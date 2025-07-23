@@ -1,0 +1,20 @@
+<h1>[% pagename %]</h1>
+
+<ul>
+[% FOREACH cat IN function_cat %]
+  <li><a href="#[% cat.link %]">[% cat.name %]</a>
+[% END %]
+</ul>
+
+[% FOREACH cat IN function_cat %]
+  <a name="[% cat.link %]"></a>
+  <h2>[% cat.name %]</h2>
+  <ul>
+    [% FOREACH function IN cat.functions %]
+      <li><a href="functions/[% function.url %]">[% function.name %]</a>
+      [% IF function.description %]
+        - [% function.description %]
+      [% END %]
+    [% END %]
+  </ul>
+[% END %]

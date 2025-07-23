@@ -1,0 +1,63 @@
+[Header]
+Description=Renesas Flash Programmer Configuration File
+File Type=3.1
+[Device Info]
+Device Type=2
+Protocol=12
+Device Code=1120FD4000480200
+Product Name=R7F701330A
+Support FAW=FALSE
+Support ESW=TRUE
+Memory Area Count=6
+[Clock Info]
+Clock Mode=0
+Support Clock=
+OSC Frequency Range=16000000,24000000
+CPU Frequency Range=40000000,240000000
+SCI Frequency Range=0,40000000
+CPU Ratio=
+SCI Ratio=
+[Memory Area 0]
+Area Type=0x00000001
+Start Address=0x00000000
+Size=0x00010000
+Erase Unit Size=0x00002000
+Write Unit Size=0x00000100
+Attribute=0x0000000C
+[Memory Area 1]
+Area Type=0x00000001
+Start Address=0x00010000
+Size=0x001F0000
+Erase Unit Size=0x00008000
+Write Unit Size=0x00000100
+Attribute=0x0000000C
+[Memory Area 2]
+Area Type=0x00000010
+Start Address=0xFF200000
+Size=0x000002C0
+Erase Unit Size=0x00000000
+Write Unit Size=0x00000000
+Attribute=0x00000000
+[Memory Area 3]
+Area Type=0x00000010
+Start Address=0xFF2002C0
+Size=0x0000FD40
+Erase Unit Size=0x00000040
+Write Unit Size=0x00000010
+Attribute=0x00000000
+[Memory Area 4]
+Area Type=0x00000020
+Start Address=0xFF300000
+Size=0x000002C0
+Erase Unit Size=0x00000000
+Write Unit Size=0x00000000
+Attribute=0x00000000
+[Memory Area 5]
+Area Type=0x00000020
+Start Address=0xFF3002C0
+Size=0x00007D40
+Erase Unit Size=0x00000040
+Write Unit Size=0x00000010
+Attribute=0x00000000
+[Checksum]
+Checksum=0x4139B426

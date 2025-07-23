@@ -1,0 +1,1872 @@
+/*@!Encoding:1252*/
+includes
+{
+  #include "Encoding.cin"
+}
+
+variables
+{
+  enum MainState_ten                                   /*Enum to indicate status of Tx message*/
+  {
+    MainStt_Idle_e,                                 /* idle case */
+    MainStt_SendFF_e,                               /* send first frame or single frame from tester to ECU */
+    MainStt_WaitFC_e,                               /* wait 0x30 in case request size > 8 bytes */
+    MainStt_SendCF_e,                               /* after receiving 0x30, we shall send all request data */
+    MainStt_WaitFR_e,                               /* wait for final response message */
+    MainStt_SendFC_e,                               /* if final response >8 bytes, we shall send flow control frame to get all data */
+    MainStt_WaitCF_e,                               /* wait consecutive frame from ECU  */
+    MainStt_CopySeed_e,
+    MainStt_SendKey_e,
+    MainStt_ProcessReadEOLComplete_e
+  };
+  
+  enum InitState_ten
+  {
+    InitStt_1_e,
+    InitStt_2_e,
+    InitStt_3_e,
+    InitStt_4_e,
+    InitStt_wait_e,
+    InitStt_Invalid_e
+  };
+
+  const int VAR_EOLSizeInByte = 12;                           /* Size of EOL in Bytes */
+  const byte VAR_SecSizeInByte = 16;
+  const VAR_DiagBufferSizeInByte = 256;                /*Max size of data could be sent on CAN is 4096*/
+  byte Sbox[256]= {
+  0x63,0x7c,0x77,0x7b,0xf2,0x6b,0x6f,0xc5,0x30,0x01,0x67,0x2b,0xfe,0xd7,0xab,0x76,
+  0xca,0x82,0xc9,0x7d,0xfa,0x59,0x47,0xf0,0xad,0xd4,0xa2,0xaf,0x9c,0xa4,0x72,0xc0,
+  0xb7,0xfd,0x93,0x26,0x36,0x3f,0xf7,0xcc,0x34,0xa5,0xe5,0xf1,0x71,0xd8,0x31,0x15,
+  0x04,0xc7,0x23,0xc3,0x18,0x96,0x05,0x9a,0x07,0x12,0x80,0xe2,0xeb,0x27,0xb2,0x75,
+  0x09,0x83,0x2c,0x1a,0x1b,0x6e,0x5a,0xa0,0x52,0x3b,0xd6,0xb3,0x29,0xe3,0x2f,0x84,
+  0x53,0xd1,0x00,0xed,0x20,0xfc,0xb1,0x5b,0x6a,0xcb,0xbe,0x39,0x4a,0x4c,0x58,0xcf,
+  0xd0,0xef,0xaa,0xfb,0x43,0x4d,0x33,0x85,0x45,0xf9,0x02,0x7f,0x50,0x3c,0x9f,0xa8,
+  0x51,0xa3,0x40,0x8f,0x92,0x9d,0x38,0xf5,0xbc,0xb6,0xda,0x21,0x10,0xff,0xf3,0xd2,
+  0xcd,0x0c,0x13,0xec,0x5f,0x97,0x44,0x17,0xc4,0xa7,0x7e,0x3d,0x64,0x5d,0x19,0x73,
+  0x60,0x81,0x4f,0xdc,0x22,0x2a,0x90,0x88,0x46,0xee,0xb8,0x14,0xde,0x5e,0x0b,0xdb,
+  0xe0,0x32,0x3a,0x0a,0x49,0x06,0x24,0x5c,0xc2,0xd3,0xac,0x62,0x91,0x95,0xe4,0x79,
+  0xe7,0xc8,0x37,0x6d,0x8d,0xd5,0x4e,0xa9,0x6c,0x56,0xf4,0xea,0x65,0x7a,0xae,0x08,
+  0xba,0x78,0x25,0x2e,0x1c,0xa6,0xb4,0xc6,0xe8,0xdd,0x74,0x1f,0x4b,0xbd,0x8b,0x8a,
+  0x70,0x3e,0xb5,0x66,0x48,0x03,0xf6,0x0e,0x61,0x35,0x57,0xb9,0x86,0xc1,0x1d,0x9e,
+  0xe1,0xf8,0x98,0x11,0x69,0xd9,0x8e,0x94,0x9b,0x1e,0x87,0xe9,0xce,0x55,0x28,0xdf,
+  0x8c,0xa1,0x89,0x0d,0xbf,0xe6,0x42,0x68,0x41,0x99,0x2d,0x0f,0xb0,0x54,0xbb,0x16
+  };
+  
+  //MaJ03A_Security Access - level-23
+  dword A_P[18] = {0x7B25C4E8, 0x86A256EF, 0x8F354858, 0x8AD86580, 0x1CF261C4, 0x6C0A2077, 0x9C3397E3, 0xA281A8EB, 0x7E4A91CE, 0x05541A19, 0x7B73BC55, 0xD2CA760E,0x19D78BCD, 0xF8E7B86E, 0x3D6BA387, 0xE817E1DB, 0xAC3CD76C, 0x7EEE1A00};
+
+  dword A_S[4][256] = {
+    {0x52234B7F,0xA5C2FBC3,0xDDC2EB9D,0xD8605843,0x251D892C,0x84C3EC3E,0x9BE9F280,0xC8FA3C9D,0x0C801000,0x8CE1382D,0xCD480EB0,0x4AB68728,0x92323468,0x12D0E946,0x5948FB2D,0x7315A824,0x7BEAACDB,0x097EF2AF,0x3B54865A,0xBAC4B0EC,0xFC3CEF4D,0xCCE6FAC8,0xA7FA99CF,0xBA19D334,0x58DD092C,0xACA64BC3,0x8DF7A8DE,0xEF84951F,0xA3E3CB07,0x0C990AC6,0xAE54FC5B,0x6B6DF7A5,0x4F87A79C,0x708ECAA4,0x0B69873C,0xC8E5F7B5,0x58CA80EC,0x79266933,0x351521B6,0xEF49D8FF,0x4FAE2FF6,0x10A5BD56,0x91FDE126,0x09DB6154,0x91500D63,0xF8FFA1A4,0xCC275382,0xD95B4DF2,0x66AC604D,0xF0BAA335,0x21C69EBA,0x50EB01E0,0xAB38F97F,0xAEC2E33A,0xA8EB8B3F,0x012445FD,0x3171ADDD,0x2F3B1493,0x94EA21DB,0x03514DED,0xB83FB888,0x8181D486,0x653DEF7A,0x3B749AE6,0x7B114015,0xA5D2DB37,0x44B09372,0x2FBE1F8D,0xB7770FC6,0xC8080657,0xBE4A9214,0xA61573B6,0x5208E0A9,0xB85FE2C1,0xA4D5A506,0x2651D992,0x6AB64B98,0xC9DE8B68,0x72FE5C3F,0xD002DB4E,0xB487B129,0xC35167B7,0x30C0B4D7,0xBD1F4E72,0x992921B3,0x83B20C7D,0x3970D747,0x7701B282,0xA88A636D,0x5EBD99E2,0x043D84EF,0x4AF46C2F,0xED4DFC8B,0x5190025C,0xFB176BC7,0xDC46B26C,0xA8F4660C,0x1820DF98,0x1E6B71D6,0xBB6BD8CF,0x2B89BFA2,0x80C7D647,0xC73830CF,0xFD21E307,0x0FCE4AFB,0xD3AAAE5A,0x0351B9D8,0x9E03A78E,0xA9C8C6E5,0xF68BC393,0x1D2A43FE,0xDEBD6CE0,0x67DFF4CA,0x17B6D89F,0x7AB609EF,0x5D9130D0,0x057F260C,0xB9143629,0x9E34898A,0x22993CA2,0x1BBA2984,0xACEA7523,0xD416C99D,0x4C120C74,0x7D394B0A,0xA39417FE,0xD9A6EE9E,0x527D7AAE,0x45AEE9CF,0x1CC2C855,0x38430CC5,0x83884628,0xC3E44DA1,0xEBDF4F30,0xEB6385AD,0xB96207A7,0x53D7FC4C,0xD479CF3F,0xA22AE4CD,0xE9D322DC,0x07767C12,0x308A281B,0xE2BFB497,0x036CC4E1,0x75BD2BA5,0xEA8E3FE9,0x771C1C12,0x12406DF0,0x5388A352,0xEA72ABBA,0xAEA7575D,0x1A9BAC0F,0x0B538537,0xD11CFD7B,0xF78B78F1,0xBBC63F04,0x3A20C6FF,0x097A8903,0xF85C7B8D,0x7401DD39,0x43AD3381,0xE999155C,0x09C85A18,0x73DD0CE4,0x965CFFCB,0xBA4FC55F,0x0381075F,0xA7BFF726,0x696E1214,0x762A2495,0x20B8A14D,0xF21D93B2,0x2E634D89,0x0EDA0F56,0x5639CB08,0x06840032,0x755BB249,0x4E591EAD,0x1DEDE2B6,0x979C376A,0xF4091FA7,0xC285C254,0x194567A5,0x698B762D,0xEFCBF1CB,0xF3ED4944,0x6A61473B,0xE083B316,0x5176EA5D,0xBE822BA0,0x5005E281,0x26B59856,0xA4C6D2D7,0x7119695E,0xE4B33768,0xEBF63D70,0xA45C903A,0x1EE58710,0x3B52A258,0xCC8A6A70,0xA9B285B6,0x38E028D9,0x30732F18,0x6D1576AE,0xFECEA687,0x61D40293,0x30392E70,0x7FD62D4D,0x163C80DA,0xA742FC8E,0x3E7A1566,0x17CAB836,0xE247770C,0x3825C00A,0x8D485CCB,0xCE7606F7,0x00C5EC91,0x74DDD60E,0x8740E4D7,0x63C9332B,0xA6F2C833,0x4A554151,0x250CFDCC,0x640112F9,0x51859482,0xEA7E21F3,0x2AD8D7B6,0x8A87DCE5,0xBFC8DA5D,0x67BEF7D1,0x3D9C28C4,0x580AA07B,0xDC1CF30E,0xD19F9AC7,0x1A6758AC,0xC71698CF,0x405DFB71,0x9830A703,0x36E4BFB2,0xDA5B30BC,0xF6840A49,0x4602B12C,0x694E45B6,0xAFA3E5E8,0xB05411AA,0xB5D1C5A5,0x66342AC8,0x37F83F80,0x1401AC4F,0xA1FE3E69,0x8931C62A,0x732F5435,0xFFE6590D,0x0CD90450,0x6660324C,0xDE03D81A},
+    {0x31D8D2A3,0x70CEC28C,0xC9CC0DA6,0x3EC53AEF,0x87E50DE6,0xEDF312FE,0x861D3238,0x373DF3E5,0x02191D30,0xB7AEEA52,0xB68680D8,0xE89987B8,0x18709CE6,0x0D4164DE,0x12B8FEBB,0xB9D14269,0x92A3FA49,0x35D77969,0x8B91672D,0xE168E242,0xF588BF21,0x5D86B2F5,0xA0B8823B,0x45367544,0x34D79AA7,0xF3DC020A,0x349C65BC,0x72DFF952,0xDF6F97F6,0xA2ED5A7F,0x4F1F5836,0x5D23D90C,0x7BFAC332,0xDC662877,0x44ECF3DF,0x7061BED4,0x74E2B04B,0x984188A9,0x3CE56666,0x51D3DF21,0x1B656D41,0xCD42EA06,0x8BF03041,0x2770FFB8,0x5E30BC32,0xCFFD80E5,0x340BB9B1,0xE8C47257,0xB31C11D2,0x05051047,0x462EE5A6,0x3DEC0FEF,0x8B3A2067,0x1A3B9BC9,0xA701608F,0xD16AEBD7,0xB81100D1,0xA04F0344,0xFC8A0ADC,0x6B5F8832,0xC19128BC,0x08779729,0x03339DDE,0x38C36248,0x267D6EF3,0x6259C143,0xAC967DF5,0x107BADD4,0xA8549388,0xE67FD52C,0x0EB52CCD,0x1FD25753,0xE7515953,0x9787AC3B,0x30230C58,0x9259E988,0xC7E048FA,0xC580F213,0xB44FFDA4,0xD9C91265,0x17545264,0x4F7B6115,0xCD042FA6,0x09D119F0,0x43035839,0x447800A3,0x068B8308,0x825BE1B4,0x55984D8F,0xC6C7B67C,0x6D6E6FEA,0x6D818C2F,0x0F5B42BE,0x12E948F2,0x0BD84453,0xF4B0626D,0x0BEADD60,0xA9E16C09,0xCD9C4FA0,0x8196856D,0xF01E8E91,0xA74C82C9,0x2AB615DF,0x85F283C0,0x5E3677DB,0x5E9E8ED0,0xA263C6BE,0x4541E3B2,0xBB26C596,0x3BD27DC8,0x0446122A,0x6E3B7DED,0xD38AB977,0xB405FBB2,0x65368172,0x9920C482,0x3F1B8BA5,0x36D5160F,0x5E950C67,0x22EA0424,0xEAB75519,0x4343B7F6,0xC769DB52,0x2CC22671,0x2001549C,0x8871A360,0xCC7C35AC,0x2D751E04,0xEE97FB22,0xDA8CA8A8,0x0616BE71,0xC5E17CCF,0x63614521,0x68523E54,0x1448A93D,0xB7EEF537,0x38874D82,0xB550F451,0xFE2BEE8D,0x09AC0593,0x3D0A98BC,0xA1454792,0xB3914391,0xE2446F68,0x1EA13F69,0x767E6DBF,0x1F507F84,0x94F0D268,0xEF4EB2E4,0xAD576B44,0xDE512FEC,0x9F11D66D,0x42D315D6,0x121BB5A9,0x86C61566,0x654DB9D5,0x6D75F03D,0x9C44C5B5,0xD552C80F,0x5BC69620,0xCAFFA7DD,0x4FAA84FA,0x3245AFBE,0x1FDCE595,0xE04FAA0E,0x1F8896FE,0x5AFDC221,0x6A781E65,0x90ED9ADC,0x2E64866C,0xCC66A222,0xFA9F2B16,0x9E15317D,0xA6E95CEC,0xF378094D,0x1BF907A9,0xADE61189,0x7D45046B,0x48591F4B,0xBF772FBE,0x028F957A,0x0DB210BD,0xC1DB2326,0xC0017955,0xB6890458,0x83E36A81,0xCD135DA9,0x6E4CD6C5,0x8341A9DC,0x406576EB,0xF6C5976C,0x38464FB4,0x1588E9A0,0x5B2EF3B9,0x5A889694,0x96FD65A0,0xA399B4DA,0x5CDA93EB,0x3B7AD826,0x47544A2D,0xCAE548E7,0x980EFE27,0xEC1DE9F7,0x1D61A7A6,0xA3E061BA,0x1CA652DD,0xEA5A211A,0x2B850A8B,0xD492ED7A,0xAE6D3769,0x27539BBF,0xADB4F45B,0xE9692F38,0xB33980EA,0x2C674DA2,0x177BFEA2,0xAFB4FF71,0x68F9CC64,0xD568B2B4,0x826E1586,0x827BA762,0x82C2679B,0x828A84B0,0x4BFD4529,0x8D6A9D1F,0x035D7D85,0x36FF4565,0xD6A0ACC0,0xBCE12286,0x92D9307F,0x50826C10,0x1E06EA2F,0xDF61EDFF,0x49B0DCD9,0x2C1D9123,0x32A712F6,0x71E9E443,0xFBCF753C,0x0FEDC74B,0xD73976F2,0xEFD428C4,0xA1E830A1,0xDA58BE60,0x12CE94F5,0x2094315E,0xDF8AFDD8,0x4C62B1A4,0x97EB7AC5,0x69FC4CC9,0x1D6BFDF5,0xDC5D6654,0x2AE853BA,0x510748DA,0xED36B3C1,0x9FACA242,0x131D5576},
+    {0xD73093C7,0xFDC9D91B,0x204221EF,0x84224D8B,0xE68D3D79,0x41C20D33,0x76BADE6C,0xBB112D61,0xA591FACD,0xC20680E9,0x14A8EF96,0x015176D9,0x45A70F35,0x2CED5B72,0x0EA7F9A4,0xBAC30576,0x3EA30EFA,0x2CF7A92B,0xAFF8D069,0x293C03E4,0x668483E9,0xF409BF8A,0x7F80D57D,0xC2373970,0x39CD7A40,0x4D9CF4C3,0x1FA1F1AB,0x0930F602,0xE0462378,0x1F1057E1,0x348BB67B,0x74E8152F,0x83493C37,0x35289543,0xB40C0046,0x19E3C099,0x65B3DD31,0xB4F17496,0x101C2C40,0xB9A2070F,0x50534E3E,0xA2843008,0x709BD9F9,0x1A203BCF,0x543F2199,0x8D763AED,0xB1B16490,0x8518896D,0x2D854152,0x9629CF90,0xE24E6E9E,0xCFCF68C7,0x957992DF,0xC044F5FB,0x46AB2CFB,0x6F8F1C95,0x91F8649A,0x2E007878,0x1EEE4086,0x74A9D8B6,0x71A07333,0x37ACB6BA,0xFD7CBD74,0xB873FA76,0x5E44C7A3,0x935BD25B,0x7AAACFF7,0xFEA2D8E6,0x11E5E3D4,0xFCAABBA6,0x86562596,0x20113A1C,0x5FE99C94,0x1E237F71,0x07D0A9C0,0xF95B4056,0x2D68D681,0xF9125B94,0x6C40F638,0x761DA0FF,0x73039EEA,0x5B6F4C7A,0xFE3E5E03,0xDDE0C4D2,0x548BADAE,0xF02A3117,0x61C51320,0xAC5C23CB,0xFE4DE5FB,0xC7A07A7F,0x9D7550B8,0x2B1A1F92,0xE5459B3C,0x54CB70DE,0x1735155C,0xFF224338,0x9830B185,0x5778A8F4,0x5373EC4E,0xFC43613B,0x78144B47,0xF7586B9D,0xC8630B3B,0xFC5195BF,0x2514F038,0xF7A35F6C,0xD4DE84B7,0x22EAC8C4,0x5923496C,0xD1B2530A,0xBF18C9CB,0x58F45F6A,0x8C09096B,0x9923A267,0x1FF0208C,0xB65019EE,0x220894D2,0x1D01A040,0xF0A5636F,0x717D5395,0x19D9EC26,0x230E48DA,0xF315BAAD,0x6CAE0718,0x338EB7E1,0x32BC6E14,0xB7D89445,0x62C9D79F,0x28C427BC,0x03F4A6EA,0x7AAB3822,0x465F81F1,0xA133496B,0x7A27DDA1,0xD0C1393D,0x3BA9F85F,0x13EE9A98,0xCEA70D4D,0x5878C590,0x0FA099DA,0x58BA96D0,0x4F799A16,0x193FB316,0x48F7266E,0x92735276,0x2CCE7A80,0x065DDF38,0x20BB788D,0xC26717C9,0xBB6AA3EE,0x8A5A6CC4,0x72FC582D,0x40647A44,0xF509A9F4,0xB9F7A296,0x56DB1140,0xA7CCD566,0x8BD3B8B8,0xF5509593,0x706C20EA,0x74B407C8,0x9B99CE63,0xDCAFB270,0x7D201329,0x6EBCBDC5,0x3B75D899,0x328175AA,0x47F2498C,0xD9B5951B,0x26D63F22,0x6294BFD1,0xED4EA50E,0x940DA4DA,0x58E8BBC7,0xB3F40DB4,0xD2BE406C,0xFA5841FE,0xFB2BC351,0x7D48876B,0x3027EAC0,0xC6B9E7E6,0x1221CCF0,0xD11A39E3,0xF6102252,0x7BAAEB0E,0x90FB072B,0xDCE47F1D,0xB01C2396,0x7500EB61,0xAC588B7A,0x6F9ED9E4,0x1E9A5DDE,0x12D980FB,0xA304600D,0xA7AE897E,0xE4AE2A57,0xE5245907,0xEB704C1A,0x98C370B5,0x3CCD7614,0xF2B3DE30,0xB6E6F5DE,0x5D9A49EA,0xF452796E,0x07DCEAA9,0xA75BBD50,0x35865CB6,0xE9F90998,0x3259CF40,0x30F56527,0x6A532C60,0x3E15F414,0xEE17835A,0x396A4D81,0xC9CD657A,0x8732B1DF,0xE7AF6220,0x6A125177,0x49290D91,0xE5CFC1F2,0x09833FC2,0xF929E21E,0x87AE9B44,0x3B4B0869,0x5E832969,0xDF853F7A,0xA1FB7455,0xCB0399D7,0xA3D0553B,0x637C3AF1,0xD6030273,0x418444D3,0x07E5487C,0x32BA520E,0x00D9ED73,0x7E408586,0xE53E7007,0xF9B34D7D,0x54CD8E9F,0xF40C55B6,0xCDAE5B87,0xB6D7CD70,0xF1082C28,0x2BF678FF,0x21B1410A,0x0A5D60D7,0x87765F66,0x747C9997,0x58BDF07E,0xFB1C9A66,0x40145D78,0xF3AF4D47,0xD5B37694,0x10C5108A,0x4EF00DFE,0x9A8001A8},
+    {0xF322C31B,0x64C18235,0x22AB1850,0xD85E9AFB,0x44267223,0x4FC9356D,0xC68ED28B,0xC70CBBC5,0xE94F0074,0x37EE1A68,0x55E30DAA,0x2D289050,0xAF8B3E3D,0xCA5ECF33,0x536B08C4,0x19812ED2,0x1C30CA15,0xD781FA38,0xEE4EB63F,0x12A7C266,0xA2059930,0xA4F4093F,0x295FC6A8,0xA6FA8ABF,0x7F41E834,0xDEF48D73,0x4A3A9B0E,0xFAE724F3,0x186668B6,0xE9CDD87D,0x5106D5F8,0x5F2F27C7,0xD8C1AE34,0x65EB84BC,0x3464EE41,0x6FEB7998,0xDAB1B896,0x9458C0EE,0x5F0C944D,0x981A2AD0,0x886072FE,0xB51AE227,0x5511C79E,0x54216A21,0x5C39A77C,0x5B25E0FC,0x6E8BACF5,0x0AEED653,0x9FD2CB07,0xE1D9A729,0xAE4DAD13,0x1BA6E84E,0xCC8D6F6C,0x3EF69288,0x39A2013D,0x6B0C16A6,0x1F4414DC,0xC14AFF26,0xBDE021D3,0xD5044321,0x1B583113,0x6761F659,0xF9D305BE,0xB30AD3AF,0x5FAA202D,0x5166E9DA,0x7BB372F3,0x8B3A605D,0xB2580FF0,0xB2A0B368,0x56427FC8,0x3C6DF23A,0x4BC785C2,0xBA247E63,0x97902F4E,0x14D20C99,0xD4B3275E,0xD4ADE6CB,0x81973BBD,0x1F685D7C,0x0090415B,0x3DD672A5,0xB26A2989,0x4C89DC6D,0x8025B774,0xCE26B683,0x46F367D6,0x4427089A,0x8E9E0ADD,0xD2993183,0x73E43AD8,0xDA6DAEF1,0x45580956,0x8B4991DF,0x044B55E5,0xB8D7BFE7,0x84200EC6,0x5681B798,0x816B4B9A,0xDBED62F7,0x35230439,0xA8781DA9,0x0A9D0FC5,0x93D1FF7D,0x7DBE49A6,0x25186F0F,0x0D1CAA31,0xD1A1C112,0xE1F48178,0x8E9059D5,0x252E47DC,0x421A5D5E,0x6A42A8B5,0x376AD130,0xA2C10AB8,0xD997090D,0xB9BD0C14,0x909F704E,0x59960F22,0x80778B59,0xF15F63C0,0xE02F1214,0x83D11847,0xDA0F829D,0x686DFE5A,0x4B69AA32,0x8B16576F,0x60E4E31E,0x4C2AFEA1,0x374ABE7E,0x03A120A0,0x0635FA09,0xA1A33118,0x712F46A5,0xCAC83E83,0x9EE738A0,0xFD970F6B,0x76E21BFB,0xDD6C587D,0x3A7EF9EA,0xE59A6D18,0x6449296D,0xA225CC5B,0x4C40BFD6,0x39A8EB79,0x3CA3CAC3,0x84F3622F,0x1D80597C,0xD5B2710D,0xFC7FCA33,0xAE45AF8D,0x2978C8BD,0xF0853F1C,0x58F3121C,0x6C8A0C3E,0x78343663,0x26E1C18B,0x1A38C97E,0xDFE45891,0xFB2BC46B,0x029C613A,0xC3CFCD95,0xD89CBDE9,0x9F7EFBB5,0xDBFA27BE,0x90A669E3,0xFE45D226,0x9D6B6430,0xD5640459,0xA9405066,0xDDF22107,0xB80A28A9,0x8DD436BF,0xEE61F7B3,0xFDFAA6CD,0x696D183D,0x324B5D92,0xEF02309E,0x5661E0E7,0xB7180D50,0xB3A60275,0x229DE2E5,0x5D419EE6,0x106C6FFF,0x7A903B54,0xA0149B8F,0x1CD36D46,0xAB62557C,0x03A3DC08,0xC3F6D530,0x10CC034A,0xF404E1A1,0xBEF72D39,0x6538F8F7,0x43FB76EF,0x653F24CC,0xCF39E683,0xECBD6556,0x4B44F7D9,0x2174EFB9,0x3C764F32,0x1332D494,0x0E60020F,0x05771F90,0x76D6CB5A,0xCF169BE7,0x89EFAFA9,0x607D2D8D,0x7612C3E2,0x3DB6B69F,0xF647699C,0xDD8EF611,0x561C3449,0x1557C349,0xA778D1E7,0x2F147CCB,0x3F481030,0x90D55501,0x858A05F1,0xF01D6DB0,0x8535E2D3,0x4823239F,0x14CE9745,0x69D9B827,0x131A0093,0x66B8CED9,0x9FCD009F,0xC0B16A07,0xAED921B9,0x497F3A32,0x693FAE10,0x4916DEF6,0x326902AA,0x17993029,0x8EC2B424,0xDA68B61F,0x4AC905A8,0xE9F3E517,0x253E9DE3,0xEB869705,0xB892BFF3,0x5376FC99,0x32FB7DE8,0x6EC73A3F,0x61CF0F92,0xBF548BB4,0x2C808C6E,0xEB5C92B4,0x93CB5D49,0xFBD7BB15,0xFD24645B,0x76FD1F2C,0x1C8D2EEB,0xD7AAB2C1,0x34DC99FB,0x17B71C4D}
+  };
+  /*data vin number*/
+  byte VIN_data = 0x11;
+  byte TVV_data = 0x11;
+  /* For security access*/
+  byte VAR_SA_KeyData[32];
+  
+  /* For Security Access Level 0x1A */
+  byte AES_Key[16] = { 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22 };
+  byte AES_InitVector[16] = { 0x8C, 0xCF, 0x74, 0x97, 0x4D, 0x68, 0x72, 0x4F, 0x75, 0x66, 0x0E, 0x16, 0x2D, 0xFA, 0x92, 0xF7 };
+  
+  /* Internal variables */
+  byte VAR_EOL_ConfigData[VAR_EOLSizeInByte];            /* Array to store EOL config data */
+  byte VAR_SEC_SeedData[VAR_SecSizeInByte];            /* Array to store EOL config data */
+  byte VAR_SEC_KeyData[VAR_SecSizeInByte];            /* Array to store EOL config data */
+  byte VAR_RxDiagMsgBuffer[VAR_DiagBufferSizeInByte];   /* Buffer to store received data */
+  byte VAR_TxDiagMsgBuffer[VAR_DiagBufferSizeInByte];   /* Buffer to store received data */
+  byte VAR_TxDiagMsgIndex;
+  byte VAR_RxDiagMsgIndex;
+  byte VAR_TxConsecutiveFrameIndex;                        /* Number of remaining consecutive frame to write */
+  byte VAR_TxConsecutiveFrameMax;                          /* Number of remaining consecutive frame to write */
+  byte VAR_RxConsecutiveFrameIndex;                        /* Number of remaining consecutive frame to read */
+  byte VAR_RxConsecutiveFrameMax;                          /* Number of remaining consecutive frame to read */
+  byte VAR_DiagMsgReceivedFlag;
+  enum MainState_ten VAR_MainState_en;                    /* Main State */
+  enum MainState_ten VAR_EndStateProcess;                 /* Main State */
+
+  msTimer TM_MainFunction;                             /* Main timer to control state of EOL */
+  msTimer TM_MainInit, TM_TesterPresent;   
+  message RCM_Diag_Rx MSG_PhyDiagReq;                      /* Message ID Physical */
+  message RCM_ISO_SCRAP_Rx MSG_DisposalDiagReq;            /* Message ID disposal */
+  message Functional_Diag_Request MSG_FuncDiagReq;         /* Message ID functional */
+  
+  message* MSG_P_DiagReq;
+  message* MSG_P_FlowReq;
+  
+  byte VAR_InitState_en, VAR_InitStateNxt_en;
+  byte VAR_TesterPresentEnable;
+  
+  msTimer TM_ComMsg;
+}
+
+on start
+{
+  /* Shall load default EOL configuration */
+  VAR_MainState_en = MainStt_Idle_e;
+  setTimer(TM_MainFunction, 1);
+  MSG_P_DiagReq = MSG_PhyDiagReq;
+  MSG_P_FlowReq = MSG_PhyDiagReq;
+  setTimer(TM_MainInit, 10);
+  @sysvar::eol_sysvar::ENV_VariantValue = 3;  //20210930 - J30 - Update for Russ Variant 
+  VAR_TesterPresentEnable = 0;
+  
+  setTimer(TM_ComMsg, 100);
+}
+
+on timer TM_ComMsg
+{
+  /*
+  int cnt =0;
+  message BCM_Information1 msg;
+  message Cruise_Multi_Switch msg1;
+  message Hvac_Control_Information2 msg2;
+  message GCC_Config_Mgmt msg3;
+  message WheelData msg4;
+  msg.BCMINFO1_No_Cs = msg.BCMINFO1_No_Cnt + msg.dlc + msg.id;
+  msg1.HECSwtchB_Cs = msg1.HECSwtchB_Cnt + msg1.dlc + msg1.id;
+  msg3.GCC_CfgParam = 0x00;
+  msg3.Steering_Position = 0x02;
+  //output(msg);
+  msg4.VehVActlBrk_D_Qf = 3;
+  output(msg3);
+  msg.BCMINFO1_No_Cnt++;
+  setTimer(TM_ComMsg, 100);
+  */
+}
+
+on errorActive
+{
+  canFlushTxQueue(1);
+}
+on errorPassive
+{
+  canFlushTxQueue(1);
+}
+
+on timer TM_TesterPresent
+{
+  if(VAR_TesterPresentEnable == 1)
+  {
+    if(VAR_MainState_en == MainStt_Idle_e)
+    {
+        FUNC_SendTesterPresent();
+        setTimer(TM_TesterPresent,4000); /* next transmission is 4s */
+    }
+    else
+    {
+      /* Diagnostic is working */
+      setTimer(TM_TesterPresent,10); /* ignore this call, wait 10ms and try again */
+    }
+  }
+}
+
+on timer TM_MainInit
+{
+  if(1 == @sysvar::eol_sysvar::ENV_InitEOLDefault)
+  {
+    setTimer(TM_MainInit, 10);
+    switch(VAR_InitState_en)
+    {
+      case InitStt_1_e:
+        VAR_InitStateNxt_en = InitStt_2_e;
+        @sysvar::eol_sysvar::ENV_SessionControl_SendButton = 1;
+        @sysvar::eol_sysvar::ENV_SessionControl_SendButton = 0;
+        VAR_InitState_en = InitStt_wait_e;
+        break;
+        
+      case InitStt_2_e:
+        @sysvar::eol_sysvar::ENV_TriggerToRequestSeed = 1;
+        @sysvar::eol_sysvar::ENV_TriggerToRequestSeed = 0;
+        VAR_InitStateNxt_en = InitStt_3_e;
+        VAR_InitState_en = InitStt_wait_e;
+        break;
+       
+      case InitStt_3_e:
+        @sysvar::eol_sysvar::ENV_TriggerToWriteEOLButton = 1;
+        @sysvar::eol_sysvar::ENV_TriggerToWriteEOLButton = 0;
+        VAR_InitStateNxt_en = InitStt_4_e;
+        VAR_InitState_en = InitStt_wait_e;
+        break;
+        
+      case InitStt_4_e:
+        @sysvar::eol_sysvar::ENV_SendResetButton = 1;
+        @sysvar::eol_sysvar::ENV_SendResetButton = 0;
+        VAR_InitStateNxt_en = InitStt_Invalid_e;
+        VAR_InitState_en = InitStt_wait_e;
+        break;
+       
+      case InitStt_wait_e:
+        if(VAR_MainState_en == MainStt_Idle_e)
+        {
+          VAR_InitState_en = VAR_InitStateNxt_en;
+        }
+        break;
+      case InitStt_Invalid_e:
+        @sysvar::eol_sysvar::ENV_InitEOLDefault = 0;
+        break;
+    }
+  }
+}
+
+on timer TM_MainFunction
+{
+   switch (VAR_MainState_en)
+  {
+      case MainStt_Idle_e:
+      {
+        /* Do nothing */
+        break;
+      }
+      case MainStt_SendFF_e:
+      {
+        if(VAR_TxDiagMsgBuffer[0] >= 0x10)
+        {
+            VAR_TxConsecutiveFrameMax = (((VAR_TxDiagMsgBuffer[0] & 0x0F) << 8) | VAR_TxDiagMsgBuffer[1]) / 7;
+            /* request > 8 bytes */
+            FUNC_SendFirstFrame();
+            VAR_RxDiagMsgIndex = 0; /* prepare Rx buffer */
+            VAR_MainState_en = MainStt_WaitFC_e;
+        }
+        else
+        {
+            /* request < 8 bytes */
+            VAR_TxConsecutiveFrameMax = 0;
+            FUNC_SendSingleFrame();
+            VAR_RxDiagMsgIndex = 0; /* prepare Rx buffer */
+            VAR_MainState_en = MainStt_WaitFR_e;
+        }
+        break;
+      }
+      case MainStt_WaitFC_e:
+      {
+        if(VAR_DiagMsgReceivedFlag == 0x01 && VAR_RxDiagMsgBuffer[0] == 0x30) /* FC 0x30 is received */
+        {
+          VAR_MainState_en            =  MainStt_SendCF_e;
+          VAR_TxConsecutiveFrameIndex = 0;
+          VAR_DiagMsgReceivedFlag     = 0x00;
+        }
+        break;
+      }
+      case MainStt_SendCF_e:
+      {
+        FUNC_SendConsecutiveFrame();
+        ++VAR_TxConsecutiveFrameIndex;
+        if(VAR_TxConsecutiveFrameIndex >= VAR_TxConsecutiveFrameMax)
+        {
+          /* Write request completely */
+          VAR_RxDiagMsgIndex = 0; /* Clear buffer index */
+          VAR_MainState_en = MainStt_WaitFR_e;
+        }
+        break;
+      }
+      case MainStt_WaitFR_e:
+      {
+        if(VAR_DiagMsgReceivedFlag == 0x01)
+        {
+          VAR_DiagMsgReceivedFlag = 0x00;
+          /* Capture NRC code */
+          if(VAR_RxDiagMsgBuffer[1] == 0x7F && VAR_RxDiagMsgBuffer[3] == 0x78)
+          {
+            VAR_RxDiagMsgIndex = 0; /* Clear buffer index */
+          }
+          else
+          {
+              /* received a final response */
+              if(VAR_RxDiagMsgBuffer[0] >= 0x10)
+              {
+                VAR_RxConsecutiveFrameMax = (((VAR_RxDiagMsgBuffer[0] & 0x0F) << 8) | VAR_RxDiagMsgBuffer[1]) / 7;
+                VAR_MainState_en = MainStt_SendFC_e;
+              }
+              else
+              {
+                VAR_RxConsecutiveFrameMax = 0;
+                VAR_MainState_en = VAR_EndStateProcess;
+              }
+          }
+        }
+        break;
+      }
+      
+    case MainStt_SendFC_e:
+    {
+      FUNC_SendFlowControlFrame();
+      VAR_MainState_en = MainStt_WaitCF_e;
+      break;
+    }
+    case MainStt_WaitCF_e:
+    {
+      if(VAR_DiagMsgReceivedFlag == 1)
+      {
+          VAR_DiagMsgReceivedFlag = 0;
+        
+          /* Capture NRC code */
+          if(VAR_RxDiagMsgBuffer[1] == 0x7F && VAR_RxDiagMsgBuffer[3] == 0x78)
+          {
+            VAR_RxDiagMsgIndex = 0;
+          }
+          else
+          {
+            VAR_RxConsecutiveFrameIndex++;
+            if(VAR_RxConsecutiveFrameIndex >= VAR_RxConsecutiveFrameMax)
+            {
+              VAR_MainState_en = VAR_EndStateProcess;
+            }
+          }
+      }
+      break;
+    }
+ 
+      case MainStt_ProcessReadEOLComplete_e:
+        VAR_EOL_ConfigData[0] = VAR_RxDiagMsgBuffer[5];
+        VAR_EOL_ConfigData[1] = VAR_RxDiagMsgBuffer[6];
+        VAR_EOL_ConfigData[2] = VAR_RxDiagMsgBuffer[7];
+        VAR_EOL_ConfigData[3] = VAR_RxDiagMsgBuffer[9];
+        VAR_EOL_ConfigData[4] = VAR_RxDiagMsgBuffer[10];
+        VAR_EOL_ConfigData[5] = VAR_RxDiagMsgBuffer[11];
+        VAR_EOL_ConfigData[6] = VAR_RxDiagMsgBuffer[12];
+        VAR_EOL_ConfigData[7] = VAR_RxDiagMsgBuffer[13];
+        VAR_EOL_ConfigData[8] = VAR_RxDiagMsgBuffer[14];
+        VAR_EOL_ConfigData[9] = VAR_RxDiagMsgBuffer[15];
+        VAR_EOL_ConfigData[10] = VAR_RxDiagMsgBuffer[17];
+        VAR_EOL_ConfigData[11] = VAR_RxDiagMsgBuffer[18];
+        FUNC_ParseDataToEOL();
+        VAR_MainState_en = MainStt_Idle_e;
+      break;
+     
+      break;
+      
+    case MainStt_CopySeed_e:
+      FUNC_CopySeed();
+      @sysvar::eol_sysvar::ENV_TriggerToSendKey =  1;
+      @sysvar::eol_sysvar::ENV_TriggerToSendKey = 0;
+      break;
+    }
+  setTimer(TM_MainFunction, 1);
+}
+
+void FUNC_SendConsecutiveFrame()
+{
+    MSG_PhyDiagReq.byte(0) = VAR_TxDiagMsgBuffer[VAR_TxDiagMsgIndex++];
+    MSG_PhyDiagReq.byte(1) = VAR_TxDiagMsgBuffer[VAR_TxDiagMsgIndex++];
+    MSG_PhyDiagReq.byte(2) = VAR_TxDiagMsgBuffer[VAR_TxDiagMsgIndex++];
+    MSG_PhyDiagReq.byte(3) = VAR_TxDiagMsgBuffer[VAR_TxDiagMsgIndex++];
+    MSG_PhyDiagReq.byte(4) = VAR_TxDiagMsgBuffer[VAR_TxDiagMsgIndex++];
+    MSG_PhyDiagReq.byte(5) = VAR_TxDiagMsgBuffer[VAR_TxDiagMsgIndex++];
+    MSG_PhyDiagReq.byte(6) = VAR_TxDiagMsgBuffer[VAR_TxDiagMsgIndex++];
+    MSG_PhyDiagReq.byte(7) = VAR_TxDiagMsgBuffer[VAR_TxDiagMsgIndex++];
+    FUNC_SendMsg(MSG_PhyDiagReq);
+}
+
+void FUNC_SendFirstFrame()
+{
+    MSG_PhyDiagReq.byte(0) = VAR_TxDiagMsgBuffer[0];
+    MSG_PhyDiagReq.byte(1) = VAR_TxDiagMsgBuffer[1];
+    MSG_PhyDiagReq.byte(2) = VAR_TxDiagMsgBuffer[2];
+    MSG_PhyDiagReq.byte(3) = VAR_TxDiagMsgBuffer[3];
+    MSG_PhyDiagReq.byte(4) = VAR_TxDiagMsgBuffer[4];
+    MSG_PhyDiagReq.byte(5) = VAR_TxDiagMsgBuffer[5];
+    MSG_PhyDiagReq.byte(6) = VAR_TxDiagMsgBuffer[6];
+    MSG_PhyDiagReq.byte(7) = VAR_TxDiagMsgBuffer[7];
+    VAR_TxDiagMsgIndex = 8;
+    VAR_TxConsecutiveFrameIndex = 0;
+    FUNC_SendMsg(MSG_PhyDiagReq);
+}
+
+void FUNC_SendFlowControlFrame()
+{
+  MSG_P_FlowReq.byte(0) = 0x30;
+  MSG_P_FlowReq.byte(1) = 0x00;
+  MSG_P_FlowReq.byte(2) = 0x00;
+  MSG_P_FlowReq.byte(3) = 0;
+  MSG_P_FlowReq.byte(4) = 0;
+  MSG_P_FlowReq.byte(5) = 0;
+  MSG_P_FlowReq.byte(6) = 0;
+  MSG_P_FlowReq.byte(7) = 0;
+  FUNC_SendMsg(MSG_P_FlowReq);
+}
+
+void FUNC_SendSingleFrame()
+{
+    MSG_P_DiagReq.byte(0) = VAR_TxDiagMsgBuffer[0];
+    MSG_P_DiagReq.byte(1) = VAR_TxDiagMsgBuffer[1];
+    MSG_P_DiagReq.byte(2) = VAR_TxDiagMsgBuffer[2];
+    MSG_P_DiagReq.byte(3) = VAR_TxDiagMsgBuffer[3];
+    MSG_P_DiagReq.byte(4) = VAR_TxDiagMsgBuffer[4];
+    MSG_P_DiagReq.byte(5) = VAR_TxDiagMsgBuffer[5];
+    MSG_P_DiagReq.byte(6) = VAR_TxDiagMsgBuffer[6];
+    MSG_P_DiagReq.byte(7) = VAR_TxDiagMsgBuffer[7];
+    VAR_TxDiagMsgIndex = 8;
+    VAR_TxConsecutiveFrameIndex = 0;
+    FUNC_SendMsg(MSG_P_DiagReq);
+}
+
+void FUNC_ParseDataToEOL()
+{
+   @sysvar::eol_sysvar::ENV_EOL_Bit_01 = (VAR_EOL_ConfigData[0] >> 0) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_02 = (VAR_EOL_ConfigData[0] >> 1) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_03 = (VAR_EOL_ConfigData[0] >> 2) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_04 = (VAR_EOL_ConfigData[0] >> 3) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_05 = (VAR_EOL_ConfigData[0] >> 4) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_06 = (VAR_EOL_ConfigData[0] >> 5) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_07 = (VAR_EOL_ConfigData[0] >> 6) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_08 = (VAR_EOL_ConfigData[0] >> 7) & 0x01;
+
+   @sysvar::eol_sysvar::ENV_EOL_Bit_09 = (VAR_EOL_ConfigData[1] >> 0) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_10 = (VAR_EOL_ConfigData[1] >> 1) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_11 = (VAR_EOL_ConfigData[1] >> 2) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_12 = (VAR_EOL_ConfigData[1] >> 3) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_13 = (VAR_EOL_ConfigData[1] >> 4) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_14 = (VAR_EOL_ConfigData[1] >> 5) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_15 = (VAR_EOL_ConfigData[1] >> 6) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_16 = (VAR_EOL_ConfigData[1] >> 7) & 0x01;
+
+   @sysvar::eol_sysvar::ENV_EOL_Bit_17 = (VAR_EOL_ConfigData[2] >> 0) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_18 = (VAR_EOL_ConfigData[2] >> 1) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_19 = (VAR_EOL_ConfigData[2] >> 2) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_20 = (VAR_EOL_ConfigData[2] >> 3) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_21 = (VAR_EOL_ConfigData[2] >> 4) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_22 = (VAR_EOL_ConfigData[2] >> 5) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_23 = (VAR_EOL_ConfigData[2] >> 6) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_24 = (VAR_EOL_ConfigData[2] >> 7) & 0x01;
+
+   @sysvar::eol_sysvar::ENV_EOL_Bit_25 = (VAR_EOL_ConfigData[3] >> 0) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_26 = (VAR_EOL_ConfigData[3] >> 1) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_27 = (VAR_EOL_ConfigData[3] >> 2) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_28 = (VAR_EOL_ConfigData[3] >> 3) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_29 = (VAR_EOL_ConfigData[3] >> 4) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_30 = (VAR_EOL_ConfigData[3] >> 5) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_31 = (VAR_EOL_ConfigData[3] >> 6) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_32 = (VAR_EOL_ConfigData[3] >> 7) & 0x01;
+
+   @sysvar::eol_sysvar::ENV_EOL_Bit_33 = (VAR_EOL_ConfigData[4] >> 0) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_34 = (VAR_EOL_ConfigData[4] >> 1) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_35 = (VAR_EOL_ConfigData[4] >> 2) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_36 = (VAR_EOL_ConfigData[4] >> 3) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_37 = (VAR_EOL_ConfigData[4] >> 4) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_38 = (VAR_EOL_ConfigData[4] >> 5) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_39 = (VAR_EOL_ConfigData[4] >> 6) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_40 = (VAR_EOL_ConfigData[4] >> 7) & 0x01;
+
+   @sysvar::eol_sysvar::ENV_EOL_Bit_41 = (VAR_EOL_ConfigData[5] >> 0) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_42 = (VAR_EOL_ConfigData[5] >> 1) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_43 = (VAR_EOL_ConfigData[5] >> 2) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_44 = (VAR_EOL_ConfigData[5] >> 3) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_45 = (VAR_EOL_ConfigData[5] >> 4) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_46 = (VAR_EOL_ConfigData[5] >> 5) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_47 = (VAR_EOL_ConfigData[5] >> 6) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_48 = (VAR_EOL_ConfigData[5] >> 7) & 0x01;
+
+   @sysvar::eol_sysvar::ENV_EOL_Bit_49 = (VAR_EOL_ConfigData[6] >> 0) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_50 = (VAR_EOL_ConfigData[6] >> 1) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_51 = (VAR_EOL_ConfigData[6] >> 2) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_52 = (VAR_EOL_ConfigData[6] >> 3) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_53 = (VAR_EOL_ConfigData[6] >> 4) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_54 = (VAR_EOL_ConfigData[6] >> 5) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_55 = (VAR_EOL_ConfigData[6] >> 6) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_56 = (VAR_EOL_ConfigData[6] >> 7) & 0x01;
+
+   @sysvar::eol_sysvar::ENV_EOL_Bit_57 = (VAR_EOL_ConfigData[7] >> 0) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_58 = (VAR_EOL_ConfigData[7] >> 1) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_59 = (VAR_EOL_ConfigData[7] >> 2) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_60 = (VAR_EOL_ConfigData[7] >> 3) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_61 = (VAR_EOL_ConfigData[7] >> 4) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_62 = (VAR_EOL_ConfigData[7] >> 5) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_63 = (VAR_EOL_ConfigData[7] >> 6) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_64 = (VAR_EOL_ConfigData[7] >> 7) & 0x01;
+
+   @sysvar::eol_sysvar::ENV_EOL_Bit_65 = (VAR_EOL_ConfigData[8] >> 0) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_66 = (VAR_EOL_ConfigData[8] >> 1) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_67 = (VAR_EOL_ConfigData[8] >> 2) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_68 = (VAR_EOL_ConfigData[8] >> 3) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_69 = (VAR_EOL_ConfigData[8] >> 4) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_70 = (VAR_EOL_ConfigData[8] >> 5) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_71 = (VAR_EOL_ConfigData[8] >> 6) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_72 = (VAR_EOL_ConfigData[8] >> 7) & 0x01;
+   
+   @sysvar::eol_sysvar::ENV_EOL_Bit_73 = (VAR_EOL_ConfigData[9] >> 0) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_74 = (VAR_EOL_ConfigData[9] >> 1) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_75 = (VAR_EOL_ConfigData[9] >> 2) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_76 = (VAR_EOL_ConfigData[9] >> 3) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_77 = (VAR_EOL_ConfigData[9] >> 4) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_78 = (VAR_EOL_ConfigData[9] >> 5) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_79 = (VAR_EOL_ConfigData[9] >> 6) & 0x01;
+   @sysvar::eol_sysvar::ENV_EOL_Bit_80 = (VAR_EOL_ConfigData[9] >> 7) & 0x01;
+}
+
+void FUNC_PreapreDataEOL()
+{
+  VAR_EOL_ConfigData[0] = 0;
+  VAR_EOL_ConfigData[0] = VAR_EOL_ConfigData[0] | (@sysvar::eol_sysvar::ENV_EOL_Bit_01 << 0);
+  VAR_EOL_ConfigData[0] = VAR_EOL_ConfigData[0] | (@sysvar::eol_sysvar::ENV_EOL_Bit_02 << 1);
+  VAR_EOL_ConfigData[0] = VAR_EOL_ConfigData[0] | (@sysvar::eol_sysvar::ENV_EOL_Bit_03 << 2);
+  VAR_EOL_ConfigData[0] = VAR_EOL_ConfigData[0] | (@sysvar::eol_sysvar::ENV_EOL_Bit_04 << 3);
+  VAR_EOL_ConfigData[0] = VAR_EOL_ConfigData[0] | (@sysvar::eol_sysvar::ENV_EOL_Bit_05 << 4);
+  VAR_EOL_ConfigData[0] = VAR_EOL_ConfigData[0] | (@sysvar::eol_sysvar::ENV_EOL_Bit_06 << 5);
+  VAR_EOL_ConfigData[0] = VAR_EOL_ConfigData[0] | (@sysvar::eol_sysvar::ENV_EOL_Bit_07 << 6);
+  VAR_EOL_ConfigData[0] = VAR_EOL_ConfigData[0] | (@sysvar::eol_sysvar::ENV_EOL_Bit_08 << 7);
+
+
+  VAR_EOL_ConfigData[1] = 0;
+  VAR_EOL_ConfigData[1] = VAR_EOL_ConfigData[1] | (@sysvar::eol_sysvar::ENV_EOL_Bit_09 << 0);
+  VAR_EOL_ConfigData[1] = VAR_EOL_ConfigData[1] | (@sysvar::eol_sysvar::ENV_EOL_Bit_10 << 1);
+  VAR_EOL_ConfigData[1] = VAR_EOL_ConfigData[1] | (@sysvar::eol_sysvar::ENV_EOL_Bit_11 << 2);
+  VAR_EOL_ConfigData[1] = VAR_EOL_ConfigData[1] | (@sysvar::eol_sysvar::ENV_EOL_Bit_12 << 3);
+  VAR_EOL_ConfigData[1] = VAR_EOL_ConfigData[1] | (@sysvar::eol_sysvar::ENV_EOL_Bit_13 << 4);
+  VAR_EOL_ConfigData[1] = VAR_EOL_ConfigData[1] | (@sysvar::eol_sysvar::ENV_EOL_Bit_14 << 5);
+  VAR_EOL_ConfigData[1] = VAR_EOL_ConfigData[1] | (@sysvar::eol_sysvar::ENV_EOL_Bit_15 << 6);
+  VAR_EOL_ConfigData[1] = VAR_EOL_ConfigData[1] | (@sysvar::eol_sysvar::ENV_EOL_Bit_16 << 7);
+
+
+  VAR_EOL_ConfigData[2] = 0;
+  VAR_EOL_ConfigData[2] = VAR_EOL_ConfigData[2] | (@sysvar::eol_sysvar::ENV_EOL_Bit_17 << 0);
+  VAR_EOL_ConfigData[2] = VAR_EOL_ConfigData[2] | (@sysvar::eol_sysvar::ENV_EOL_Bit_18 << 1);
+  VAR_EOL_ConfigData[2] = VAR_EOL_ConfigData[2] | (@sysvar::eol_sysvar::ENV_EOL_Bit_19 << 2);
+  VAR_EOL_ConfigData[2] = VAR_EOL_ConfigData[2] | (@sysvar::eol_sysvar::ENV_EOL_Bit_20 << 3);
+  VAR_EOL_ConfigData[2] = VAR_EOL_ConfigData[2] | (@sysvar::eol_sysvar::ENV_EOL_Bit_21 << 4);
+  VAR_EOL_ConfigData[2] = VAR_EOL_ConfigData[2] | (@sysvar::eol_sysvar::ENV_EOL_Bit_22 << 5);
+  VAR_EOL_ConfigData[2] = VAR_EOL_ConfigData[2] | (@sysvar::eol_sysvar::ENV_EOL_Bit_23 << 6);
+  VAR_EOL_ConfigData[2] = VAR_EOL_ConfigData[2] | (@sysvar::eol_sysvar::ENV_EOL_Bit_24 << 7);
+
+
+
+
+  VAR_EOL_ConfigData[3] = 0;
+  VAR_EOL_ConfigData[3] = VAR_EOL_ConfigData[3] | (@sysvar::eol_sysvar::ENV_EOL_Bit_25 << 0);
+  VAR_EOL_ConfigData[3] = VAR_EOL_ConfigData[3] | (@sysvar::eol_sysvar::ENV_EOL_Bit_26 << 1);
+  VAR_EOL_ConfigData[3] = VAR_EOL_ConfigData[3] | (@sysvar::eol_sysvar::ENV_EOL_Bit_27 << 2);
+  VAR_EOL_ConfigData[3] = VAR_EOL_ConfigData[3] | (@sysvar::eol_sysvar::ENV_EOL_Bit_28 << 3);
+  VAR_EOL_ConfigData[3] = VAR_EOL_ConfigData[3] | (@sysvar::eol_sysvar::ENV_EOL_Bit_29 << 4);
+  VAR_EOL_ConfigData[3] = VAR_EOL_ConfigData[3] | (@sysvar::eol_sysvar::ENV_EOL_Bit_30 << 5);
+  VAR_EOL_ConfigData[3] = VAR_EOL_ConfigData[3] | (@sysvar::eol_sysvar::ENV_EOL_Bit_31 << 6);
+  VAR_EOL_ConfigData[3] = VAR_EOL_ConfigData[3] | (@sysvar::eol_sysvar::ENV_EOL_Bit_32 << 7);
+
+
+  VAR_EOL_ConfigData[4] = 0;
+  VAR_EOL_ConfigData[4] = VAR_EOL_ConfigData[4] | (@sysvar::eol_sysvar::ENV_EOL_Bit_33 << 0);
+  VAR_EOL_ConfigData[4] = VAR_EOL_ConfigData[4] | (@sysvar::eol_sysvar::ENV_EOL_Bit_34 << 1);
+  VAR_EOL_ConfigData[4] = VAR_EOL_ConfigData[4] | (@sysvar::eol_sysvar::ENV_EOL_Bit_35 << 2);
+  VAR_EOL_ConfigData[4] = VAR_EOL_ConfigData[4] | (@sysvar::eol_sysvar::ENV_EOL_Bit_36 << 3);
+  VAR_EOL_ConfigData[4] = VAR_EOL_ConfigData[4] | (@sysvar::eol_sysvar::ENV_EOL_Bit_37 << 4);
+  VAR_EOL_ConfigData[4] = VAR_EOL_ConfigData[4] | (@sysvar::eol_sysvar::ENV_EOL_Bit_38 << 5);
+  VAR_EOL_ConfigData[4] = VAR_EOL_ConfigData[4] | (@sysvar::eol_sysvar::ENV_EOL_Bit_39 << 6);
+  VAR_EOL_ConfigData[4] = VAR_EOL_ConfigData[4] | (@sysvar::eol_sysvar::ENV_EOL_Bit_40 << 7);
+
+
+  VAR_EOL_ConfigData[5] = 0;
+  VAR_EOL_ConfigData[5] = VAR_EOL_ConfigData[5] | (@sysvar::eol_sysvar::ENV_EOL_Bit_41 << 0);
+  VAR_EOL_ConfigData[5] = VAR_EOL_ConfigData[5] | (@sysvar::eol_sysvar::ENV_EOL_Bit_42 << 1);
+  VAR_EOL_ConfigData[5] = VAR_EOL_ConfigData[5] | (@sysvar::eol_sysvar::ENV_EOL_Bit_43 << 2);
+  VAR_EOL_ConfigData[5] = VAR_EOL_ConfigData[5] | (@sysvar::eol_sysvar::ENV_EOL_Bit_44 << 3);
+  VAR_EOL_ConfigData[5] = VAR_EOL_ConfigData[5] | (@sysvar::eol_sysvar::ENV_EOL_Bit_45 << 4);
+  VAR_EOL_ConfigData[5] = VAR_EOL_ConfigData[5] | (@sysvar::eol_sysvar::ENV_EOL_Bit_46 << 5);
+  VAR_EOL_ConfigData[5] = VAR_EOL_ConfigData[5] | (@sysvar::eol_sysvar::ENV_EOL_Bit_47 << 6);
+  VAR_EOL_ConfigData[5] = VAR_EOL_ConfigData[5] | (@sysvar::eol_sysvar::ENV_EOL_Bit_48 << 7);
+
+
+  VAR_EOL_ConfigData[6] = 0;
+  VAR_EOL_ConfigData[6] = VAR_EOL_ConfigData[6] | (@sysvar::eol_sysvar::ENV_EOL_Bit_49 << 0);
+  VAR_EOL_ConfigData[6] = VAR_EOL_ConfigData[6] | (@sysvar::eol_sysvar::ENV_EOL_Bit_50 << 1);
+  VAR_EOL_ConfigData[6] = VAR_EOL_ConfigData[6] | (@sysvar::eol_sysvar::ENV_EOL_Bit_51 << 2);
+  VAR_EOL_ConfigData[6] = VAR_EOL_ConfigData[6] | (@sysvar::eol_sysvar::ENV_EOL_Bit_52 << 3);
+  VAR_EOL_ConfigData[6] = VAR_EOL_ConfigData[6] | (@sysvar::eol_sysvar::ENV_EOL_Bit_53 << 4);
+  VAR_EOL_ConfigData[6] = VAR_EOL_ConfigData[6] | (@sysvar::eol_sysvar::ENV_EOL_Bit_54 << 5);
+  VAR_EOL_ConfigData[6] = VAR_EOL_ConfigData[6] | (@sysvar::eol_sysvar::ENV_EOL_Bit_55 << 6);
+  VAR_EOL_ConfigData[6] = VAR_EOL_ConfigData[6] | (@sysvar::eol_sysvar::ENV_EOL_Bit_56 << 7);
+
+
+  VAR_EOL_ConfigData[7] = 0;
+  VAR_EOL_ConfigData[7] = VAR_EOL_ConfigData[7] | (@sysvar::eol_sysvar::ENV_EOL_Bit_57 << 0);
+  VAR_EOL_ConfigData[7] = VAR_EOL_ConfigData[7] | (@sysvar::eol_sysvar::ENV_EOL_Bit_58 << 1);
+  VAR_EOL_ConfigData[7] = VAR_EOL_ConfigData[7] | (@sysvar::eol_sysvar::ENV_EOL_Bit_59 << 2);
+  VAR_EOL_ConfigData[7] = VAR_EOL_ConfigData[7] | (@sysvar::eol_sysvar::ENV_EOL_Bit_60 << 3);
+  VAR_EOL_ConfigData[7] = VAR_EOL_ConfigData[7] | (@sysvar::eol_sysvar::ENV_EOL_Bit_61 << 4);
+  VAR_EOL_ConfigData[7] = VAR_EOL_ConfigData[7] | (@sysvar::eol_sysvar::ENV_EOL_Bit_62 << 5);
+  VAR_EOL_ConfigData[7] = VAR_EOL_ConfigData[7] | (@sysvar::eol_sysvar::ENV_EOL_Bit_63 << 6);
+  VAR_EOL_ConfigData[7] = VAR_EOL_ConfigData[7] | (@sysvar::eol_sysvar::ENV_EOL_Bit_64 << 7);
+
+
+  VAR_EOL_ConfigData[8] = 0;
+  VAR_EOL_ConfigData[8] = VAR_EOL_ConfigData[8] | (@sysvar::eol_sysvar::ENV_EOL_Bit_65 << 0);
+  VAR_EOL_ConfigData[8] = VAR_EOL_ConfigData[8] | (@sysvar::eol_sysvar::ENV_EOL_Bit_66 << 1);
+  VAR_EOL_ConfigData[8] = VAR_EOL_ConfigData[8] | (@sysvar::eol_sysvar::ENV_EOL_Bit_67 << 2);
+  VAR_EOL_ConfigData[8] = VAR_EOL_ConfigData[8] | (@sysvar::eol_sysvar::ENV_EOL_Bit_68 << 3);
+  VAR_EOL_ConfigData[8] = VAR_EOL_ConfigData[8] | (@sysvar::eol_sysvar::ENV_EOL_Bit_69 << 4);
+  VAR_EOL_ConfigData[8] = VAR_EOL_ConfigData[8] | (@sysvar::eol_sysvar::ENV_EOL_Bit_70 << 5);
+  VAR_EOL_ConfigData[8] = VAR_EOL_ConfigData[8] | (@sysvar::eol_sysvar::ENV_EOL_Bit_71 << 6);
+  VAR_EOL_ConfigData[8] = VAR_EOL_ConfigData[8] | (@sysvar::eol_sysvar::ENV_EOL_Bit_72 << 7);
+  
+  VAR_EOL_ConfigData[9] = 0;
+  VAR_EOL_ConfigData[9] = VAR_EOL_ConfigData[9] | (@sysvar::eol_sysvar::ENV_EOL_Bit_73 << 0);
+  VAR_EOL_ConfigData[9] = VAR_EOL_ConfigData[9] | (@sysvar::eol_sysvar::ENV_EOL_Bit_74 << 1);
+  VAR_EOL_ConfigData[9] = VAR_EOL_ConfigData[9] | (@sysvar::eol_sysvar::ENV_EOL_Bit_75 << 2);
+  VAR_EOL_ConfigData[9] = VAR_EOL_ConfigData[9] | (@sysvar::eol_sysvar::ENV_EOL_Bit_76 << 3);
+  VAR_EOL_ConfigData[9] = VAR_EOL_ConfigData[9] | (@sysvar::eol_sysvar::ENV_EOL_Bit_77 << 4);
+  VAR_EOL_ConfigData[9] = VAR_EOL_ConfigData[9] | (@sysvar::eol_sysvar::ENV_EOL_Bit_78 << 5);
+  VAR_EOL_ConfigData[9] = VAR_EOL_ConfigData[9] | (@sysvar::eol_sysvar::ENV_EOL_Bit_79 << 6);
+  VAR_EOL_ConfigData[9] = VAR_EOL_ConfigData[9] | (@sysvar::eol_sysvar::ENV_EOL_Bit_80 << 7);
+  
+  
+}
+/*Handle mapping input data from bits to 12 byte to send*/
+void FUNC_CalculateCRC()
+{
+ 	word  crc_table[256] =  {	
+            0x0000, 0x1021, 0x2042, 0x3063, 0x4084, 0x50a5,
+						0x60c6, 0x70e7, 0x8108, 0x9129, 0xa14a, 0xb16b,
+						0xc18c, 0xd1ad, 0xe1ce, 0xf1ef, 0x1231, 0x0210,
+						0x3273, 0x2252, 0x52b5, 0x4294, 0x72f7, 0x62d6,
+						0x9339, 0x8318, 0xb37b, 0xa35a, 0xd3bd, 0xc39c,
+						0xf3ff, 0xe3de, 0x2462, 0x3443, 0x0420, 0x1401,
+						0x64e6, 0x74c7, 0x44a4, 0x5485, 0xa56a, 0xb54b,
+						0x8528, 0x9509, 0xe5ee, 0xf5cf, 0xc5ac, 0xd58d,
+						0x3653, 0x2672, 0x1611, 0x0630, 0x76d7, 0x66f6,
+						0x5695, 0x46b4, 0xb75b, 0xa77a, 0x9719, 0x8738,
+						0xf7df, 0xe7fe, 0xd79d, 0xc7bc, 0x48c4, 0x58e5,
+						0x6886, 0x78a7, 0x0840, 0x1861, 0x2802, 0x3823,
+						0xc9cc, 0xd9ed, 0xe98e, 0xf9af, 0x8948, 0x9969,
+						0xa90a, 0xb92b, 0x5af5, 0x4ad4, 0x7ab7, 0x6a96,
+						0x1a71, 0x0a50, 0x3a33, 0x2a12, 0xdbfd, 0xcbdc,
+						0xfbbf, 0xeb9e, 0x9b79, 0x8b58, 0xbb3b, 0xab1a,
+						0x6ca6, 0x7c87, 0x4ce4, 0x5cc5, 0x2c22, 0x3c03,
+						0x0c60, 0x1c41, 0xedae, 0xfd8f, 0xcdec, 0xddcd,
+						0xad2a, 0xbd0b, 0x8d68, 0x9d49, 0x7e97, 0x6eb6,
+						0x5ed5, 0x4ef4, 0x3e13, 0x2e32, 0x1e51, 0x0e70,
+						0xff9f, 0xefbe, 0xdfdd, 0xcffc, 0xbf1b, 0xaf3a,
+						0x9f59, 0x8f78, 0x9188, 0x81a9, 0xb1ca, 0xa1eb,
+						0xd10c, 0xc12d, 0xf14e, 0xe16f, 0x1080, 0x00a1,
+						0x30c2, 0x20e3, 0x5004, 0x4025, 0x7046, 0x6067,
+						0x83b9, 0x9398, 0xa3fb, 0xb3da, 0xc33d, 0xd31c,
+						0xe37f, 0xf35e, 0x02b1, 0x1290, 0x22f3, 0x32d2,
+						0x4235, 0x5214, 0x6277, 0x7256, 0xb5ea, 0xa5cb,
+						0x95a8, 0x8589, 0xf56e, 0xe54f, 0xd52c, 0xc50d,
+						0x34e2, 0x24c3, 0x14a0, 0x0481, 0x7466, 0x6447,
+						0x5424, 0x4405, 0xa7db, 0xb7fa, 0x8799, 0x97b8,
+						0xe75f, 0xf77e, 0xc71d, 0xd73c, 0x26d3, 0x36f2,
+						0x0691, 0x16b0, 0x6657, 0x7676, 0x4615, 0x5634,
+						0xd94c, 0xc96d, 0xf90e, 0xe92f, 0x99c8, 0x89e9,
+						0xb98a, 0xa9ab, 0x5844, 0x4865, 0x7806, 0x6827,
+						0x18c0, 0x08e1, 0x3882, 0x28a3, 0xcb7d, 0xdb5c,
+						0xeb3f, 0xfb1e, 0x8bf9, 0x9bd8, 0xabbb, 0xbb9a,
+						0x4a75, 0x5a54, 0x6a37, 0x7a16, 0x0af1, 0x1ad0,
+						0x2ab3, 0x3a92, 0xfd2e, 0xed0f, 0xdd6c, 0xcd4d,
+						0xbdaa, 0xad8b, 0x9de8, 0x8dc9, 0x7c26, 0x6c07,
+						0x5c64, 0x4c45, 0x3ca2, 0x2c83, 0x1ce0, 0x0cc1,
+						0xef1f, 0xff3e, 0xcf5d, 0xdf7c, 0xaf9b, 0xbfba,
+						0x8fd9, 0x9ff8, 0x6e17, 0x7e36, 0x4e55, 0x5e74,
+						0x2e93, 0x3eb2, 0x0ed1, 0x1ef0};  
+	word  crc; 
+	word  tmp, i;
+  
+  crc = 0xffff; /* initial value	int poly = 0x1021; /* poly mask */
+
+	
+	for(i = 0; i < VAR_EOLSizeInByte - 2; ++i)
+	{
+		tmp = (VAR_EOL_ConfigData[i] ^ (crc >> 8)) & 0xff;
+		crc = crc_table[tmp] ^ (crc << 8);
+	}
+	VAR_EOL_ConfigData[10] = (crc >> 8) & 0xFF; 
+  VAR_EOL_ConfigData[11] = crc & 0xFF; 
+
+}
+/* Write VIN number */
+/*a.	$VIN:    2E F1 90 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 */
+on sysvar Write_VIN_TVV::VIN_number
+{
+  if (0 == @sysvar::Write_VIN_TVV::VIN_number)
+  {
+      VAR_TxDiagMsgBuffer[0] = 0x10;
+      VAR_TxDiagMsgBuffer[1] = 0x1B;
+      VAR_TxDiagMsgBuffer[2] = 0x2E;
+      VAR_TxDiagMsgBuffer[3] = 0xF1;
+      VAR_TxDiagMsgBuffer[4] = 0x90;
+      VAR_TxDiagMsgBuffer[5] = VIN_data;
+      VAR_TxDiagMsgBuffer[6] = VIN_data;
+      VAR_TxDiagMsgBuffer[7] = VIN_data;
+    // 2nd consecutive frame
+      VAR_TxDiagMsgBuffer[8] = 0x21;
+      VAR_TxDiagMsgBuffer[9] = VIN_data;
+      VAR_TxDiagMsgBuffer[10] = VIN_data;
+      VAR_TxDiagMsgBuffer[11] = VIN_data;
+      VAR_TxDiagMsgBuffer[12] = VIN_data;
+      VAR_TxDiagMsgBuffer[13] = VIN_data;
+      VAR_TxDiagMsgBuffer[14] = VIN_data;
+      VAR_TxDiagMsgBuffer[15] = VIN_data;
+    // 3rd consecutive frame
+      VAR_TxDiagMsgBuffer[16] = 0x22;
+      VAR_TxDiagMsgBuffer[17] = VIN_data;
+      VAR_TxDiagMsgBuffer[18] = VIN_data;
+      VAR_TxDiagMsgBuffer[19] = VIN_data;
+      VAR_TxDiagMsgBuffer[20] = VIN_data;
+      VAR_TxDiagMsgBuffer[21] = VIN_data;
+      VAR_TxDiagMsgBuffer[22] = VIN_data;
+      VAR_TxDiagMsgBuffer[23] = VIN_data;
+    // 4th consecutive frame
+      VAR_TxDiagMsgBuffer[24] = 0x23;
+      VAR_TxDiagMsgBuffer[17] = VIN_data;
+      VAR_TxDiagMsgBuffer[18] = VIN_data;
+      VAR_TxDiagMsgBuffer[17] = VIN_data;
+      VAR_TxDiagMsgBuffer[18] = VIN_data;
+      VAR_TxDiagMsgBuffer[17] = VIN_data;
+      VAR_TxDiagMsgBuffer[18] = VIN_data;
+      VAR_TxDiagMsgBuffer[18] = VIN_data;
+    
+            /* reset variables */
+      VAR_TxConsecutiveFrameIndex = 0;
+      VAR_RxConsecutiveFrameIndex = 0;
+      VAR_MainState_en    = MainStt_SendFF_e;
+      VAR_EndStateProcess = MainStt_Idle_e;
+      write("Send write VIN number");
+  }
+}
+/* Write TVV number */
+/*a.	$VIN:    2E F1 96 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 */
+on sysvar Write_VIN_TVV::TVV_number
+{
+  if (0 == @sysvar::Write_VIN_TVV::TVV_number)
+  {
+      VAR_TxDiagMsgBuffer[0] = 0x10;
+      VAR_TxDiagMsgBuffer[1] = 0x1B;
+      VAR_TxDiagMsgBuffer[2] = 0x2E;
+      VAR_TxDiagMsgBuffer[3] = 0xF1;
+      VAR_TxDiagMsgBuffer[4] = 0x96;
+      VAR_TxDiagMsgBuffer[5] = TVV_data;
+      VAR_TxDiagMsgBuffer[6] = TVV_data;
+      VAR_TxDiagMsgBuffer[7] = TVV_data;
+    // 2nd consecutive frame
+      VAR_TxDiagMsgBuffer[8] = 0x21;
+      VAR_TxDiagMsgBuffer[9] = TVV_data;
+      VAR_TxDiagMsgBuffer[10] = TVV_data;
+      VAR_TxDiagMsgBuffer[11] = TVV_data;
+      VAR_TxDiagMsgBuffer[12] = TVV_data;
+      VAR_TxDiagMsgBuffer[13] = TVV_data;
+      VAR_TxDiagMsgBuffer[14] = TVV_data;
+      VAR_TxDiagMsgBuffer[15] = TVV_data;
+    // 3rd consecutive frame
+      VAR_TxDiagMsgBuffer[16] = 0x22;
+      VAR_TxDiagMsgBuffer[17] = TVV_data;
+      VAR_TxDiagMsgBuffer[18] = TVV_data;
+      VAR_TxDiagMsgBuffer[19] = TVV_data;
+      VAR_TxDiagMsgBuffer[20] = TVV_data;
+      VAR_TxDiagMsgBuffer[21] = TVV_data;
+      VAR_TxDiagMsgBuffer[22] = TVV_data;
+      VAR_TxDiagMsgBuffer[23] = TVV_data;
+    // 4th consecutive frame
+      VAR_TxDiagMsgBuffer[24] = 0x23;
+      VAR_TxDiagMsgBuffer[17] = TVV_data;
+      VAR_TxDiagMsgBuffer[18] = TVV_data;
+      VAR_TxDiagMsgBuffer[17] = TVV_data;
+      VAR_TxDiagMsgBuffer[18] = TVV_data;
+      VAR_TxDiagMsgBuffer[17] = TVV_data;
+      VAR_TxDiagMsgBuffer[18] = TVV_data;
+      VAR_TxDiagMsgBuffer[18] = TVV_data;
+    
+            /* reset variables */
+      VAR_TxConsecutiveFrameIndex = 0;
+      VAR_RxConsecutiveFrameIndex = 0;
+      VAR_MainState_en    = MainStt_SendFF_e;
+      VAR_EndStateProcess = MainStt_Idle_e;
+      write("Send write TVV number");
+  }
+}
+
+/* Handle write EOL data */
+on sysvar eol_sysvar::ENV_TriggerToWriteEOLButton
+{
+  byte i;
+  if (0 == @sysvar::eol_sysvar::ENV_TriggerToWriteEOLButton)
+  {
+        FUNC_PreapreDataEOL();
+        FUNC_CalculateCRC();
+        /* Prepare data buffer */
+        VAR_TxDiagMsgBuffer[0] = 0x10;
+        VAR_TxDiagMsgBuffer[1] = 0x0F;
+        VAR_TxDiagMsgBuffer[2] = 0x2E;
+        VAR_TxDiagMsgBuffer[3] = 0xDE;
+        VAR_TxDiagMsgBuffer[4] = 0x00;
+        VAR_TxDiagMsgBuffer[5] = VAR_EOL_ConfigData[0];
+        VAR_TxDiagMsgBuffer[6] = VAR_EOL_ConfigData[1];
+        VAR_TxDiagMsgBuffer[7] = VAR_EOL_ConfigData[2];
+        VAR_TxDiagMsgBuffer[8] = 0x21;
+        VAR_TxDiagMsgBuffer[9] = VAR_EOL_ConfigData[3];
+        VAR_TxDiagMsgBuffer[10] = VAR_EOL_ConfigData[4];
+        VAR_TxDiagMsgBuffer[11] = VAR_EOL_ConfigData[5];
+        VAR_TxDiagMsgBuffer[12] = VAR_EOL_ConfigData[6];
+        VAR_TxDiagMsgBuffer[13] = VAR_EOL_ConfigData[7];
+        VAR_TxDiagMsgBuffer[14] = VAR_EOL_ConfigData[8];
+        VAR_TxDiagMsgBuffer[15] = VAR_EOL_ConfigData[9];
+        VAR_TxDiagMsgBuffer[16] = 0x22;
+        VAR_TxDiagMsgBuffer[17] = VAR_EOL_ConfigData[10];
+        VAR_TxDiagMsgBuffer[18] = VAR_EOL_ConfigData[11];
+    
+        /* reset variables */
+        VAR_TxConsecutiveFrameIndex = 0;
+        VAR_RxConsecutiveFrameIndex = 0;
+        
+        VAR_MainState_en    = MainStt_SendFF_e;
+        VAR_EndStateProcess = MainStt_Idle_e;
+
+  }
+}
+
+/* Handle read EOL data by byte */
+on sysvar eol_sysvar::ENV_TriggerToReadEOLButton
+{
+  if (0 == @sysvar::eol_sysvar::ENV_TriggerToReadEOLButton)
+  {
+        /* Prepare data buffer */
+        VAR_TxDiagMsgBuffer[0] = 0x03;
+        VAR_TxDiagMsgBuffer[1] = 0x22;
+        VAR_TxDiagMsgBuffer[2] = 0xDE;
+        VAR_TxDiagMsgBuffer[3] = 0x00;
+        VAR_TxDiagMsgBuffer[4] = 0x00;
+        VAR_TxDiagMsgBuffer[5] = 0x00;
+        VAR_TxDiagMsgBuffer[6] = 0x00;       
+        VAR_TxDiagMsgBuffer[7] = 0x00;
+
+        /* reset variables */
+        VAR_TxConsecutiveFrameIndex = 0;
+        VAR_RxConsecutiveFrameIndex = 0;
+        VAR_EndStateProcess = MainStt_ProcessReadEOLComplete_e;
+        VAR_MainState_en    = MainStt_SendFF_e;
+  }
+}
+
+on sysvar eol_sysvar::ENV_SessionControl_SendButton
+{
+  if (0 == @sysvar::eol_sysvar::ENV_SessionControl_SendButton)
+  {
+    /* Prepare data buffer */
+    VAR_TxDiagMsgBuffer[0] = 0x02;
+    VAR_TxDiagMsgBuffer[1] = 0x10;
+    VAR_TxDiagMsgBuffer[2] = @sysvar::eol_sysvar::ENV_SessionControl_SID;
+    VAR_TxDiagMsgBuffer[3] = 0x00;
+    VAR_TxDiagMsgBuffer[4] = 0x00;
+    VAR_TxDiagMsgBuffer[5] = 0x00;
+    VAR_TxDiagMsgBuffer[6] = 0x00;       
+    VAR_TxDiagMsgBuffer[7] = 0x00;
+
+    /* reset variables */
+    VAR_TxConsecutiveFrameIndex = 0;
+    VAR_RxConsecutiveFrameIndex = 0;
+
+    VAR_MainState_en    = MainStt_SendFF_e;
+    VAR_EndStateProcess = MainStt_Idle_e;
+    
+    VAR_TesterPresentEnable = 0;
+    cancelTimer(TM_TesterPresent);
+  }
+}
+
+on sysvar eol_sysvar::ENV_SessionControl_SendButton2
+{
+  if (0 == @sysvar::eol_sysvar::ENV_SessionControl_SendButton2)
+  {
+    /* Prepare data buffer */
+    VAR_TxDiagMsgBuffer[0] = 0x02;
+    VAR_TxDiagMsgBuffer[1] = 0x10;
+    VAR_TxDiagMsgBuffer[2] = @sysvar::eol_sysvar::ENV_SessionControl_SID;
+    VAR_TxDiagMsgBuffer[3] = 0x00;
+    VAR_TxDiagMsgBuffer[4] = 0x00;
+    VAR_TxDiagMsgBuffer[5] = 0x00;
+    VAR_TxDiagMsgBuffer[6] = 0x00;       
+    VAR_TxDiagMsgBuffer[7] = 0x00;
+
+    /* reset variables */
+    VAR_TxConsecutiveFrameIndex = 0;
+    VAR_RxConsecutiveFrameIndex = 0;
+
+    VAR_MainState_en    = MainStt_SendFF_e;
+    VAR_EndStateProcess = MainStt_Idle_e;
+    
+    /* Set flag */
+    VAR_TesterPresentEnable = 1;
+    setTimer(TM_TesterPresent, 10);
+  }
+}
+
+on sysvar eol_sysvar::ENV_TriggerToRequestSeed
+{
+  if (0 == @sysvar::eol_sysvar::ENV_TriggerToRequestSeed)
+  {
+    switch(@sysvar::eol_sysvar::ENV_SA_SecurityLevel)
+    {
+      case 0x03:
+        /* Prepare data buffer */
+        VAR_TxDiagMsgBuffer[0] = 0x02;
+        VAR_TxDiagMsgBuffer[1] = 0x27;
+        VAR_TxDiagMsgBuffer[2] = 0x03;
+        VAR_TxDiagMsgBuffer[3] = 0x00;
+        VAR_TxDiagMsgBuffer[4] = 0x00;
+        VAR_TxDiagMsgBuffer[5] = 0x00;
+        VAR_TxDiagMsgBuffer[6] = 0x00;       
+        VAR_TxDiagMsgBuffer[7] = 0x00;
+    
+        /* reset variables */
+        VAR_TxConsecutiveFrameIndex = 0;
+        VAR_RxConsecutiveFrameIndex = 0;
+        VAR_MainState_en    = MainStt_SendFF_e;
+        VAR_EndStateProcess = MainStt_CopySeed_e;
+        
+        break;
+
+      case 0x23:
+      case 0x27:
+      case 0x2B:
+      case 0x2F:
+        /* Prepare data buffer */
+        VAR_TxDiagMsgBuffer[0] = 0x02;
+        VAR_TxDiagMsgBuffer[1] = 0x27;
+        /* Request Sub Function is @sysvar::eol_sysvar::ENV_SA_SecurityLevel*/
+        VAR_TxDiagMsgBuffer[2] = @sysvar::eol_sysvar::ENV_SA_SecurityLevel;
+        VAR_TxDiagMsgBuffer[3] = 0x00;
+        VAR_TxDiagMsgBuffer[4] = 0x00;
+        VAR_TxDiagMsgBuffer[5] = 0x00;
+        VAR_TxDiagMsgBuffer[6] = 0x00;       
+        VAR_TxDiagMsgBuffer[7] = 0x00;
+        
+        VAR_MainState_en    = MainStt_SendFF_e;
+        VAR_EndStateProcess = MainStt_CopySeed_e;
+        
+
+        break;
+      Default:
+        /* Prepare data buffer */
+        VAR_TxDiagMsgBuffer[0] = 0x02;
+        VAR_TxDiagMsgBuffer[1] = 0x27;
+        /* Request Sub Function is @sysvar::eol_sysvar::ENV_SA_SecurityLevel*/
+        VAR_TxDiagMsgBuffer[2] = @sysvar::eol_sysvar::ENV_SA_SecurityLevel;
+        VAR_TxDiagMsgBuffer[3] = 0x00;
+        VAR_TxDiagMsgBuffer[4] = 0x00;
+        VAR_TxDiagMsgBuffer[5] = 0x00;
+        VAR_TxDiagMsgBuffer[6] = 0x00;       
+        VAR_TxDiagMsgBuffer[7] = 0x00;
+        
+        VAR_MainState_en    = MainStt_SendFF_e;
+        VAR_EndStateProcess = MainStt_CopySeed_e;
+        break;
+    }
+        /* reset variables */
+    VAR_TxConsecutiveFrameIndex = 0;
+    VAR_RxConsecutiveFrameIndex = 0;
+  }
+}
+
+on sysvar eol_sysvar::ENV_TriggerToSendKey
+{
+  
+  if (0 == @sysvar::eol_sysvar::ENV_TriggerToSendKey)
+  {
+     switch(@sysvar::eol_sysvar::ENV_SA_SecurityLevel)
+    {
+      case 0x03:
+        FUNC_PrepareKey();
+        VAR_TxDiagMsgBuffer[0] = 0x05;
+        VAR_TxDiagMsgBuffer[1] = 0x27;
+        VAR_TxDiagMsgBuffer[2] = 0x04;
+        VAR_TxDiagMsgBuffer[3] = VAR_SEC_KeyData[0];
+        VAR_TxDiagMsgBuffer[4] = VAR_SEC_KeyData[1];
+        VAR_TxDiagMsgBuffer[5] = VAR_SEC_KeyData[2];
+        VAR_TxDiagMsgBuffer[6] = 0x00;       
+        VAR_TxDiagMsgBuffer[7] = 0x00;
+        /* reset variables */
+        VAR_TxConsecutiveFrameIndex = 0;
+        VAR_RxConsecutiveFrameIndex = 0;
+        
+        VAR_EndStateProcess = MainStt_Idle_e;
+        VAR_MainState_en    = MainStt_SendFF_e;
+        break;
+        
+      case 0x23:
+      case 0x27:
+      case 0x2B:
+      case 0x2F:
+        FUNC_PrepareKey();
+        /* Prepare data buffer */
+        VAR_TxDiagMsgBuffer[0] = 0x10;
+        VAR_TxDiagMsgBuffer[1] = 0x0A;
+        VAR_TxDiagMsgBuffer[2] = 0x27;
+        VAR_TxDiagMsgBuffer[3] = @sysvar::eol_sysvar::ENV_SA_SecurityLevel + 1;
+        VAR_TxDiagMsgBuffer[4] = VAR_SA_KeyData[0];
+        VAR_TxDiagMsgBuffer[5] = VAR_SA_KeyData[1];
+        VAR_TxDiagMsgBuffer[6] = VAR_SA_KeyData[2];
+        VAR_TxDiagMsgBuffer[7] = VAR_SA_KeyData[3];
+        VAR_TxDiagMsgBuffer[8] = 0x21;
+        VAR_TxDiagMsgBuffer[9] = VAR_SA_KeyData[4];
+        VAR_TxDiagMsgBuffer[10] = VAR_SA_KeyData[5];
+        VAR_TxDiagMsgBuffer[11] = VAR_SA_KeyData[6];
+        VAR_TxDiagMsgBuffer[12] = VAR_SA_KeyData[7];
+        VAR_TxDiagMsgBuffer[13] = 0;
+        VAR_TxDiagMsgBuffer[14] = 0;
+        VAR_TxDiagMsgBuffer[15] = 0;
+        VAR_TxDiagMsgBuffer[16] = 0;
+
+        VAR_EndStateProcess = MainStt_Idle_e;
+        VAR_MainState_en    = MainStt_SendFF_e;
+
+        break;
+        
+      case 0x33:
+        FUNC_PrepareKey();
+        VAR_TxDiagMsgBuffer[0] = 0x10;
+        VAR_TxDiagMsgBuffer[1] = 0x12;
+        VAR_TxDiagMsgBuffer[2] = 0x27;
+        VAR_TxDiagMsgBuffer[3] = @sysvar::eol_sysvar::ENV_SA_SecurityLevel + 1;
+        VAR_TxDiagMsgBuffer[4] = VAR_SA_KeyData[0];
+        VAR_TxDiagMsgBuffer[5] = VAR_SA_KeyData[1];
+        VAR_TxDiagMsgBuffer[6] = VAR_SA_KeyData[2];
+        VAR_TxDiagMsgBuffer[7] = VAR_SA_KeyData[3];
+        VAR_TxDiagMsgBuffer[8] = 0x21;
+        VAR_TxDiagMsgBuffer[9] = VAR_SA_KeyData[4];
+        VAR_TxDiagMsgBuffer[10] = VAR_SA_KeyData[5];
+        VAR_TxDiagMsgBuffer[11] = VAR_SA_KeyData[6];
+        VAR_TxDiagMsgBuffer[12] = VAR_SA_KeyData[7];
+        VAR_TxDiagMsgBuffer[13] = VAR_SA_KeyData[8];
+        VAR_TxDiagMsgBuffer[14] = VAR_SA_KeyData[9];
+        VAR_TxDiagMsgBuffer[15] = VAR_SA_KeyData[10];
+        VAR_TxDiagMsgBuffer[16] = 0x22;
+        VAR_TxDiagMsgBuffer[17] = VAR_SA_KeyData[11];
+        VAR_TxDiagMsgBuffer[18] = VAR_SA_KeyData[12];
+        VAR_TxDiagMsgBuffer[19] = VAR_SA_KeyData[13];
+        VAR_TxDiagMsgBuffer[20] = VAR_SA_KeyData[14];
+        VAR_TxDiagMsgBuffer[21] = VAR_SA_KeyData[15];
+        
+        VAR_EndStateProcess = MainStt_Idle_e;
+        VAR_MainState_en    = MainStt_SendFF_e;
+        break;
+        
+	
+      Default:
+        VAR_EndStateProcess = MainStt_Idle_e;
+        VAR_MainState_en    = MainStt_SendFF_e;
+        break;
+    }
+    
+    /* reset variables */
+    VAR_TxConsecutiveFrameIndex = 0;
+    VAR_RxConsecutiveFrameIndex = 0;
+  }
+}
+
+
+/* Handle load EOL data by byte */
+on sysvar eol_sysvar::ENV_VariantValue
+{
+  if(0==@sysvar::eol_sysvar::ENV_VariantValue)
+  {
+      FUNC_LoadDefaultConfiguration();
+  }
+  
+  else if(1==@sysvar::eol_sysvar::ENV_VariantValue)
+  {
+      FUNC_LoadJ34X25CY_VC85_Configuration();
+  }
+  
+  else if(2==@sysvar::eol_sysvar::ENV_VariantValue)
+  {
+      FUNC_LoadJ30A25CY_KKVD_Configuration();
+  }
+  
+  else
+  {
+    FUNC_ClearConfigAll();
+  }
+}
+
+on sysvar eol_sysvar::ENV_SendResetButton
+{
+   if (0 == @sysvar::eol_sysvar::ENV_SendResetButton)
+  {
+    VAR_TxDiagMsgBuffer[0] = 0x02;
+    VAR_TxDiagMsgBuffer[1] = 0x11;
+    VAR_TxDiagMsgBuffer[2] = @sysvar::eol_sysvar::ENV_ResetSubSevice;
+    VAR_TxDiagMsgBuffer[3] = 0;
+    VAR_TxDiagMsgBuffer[4] = 0;
+    VAR_TxDiagMsgBuffer[5] = 0;
+    VAR_TxDiagMsgBuffer[6] = 0;
+    VAR_TxDiagMsgBuffer[7] = 0;
+    
+    /* reset variables */
+    VAR_TxConsecutiveFrameIndex = 0;
+    VAR_RxConsecutiveFrameIndex = 0;
+    
+    VAR_EndStateProcess = MainStt_Idle_e;
+    VAR_MainState_en    = MainStt_SendFF_e;
+  }
+}
+
+on sysvar eol_sysvar::ENV_ClearDTCButton
+{
+   if (0 == @sysvar::eol_sysvar::ENV_ClearDTCButton)
+  {
+    VAR_TxDiagMsgBuffer[0] = 0x04;
+    VAR_TxDiagMsgBuffer[1] = 0x14;
+    VAR_TxDiagMsgBuffer[2] = 0xFF;
+    VAR_TxDiagMsgBuffer[3] = 0xFF;
+    VAR_TxDiagMsgBuffer[4] = 0xFF;
+    VAR_TxDiagMsgBuffer[5] = 0;
+    VAR_TxDiagMsgBuffer[6] = 0;
+    VAR_TxDiagMsgBuffer[7] = 0;
+    
+    
+    /* reset variables */
+    VAR_TxConsecutiveFrameIndex = 0;
+    VAR_RxConsecutiveFrameIndex = 0;
+    
+    VAR_EndStateProcess = MainStt_Idle_e;
+    VAR_MainState_en    = MainStt_SendFF_e;
+  }
+}
+
+on sysvar eol_sysvar::ENV_ClearLogButton
+{
+  if (0 == @sysvar::eol_sysvar::ENV_ClearLogButton)
+  {
+    DeleteControlContent("EOL panel","CAPL Output View");
+  }
+}
+
+on sysvar eol_sysvar::ENV_ClearEOLDataBtn
+{
+  if (0 == @sysvar::eol_sysvar::ENV_ClearEOLDataBtn)
+  {
+    @eol_sysvar::ENV_VariantValue = 3;   //Clear all config EOL in panel
+  }
+}
+
+on sysvar eol_sysvar::ENV_AddressingMode
+{
+  if (1 == @sysvar::eol_sysvar::ENV_AddressingMode)
+  {
+    MSG_P_DiagReq = MSG_PhyDiagReq;
+    MSG_P_FlowReq = MSG_PhyDiagReq;
+  }
+  else if(2 == @sysvar::eol_sysvar::ENV_AddressingMode)
+  {
+    MSG_P_DiagReq = MSG_FuncDiagReq;
+    MSG_P_FlowReq = MSG_PhyDiagReq;
+  }
+  else
+  {
+    MSG_P_DiagReq = MSG_DisposalDiagReq;
+    MSG_P_FlowReq = MSG_DisposalDiagReq;
+  }
+}
+
+on sysvar eol_sysvar::ENV_SendDiagnosisRequestButton
+{
+  long sizeOfRequest;
+  byte buffer[4096];
+  int numberOfFrame;
+  int i;
+  if (0 == @sysvar::eol_sysvar::ENV_SendDiagnosisRequestButton)
+  {
+    sysGetVariableData(sysvar::eol_sysvar::ENV_DiagnosticData, buffer, sizeOfRequest);
+    if(sizeOfRequest <= 7)
+    {
+        VAR_TxDiagMsgBuffer[0] = sizeOfRequest;
+        VAR_TxDiagMsgBuffer[1] = buffer[0];
+        VAR_TxDiagMsgBuffer[2] = buffer[1];
+        VAR_TxDiagMsgBuffer[3] = buffer[2];
+        VAR_TxDiagMsgBuffer[4] = buffer[3];
+        VAR_TxDiagMsgBuffer[5] = buffer[4];
+        VAR_TxDiagMsgBuffer[6] = buffer[5];
+        VAR_TxDiagMsgBuffer[7] = buffer[6];
+      
+    }
+    else
+    {
+        VAR_TxDiagMsgBuffer[0] = (0x1 << 4) | (sizeOfRequest >> 8);
+        VAR_TxDiagMsgBuffer[1] = sizeOfRequest & 0xFF;
+        VAR_TxDiagMsgBuffer[2] = buffer[0];
+        VAR_TxDiagMsgBuffer[3] = buffer[1];
+        VAR_TxDiagMsgBuffer[4] = buffer[2];
+        VAR_TxDiagMsgBuffer[5] = buffer[3];
+        VAR_TxDiagMsgBuffer[6] = buffer[4];
+        VAR_TxDiagMsgBuffer[7] = buffer[5];
+        numberOfFrame = sizeOfRequest / 7;
+      
+        for(i= 0; i < numberOfFrame; ++i)
+        {
+          VAR_TxDiagMsgBuffer[i * 8 + 8] = (0x2 << 4) | (i+ 1);
+          VAR_TxDiagMsgBuffer[i * 8 + 9] = buffer[i * 7 + 6] ;
+          VAR_TxDiagMsgBuffer[i * 8 + 10] = buffer[i * 7 + 7];
+          VAR_TxDiagMsgBuffer[i * 8 + 11] = buffer[i * 7 + 8];
+          VAR_TxDiagMsgBuffer[i * 8 + 12] = buffer[i * 7 + 9];
+          VAR_TxDiagMsgBuffer[i * 8 + 13] = buffer[i * 7 + 10];
+          VAR_TxDiagMsgBuffer[i * 8 + 14] = buffer[i * 7 + 11];
+          VAR_TxDiagMsgBuffer[i * 8 + 15] = buffer[i * 7 + 12];
+        }
+    }
+    
+    
+    /* reset variables */
+    VAR_TxConsecutiveFrameIndex = 0;
+    VAR_RxConsecutiveFrameIndex = 0;
+    VAR_EndStateProcess = MainStt_Idle_e;
+    VAR_MainState_en    = MainStt_SendFF_e;
+
+  }
+}
+
+/*Handle received message from ECU*/
+on message RCM_Diag_Tx 
+{
+  dword d;
+  byte h, m, s;
+  word ms, us, ns;
+  char buffer[100];
+  VAR_RxDiagMsgBuffer[VAR_RxDiagMsgIndex++] = this.byte(0);
+  VAR_RxDiagMsgBuffer[VAR_RxDiagMsgIndex++] = this.byte(1);
+  VAR_RxDiagMsgBuffer[VAR_RxDiagMsgIndex++] = this.byte(2);
+  VAR_RxDiagMsgBuffer[VAR_RxDiagMsgIndex++] = this.byte(3);
+  VAR_RxDiagMsgBuffer[VAR_RxDiagMsgIndex++] = this.byte(4);
+  VAR_RxDiagMsgBuffer[VAR_RxDiagMsgIndex++] = this.byte(5);
+  VAR_RxDiagMsgBuffer[VAR_RxDiagMsgIndex++] = this.byte(6);
+  VAR_RxDiagMsgBuffer[VAR_RxDiagMsgIndex++] = this.byte(7);
+  VAR_DiagMsgReceivedFlag = 0x01;
+  
+  convertTimestampNS(timeNowNS(), d, h, m, s, ms, us, ns);
+  snprintf(buffer, elcount(buffer), "%04d:%03d", (s + 60*m), ms);
+  putValueToControl("EOL panel","CAPL Output View", buffer);
+  putValueToControl("EOL panel","CAPL Output View", "|Rx|");
+  putValueToControl("EOL panel","CAPL Output View", this);
+  putValueToControl("EOL panel","CAPL Output View", "\n");
+}
+
+on message RCM_ISO_SCRAP_Tx 
+{
+  dword d;
+  byte h, m, s;
+  word ms, us, ns;
+  char buffer[100];
+  VAR_RxDiagMsgBuffer[VAR_RxDiagMsgIndex++] = this.byte(0);
+  VAR_RxDiagMsgBuffer[VAR_RxDiagMsgIndex++] = this.byte(1);
+  VAR_RxDiagMsgBuffer[VAR_RxDiagMsgIndex++] = this.byte(2);
+  VAR_RxDiagMsgBuffer[VAR_RxDiagMsgIndex++] = this.byte(3);
+  VAR_RxDiagMsgBuffer[VAR_RxDiagMsgIndex++] = this.byte(4);
+  VAR_RxDiagMsgBuffer[VAR_RxDiagMsgIndex++] = this.byte(5);
+  VAR_RxDiagMsgBuffer[VAR_RxDiagMsgIndex++] = this.byte(6);
+  VAR_RxDiagMsgBuffer[VAR_RxDiagMsgIndex++] = this.byte(7);
+  VAR_DiagMsgReceivedFlag = 0x01;
+
+  convertTimestampNS(timeNowNS(), d, h, m, s, ms, us, ns);
+  snprintf(buffer, elcount(buffer), "%04d:%03d", (s + 60*m), ms);
+  putValueToControl("EOL panel","CAPL Output View", buffer);
+  putValueToControl("EOL panel","CAPL Output View", "|Rx]");
+  putValueToControl("EOL panel","CAPL Output View", this);
+  putValueToControl("EOL panel","CAPL Output View", "\n");
+}
+/*End Handle received message from ECU*/
+
+/*Handle load max setting*/
+void FUNC_LoadDefaultConfiguration()
+{
+@sysvar::eol_sysvar::ENV_EOL_Bit_08=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_07=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_06=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_05=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_04=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_03=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_02=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_01=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_16=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_15=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_14=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_13=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_12=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_11=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_10=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_09=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_24=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_23=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_22=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_21=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_20=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_19=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_18=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_17=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_32=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_31=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_30=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_29=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_28=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_27=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_26=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_25=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_40=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_39=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_38=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_37=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_36=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_35=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_34=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_33=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_48=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_47=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_46=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_45=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_44=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_43=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_42=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_41=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_56=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_55=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_54=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_53=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_52=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_51=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_50=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_49=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_64=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_63=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_62=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_61=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_60=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_59=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_58=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_57=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_72=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_71=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_70=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_69=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_68=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_67=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_66=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_65=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_80=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_79=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_78=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_77=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_76=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_75=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_74=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_73=0;
+}
+
+void FUNC_LoadJ34X25CY_VC85_Configuration()
+{
+@sysvar::eol_sysvar::ENV_EOL_Bit_08=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_07=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_06=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_05=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_04=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_03=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_02=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_01=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_16=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_15=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_14=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_13=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_12=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_11=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_10=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_09=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_24=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_23=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_22=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_21=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_20=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_19=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_18=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_17=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_32=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_31=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_30=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_29=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_28=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_27=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_26=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_25=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_40=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_39=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_38=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_37=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_36=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_35=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_34=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_33=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_48=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_47=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_46=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_45=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_44=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_43=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_42=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_41=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_56=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_55=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_54=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_53=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_52=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_51=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_50=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_49=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_64=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_63=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_62=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_61=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_60=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_59=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_58=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_57=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_72=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_71=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_70=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_69=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_68=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_67=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_66=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_65=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_80=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_79=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_78=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_77=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_76=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_75=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_74=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_73=0;
+}
+
+void FUNC_LoadJ30A25CY_KKVD_Configuration()
+{
+@sysvar::eol_sysvar::ENV_EOL_Bit_08=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_07=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_06=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_05=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_04=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_03=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_02=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_01=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_16=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_15=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_14=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_13=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_12=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_11=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_10=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_09=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_24=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_23=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_22=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_21=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_20=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_19=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_18=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_17=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_32=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_31=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_30=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_29=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_28=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_27=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_26=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_25=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_40=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_39=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_38=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_37=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_36=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_35=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_34=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_33=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_48=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_47=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_46=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_45=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_44=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_43=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_42=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_41=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_56=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_55=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_54=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_53=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_52=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_51=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_50=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_49=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_64=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_63=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_62=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_61=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_60=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_59=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_58=1;
+@sysvar::eol_sysvar::ENV_EOL_Bit_57=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_72=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_71=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_70=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_69=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_68=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_67=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_66=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_65=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_80=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_79=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_78=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_77=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_76=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_75=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_74=0;
+@sysvar::eol_sysvar::ENV_EOL_Bit_73=0;
+}
+
+void FUNC_ClearConfigAll()
+{
+    @sysvar::eol_sysvar::ENV_EOL_Bit_01 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_02 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_03 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_04 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_05 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_06 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_07 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_08 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_09 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_10 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_11 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_12 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_13 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_14 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_15 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_16 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_17 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_18 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_19 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_20 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_21 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_22 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_23 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_24 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_25 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_26 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_27 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_28 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_29 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_30 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_31 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_32 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_33 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_34 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_35 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_36 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_37 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_38 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_39 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_40 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_41 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_42 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_43 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_44 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_45 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_46 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_47 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_48 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_49 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_50 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_51 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_52 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_53 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_54 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_55 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_56 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_57 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_58 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_59 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_60 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_61 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_62 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_63 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_64 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_65 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_66 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_67 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_68 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_69 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_70 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_71 = 0;
+    @sysvar::eol_sysvar::ENV_EOL_Bit_72 = 0;
+}
+
+void FUNC_PrepareKey()
+{
+  write("Prepare key");
+  switch(@sysvar::eol_sysvar::ENV_SA_SecurityLevel)
+  {
+    case 0x03:
+      FUNC_CalculateFordCommonKey(VAR_SEC_SeedData);
+      break;
+    case 0x23:
+    case 0x27:
+    case 0x2B:
+    case 0x2F:
+      FUNC_CalculateMazdaCommonKey(VAR_SEC_SeedData, @sysvar::eol_sysvar::ENV_SA_SecurityLevel);
+      break;
+    case 0x33:
+      write("Prepare key of 0x33");
+      FUNC_CalculateAESCommonKey(VAR_SEC_SeedData);
+      break;
+    Default:
+     break;
+   }
+}
+void FUNC_CopySeed()
+{
+  switch(@sysvar::eol_sysvar::ENV_SA_SecurityLevel)
+  {
+    case 0x03:
+      VAR_SEC_SeedData[0] = VAR_RxDiagMsgBuffer[3];
+      VAR_SEC_SeedData[1] = VAR_RxDiagMsgBuffer[4];
+      VAR_SEC_SeedData[2] = VAR_RxDiagMsgBuffer[5];
+      break;
+
+    case 0x23:
+    case 0x27:
+    case 0x2B:  
+    case 0x2F:  
+      VAR_SEC_SeedData[0] = VAR_RxDiagMsgBuffer[4];
+      VAR_SEC_SeedData[1] = VAR_RxDiagMsgBuffer[5];
+      VAR_SEC_SeedData[2] = VAR_RxDiagMsgBuffer[6];
+      VAR_SEC_SeedData[3] = VAR_RxDiagMsgBuffer[7];
+      VAR_SEC_SeedData[4] = VAR_RxDiagMsgBuffer[9];
+      VAR_SEC_SeedData[5] = VAR_RxDiagMsgBuffer[10];
+      VAR_SEC_SeedData[6] = VAR_RxDiagMsgBuffer[11];
+      VAR_SEC_SeedData[7] = VAR_RxDiagMsgBuffer[12];
+      break;
+    case 0x33:
+      
+      VAR_SEC_SeedData[0] = VAR_RxDiagMsgBuffer[4];
+      VAR_SEC_SeedData[1] = VAR_RxDiagMsgBuffer[5];
+      VAR_SEC_SeedData[2] = VAR_RxDiagMsgBuffer[6];
+      VAR_SEC_SeedData[3] = VAR_RxDiagMsgBuffer[7];
+      VAR_SEC_SeedData[4] = VAR_RxDiagMsgBuffer[9];
+      VAR_SEC_SeedData[5] = VAR_RxDiagMsgBuffer[10];
+      VAR_SEC_SeedData[6] = VAR_RxDiagMsgBuffer[11];
+      VAR_SEC_SeedData[7] = VAR_RxDiagMsgBuffer[12];
+      VAR_SEC_SeedData[8] = VAR_RxDiagMsgBuffer[13];
+      VAR_SEC_SeedData[9] = VAR_RxDiagMsgBuffer[14];
+      VAR_SEC_SeedData[10] = VAR_RxDiagMsgBuffer[15];
+      VAR_SEC_SeedData[11] = VAR_RxDiagMsgBuffer[17];
+      VAR_SEC_SeedData[12] = VAR_RxDiagMsgBuffer[18];
+      VAR_SEC_SeedData[13] = VAR_RxDiagMsgBuffer[19];
+      VAR_SEC_SeedData[14] = VAR_RxDiagMsgBuffer[20];
+      VAR_SEC_SeedData[15] = VAR_RxDiagMsgBuffer[21];
+      break;
+    default:
+      break;
+  }
+}
+
+
+FUNC_CalculateFordCommonKey(byte V_SeedByte_b[])
+{
+  dword V_Seed_U32R;
+  dword v_Challenge1_u32r;
+  dword v_Challenge2_u32r;
+  dword v_temp_u32r;
+  byte v_index_u8r;
+  byte v_bitvalue_u8r;
+  dword v_SecKey_u32r;
+  
+  v_temp_u32r = 0x00C541A9;
+
+  V_Seed_U32R =(V_SeedByte_b[2]<<16)|(V_SeedByte_b[1]<< 8)|(V_SeedByte_b[0]);
+//  write("TAMMMMMMMM = %d", V_Seed_U32R );
+  v_Challenge1_u32r = V_Seed_U32R; 
+  v_Challenge1_u32r = (v_Challenge1_u32r) | (0x0000002F << 24);
+  v_Challenge2_u32r = (0x00000008 << 24)|(0x00000019 << 16)|(0x000000C2<<8)|(0x0000001A );
+
+  for (v_index_u8r = 0; v_index_u8r < 32; v_index_u8r ++)
+  {
+    v_bitvalue_u8r = ( ((v_temp_u32r)&(0x00000001)) ^ (((v_Challenge1_u32r)&(0x00000001<<v_index_u8r))>>v_index_u8r) );
+    /* EasyCASE - */
+    v_temp_u32r = (v_temp_u32r >> 1);
+    if (v_bitvalue_u8r != 0)
+    {
+      v_temp_u32r ^= 0x00909028;
+    }
+  }
+
+  for (v_index_u8r = 0; v_index_u8r < 32; v_index_u8r ++)
+  {
+    v_bitvalue_u8r = ( ((v_temp_u32r)&(0x00000001)) ^ (((v_Challenge2_u32r)&(0x00000001<<v_index_u8r))>>v_index_u8r) );
+    /* EasyCASE - */
+    v_temp_u32r = (v_temp_u32r >> 1);
+    if (v_bitvalue_u8r != 0)
+    {
+      v_temp_u32r ^= 0x00909028;
+    }
+  }
+
+
+  v_SecKey_u32r = (  (((v_temp_u32r & 0x00000FF0)<< (12)))  | 
+               (((v_temp_u32r) & (0x0000F000)))       | 
+               (((v_temp_u32r & 0x0000000F)<< (4)) ) | 
+               (((v_temp_u32r & 0x000F0000)>> (16)) ) | 
+               (((v_temp_u32r & 0x00F00000) >> (12)) ) );
+
+
+  VAR_SEC_KeyData[0]=(v_SecKey_u32r & 0x00ff0000 )>>16;
+  VAR_SEC_KeyData[1]=(v_SecKey_u32r & 0x0000ff00 )>>8;
+  VAR_SEC_KeyData[2]=(v_SecKey_u32r & 0x000000ff );
+}
+
+FUNC_CalculateMazdaCommonKey(byte V_SeedByte_b[], byte V_SubFunction)
+{
+  int i=1;
+  dword  V_SeedResp_l[8];
+  byte V_Key_b[11];
+  dword xl, xr;
+  int iS, Level;
+
+  // Seed
+  xl = V_SeedByte_b[0]<<24;
+  xl |= V_SeedByte_b[1]<<16;
+  xl |= V_SeedByte_b[2]<<8;
+  xl |= V_SeedByte_b[3];
+
+  xr = V_SeedByte_b[4]<<24;
+  xr |= V_SeedByte_b[5]<<16;
+  xr |= V_SeedByte_b[6]<<8;
+  xr |= V_SeedByte_b[7];
+  
+  switch(V_SubFunction)
+  {
+    case 0x23:
+      iS = 0;
+      break;
+    case 0x27:
+      iS = 1;
+      break;
+    case 0x2B:
+      iS = 2;
+      break;
+    case 0x2F:
+      iS = 3;
+      break;
+    default:
+      break; 
+  }
+  /* Enscrypt the Key from Seed*/
+  FUNC_CalculateKey( xl, xr, iS);
+}
+
+FUNC_CalculateAESCommonKey(byte V_SeedByte_b[]) {
+  dword keyLength = 32;
+  LocalSecurityEncryptAES128CBC(AES_Key, 16, V_SeedByte_b, 16, AES_InitVector, 16, VAR_SA_KeyData, keyLength);
+  write("%x", VAR_SA_KeyData[0]);
+  write("%x", VAR_SA_KeyData[1]);
+  write("%x", VAR_SA_KeyData[2]);
+  write("%x", VAR_SA_KeyData[3]);
+  write("%x", VAR_SA_KeyData[4]);
+  write("%x", VAR_SA_KeyData[5]);
+  write("%x", VAR_SA_KeyData[6]);
+  write("%x", VAR_SA_KeyData[7]);
+  write("%x", VAR_SA_KeyData[8]);
+  write("%x", VAR_SA_KeyData[9]);
+  write("%x", VAR_SA_KeyData[10]);
+  write("%x", VAR_SA_KeyData[11]);
+  write("%x", VAR_SA_KeyData[12]);
+  write("%x", VAR_SA_KeyData[13]);
+  write("%x", VAR_SA_KeyData[14]);
+  write("%x", VAR_SA_KeyData[15]);
+  write("%x", VAR_SA_KeyData[16]);
+  write("%x", VAR_SA_KeyData[17]);
+  write("%x", VAR_SA_KeyData[18]);
+}
+
+FUNC_CalculateKey(dword xl, dword xr, int iS)
+{
+  dword Xl;
+  dword Xr;
+  dword temp;
+  int i, N;
+
+  N=16;
+  Xl = xl;
+  Xr = xr;
+  //
+  for(i=0; i< N; i++)
+  {
+    Xl = Xl ^ A_P[i];
+    Xr = FUNC_Encrypt(Xl, iS) ^ Xr;
+    temp = Xl;
+    Xl = Xr;
+    Xr = temp;
+    
+    write("XL[%x]= % x", i, Xl);
+    write("XR[%x]= % x", i, Xr);
+  }
+  //
+  temp = Xl;
+  Xl = Xr;
+  Xr = temp;
+  Xr = Xr ^ A_P[ N ];
+  Xl = Xl ^ A_P[ N+1];
+
+  VAR_SA_KeyData[0] = (Xl & 0xFF000000)>>24;
+  VAR_SA_KeyData[1] = (Xl & 0xFF0000)>>16;
+  VAR_SA_KeyData[2] = (Xl & 0xFF00)>>8;
+  VAR_SA_KeyData[3] = (Xl & 0xFF);
+  //
+  VAR_SA_KeyData[4] = (Xr & 0xFF000000)>>24;
+  VAR_SA_KeyData[5] = (Xr & 0xFF0000)>>16;
+  VAR_SA_KeyData[6] = (Xr & 0xFF00)>>8;
+  VAR_SA_KeyData[7] = (Xr & 0xFF);
+  
+  write("Key XL = %x ",Xl);
+  write("Key XR = %x ",Xr);
+}
+
+dword FUNC_Encrypt(dword x, int iS)
+{
+  dword a, b, c, d;
+  dword y;
+
+  d = (x & 0xFF);
+  x >>= 8;
+  c = (x & 0xFF);
+  x >>= 8;
+  b = (x & 0xFF);
+  x >>= 8;
+  a = (x & 0xFF);
+  y = A_S[iS][a] + A_S[ iS][b];
+  y = y ^ A_S[iS][c];
+  y = y + A_S[iS][d];
+
+  return y;
+}
+
+void FUNC_SendTesterPresent()
+{
+  MSG_PhyDiagReq.byte(0) = 0x02;
+  MSG_PhyDiagReq.byte(1) = 0x3E;
+  MSG_PhyDiagReq.byte(2) = 0x80;
+  MSG_PhyDiagReq.byte(3) = 0x00;
+  MSG_PhyDiagReq.byte(4) = 0x00;
+  MSG_PhyDiagReq.byte(5) = 0x00;
+  MSG_PhyDiagReq.byte(6) = 0x00;
+  MSG_PhyDiagReq.byte(7) = 0x00;
+  FUNC_SendMsg(MSG_PhyDiagReq);
+}
+void FUNC_SendMsg(message* DiagMsg)
+{
+  dword d;
+  byte h, m, s;
+  word ms, us, ns;
+  char buffer[100];
+  
+  output(DiagMsg);
+  convertTimestampNS(timeNowNS(), d, h, m, s, ms, us, ns);
+  snprintf(buffer, elcount(buffer), "%04d:%03d", (s + 60*m), ms);
+  putValueToControl("EOL panel","CAPL Output View", buffer);
+  putValueToControl("EOL panel","CAPL Output View", "|Tx|");
+  putValueToControl("EOL panel","CAPL Output View", DiagMsg);
+  putValueToControl("EOL panel","CAPL Output View", "\n");
+  /* Reset received Flag */
+  VAR_DiagMsgReceivedFlag = 0;
+}
+

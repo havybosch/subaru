@@ -1,0 +1,4081 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="SMB470.spi" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="SMB470.spi">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="asicReference" type="xs:unsignedInt" minOccurs="0" />
+                <xs:element name="asicReferenceNode" type="xs:unsignedByte" minOccurs="0" />
+                <xs:element name="asicMaskMOSI" msdata:DataType="SPIMaidPlus.LongWord, SPIMaidPlus, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" type="xs:anyType" minOccurs="0" />
+                <xs:element name="asicValueMOSI" msdata:DataType="SPIMaidPlus.LongWord, SPIMaidPlus, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" type="xs:anyType" minOccurs="0" />
+                <xs:element name="asicDecodingMOSI" msdata:DataType="SPIMaidPlus.MessageDecoder+decodingType, SPIMaidPlus, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" type="xs:anyType" minOccurs="0" />
+                <xs:element name="asicPropertyMOSI" type="xs:int" minOccurs="0" />
+                <xs:element name="asicTextMOSI" type="xs:string" minOccurs="0" />
+                <xs:element name="asicMaskMISO" msdata:DataType="SPIMaidPlus.LongWord, SPIMaidPlus, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" type="xs:anyType" minOccurs="0" />
+                <xs:element name="asicValueMISO" msdata:DataType="SPIMaidPlus.LongWord, SPIMaidPlus, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" type="xs:anyType" minOccurs="0" />
+                <xs:element name="asicDecodingMISO" msdata:DataType="SPIMaidPlus.MessageDecoder+decodingType, SPIMaidPlus, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" type="xs:anyType" minOccurs="0" />
+                <xs:element name="asicPropertyMISO" type="xs:int" minOccurs="0" />
+                <xs:element name="asicTextMISO" type="xs:string" minOccurs="0" />
+                <xs:element name="asicVisible" type="xs:boolean" minOccurs="0" />
+                <xs:element name="asicGraficMOSI" type="xs:boolean" minOccurs="0" />
+                <xs:element name="asicGraficMISO" type="xs:boolean" minOccurs="0" />
+                <xs:element name="asicInstLength" type="xs:unsignedInt" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <SMB470.spi>
+    <asicReference>0</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>65280</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>61440</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI>WR_PROTOCOL_SELECT</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>1</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>65280</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>256</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI>RD_DEVICE_ID</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>1</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>3</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO>Sensor_ID</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>1</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>1</asicDecodingMISO>
+    <asicPropertyMISO>-65536</asicPropertyMISO>
+    <asicTextMISO>TST</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>1</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>71</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>9</asicDecodingMISO>
+    <asicPropertyMISO>-32704</asicPropertyMISO>
+    <asicTextMISO>Device Incorrect!</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>1</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>71</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>1</asicDecodingMISO>
+    <asicPropertyMISO>-16711936</asicPropertyMISO>
+    <asicTextMISO>DeviceID correct!</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>2</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>65280</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>1792</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI>RD_REVISION_ID</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>2</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>240</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>3</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO>SWR</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>2</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>15</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>3</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO>MSR</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>2</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>1</asicDecodingMISO>
+    <asicPropertyMISO>-65536</asicPropertyMISO>
+    <asicTextMISO>TST</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>3</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>65280</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>2816</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI>RD_MONITOR_I_DATA</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>3</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>9</asicDecodingMISO>
+    <asicPropertyMISO>-65536</asicPropertyMISO>
+    <asicTextMISO>Monitored Data Error</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>4</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>65280</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>3328</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI>RD_MONITOR_II_DATA</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>4</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>9</asicDecodingMISO>
+    <asicPropertyMISO>-65536</asicPropertyMISO>
+    <asicTextMISO>Monitored Data Error</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>5</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>65280</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>4864</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI>RD_MONITOR_III_DATA</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>5</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>9</asicDecodingMISO>
+    <asicPropertyMISO>-65536</asicPropertyMISO>
+    <asicTextMISO>Monitored Data Error</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>6</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>65280</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>20736</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI>PROG_SID</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>7</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>65280</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>5376</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI>RD_SID</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>7</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>1</asicDecodingMISO>
+    <asicPropertyMISO>-65536</asicPropertyMISO>
+    <asicTextMISO>TST</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>7</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>19</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>9</asicDecodingMISO>
+    <asicPropertyMISO>-32704</asicPropertyMISO>
+    <asicTextMISO>SID Programming failed!</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>7</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>19</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>1</asicDecodingMISO>
+    <asicPropertyMISO>-128</asicPropertyMISO>
+    <asicTextMISO>SID programmed</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>8</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>65280</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>22272</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI>PROG_FILTER_SETTINGS</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>8</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>1</asicDecodingMISO>
+    <asicPropertyMISO>-65536</asicPropertyMISO>
+    <asicTextMISO>TST</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>9</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>65280</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>6400</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI>RD_FILTER_SETTINGS</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>9</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>9</asicDecodingMISO>
+    <asicPropertyMISO>-32704</asicPropertyMISO>
+    <asicTextMISO>ECLK and Filter Settings Incorrect!</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>9</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>1</asicDecodingMISO>
+    <asicPropertyMISO>-128</asicPropertyMISO>
+    <asicTextMISO>ECLK and Filter Settings OK!</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>9</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>1</asicDecodingMISO>
+    <asicPropertyMISO>-65536</asicPropertyMISO>
+    <asicTextMISO>TST</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>10</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>65280</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>7936</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI>RD_OFFSET_CANCELLATION</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>10</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>59</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>1</asicDecodingMISO>
+    <asicPropertyMISO>-128</asicPropertyMISO>
+    <asicTextMISO>Fast Offset started!</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>10</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>32</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>1</asicDecodingMISO>
+    <asicPropertyMISO>-128</asicPropertyMISO>
+    <asicTextMISO>Fast Offset Completed!</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>10</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>50</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>1</asicDecodingMISO>
+    <asicPropertyMISO>-128</asicPropertyMISO>
+    <asicTextMISO>Slow Offset calc Active</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>10</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>1</asicDecodingMISO>
+    <asicPropertyMISO>-65536</asicPropertyMISO>
+    <asicTextMISO>TST</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>11</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>65280</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>8960</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI>RD_PART_ID_I</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>11</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>1</asicDecodingMISO>
+    <asicPropertyMISO>-65536</asicPropertyMISO>
+    <asicTextMISO>TST</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>12</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>65280</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>9472</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI>RD_PART_ID_II</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>12</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>1</asicDecodingMISO>
+    <asicPropertyMISO>-65536</asicPropertyMISO>
+    <asicTextMISO>TST</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>13</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>65280</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>10496</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI>RD_PART_ID_III</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>13</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>1</asicDecodingMISO>
+    <asicPropertyMISO>-65536</asicPropertyMISO>
+    <asicTextMISO>TST</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>14</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>65280</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>12032</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI>RD_PART_ID_IV</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>14</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>1</asicDecodingMISO>
+    <asicPropertyMISO>-65536</asicPropertyMISO>
+    <asicTextMISO>TST</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>15</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>65280</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>12544</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI>RD_PART_ID_V</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>15</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>1</asicDecodingMISO>
+    <asicPropertyMISO>-65536</asicPropertyMISO>
+    <asicTextMISO>TST</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>16</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>65280</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>14080</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI>RD_PART_ID_VI</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>16</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>1</asicDecodingMISO>
+    <asicPropertyMISO>-65536</asicPropertyMISO>
+    <asicTextMISO>TST</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>17</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>65280</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>17152</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI>WR_EXT_MODE</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>18</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>65280</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>17664</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI>WR_EXT_TESTMODE_I</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>19</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>65280</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>18688</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI>WR_EXT_TESTMODE_II</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>20</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>65280</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>20224</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-4144960</asicPropertyMOSI>
+    <asicTextMOSI>RD_TEMP</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>21</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>65280</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>24832</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI>DEMAND_FOR_TEST</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>21</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>129</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-128</asicPropertyMOSI>
+    <asicTextMOSI>: LF Channel pos BITE test started!</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>0</asicDecodingMISO>
+    <asicPropertyMISO>-128</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>21</asicReference>
+    <asicReferenceNode>2</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>1</asicDecodingMISO>
+    <asicPropertyMISO>-256</asicPropertyMISO>
+    <asicTextMISO>TST bit ok</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>21</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>130</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-128</asicPropertyMOSI>
+    <asicTextMOSI>: LF Channel neg BITE test started!</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>0</asicDecodingMISO>
+    <asicPropertyMISO>-128</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>21</asicReference>
+    <asicReferenceNode>2</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>9</asicDecodingMISO>
+    <asicPropertyMISO>-32704</asicPropertyMISO>
+    <asicTextMISO>TST bit not set!!</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>21</asicReference>
+    <asicReferenceNode>2</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>1</asicDecodingMISO>
+    <asicPropertyMISO>-128</asicPropertyMISO>
+    <asicTextMISO>TST bit ok</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>21</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>128</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-128</asicPropertyMOSI>
+    <asicTextMOSI>: BITE Off</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>0</asicDecodingMISO>
+    <asicPropertyMISO>-128</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>21</asicReference>
+    <asicReferenceNode>2</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>9</asicDecodingMISO>
+    <asicPropertyMISO>-65536</asicPropertyMISO>
+    <asicTextMISO>TST Error</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>21</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>175</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-128</asicPropertyMOSI>
+    <asicTextMOSI>: BSS Channel 2KHz Test!</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>0</asicDecodingMISO>
+    <asicPropertyMISO>-128</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>21</asicReference>
+    <asicReferenceNode>2</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>9</asicDecodingMISO>
+    <asicPropertyMISO>-32704</asicPropertyMISO>
+    <asicTextMISO>TST bit not set!!</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>21</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>147</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-128</asicPropertyMOSI>
+    <asicTextMOSI>: BSS Channel 10KHz Test!</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>0</asicDecodingMISO>
+    <asicPropertyMISO>-128</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>21</asicReference>
+    <asicReferenceNode>2</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>9</asicDecodingMISO>
+    <asicPropertyMISO>-32704</asicPropertyMISO>
+    <asicTextMISO>TST bit not set!!</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>21</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>139</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-128</asicPropertyMOSI>
+    <asicTextMOSI>: BSS Channel 15KHz Test!</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>0</asicDecodingMISO>
+    <asicPropertyMISO>-128</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>21</asicReference>
+    <asicReferenceNode>2</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>9</asicDecodingMISO>
+    <asicPropertyMISO>-32704</asicPropertyMISO>
+    <asicTextMISO>TST bit not set!!</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>22</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>65280</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>26368</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI>RD_SELF_TEST_REF1</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>22</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>1</asicDecodingMISO>
+    <asicPropertyMISO>-65536</asicPropertyMISO>
+    <asicTextMISO>TST Error</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>23</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>65280</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>26880</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI>RD_SELF_TEST_REF2</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>23</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>1</asicDecodingMISO>
+    <asicPropertyMISO>-65536</asicPropertyMISO>
+    <asicTextMISO>TST Error</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>24</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>65280</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>30976</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI>DEMAND_FOR_CYCLIC_TEST</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>25</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>65280</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>27904</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI>DEMAND_SOFTRESET</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>26</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>65280</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>29440</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI>DEMAND_LINEAR_INTERPOLATION</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>26</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>1</asicDecodingMISO>
+    <asicPropertyMISO>-65536</asicPropertyMISO>
+    <asicTextMISO>TST Error</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>26</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>1</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-128</asicPropertyMOSI>
+    <asicTextMOSI>: Interpolation Requested!</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>0</asicDecodingMISO>
+    <asicPropertyMISO>-128</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>26</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>1</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>9</asicDecodingMOSI>
+    <asicPropertyMOSI>-32704</asicPropertyMOSI>
+    <asicTextMOSI>: Interpolation Turn-on failed!</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>0</asicDecodingMISO>
+    <asicPropertyMISO>-32704</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>27</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>65280</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>29952</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI>DEMAND_OFFSET_CANCELLATION</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>27</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>2</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>2</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-32704</asicPropertyMOSI>
+    <asicTextMOSI>: Offset subtraction ON for SBS channel</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>0</asicDecodingMISO>
+    <asicPropertyMISO>-32704</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>27</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>13</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-128</asicPropertyMOSI>
+    <asicTextMOSI>: Offset cancellation ON</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>0</asicDecodingMISO>
+    <asicPropertyMISO>-32704</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>27</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>8</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-128</asicPropertyMOSI>
+    <asicTextMOSI>: Offset cancellation OFF</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>0</asicDecodingMISO>
+    <asicPropertyMISO>-32704</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>27</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>1</asicDecodingMISO>
+    <asicPropertyMISO>-65536</asicPropertyMISO>
+    <asicTextMISO>TST</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>28</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>65280</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>32512</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-8355585</asicPropertyMOSI>
+    <asicTextMOSI>END_OF_PROG</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>28</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>65280</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>3328</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI>RD_MONITOR_II_DATA</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>28</asicReference>
+    <asicReferenceNode>2</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>128</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>128</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>1</asicDecodingMISO>
+    <asicPropertyMISO>-65536</asicPropertyMISO>
+    <asicTextMISO>NRO Error</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>29</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>65280</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>32768</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-8323073</asicPropertyMOSI>
+    <asicTextMOSI>RD_SENSOR_DATA_I (SBS)</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>1023</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>2</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>29</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>8192</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>8192</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>1</asicDecodingMISO>
+    <asicPropertyMISO>-65536</asicPropertyMISO>
+    <asicTextMISO>         NRO </asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>29</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>1</asicDecodingMISO>
+    <asicPropertyMISO>-65536</asicPropertyMISO>
+    <asicTextMISO>       TST</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>29</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>7168</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>3072</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>9</asicDecodingMISO>
+    <asicPropertyMISO>-65536</asicPropertyMISO>
+    <asicTextMISO>      SID Incorrect!</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>30</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>65280</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>57344</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-16711681</asicPropertyMOSI>
+    <asicTextMOSI>RD_SENSOR_DATA_II (LF)</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>1023</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>2</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>30</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>8192</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>8192</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>1</asicDecodingMISO>
+    <asicPropertyMISO>-65536</asicPropertyMISO>
+    <asicTextMISO>       NRO </asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>30</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16384</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>1</asicDecodingMISO>
+    <asicPropertyMISO>-65536</asicPropertyMISO>
+    <asicTextMISO>         TST</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>30</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>7168</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>2048</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>9</asicDecodingMISO>
+    <asicPropertyMISO>-65536</asicPropertyMISO>
+    <asicTextMISO>        SID Incorrect!</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>31</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>65280</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>15104</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI>RD_ECLK_CNT</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>32</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>65280</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>23808</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI>RD_NOISE_OFFSET (SBS)</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>2</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>33</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>32768</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>32768</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>1</asicDecodingMISO>
+    <asicPropertyMISO>-65536</asicPropertyMISO>
+    <asicTextMISO>TFF Error</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+  <SMB470.spi>
+    <asicReference>34</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>32768</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>3</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO>TFF</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </SMB470.spi>
+</NewDataSet>

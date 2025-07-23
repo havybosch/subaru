@@ -1,0 +1,2 @@
+TC_set_verdict.VERDICT_FAIL
+TC_set_verdict.VERDICT_PASS

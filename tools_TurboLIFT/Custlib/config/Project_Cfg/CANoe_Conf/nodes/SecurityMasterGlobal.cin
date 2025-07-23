@@ -1,0 +1,44 @@
+/*@!Encoding:1252*/
+
+variables
+{
+//  dword tripCounterChangeCounter = 0;
+//  dword resetCounterChangeCounter = 0;
+}
+
+void ChangeTripCounter()
+{
+  qword localTripCnt;
+  qword localResetCnt;
+  localTripCnt = getvalue ( EnvCGW_Sync_TripCnt_);
+  localResetCnt = getvalue ( EnvCGW_Sync_ResetCnt_);
+  
+  localTripCnt++;
+  if (localTripCnt > 0xFFFF)
+  {
+    localTripCnt = 1;
+  }
+  localResetCnt = 0;
+  
+  putValue(EnvCGW_Sync_TripCnt_, localTripCnt);
+  putValue(EnvCGW_Sync_ResetCnt_, localResetCnt);
+  //@CGWSync_Msg::CGWSyncFV.TripCnt = localTripCnt;
+  //@CGWSync_Msg::CGWSyncFV.ResetCnt = localResetCnt;
+}
+
+void IncreaseSyncFV()
+{
+  qword localResetCnt;
+  localResetCnt = getvalue ( EnvCGW_Sync_ResetCnt_);
+  
+  if (localResetCnt <= 0xFFFFF)
+  {
+    localResetCnt++;
+  }
+  else {
+    ChangeTripCounter();
+  }
+  
+  putValue(EnvCGW_Sync_ResetCnt_, localResetCnt);
+  //@CGWSync_Msg::CGWSyncFV.ResetCnt = localResetCnt;
+}

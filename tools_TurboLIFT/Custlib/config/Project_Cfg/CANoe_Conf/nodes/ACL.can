@@ -1,0 +1,26 @@
+/*@!Encoding:1252*/
+includes
+{
+  
+}
+ 
+variables
+{
+  msTimer HighDout_ms;
+  msTimer LowDout_ms;
+}
+ 
+on timer HighDout_ms
+{
+   @IO::VN1600_1::DOUT = 1;
+   setTimer(LowDout_ms,60);
+}
+on timer LowDout_ms
+{
+   @IO::VN1600_1::DOUT = 0;
+   setTimer(HighDout_ms,140);
+}
+on start
+{
+  setTimer(HighDout_ms,100);
+} 

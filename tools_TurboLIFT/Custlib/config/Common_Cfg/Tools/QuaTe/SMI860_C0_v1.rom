@@ -1,0 +1,98 @@
+; SMI8xx RFG-Version 2.7  Date: 15.11.2016	
+; Date of creation:29. November 2017 10:04 AM	
+; compatible with QuaTeDLL version 7J or higher	
+	
+[SMI8xx]       ; Do not edit this line!	
+version = 1   ; Do not edit this line!	
+	
+deviceName = SMI860	
+	
+; define sensor XI800 or XI810 or XI860	
+;------------------------------- 	
+CHIPADDR = 1	; 0: XI800 ;00 XI800 redundant for XI860 and also for XI800
+	; 1: XI800 ;01 XI800 primary for XI860 and also for XI800
+	; 2: XI810 ;10 XI810 pitch rate redundant for XI860 
+	; 3: XI810 ;11 XI810 roll rate primary for XI860
+	
+;-------------------------------	
+OVERLOAD_CONFIG1 = 0x0;	
+OVERLOAD_CONFIG2 = 0x0; 	
+	
+;------------------------------- 	
+; channel assignment 	
+;	
+; sensor signal | QuaTe channel | XI800  | XI810  | XI860 	
+; ------------------------------|--------------------------	
+;   RATE1_LF    |	CH0         |        |        |        
+;   ACC1_LF     |	CH1         |        |        |      
+;   ACC2_LF     |	CH2         |        |        |    
+;   ACC1_HF     |	CH3         |        |        |       
+;   ACC2_HF     |	CH4         |        |        |       
+;   RATE2_LF    |	CH5         |        |        |       
+;   ACC3_LF     |	CH6         |        |        |       
+;   ACC3_HF     |	CH7         |        |        |       
+
+;--------------------------------
+SID_RATE1_LF 	= 0x19; 5bit [hex];
+SID_RATE2_LF 	= 0x16; 5bit [hex];
+SID_ACC1_LF 	= 0x14; 5bit [hex];
+SID_ACC2_LF 	= 0x17; 5bit [hex];
+SID_ACC3_LF 	= 0x13; 5bit [hex];
+SID_ACC1_HF 	= 0x15; 5bit [hex];
+SID_ACC2_HF 	= 0x18; 5bit [hex];
+SID_ACC3_HF 	= 0x1F; 5bit [hex];
+	
+;------------------------------- 	
+OFFSETVALUE_ACC1_LF	= 0;
+OFFSETVALUE_ACC1_HF	= 0;
+OFFSETVALUE_ACC2_LF	= 0;
+OFFSETVALUE_ACC2_HF	= 0;
+OFFSETVALUE_ACC3_LF	= -5000;
+OFFSETVALUE_ACC3_HF	= -500;
+	
+;------------------------------- 	
+NOISE_RATE1_LF 	= 0; 
+NOISE_RATE2_LF 	= 0; 
+NOISE_ACC1_LF 	= 0; adds 2^n LSB noise  
+NOISE_ACC2_LF 	= 0; 
+NOISE_ACC3_LF 	= 0; 
+	
+NOISE_RATE1_HF 	= 0; 
+NOISE_RATE2_HF 	= 0; 
+NOISE_ACC1_HF 	= 0; adds 2^n LSB noise  
+NOISE_ACC2_HF 	= 0; 
+NOISE_ACC3_HF 	= 0; 
+;------------------------------- 	
+;OTP implementation	
+OTP_1	= 0x03E4; Rate Sensor IDs LF and HF
+OTP_2	= 0x03FF; ACC1 Sensor IDs LF and HF
+OTP_3	= 0x03F3; ACC2 Sensor IDs LF and HF
+OTP_13	= 0x00AB; RESET_VECTOR
+OTP_25	= 0xF448; TEMP_2
+OTP_32	= 0xF448; TEMP_1
+OTP_33	= 0x0000; ERROR_FLAG_BANK_0
+OTP_34	= 0x0000; ERROR_FLAG_BANK_1
+OTP_35	= 0x0000; ERROR_FLAG_BANK_2
+OTP_36	= 0x0000; ERROR_FLAG_BANK_3
+OTP_37	= 0x0000; ERROR_FLAG_BANK_4
+OTP_38	= 0x0000; ERROR_FLAG_BANK_5
+OTP_39	= 0x0000; ERROR_FLAG_BANK_6
+OTP_40	= 0x0000; ERROR_FLAG_BANK_7
+OTP_41	= 0x0000; ERROR_FLAG_BANK_8
+OTP_42	= 0x0000; ERROR_FLAG_BANK_9
+OTP_43	= 0x2424; ERROR_COUNTER_1_0
+OTP_44	= 0x0424; ERROR_COUNTER_3_2
+OTP_45	= 0x0424; ERROR_COUNTER_5_4
+OTP_64	= 0x8E35; RD_ASIC_SERIAL_NR_0
+OTP_65	= 0x07E0; RD_ASIC_SERIAL_NR_1
+OTP_66	= 0x7339; RD_ASIC_SERIAL_NR_2
+OTP_67	= 0x0860; RD_ASIC_NAME
+OTP_68	= 0x0010; RD_ASIC_REVISION
+OTP_69	= 0xC2F7; RD_SMI_SERIAL_NR_0
+OTP_70	= 0xCA46; RD_SMI_SERIAL_NR_1
+OTP_71	= 0x33E1; RD_SMI_SERIAL_NR_2
+OTP_72	= 0x4321; RD_CUSTOMER_SERIAL_NR
+	
+;------------------------------- 	
+;end configuration file	
+;------------------------------- 	

@@ -1,0 +1,46 @@
+/*@!Encoding:1252*/
+includes
+{
+  
+}
+
+variables
+{
+  
+}
+
+on key 'q'
+{
+  putValue(Env_24EDR_MSG40AWithoutMode15_, 1);
+}
+
+on key 'w'
+{
+  putValue(Env_24EDR_MSG40AWithoutMode15_, 0);
+}
+
+on key 'e'
+{
+  putValue(EnvBCM_Information1_MACTo_, 0);
+  putValue(EnvCruise_Multi_Switch_1_MACTo_,0);
+  putValue(EnvCruise_Multi_Switch_2_MACTo_, 0);
+  putValue(EnvWheelData_2_MACTo_, 0);
+  putValue(EnvHvac_Control_Information2_MACTo_, 0);
+}
+on key 't'
+{
+  putvalue(Env_P_Dummy,1);
+}
+
+on key 's'
+{
+  putvalue(Env_24EDR_sampleDataT0,8);
+}
+on key 'v'
+{
+  putvalue(Env_24EDR_sampleDataT0,0);
+}
+on key 'a'
+{
+  putvalue(Env_24EDR_sampleDataT0,11);
+}

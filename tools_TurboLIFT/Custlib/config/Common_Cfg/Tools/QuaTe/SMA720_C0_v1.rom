@@ -1,0 +1,149 @@
+; SMA7xx RFG-Version 2.8 Date 06-April-2018		
+; Date of creation:	30. November 2018 04:53 PM	
+; compatible with QuaTeDLL version 7K or higher		
+		
+[SMA7xx]	; Do not edit this line!	
+version = 1	; Do not edit this line!	
+		
+deviceName = SMA720		
+;-------------------------------		
+psi_spi_en = 1		
+		; 1: SPI device 
+		; 2: PSI device 
+;-------------------------------		
+;channel 0		
+A_PTR = -8000		
+A_NTR = 8000		
+;-------------------------------		
+;channel 1		
+B_PTR = 32000		
+B_NTR = -32000		
+;-------------------------------		
+;cma_type_ch1 = 3		
+		; 3: 120g 
+		; 1: 480g 
+		; 2: 800g
+;-------------------------------		
+;cma_type_ch2 = 3		
+		; 3: 120g 
+		; 1: 480g 
+		; 2: 800g
+;------------------------------- 		
+;series_number = 0x8AC71616D55C		; 48bit [hex]
+		
+;------------------------------- 		
+; do not edit this section 		
+[SMA7XX_OTP]		; Do not edit this line!
+version = 1		; Do not edit this line!
+		
+;The OTP contents in QuaTe Implementation are inverted. Hence the inverted value of the intended OTP value should be programmed here. for eg: 0x00 should be used to describe 0xFF		
+;direct access to OTP data will be overwritten by the symbolic parameter of section [SMA7xx] if defined		
+; OTP scratch area		
+OTP_0 = 	0x00	
+OTP_1 = 	0x1F	
+OTP_2 = 	0xFF	
+OTP_3 = 	0xFF	
+OTP_4 = 	0xFF	
+OTP_5 = 	0xFF	
+OTP_6 = 	0xFF	
+OTP_7 = 	0xFF	
+OTP_8 = 	0xFF	
+OTP_9 = 	0xFF	
+OTP_10 =	0xFF	
+OTP_11 =	0xFF	
+; OTP ASIC area	   	
+OTP_12 =	0x5C	
+OTP_13 =	0xD5	
+OTP_14 =	0x16	
+OTP_15 =	0x16	
+OTP_16 =	0xC7	
+OTP_17 =	0x8A	
+OTP_18 =	0xFF	
+OTP_19 =	0xFF	
+OTP_20 =	0xFF	
+OTP_21 =	0xEB	
+OTP_22 =	0xF0	
+OTP_23 =	0xEF	
+OTP_24 =	0xFF	
+OTP_25 =	0xFB	
+OTP_26 =	0xA9	
+OTP_27 =	0xF6	
+OTP_28 =	0xFF	
+OTP_29 =	0xFF	
+OTP_30 =	0xFF	
+OTP_31 =	0x1C	
+; OTP SMA area	   	
+OTP_32 =	0xC1	
+OTP_33 =	0x00	
+OTP_34 =	0x66	
+OTP_35 =	0xFF	
+OTP_36 =	0xFF	
+OTP_37 =	0x00	
+OTP_38 =	0x7F	
+OTP_39 =	0x80	
+OTP_40 =	0x7F	
+OTP_41 =	0x80	
+OTP_42 =	0xFF	
+OTP_43 =	0x00	
+OTP_44 =	0xFF	
+OTP_45 =	0xFF	
+OTP_46 =	0xFF	
+OTP_47 =	0xDF	
+OTP_48 =	0xFF	
+OTP_49 =	0xFF	
+OTP_50 =	0xFF	
+OTP_51 =	0xFF	
+OTP_52 =	0xB8	
+OTP_53 =	0xFF	
+OTP_54 =	0xFF	
+OTP_55 =	0x93	
+; OTP PAS area	   	
+OTP_56 =	0xFF	
+OTP_57 =	0xFF	
+OTP_58 =	0xFF	
+OTP_59 =	0xFF	
+OTP_60 =	0xFF	
+OTP_61 =	0xFF	
+OTP_62 =	0xFF	
+OTP_63 =	0xFF	
+OTP_64 =	0xFF	
+OTP_65 =	0xFF	
+OTP_66 =	0xFF	
+OTP_67 =	0xFF	
+OTP_68 =	0xFF	
+OTP_69 =	0xFF	
+OTP_70 =	0xFF	
+OTP_71 =	0x42	
+; OTP ECC area	   	
+OTP_72 =	0xEE	
+OTP_73 =	0xFF	
+OTP_74 =	0xFF	
+OTP_75 =	0xFD	
+OTP_76 =	0xEC	
+OTP_77 =	0xC1	
+OTP_78 =	0xC5	
+OTP_79 =	0xD9	
+OTP_80 =	0xED	
+OTP_81 =	0xDF	
+OTP_82 =	0xFD	
+OTP_83 =	0xDB	
+OTP_84 =	0xFF	
+OTP_85 =	0xF6	
+OTP_86 =	0xFF	
+OTP_87 =	0xFF	
+OTP_88 =	0xFF	
+OTP_89 =	0xC3	
+		
+		
+;------------------------------- 		
+otp_crc = 0	; 0: CRC re-calculation off 	
+	; 1: CRC re-calculation on (required for customer data) 	
+		
+;------------------------------- 		
+;current_quiet = 40	; 0..255 (x * 32mA/256)	
+;current_communication = 104	; 0..255 (x * 64mA/256)	
+; none or both parameters must be set 		
+		
+;------------------------------- 		
+;  end of file		
+;------------------------------- 		

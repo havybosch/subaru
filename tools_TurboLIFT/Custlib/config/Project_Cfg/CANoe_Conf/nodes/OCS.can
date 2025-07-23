@@ -1,0 +1,4492 @@
+/*@!Encoding:1252*/
+variables
+{
+  // GLOBAL
+  const int kBUFFER_SIZE = 3000;
+  const int kINFO        = 1;
+  const int kWARN        = 2;
+  const int kERROR       = 3;
+
+  const int kHANDSHAKE_DISABLED = 0;
+
+  // data is copied from callback buffer to gReceiverBuffer (collects data)
+  byte gReceiverCallbackBuffer[kBUFFER_SIZE];
+
+  byte gReceiverBuffer[kBUFFER_SIZE];
+  byte receive_buffer[kBUFFER_SIZE];
+  byte gEmptyBuffer   [kBUFFER_SIZE];
+  long gNumberOfReceivedBytes = 0;
+
+  // state variable
+  byte gSending = 0;
+  
+  // timer for indication of data reception 
+  msTimer tBytesReceived;
+  msTimer tTimerP2;
+  msTimer tTimerT4;
+  
+  //T2 Value changing
+  int gT2Value = 2;
+  int gT2NTime = 0;
+  
+  //T4 delay
+  int T4_delay = 0;
+  
+  //constan value
+  const int number_of_step = 8;     //This value can be change
+  const int number_of_element_one_step = 18;    //This value can be change (('number_of_element_one_step' - 1) elements for ('number_of_element_one_step' - 1) options + 1 element for number of response in one step)
+  const int lenght_option_step = (number_of_step * number_of_element_one_step)+number_of_element_one_step;
+  
+  const int number_of_response_position = 0;
+  const int normal_option_position = 1;
+  const int T2_timeout_position = 2;
+  const int header_error_position = 3;
+  const int length_error_position = 4;
+  const int id_error_position = 5;
+  const int checksum_error_position = 6;
+  const int t4_timeout_position = 7;
+  const int wrong_parity_position = 8;
+  const int change_occupant_position = 9;
+  const int change_fault_info_position = 10;
+  const int change_buckle_position = 11;
+  const int change_datarecording_position = 12;
+  /* version 2 */
+  const int change_weightUpper_position = 13;
+  const int change_weightLower_position = 14;
+  const int change_vehicleId_position = 15;
+  const int change_statusDiagCmd_position = 16;
+  const int change_causeOfFltDiagCmd_position = 17;
+  /* version 3 */
+
+  const int display_command_response = 0;
+  const int display_flow = 1;
+  
+  //variable
+  int vehicleID1,vehicleID2,default_occupant_status,occupant_weight_up,occupant_weight_low,default_fault_infor,default_buckle_sw,default_data_recording;
+  /* Default data */
+  byte send_buffer[kBUFFER_SIZE];
+  int length = 0;
+  byte serial_address[25];
+  byte readDetailFltCode_address[28];
+  int i,j,k,a,b,c;
+  int tam,swap_value_occupant,swap_value_fault_infor,swap_value_buckle_step,swap_value_data_recording;
+  int sending_timeout_T4 = 0;
+  int allow_sending = 0;
+  int Option_step[lenght_option_step], Temporary_Option_step[number_of_element_one_step];
+  long Occupant_step[number_of_step+1], Fault_infor_step[number_of_step+1], Buckle_step[number_of_step+1], DataRecording_step[number_of_step+1];
+  long weightUpper_Step[number_of_step+1], weightLower_Step[number_of_step+1], vehicleID1_step[number_of_step+1], vehicleID2_step[number_of_step+1], statusDiag_step[number_of_step+1], causeOfFltDiag_step[number_of_step+1];
+  int input_t2,input_t4;
+  int gWrongParity = 0;
+  int parity;
+  int alway_timeout_t2, always_abnormalresponseCS,fault_for_DataRecording_only = 0;
+  int create_fault = 0, rb_ocs_isClearCmdEnabled = 0, rb_ocs_isCalibCmdEnabled = 0, rb_ocs_isCALChkCmdEnabled = 0, rb_ocs_isReadFCEnabled = 0;
+  int sending_data_recording = 0, rb_ocs_isClearCmdReceived = 0, rb_ocs_isCalibCmdReceived = 0, rb_ocs_isCALChkCmdReceived = 0, rb_ocs_isReadFCReceived = 0;
+  dword numberOfBytesToCopy;
+  int looptimes_step, number_of_response_in_loop, use_loop_step = 0;
+  int number_of_used_steps = 0,number_of_response_in_step;
+  int temporary_step_begin,step_begin,temporary_step_end,step_end,count_step;
+  int allow_set_normal,set_normal_s1,set_normal_s2,set_normal_s3,set_normal_s4,set_normal_s5,set_normal_s6,set_normal_s7,set_normal_s8;
+  int continue_value_receive=0;
+  int display_mode = 0;
+  int count_cmd=0,count_option_fault=0,count_option_change_value=0;
+  int start_observe = 0;
+  float time_now=1.5;
+  
+  byte clearedStatusForReqStart_u8;
+  /* Variable holds OCS-ECU Cleared Status when A/B ECU transmits ClearCmd (Request to start) */
+  byte clearedStatusForReqStatus_u8;
+  /* Variable holds OCS-ECU Cleared Status when A/B ECU transmits ClearCmd (Request the status) */
+  int clearedStatusNumberInProc_u8;
+  /* Variable holds number response, which has In Process status, when A/B ECU transmits ClearCmd (Request the status) */
+  byte calibStatusForReqStart_u8;
+  /* Variable holds OCS-ECU Calibration Status of Response when A/B ECU transmits CalibrationCmd (Request to start) */
+  byte calibCauseOfFltForReqStart_u8;
+  /* Variable holds OCS-ECU Cause of flt of Response when A/B ECU transmits CalibrationCmd (Request to start) */
+  byte calibStatusForReqStatus_u8;
+  /* Variable holds OCS-ECU Calibration Status of Response when A/B ECU transmits CalibrationCmd (Request the status) */
+  byte calibCauseOfFltForReqStatus_u8;
+  /* Variable holds OCS-ECU Cause of flt of Response when A/B ECU transmits CalibrationCmd (Request the status) */
+  int calibStatusNumberInProc_u8;
+  /* Variable holds number response, which has In Process status, when A/B ECU transmits CalibrationCmd (Request the status) */
+  byte calChkStatusForReqStart_u8;
+  /* Variable holds OCS-ECU CAL Check status of Response when A/B ECU transmits CALCheckCmd (Request to start) */
+  byte calChkCauseOfFltForReqStart_u8;
+  /* Variable holds OCS-ECU CAL Check Cause of flt of Response when A/B ECU transmits CALCheckCmd (Request to start) */
+  byte calChkStatusForReqStatus_u8;
+  /* Variable holds OCS-ECU CAL Check status of Response when A/B ECU transmits CALCheckCmd (Request the status) */
+  byte calChkCauseOfFltForReqStatus_u8;
+  /* Variable holds OCS-ECU CAL Check Cause of flt of Response when A/B ECU transmits CALCheckCmd (Request the status) */
+  int calChkStatusNumberInProc_u8;
+  /* Variable holds number response, which has In Process status, when A/B ECU transmits CALCheckCmd (Request the status) */
+  
+  byte rb_ocs_memoryOCSSimulate_au8[271];
+  /* Simulate memory in OCS-ECU: max add (0xFF) + max bytes in res (0x10) */
+  
+  byte debugTesting;
+  
+  msTimer buttonRelease;
+}
+
+on preStart
+{
+  InitSerialPort();
+  set_ValueOfResponse_inStep();
+  allow_sending = 0;
+  putValue(Env_response_auto,allow_sending);
+  /* Make "Automatic Response" is off */
+  for(i = 0; i < elCount(rb_ocs_memoryOCSSimulate_au8); ++i)
+  {
+    rb_ocs_memoryOCSSimulate_au8[i] = i;
+  }
+  i = 0;
+}
+
+on start
+{
+  putValue(Env_start_responding, 1);
+  setTimer(buttonRelease, 10);
+}
+
+on timer buttonRelease
+{
+  putValue(Env_start_responding, 0);
+}
+
+InitSerialPort()
+{
+  // close serial port (port may have changed, former port shall not remain open)
+  if(Rs232Close(getValue(EnvPortA))==1)
+    writeLineEx(0,kINFO, "Serial port %d successfully closed.", getValue(EnvPortA));    
+  else
+    writeLineEx(0,kERROR,"An error occurred during closing of the serial port %d.", getValue(EnvPortA));    
+
+  // set state (close aborts all open requests)
+  //gSending = 0;
+
+  // open the serial port (comes up with Windows defaults)
+  if(Rs232Open(getValue(EnvPortA))==1)
+    if(display_mode==display_flow)
+      writeLineEx(0,kINFO, "Serial port %d successfully opened.", getValue(EnvPortA));    
+  else
+    if(display_mode==display_flow)
+      writeLineEx(0,kERROR,"An error occurred during opening of the serial port %d.", getValue(EnvPortA));    
+
+  // configure the serial port
+  // - just take the panel content
+//  if(Rs232Configure(getValue(EnvPortA),10400,getValue(EnvDataBitsPortA),getValue(EnvStopbitsPortA),getValue(EnvParityPortA))==1)
+  if(Rs232Configure(getValue(EnvPortA),10400,getValue(EnvDataBitsPortA),getValue(EnvStopbitsPortA),getValue(EnvParityPortA))==1)
+    if(display_mode==display_flow)
+      writeLineEx(0,kINFO, "Serial port %d successfully initialized.", getValue(EnvPortA));    
+  else
+    if(display_mode==display_flow)
+      writeLineEx(0,kERROR,"An error occurred during initialization of the serial port %d.", getValue(EnvPortA));    
+  
+  // port, handshake, xonLim, xoffLim, xonChar, xoffChar, writeTimeout
+  // without last timeout parameter: use default timeout
+  // for transmission of small amounts of data one may not need to use handshake ! 
+  // e.g. 33 for RTS/CTS as second parameter for large volumes of data, 0 for small volumes
+  if(Rs232SetHandshake(getValue(EnvPortA), kHANDSHAKE_DISABLED, 0, 0, 0, 0))
+    if(display_mode==display_flow)
+      writeLineEx(0,kINFO, "Handshake parameters for serial port %d successfully configured.", getValue(EnvPortA));    
+  else
+    if(display_mode==display_flow)
+      writeLineEx(0,kERROR,"An error occurred during the serial port %d configuration of handshake parameters.", getValue(EnvPortA));
+
+  // set buffer for reception (otherwise callback would not work)
+  if(Rs232Receive(getValue(EnvPortA), gReceiverCallbackBuffer, kBUFFER_SIZE))
+    if(display_mode==display_flow)
+      writeLineEx(0,kINFO, "Receiver buffer for serial port %d successfully set.", getValue(EnvPortA));    
+  else
+    if(display_mode==display_flow)
+      writeLineEx(0,kERROR,"An error occurred during setting the receiver buffer for serial port %d.", getValue(EnvPortA));
+}
+
+on timer tBytesReceived
+{
+  // reset data indication
+  putValue(EnvReceptionIndicationPortA,0);
+}
+
+on timer tTimerP2
+{
+  if ( gSending == 1 )
+  {
+    if(display_mode==display_flow)
+      writeLineEx(0,kWARN,"Ongoing transmission, please wait for completion of previous one !");
+    return;
+  }
+  if (number_of_used_steps == 0)
+  {
+    rb_ocs_CreateNormalResponse();
+    Send_Response();
+
+      // collect response data as long as buffer has space for it (only for using TSG4)                                                 
+  if ( (gNumberOfReceivedBytes+length)>kBUFFER_SIZE )                                                 // This line has to be uncomment if using TSG4
+  {                                                                                                   // This line has to be uncomment if using TSG4
+    numberOfBytesToCopy = kBUFFER_SIZE-gNumberOfReceivedBytes; // no more than that ! it is full now  // This line has to be uncomment if using TSG4
+    gNumberOfReceivedBytes = 0;                                                                       // This line has to be uncomment if using TSG4
+  }                                                                                                   // This line has to be uncomment if using TSG4
+  else                                                                                                // This line has to be uncomment if using TSG4
+  {                                                                                                   // This line has to be uncomment if using TSG4
+    numberOfBytesToCopy = length;                                                                     // This line has to be uncomment if using TSG4
+  }                                                                                                   // This line has to be uncomment if using TSG4
+  CopyBuffer(gReceiverBuffer,gNumberOfReceivedBytes,send_buffer,numberOfBytesToCopy);                 // This line has to be uncomment if using TSG4
+  gNumberOfReceivedBytes += numberOfBytesToCopy;                                                      // This line has to be uncomment if using TSG4
+    putValue(EnvReceptionPortA, gReceiverBuffer, gNumberOfReceivedBytes);
+    writeLineEx(0,kINFO,"response = %x %x %x %x %x %x %x %x %x %x",send_buffer[0],send_buffer[1],send_buffer[2],send_buffer[3],send_buffer[4],send_buffer[5],send_buffer[6],send_buffer[7],send_buffer[8],send_buffer[9]);
+
+    gSending = 1;
+  }
+  else
+  {
+    Create_Response();
+    create_fault = 0;
+    if ((fault_for_DataRecording_only == 1) || (rb_ocs_isCalibCmdEnabled == 1) || (rb_ocs_isClearCmdEnabled == 1) || (rb_ocs_isCALChkCmdEnabled == 1) 
+      || (rb_ocs_isReadFCEnabled == 1))
+    /* If Tester would like to Test for DataRecording or CalibCmd or ClearCmd or CALChkCmd */
+    {
+        if ((sending_data_recording == 1) || (rb_ocs_isCalibCmdReceived == 1) || (rb_ocs_isClearCmdReceived == 1) || (rb_ocs_isCALChkCmdReceived == 1)
+          || (rb_ocs_isReadFCReceived == 1))
+        /* If receive DataRecordingCmd, CalibCmd, ClearCmd, CALChkCmd 's response */
+        {
+
+            create_fault = 1;
+            /* Indicate fault */
+        }
+    }
+    else
+    /* If Tester would like to Test for other command */
+    {
+      create_fault = 1;
+    }
+    
+//    if(((fault_for_DataRecording_only == 1)&&(sending_data_recording == 1))
+//      ||(fault_for_DataRecording_only == 0))
+//      /* If click to (Create Step for DataRecordingCmd and receive DataRecordingCmd) or (does not Create Step for DataRecordingCmd ) */
+//    {
+//      create_fault = 1;
+//    }
+//    else
+//    { 
+//      create_fault = 0;
+//    }
+    writeLineEx(0,kINFO,"response = %x %x %x %x %x %x %x %x %x %x",send_buffer[0],send_buffer[1],send_buffer[2],send_buffer[3],send_buffer[4],send_buffer[5],send_buffer[6],send_buffer[7],send_buffer[8],send_buffer[9]);
+    Create_Condition_and_Send_Response();
+    writeLineEx(0,kINFO,"response = %x %x %x %x %x %x %x %x %x %x",send_buffer[0],send_buffer[1],send_buffer[2],send_buffer[3],send_buffer[4],send_buffer[5],send_buffer[6],send_buffer[7],send_buffer[8],send_buffer[9]);
+  }
+}
+
+on timer tTimerT4
+{
+  int i;
+  for(i=0 ; i<(length-1); i++)
+  {
+    send_buffer[i] = send_buffer[i+1];
+  }
+  
+  if( 1 == rs232Send(getValue(EnvPortA), send_buffer,length-1)) 
+    if(display_mode==display_flow)
+      writeLineEx(0,kINFO, "Write block of bytes to serial port %d with T4 delay.", getValue(EnvPortA)); 
+  else
+    if(display_mode==display_flow)
+      writeLineEx(0,kERROR,"An error occurred during write of block of byte data to the serial port %d with T4 delay.", getValue(EnvPortA));
+  sending_timeout_T4 = 0;
+}
+
+on envVar EnvClearDataPortA
+{
+  if(getValue(this)!=1)
+    return;
+  
+  // clear reception and transmission display
+  putValue(EnvReceptionPortA,    gEmptyBuffer, 0);
+  putValue(EnvTransmissionPortA, gEmptyBuffer, 0);
+  gNumberOfReceivedBytes = 0;
+}
+
+on envVar Env_Loop_Steps
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_LoopTime", 1);
+  else
+    SetControlVisibility("PortA", "Input_LoopTime", 0); 
+}
+
+on envVar Env_Change_Occupant_S1
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_Occupant_S1", 1);
+  else
+    SetControlVisibility("PortA", "Input_Occupant_S1", 0); 
+}
+
+on envVar Env_Change_Occupant_S2
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_Occupant_S2", 1);
+  else
+    SetControlVisibility("PortA", "Input_Occupant_S2", 0); 
+}
+
+on envVar Env_Change_Occupant_S3
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_Occupant_S3", 1);
+  else
+    SetControlVisibility("PortA", "Input_Occupant_S3", 0); 
+}
+
+on envVar Env_Change_Occupant_S4
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_Occupant_S4", 1);
+  else
+    SetControlVisibility("PortA", "Input_Occupant_S4", 0); 
+}
+
+on envVar Env_Change_Occupant_S5
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_Occupant_S5", 1);
+  else
+    SetControlVisibility("PortA", "Input_Occupant_S5", 0); 
+}
+
+
+on envVar Env_Change_Occupant_S6
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_Occupant_S6", 1);
+  else
+    SetControlVisibility("PortA", "Input_Occupant_S6", 0); 
+}
+
+on envVar Env_Change_Occupant_S7
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_Occupant_S7", 1);
+  else
+    SetControlVisibility("PortA", "Input_Occupant_S7", 0); 
+}
+
+on envVar Env_Change_Occupant_S8
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_Occupant_S8", 1);
+  else
+    SetControlVisibility("PortA", "Input_Occupant_S8", 0); 
+}
+
+on envVar Env_Change_Fault_Infor_S1
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_Fault_Infor_S1", 1);
+  else
+    SetControlVisibility("PortA", "Input_Fault_Infor_S1", 0); 
+}
+
+on envVar Env_Change_Fault_Infor_S2
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_Fault_Infor_S2", 1);
+  else
+    SetControlVisibility("PortA", "Input_Fault_Infor_S2", 0); 
+}
+
+on envVar Env_Change_Fault_Infor_S3
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_Fault_Infor_S3", 1);
+  else
+    SetControlVisibility("PortA", "Input_Fault_Infor_S3", 0); 
+}
+
+on envVar Env_Change_Fault_Infor_S4
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_Fault_Infor_S4", 1);
+  else
+    SetControlVisibility("PortA", "Input_Fault_Infor_S4", 0); 
+}
+
+on envVar Env_Change_Fault_Infor_S5
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_Fault_Infor_S5", 1);
+  else
+    SetControlVisibility("PortA", "Input_Fault_Infor_S5", 0); 
+}
+
+on envVar Env_Change_Fault_Infor_S6
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_Fault_Infor_S6", 1);
+  else
+    SetControlVisibility("PortA", "Input_Fault_Infor_S6", 0); 
+}
+
+on envVar Env_Change_Fault_Infor_S7
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_Fault_Infor_S7", 1);
+  else
+    SetControlVisibility("PortA", "Input_Fault_Infor_S7", 0); 
+}
+
+on envVar Env_Change_Fault_Infor_S8
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_Fault_Infor_S8", 1);
+  else
+    SetControlVisibility("PortA", "Input_Fault_Infor_S8", 0); 
+}
+
+on envVar Env_Change_Buckle_S1
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_Buckle_S1", 1);
+  else
+    SetControlVisibility("PortA", "Input_Buckle_S1", 0); 
+}
+
+on envVar Env_Change_Buckle_S2
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_Buckle_S2", 1);
+  else
+    SetControlVisibility("PortA", "Input_Buckle_S2", 0); 
+}
+
+on envVar Env_Change_Buckle_S3
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_Buckle_S3", 1);
+  else
+    SetControlVisibility("PortA", "Input_Buckle_S3", 0); 
+}
+
+on envVar Env_Change_Buckle_S4
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_Buckle_S4", 1);
+  else
+    SetControlVisibility("PortA", "Input_Buckle_S4", 0); 
+}
+
+on envVar Env_Change_Buckle_S5
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_Buckle_S5", 1);
+  else
+    SetControlVisibility("PortA", "Input_Buckle_S5", 0); 
+}
+
+on envVar Env_Change_Buckle_S6
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_Buckle_S6", 1);
+  else
+    SetControlVisibility("PortA", "Input_Buckle_S6", 0); 
+}
+
+on envVar Env_Change_Buckle_S7
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_Buckle_S7", 1);
+  else
+    SetControlVisibility("PortA", "Input_Buckle_S7", 0); 
+}
+
+on envVar Env_Change_Buckle_S8
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_Buckle_S8", 1);
+  else
+    SetControlVisibility("PortA", "Input_Buckle_S8", 0); 
+}
+
+on envVar Env_Change_DataRecording_S1
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_DataRecording_S1", 1);
+  else
+    SetControlVisibility("PortA", "Input_DataRecording_S1", 0); 
+}
+
+on envVar Env_Change_DataRecording_S2
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_DataRecording_S2", 1);
+  else
+    SetControlVisibility("PortA", "Input_DataRecording_S2", 0); 
+}
+
+on envVar Env_Change_DataRecording_S3
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_DataRecording_S3", 1);
+  else
+    SetControlVisibility("PortA", "Input_DataRecording_S3", 0); 
+}
+
+on envVar Env_Change_DataRecording_S4
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_DataRecording_S4", 1);
+  else
+    SetControlVisibility("PortA", "Input_DataRecording_S4", 0); 
+}
+
+on envVar Env_Change_DataRecording_S5
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_DataRecording_S5", 1);
+  else
+    SetControlVisibility("PortA", "Input_DataRecording_S5", 0); 
+}
+
+on envVar Env_Change_DataRecording_S6
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_DataRecording_S6", 1);
+  else
+    SetControlVisibility("PortA", "Input_DataRecording_S6", 0); 
+}
+
+on envVar Env_Change_DataRecording_S7
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_DataRecording_S7", 1);
+  else
+    SetControlVisibility("PortA", "Input_DataRecording_S7", 0); 
+}
+
+on envVar Env_Change_DataRecording_S8
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_DataRecording_S8", 1);
+  else
+    SetControlVisibility("PortA", "Input_DataRecording_S8", 0); 
+}
+
+on envVar EnvBitPerSecondsPortA
+{
+  InitSerialPort();
+}
+
+on envVar EnvDataBitsPortA
+{
+  InitSerialPort();
+}
+
+on envVar EnvParityPortA
+{
+  InitSerialPort();
+}
+
+on envVar EnvPortA
+{
+  InitSerialPort();
+}
+
+on envVar EnvStopbitsPortA
+{
+  InitSerialPort();
+}
+
+//Fault combination start
+on envVar EnvFaultCombSend
+{
+    if(getValue(this)!=1)
+      return;
+    
+    writeLineEx(0,kINFO, "time_now = %f",time_now);
+    time_now = timeNow();
+    writeLineEx(0,kINFO, "time_now = %f",time_now);
+    /* Part 1: Get input from Env variable to local variable */
+    serial_address[0] = getValue(Env_Input_0);
+    serial_address[1] = getValue(Env_Input_1);
+    serial_address[2] = getValue(Env_Input_2);
+    serial_address[3] = getValue(Env_Input_3);
+    serial_address[4] = getValue(Env_Input_4);
+    serial_address[5] = getValue(Env_Input_5);
+    serial_address[6] = getValue(Env_Input_6);
+    serial_address[7] = getValue(Env_Input_7);
+    serial_address[8] = getValue(Env_Input_8);
+    serial_address[9] = getValue(Env_Input_9);
+    serial_address[10] = getValue(Env_Input_15); // S-FR
+    serial_address[11] = getValue(Env_Input_16);
+    serial_address[12] = getValue(Env_Input_17);
+    serial_address[13] = getValue(Env_Input_18);
+    serial_address[14] = getValue(Env_Input_19);
+    serial_address[15] = getValue(Env_Input_10); // S-RL
+    serial_address[16] = getValue(Env_Input_11);
+    serial_address[17] = getValue(Env_Input_12);
+    serial_address[18] = getValue(Env_Input_13);
+    serial_address[19] = getValue(Env_Input_14);
+    serial_address[20] = getValue(Env_Input_20); // S-RR
+    serial_address[21] = getValue(Env_Input_21);
+    serial_address[22] = getValue(Env_Input_22);
+    serial_address[23] = getValue(Env_Input_23);
+    serial_address[24] = getValue(Env_Input_24);
+    /* Get Env of Serial Address to local */
+    
+    readDetailFltCode_address[0] = getValue(Env_Input_0_ReadFltCode);
+    readDetailFltCode_address[1] = getValue(Env_Input_1_ReadFltCode);
+    readDetailFltCode_address[2] = getValue(Env_Input_2_ReadFltCode);
+    readDetailFltCode_address[3] = getValue(Env_Input_3_ReadFltCode);
+    readDetailFltCode_address[4] = getValue(Env_Input_4_ReadFltCode);
+    readDetailFltCode_address[5] = getValue(Env_Input_5_ReadFltCode);
+    readDetailFltCode_address[6] = getValue(Env_Input_6_ReadFltCode);
+    readDetailFltCode_address[7] = getValue(Env_Input_7_ReadFltCode);
+    readDetailFltCode_address[8] = getValue(Env_Input_8_ReadFltCode);
+    readDetailFltCode_address[9] = getValue(Env_Input_9_ReadFltCode);
+    readDetailFltCode_address[10] = getValue(Env_Input_10_ReadFltCode); 
+    readDetailFltCode_address[11] = getValue(Env_Input_11_ReadFltCode);
+    readDetailFltCode_address[12] = getValue(Env_Input_12_ReadFltCode);
+    readDetailFltCode_address[13] = getValue(Env_Input_13_ReadFltCode);
+    readDetailFltCode_address[14] = getValue(Env_Input_14_ReadFltCode);
+    readDetailFltCode_address[15] = getValue(Env_Input_15_ReadFltCode);
+    readDetailFltCode_address[16] = getValue(Env_Input_16_ReadFltCode);
+    readDetailFltCode_address[17] = getValue(Env_Input_17_ReadFltCode);
+    readDetailFltCode_address[18] = getValue(Env_Input_18_ReadFltCode);
+    readDetailFltCode_address[19] = getValue(Env_Input_19_ReadFltCode);
+    readDetailFltCode_address[20] = getValue(Env_Input_20_ReadFltCode);
+    readDetailFltCode_address[21] = getValue(Env_Input_21_ReadFltCode);
+    readDetailFltCode_address[22] = getValue(Env_Input_22_ReadFltCode);
+    readDetailFltCode_address[23] = getValue(Env_Input_23_ReadFltCode);
+    readDetailFltCode_address[24] = getValue(Env_Input_24_ReadFltCode);
+    readDetailFltCode_address[25] = getValue(Env_Input_25_ReadFltCode);
+    readDetailFltCode_address[26] = getValue(Env_Input_26_ReadFltCode);
+    readDetailFltCode_address[27] = getValue(Env_Input_27_ReadFltCode);
+    /* Get Env of Read Detail flt code information to local */
+    
+      for (i = 0; i < 25; ++i)
+  {
+    rb_ocs_memoryOCSSimulate_au8[i] = serial_address[i];
+  }
+  for (i = 0; i < 28; ++i)
+  {
+    rb_ocs_memoryOCSSimulate_au8[i + 0x19] = readDetailFltCode_address[i];
+  }
+  
+  
+    vehicleID1 = getValue(Env_input_vehicleID_1);
+    vehicleID2 = getValue(Env_input_vehicleID_2);
+    /* Get Env of Vehicle ID to local */
+    
+    default_occupant_status = getValue(Env_input_occupant_status);
+    occupant_weight_up = getValue(Env_input_occupant_weight_upper);
+    occupant_weight_low = getValue(Env_input_occupant_weight_lower);
+    default_fault_infor = getValue(Env_input_fault_infor);
+    default_buckle_sw = getValue(Env_input_buckle_sw_status);
+    /* Get Env of data of StatusCmd to local */
+    default_data_recording = getValue(Env_input_Default_DataRecording);
+    /* Get Env of data of StatusCmd to local */
+    clearedStatusForReqStart_u8 = getValue(Env_ClearCmdStart_Status);
+    /* Set default value to clearedStatusForReqStart_u8 variable from Env variable */
+    clearedStatusForReqStatus_u8 = getValue(Env_ClearCmdStatus_Status);  
+    /* Set default value to clearedStatusForReqStatus_u8 variable from Env variable */
+    clearedStatusNumberInProc_u8 = getValue(Env_ClearCmdStatus_NoInProc);
+    /* Set default value to clearedStatusForReqStatus_u8 variable from Env variable */
+    calibStatusForReqStart_u8 = getValue(Env_CalibCmdStart_Status);
+    /* Set default value to clearedStatusForReqStatus_u8 variable from Env variable */
+    calibCauseOfFltForReqStart_u8 = getValue(Env_CalibCmdStart_CauseOfFlt);
+    /* Set default value to clearedStatusForReqStatus_u8 variable from Env variable */
+    calibStatusForReqStatus_u8 = getValue(Env_CalibCmdStatus_Status);
+    /* Set default value to clearedStatusForReqStatus_u8 variable from Env variable */
+    calibCauseOfFltForReqStatus_u8 = getValue(Env_CalibCmdStatus_CauseOfFlt);
+    /* Set default value to clearedStatusForReqStatus_u8 variable from Env variable */
+    calibStatusNumberInProc_u8 = getValue(Env_CalibCmdStatus_NoInProc);
+    /* Set default value to clearedStatusForReqStatus_u8 variable from Env variable */
+    calChkStatusForReqStart_u8 = getValue(Env_CALChkCmdStart_Status);
+    /* Variable holds OCS-ECU CAL Check status of Response when A/B ECU transmits CALCheckCmd (Request to start) */
+    calChkCauseOfFltForReqStart_u8 = getValue(Env_CALChkCmdStart_CauseOfFlt);
+    /* Variable holds OCS-ECU CAL Check Cause of flt of Response when A/B ECU transmits CALCheckCmd (Request to start) */
+    calChkStatusForReqStatus_u8 = getValue(Env_CALChkCmdStatus_Status);
+    /* Variable holds OCS-ECU CAL Check status of Response when A/B ECU transmits CALCheckCmd (Request the status) */
+    calChkCauseOfFltForReqStatus_u8 = getValue(Env_CALChkCmdStatus_CauseOfFlt);
+    /* Variable holds OCS-ECU CAL Check Cause of flt of Response when A/B ECU transmits CALCheckCmd (Request the status) */
+    calChkStatusNumberInProc_u8 = getValue(Env_CALChkCmdStatus_NoInProc);
+    /* Variable holds number response, which has In Process status, when A/B ECU transmits CALCheckCmd (Request the status) */
+    rb_ocs_isClearCmdReceived = 0;
+    rb_ocs_isCALChkCmdReceived = 0;
+    rb_ocs_isCalibCmdReceived = 0;
+    rb_ocs_isReadFCReceived = 0;
+    
+    /* Part 2: Set for DiagCmd  */
+    // Number of times delaying for TimeOut Fault
+    input_t2 = getValue(Env_T2_time_out);
+    input_t4 = getValue(Env_T4_time_out);
+    
+    // Set Alway Fault
+    alway_timeout_t2 = getValue(Env_Always_TimeOut_T2);
+    always_abnormalresponseCS = getValue(Env_Always_AbnormalResponseCS);
+    fault_for_DataRecording_only = getValue(Env_Fault_For_DataRecording_only);
+    rb_ocs_isClearCmdEnabled = getValue(Env_EnableStepForClearCmd);
+    rb_ocs_isCalibCmdEnabled = getValue(Env_EnableStepForCalibCmd);
+    rb_ocs_isCALChkCmdEnabled = getValue(Env_EnableStepForCALChkCmd);
+    rb_ocs_isReadFCEnabled = getValue(Env_EnableStepForReadFltInfo);
+    
+    writeLineEx(0,kINFO, "alway_timeout_t2 = %d",alway_timeout_t2);
+    writeLineEx(0,kINFO, "always_abnormalresponseCS = %d",always_abnormalresponseCS);
+    
+    /* Part 3: Set local variable in case for tester */
+    Occupant_step[number_of_step] = default_occupant_status;
+    Fault_infor_step[number_of_step] = default_fault_infor;
+    Buckle_step[number_of_step] = default_buckle_sw;
+    DataRecording_step[number_of_step] = default_data_recording;
+    weightUpper_Step[number_of_step] = occupant_weight_up;
+    weightLower_Step[number_of_step] = occupant_weight_low;
+    vehicleID1_step[number_of_step] = vehicleID1;
+    vehicleID2_step[number_of_step] = vehicleID2;
+    statusDiag_step[number_of_step] = calChkStatusForReqStart_u8;
+    causeOfFltDiag_step[number_of_step] = calChkCauseOfFltForReqStart_u8;
+    
+    number_of_response_in_loop = 0;
+    /* Reset number of response in loop */
+    count_step = 1;
+    /* Reset count step */
+    putValue(Env_Flag_LoopCompleted, 0);
+    putValue(Env_Flag_StepCompleted, 0);
+    
+    if(getValue(Env_Loop_Steps)!=0)
+    /* Check using Loop, if using */
+    {
+      temporary_step_begin = getValue(Env_Step_Begin_Loop);
+      temporary_step_end = getValue(Env_Step_End_Loop);
+      use_loop_step = 1;
+    }
+
+    /* Part 4: Set up Condition by Step */
+    for(i = 0; i < number_of_step; i++)
+    {
+      if(i == 0)  //step 1
+      {
+        tam = i*number_of_element_one_step;
+        /* Get first index of step */
+        Option_step[tam+number_of_response_position] = getValue(EnvFaultCombN1);
+        /* Get number of response value to first index location */
+        if ((Option_step[tam+number_of_response_position] == 0))
+        /* If number of response is 0 */
+        {
+          write("DBG %d",Option_step[tam+number_of_response_position]);
+          putValue(Env_F_T_out_T2_S1, 0);
+          putValue(Env_F_T_out_T4_S1, 0);
+          putValue(Env_F_Abnor_HD_S1, 0);
+          putValue(Env_F_Abnor_len_S1, 0);
+          putValue(Env_F_Abnor_ID_S1, 0);
+          putValue(Env_F_Abnor_CS_S1, 0);
+          putValue(Env_WrongParity_S1, 0);      
+          putValue(Env_F_Nor_S1, 0);
+          putValue(Env_Change_Occupant_S1, 0);
+          putValue(Env_Change_Fault_Infor_S1, 0);
+          putValue(Env_Change_Buckle_S1, 0);
+          putValue(Env_Change_DataRecording_S1, 0);
+          putValue(Env_Change_WeightUpper_S1, 0);
+          putValue(Env_Change_WeightLower_S1, 0);
+          putValue(Env_Change_VehicleID_S1, 0);
+          putValue(Env_Change_StatusDiagReq_S1, 0);
+          putValue(Env_Change_CauseOfFltDiagReq_S1, 0);
+          /* Clear all opt */
+        }
+        else if (getValue(Env_F_Nor_S1) == 1)
+        /* If number of response is > 0 but Step has normal response opt */
+        {
+          putValue(Env_F_T_out_T2_S1,0);
+          putValue(Env_F_T_out_T4_S1,0);
+          putValue(Env_F_Abnor_HD_S1,0);
+          putValue(Env_F_Abnor_len_S1,0);
+          putValue(Env_F_Abnor_ID_S1,0);
+          putValue(Env_F_Abnor_CS_S1,0);
+          putValue(Env_WrongParity_S1,0);
+          /* Clear abnormal response opt  */
+        }
+        else
+        /* If number of response is > 0 but Step have not normal response opt */
+        {
+          /* Do nothing */
+        }
+        
+//        if((Option_step[tam+number_of_response_position] == 0) || (getValue(Env_F_Nor_S1) == 1)) 
+//        /* If don't set number of response in step 1 or set normal sending in step 1 */
+//        {
+//          putValue(Env_F_T_out_T2_S1,0);
+//          putValue(Env_F_T_out_T4_S1,0);
+//          putValue(Env_F_Abnor_HD_S1,0);
+//          putValue(Env_F_Abnor_len_S1,0);
+//          putValue(Env_F_Abnor_ID_S1,0);
+//          putValue(Env_F_Abnor_CS_S1,0);
+//          putValue(Env_WrongParity_S1,0);
+//          /* Clear value of abnormal opt */
+//        }
+//        
+//        if(Option_step[tam + number_of_response_position] == 0)            //if don't set times of step 1
+//        {
+//          putValue(Env_F_Nor_S1,0);
+//          putValue(Env_Change_Occupant_S1,0);
+//          putValue(Env_Change_Fault_Infor_S1,0);
+//          putValue(Env_Change_Buckle_S1,0);
+//          putValue(Env_Change_DataRecording_S1,0);
+//        }
+
+        if(getValue(Env_F_Nor_S1) == 1) //if set normal sending
+        {
+          Option_step[tam + normal_option_position] = normal_option_position;
+        }
+        else
+        {
+          //don't set normal sending
+          Option_step[tam + normal_option_position] = 0;
+          
+          // set T2 time out error
+          if( getValue(Env_F_T_out_T2_S1) != 0)
+            Option_step[tam + T2_timeout_position] = T2_timeout_position;
+          else 
+            Option_step[tam + T2_timeout_position] = 0;
+      
+          //set header error
+          if( getValue(Env_F_Abnor_HD_S1) != 0)
+            Option_step[tam + header_error_position] = header_error_position;
+          else 
+            Option_step[tam + header_error_position] = 0;
+      
+          //set lenght error
+          if( getValue(Env_F_Abnor_len_S1) != 0)
+            Option_step[tam + length_error_position] = length_error_position;
+          else
+            Option_step[tam + length_error_position] = 0;
+    
+          //set id error
+          if(getValue(Env_F_Abnor_ID_S1) != 0)
+            Option_step[tam + id_error_position] = id_error_position;
+          else
+            Option_step[tam + id_error_position] = 0;
+      
+          //set checksum error
+          if( getValue(Env_F_Abnor_CS_S1) != 0)
+            Option_step[tam + checksum_error_position] = checksum_error_position;
+          else
+            Option_step[tam + checksum_error_position] = 0;
+      
+          //set T4 Timeout error
+          if( getValue(Env_F_T_out_T4_S1) != 0)
+           Option_step[tam + t4_timeout_position] = t4_timeout_position;
+          else
+            Option_step[tam + t4_timeout_position] = 0; 
+            
+          // set wrong parity
+          if( getValue(Env_WrongParity_S1) != 0)
+            Option_step[tam + wrong_parity_position] = wrong_parity_position;
+          else
+            Option_step[tam + wrong_parity_position] = 0;       
+        }
+        
+        // change occupant value
+        if( getValue(Env_Change_Occupant_S1) != 0)
+        {
+          Option_step[tam + change_occupant_position] = change_occupant_position;
+          Occupant_step[i] = getValue(Env_Occupant_Value_S1);
+        }
+        else
+        {
+          Option_step[tam + change_occupant_position] = 0;
+          Occupant_step[i] = default_occupant_status;
+        }
+          
+        // change fault information value
+        if( getValue(Env_Change_Fault_Infor_S1) != 0)
+        {
+          Option_step[tam + change_fault_info_position] = change_fault_info_position;
+          Fault_infor_step[i] = getValue(Env_Fault_Infor_S1);
+        }
+        else
+        {
+          Option_step[tam + change_fault_info_position] = 0;
+          Fault_infor_step[i] = default_fault_infor;
+        }
+        
+        // change buckle SW value
+        if( getValue(Env_Change_Buckle_S1) != 0)
+        {
+          Option_step[tam + change_buckle_position] = change_buckle_position;
+          Buckle_step[i] = getValue(Env_Buckle_Value_S1);
+        }
+        else
+        {
+          Option_step[tam + change_buckle_position] = 0;
+          Buckle_step[i] = default_buckle_sw;
+        }
+        
+        // change Data Recording value
+        if( getValue(Env_Change_DataRecording_S1) != 0)
+        {
+          Option_step[tam + change_datarecording_position] = change_datarecording_position;
+          DataRecording_step[i] = getValue(Env_DataRecording_Value_S1);
+        }
+        else
+        {
+          Option_step[tam + change_datarecording_position] = 0;
+          DataRecording_step[i] = default_data_recording;
+        }
+        
+        // change Weight Upper value
+        if(getValue(Env_Change_WeightUpper_S1) != 0)
+        {
+          Option_step[tam + change_weightUpper_position] = change_weightUpper_position;
+          weightUpper_Step[i] = getValue(Env_WeightUpper_Value_S1);
+        }
+        else
+        {
+          Option_step[tam + change_weightUpper_position] = 0;
+          weightUpper_Step[i] = occupant_weight_up;
+        }
+        
+        // change Weight Lower value
+        if(getValue(Env_Change_WeightLower_S1) != 0)
+        {
+          Option_step[tam + change_weightLower_position] = change_weightLower_position;
+          weightLower_Step[i] = getValue(Env_WeightLower_Value_S1);
+        }
+        else
+        {
+          Option_step[tam + change_weightLower_position] = 0;
+          weightLower_Step[i] = occupant_weight_low;
+        }
+        
+        // change vehicle ID value
+        if(getValue(Env_Change_VehicleID_S1) != 0)
+        {
+          Option_step[tam + change_vehicleId_position] = change_datarecording_position;
+          vehicleID1_step[i] = getValue(Env_VehicleIDUpper_Value_S1);
+          vehicleID2_step[i] = getValue(Env_VehicleIDLower_Value_S1); 
+        }
+        else
+        {
+          Option_step[tam + change_vehicleId_position] = 0;
+          vehicleID1_step[i] = vehicleID1;
+          vehicleID2_step[i] = vehicleID2;
+        }
+        
+        // change Status DiagReq value
+        if((getValue(Env_Change_StatusDiagReq_S1) != 0) && 
+          ((rb_ocs_isClearCmdEnabled != 0) || (rb_ocs_isCalibCmdEnabled != 0) || (rb_ocs_isCALChkCmdEnabled != 0)))
+          /* If get */
+        {
+          Option_step[tam + change_statusDiagCmd_position] = change_statusDiagCmd_position;
+          statusDiag_step[i] = getValue(Env_StatusDiagReq_Value_S1);
+        }
+        else
+        {
+          Option_step[tam + change_statusDiagCmd_position] = 0;
+          statusDiag_step[i] = calChkStatusForReqStart_u8;
+          putValue(Env_Change_StatusDiagReq_S1, 0);
+        }
+        
+        // change Cause of flt DiagReq value
+        if((getValue(Env_Change_CauseOfFltDiagReq_S1) != 0) &&
+          ((rb_ocs_isCalibCmdEnabled != 0) || (rb_ocs_isCALChkCmdEnabled != 0)))
+        {
+          Option_step[tam + change_causeOfFltDiagCmd_position] = change_causeOfFltDiagCmd_position;
+          causeOfFltDiag_step[i] = getValue(Env_CauseOfFltDiagReq_Value_S1);
+        }
+        else
+        {
+          Option_step[tam + change_causeOfFltDiagCmd_position] = 0;
+          causeOfFltDiag_step[i] = calChkCauseOfFltForReqStart_u8;
+          putValue(Env_CauseOfFltDiagReq_Value_S1, 0);
+        }
+      }
+      
+      if(i == 1)  //step 2
+      {
+        tam = i * number_of_element_one_step;
+        Option_step[tam + number_of_response_position] = getValue(EnvFaultCombN2);
+        if((Option_step[tam + number_of_response_position] == 0)||(getValue(Env_F_Nor_S2) == 1)) //if don't set times of step 2 or set normal sending in step 2
+        {
+          putValue(Env_F_T_out_T2_S2,0);
+          putValue(Env_F_T_out_T4_S2,0);
+          putValue(Env_F_Abnor_HD_S2,0);
+          putValue(Env_F_Abnor_len_S2,0);
+          putValue(Env_F_Abnor_ID_S2,0);
+          putValue(Env_F_Abnor_CS_S2,0);
+          putValue(Env_WrongParity_S2,0);
+        }
+        
+        if(Option_step[tam + number_of_response_position] == 0)            //if don't set times of step 2
+        {
+          putValue(Env_F_Nor_S2,0);
+          putValue(Env_Change_Occupant_S2,0);
+          putValue(Env_Change_Fault_Infor_S2,0);
+          putValue(Env_Change_Buckle_S2,0);
+          putValue(Env_Change_DataRecording_S2,0);
+          putValue(Env_Change_WeightUpper_S2, 0);
+          putValue(Env_Change_WeightLower_S2, 0);
+          putValue(Env_Change_VehicleID_S2, 0);
+          putValue(Env_Change_StatusDiagReq_S2, 0);
+          putValue(Env_Change_CauseOfFltDiagReq_S2, 0);
+        }
+
+        if(getValue(Env_F_Nor_S2) == 1) //if set normal sending
+        {
+          Option_step[tam + normal_option_position] = normal_option_position;
+        }
+        else
+        {
+          //don't set normal sending
+          Option_step[tam + normal_option_position] = 0;
+          
+          // set T2 time out error
+          if(getValue(Env_F_T_out_T2_S2) != 0)
+            Option_step[tam + T2_timeout_position] = T2_timeout_position;
+          else 
+            Option_step[tam + T2_timeout_position] = 0;
+      
+          //set header error
+          if(getValue(Env_F_Abnor_HD_S2) != 0)
+            Option_step[tam + header_error_position] = header_error_position;
+          else 
+            Option_step[tam + header_error_position] = 0;
+      
+          //set lenght error
+          if(getValue(Env_F_Abnor_len_S2) != 0)
+            Option_step[tam + length_error_position] = length_error_position;
+          else
+            Option_step[tam + length_error_position] = 0;
+    
+          //set id error
+          if(getValue(Env_F_Abnor_ID_S2) != 0)
+            Option_step[tam + id_error_position] = id_error_position;
+          else
+            Option_step[tam + id_error_position] = 0;
+      
+          //set checksum error
+          if(getValue(Env_F_Abnor_CS_S2) != 0)
+            Option_step[tam + checksum_error_position] = checksum_error_position;
+          else
+            Option_step[tam + checksum_error_position] = 0;
+      
+          //set T4 Timeout error
+          if(getValue(Env_F_T_out_T4_S2) != 0)
+           Option_step[tam + t4_timeout_position] = t4_timeout_position;
+          else
+            Option_step[tam + t4_timeout_position] = 0; 
+            
+          // set wrong parity
+          if(getValue(Env_WrongParity_S2) != 0)
+            Option_step[tam + wrong_parity_position] = wrong_parity_position;
+          else
+            Option_step[tam + wrong_parity_position] = 0;
+        }
+        // change occupant value
+        if( getValue(Env_Change_Occupant_S2) != 0)
+        {
+          Option_step[tam + change_occupant_position] = change_occupant_position;
+          Occupant_step[i] = getValue(Env_Occupant_Value_S2);
+        }
+        else
+        {
+          Option_step[tam + change_occupant_position] = 0;
+          Occupant_step[i] = default_occupant_status;
+        }
+        
+        // change fault information value
+        if( getValue(Env_Change_Fault_Infor_S2) != 0)
+        {
+          Option_step[tam + change_fault_info_position] = change_fault_info_position;
+          Fault_infor_step[i] = getValue(Env_Fault_Infor_S2);
+        }
+        else
+        {
+          Option_step[tam + change_fault_info_position] = 0;
+          Fault_infor_step[i] = default_fault_infor;
+        }
+        
+        // change buckle SW value
+        if( getValue(Env_Change_Buckle_S2) != 0)
+        {
+          Option_step[tam + change_buckle_position] = change_buckle_position;
+          Buckle_step[i] = getValue(Env_Buckle_Value_S2);
+        }
+        else
+        {
+          Option_step[tam + change_buckle_position] = 0;
+          Buckle_step[i] = default_buckle_sw;
+        }
+        
+        // change Data Recording value
+        if( getValue(Env_Change_DataRecording_S2) != 0)
+        {
+          Option_step[tam + change_datarecording_position] = change_datarecording_position;
+          DataRecording_step[i] = getValue(Env_DataRecording_Value_S2);
+        }
+        else
+        {
+          Option_step[tam + change_datarecording_position] = 0;
+          DataRecording_step[i] = default_data_recording;
+        }
+        
+        // change Weight Upper value
+        if(getValue(Env_Change_WeightUpper_S2) != 0)
+        {
+          Option_step[tam + change_weightUpper_position] = change_weightUpper_position;
+          weightUpper_Step[i] = getValue(Env_WeightUpper_Value_S2);
+        }
+        else
+        {
+          Option_step[tam + change_weightUpper_position] = 0;
+          weightUpper_Step[i] = occupant_weight_up;
+        }
+        
+        // change Weight Lower value
+        if(getValue(Env_Change_WeightLower_S2) != 0)
+        {
+          Option_step[tam + change_weightLower_position] = change_weightLower_position;
+          weightLower_Step[i] = getValue(Env_WeightLower_Value_S2);
+        }
+        else
+        {
+          Option_step[tam + change_weightLower_position] = 0;
+          weightLower_Step[i] = occupant_weight_low;
+        }
+        
+        // change vehicle ID value
+        if(getValue(Env_Change_VehicleID_S2) != 0)
+        {
+          Option_step[tam + change_vehicleId_position] = change_datarecording_position;
+          vehicleID1_step[i] = getValue(Env_VehicleIDUpper_Value_S2);
+          vehicleID2_step[i] = getValue(Env_VehicleIDLower_Value_S1); 
+        }
+        else
+        {
+          Option_step[tam + change_vehicleId_position] = 0;
+          vehicleID1_step[i] = vehicleID1;
+          vehicleID2_step[i] = vehicleID2;
+        }
+        
+        // change Status DiagReq value
+        if((getValue(Env_Change_StatusDiagReq_S2) != 0) && 
+          ((rb_ocs_isClearCmdEnabled != 0) || (rb_ocs_isCalibCmdEnabled != 0) || (rb_ocs_isCALChkCmdEnabled != 0)))
+        {
+          Option_step[tam + change_statusDiagCmd_position] = change_statusDiagCmd_position;
+          statusDiag_step[i] = getValue(Env_StatusDiagReq_Value_S2);
+        }
+        else
+        {
+          Option_step[tam + change_statusDiagCmd_position] = 0;
+          statusDiag_step[i] = calChkStatusForReqStart_u8;
+          putValue(Env_Change_StatusDiagReq_S2, 0);
+        }
+        
+        // change Cause of flt DiagReq value
+		    if((getValue(Env_Change_CauseOfFltDiagReq_S2) != 0) &&
+          ((rb_ocs_isCalibCmdEnabled != 0) || (rb_ocs_isCALChkCmdEnabled != 0)))
+        {
+          Option_step[tam + change_causeOfFltDiagCmd_position] = change_causeOfFltDiagCmd_position;
+          causeOfFltDiag_step[i] = getValue(Env_CauseOfFltDiagReq_Value_S2);
+        }
+        else
+        {
+          Option_step[tam + change_causeOfFltDiagCmd_position] = 0;
+          causeOfFltDiag_step[i] = calChkCauseOfFltForReqStart_u8;
+          putValue(Env_Change_CauseOfFltDiagReq_S2, 0);
+        }
+      }
+     
+      if(i == 2)  //step 3
+      {
+        tam = i*number_of_element_one_step;
+        Option_step[tam + number_of_response_position] = getValue(EnvFaultCombN3);
+        if((Option_step[tam + number_of_response_position] == 0)||(getValue(Env_F_Nor_S3) == 1)) //if don't set times of step 3 or set normal sending in step 3
+        {
+          putValue(Env_F_T_out_T2_S3,0);
+          putValue(Env_F_T_out_T4_S3,0);
+          putValue(Env_F_Abnor_HD_S3,0);
+          putValue(Env_F_Abnor_len_S3,0);
+          putValue(Env_F_Abnor_ID_S3,0);
+          putValue(Env_F_Abnor_CS_S3,0);
+          putValue(Env_WrongParity_S3,0);
+        }
+        
+        if(Option_step[tam + number_of_response_position] == 0)            //if don't set times of step 3
+        {
+          putValue(Env_F_Nor_S3,0);
+          putValue(Env_Change_Occupant_S3,0);
+          putValue(Env_Change_Fault_Infor_S3,0);
+          putValue(Env_Change_Buckle_S3,0);
+          putValue(Env_Change_DataRecording_S3,0);
+          putValue(Env_Change_WeightUpper_S3, 0);
+          putValue(Env_Change_WeightLower_S3, 0);
+          putValue(Env_Change_VehicleID_S3, 0);
+          putValue(Env_Change_StatusDiagReq_S3, 0);
+          putValue(Env_Change_CauseOfFltDiagReq_S3, 0);
+        }
+
+        if(getValue(Env_F_Nor_S3) == 1) //if set normal sending
+        {
+          Option_step[tam + normal_option_position] = normal_option_position;
+        }
+        else
+        {
+          //don't set normal sending
+          Option_step[tam + normal_option_position] = 0;
+          
+          // set T2 time out error
+          if( getValue(Env_F_T_out_T2_S3) != 0)
+            Option_step[tam + T2_timeout_position] = T2_timeout_position;
+          else 
+            Option_step[tam + T2_timeout_position] = 0;
+      
+          //set header error
+          if( getValue(Env_F_Abnor_HD_S3) != 0)
+            Option_step[tam + header_error_position] = header_error_position;
+          else 
+            Option_step[tam + header_error_position] = 0;
+     
+          //set lenght error
+          if( getValue(Env_F_Abnor_len_S3) != 0)
+            Option_step[tam + length_error_position] = length_error_position;
+          else
+            Option_step[tam + length_error_position] = 0;
+    
+          //set id error
+          if(getValue(Env_F_Abnor_ID_S3) != 0)
+            Option_step[tam + id_error_position] = id_error_position;
+          else
+            Option_step[tam + id_error_position] = 0;
+    
+          //set checksum error
+          if( getValue(Env_F_Abnor_CS_S3) != 0)
+            Option_step[tam + checksum_error_position] = checksum_error_position;
+          else
+            Option_step[tam + checksum_error_position] = 0;
+      
+          //set T4 Timeout error
+          if( getValue(Env_F_T_out_T4_S3) != 0)
+            Option_step[tam + t4_timeout_position] = t4_timeout_position;
+          else
+            Option_step[tam + t4_timeout_position] = 0; 
+              
+          // set wrong parity
+          if( getValue(Env_WrongParity_S3) != 0)
+            Option_step[tam + wrong_parity_position] = wrong_parity_position;
+          else
+            Option_step[tam + wrong_parity_position] = 0;
+        }
+        // change occupant value
+        if(getValue(Env_Change_Occupant_S3) != 0)
+        {
+          Option_step[tam + change_occupant_position] = change_occupant_position;
+          Occupant_step[i] = getValue(Env_Occupant_Value_S3);
+        }
+        else
+        {
+          Option_step[tam + change_occupant_position] = 0;
+          Occupant_step[i] = default_occupant_status;
+        }
+        
+        // change fault information value
+        if(getValue(Env_Change_Fault_Infor_S3) != 0)
+        {
+          Option_step[tam + change_fault_info_position] = change_fault_info_position;
+          Fault_infor_step[i] = getValue(Env_Fault_Infor_S3);
+        }
+        else
+        {
+          Option_step[tam + change_fault_info_position] = 0;
+          Fault_infor_step[i] = default_fault_infor;
+        }
+          
+        // change buckle SW value
+        if(getValue(Env_Change_Buckle_S3) != 0)
+        {
+          Option_step[tam + change_buckle_position] = change_buckle_position;
+          Buckle_step[i] = getValue(Env_Buckle_Value_S3);
+        }
+        else
+        {
+          Option_step[tam + change_buckle_position] = 0;
+          Buckle_step[i] = default_buckle_sw;
+        }
+        
+        // change Data Recording value
+        if(getValue(Env_Change_DataRecording_S3) != 0)
+        {
+          Option_step[tam + change_datarecording_position] = change_datarecording_position;
+          DataRecording_step[i] = getValue(Env_DataRecording_Value_S3);
+        }
+        else
+        {
+          Option_step[tam + change_datarecording_position] = 0;
+          DataRecording_step[i] = default_data_recording;
+        }
+        
+        // change Weight Upper value
+        if(getValue(Env_Change_WeightUpper_S3) != 0)
+        {
+          Option_step[tam + change_weightUpper_position] = change_weightUpper_position;
+          weightUpper_Step[i] = getValue(Env_WeightUpper_Value_S3);
+        }
+        else
+        {
+          Option_step[tam + change_weightUpper_position] = 0;
+          weightUpper_Step[i] = occupant_weight_up;
+        }
+        
+        // change Weight Lower value
+        if(getValue(Env_Change_WeightLower_S3) != 0)
+        {
+          Option_step[tam + change_weightLower_position] = change_weightLower_position;
+          weightLower_Step[i] = getValue(Env_WeightLower_Value_S3);
+        }
+        else
+        {
+          Option_step[tam + change_weightLower_position] = 0;
+          weightLower_Step[i] = occupant_weight_low;
+        }
+        
+        // change vehicle ID value
+        if(getValue(Env_Change_VehicleID_S3) != 0)
+        {
+          Option_step[tam + change_vehicleId_position] = change_datarecording_position;
+          vehicleID1_step[i] = getValue(Env_VehicleIDUpper_Value_S3);
+          vehicleID2_step[i] = getValue(Env_VehicleIDLower_Value_S3); 
+        }
+        else
+        {
+          Option_step[tam + change_vehicleId_position] = 0;
+          vehicleID1_step[i] = vehicleID1;
+          vehicleID2_step[i] = vehicleID2;
+        }
+        
+        // change Status DiagReq value
+        if((getValue(Env_Change_StatusDiagReq_S3) != 0) && 
+          ((rb_ocs_isClearCmdEnabled != 0) || (rb_ocs_isCalibCmdEnabled != 0) || (rb_ocs_isCALChkCmdEnabled != 0)))
+        {
+          Option_step[tam + change_statusDiagCmd_position] = change_statusDiagCmd_position;
+          statusDiag_step[i] = getValue(Env_StatusDiagReq_Value_S3);
+        }
+        else
+        {
+          Option_step[tam + change_statusDiagCmd_position] = 0;
+          statusDiag_step[i] = calChkStatusForReqStart_u8;
+          putValue(Env_Change_StatusDiagReq_S3, 0);
+        }
+        
+        // change Cause of flt DiagReq value
+		    if((getValue(Env_Change_CauseOfFltDiagReq_S3) != 0) &&
+          ((rb_ocs_isCalibCmdEnabled != 0) || (rb_ocs_isCALChkCmdEnabled != 0)))
+        {
+          Option_step[tam + change_causeOfFltDiagCmd_position] = change_causeOfFltDiagCmd_position;
+          causeOfFltDiag_step[i] = getValue(Env_CauseOfFltDiagReq_Value_S3);
+        }
+        else
+        {
+          Option_step[tam + change_causeOfFltDiagCmd_position] = 0;
+          causeOfFltDiag_step[i] = calChkCauseOfFltForReqStart_u8;
+          putValue(Env_Change_CauseOfFltDiagReq_S3, 0);
+        }
+      }
+      
+      if(i == 3)  //step 4
+      {
+        tam = i * number_of_element_one_step;
+        Option_step[tam + number_of_response_position] = getValue(EnvFaultCombN4);
+        if((Option_step[tam + number_of_response_position] == 0)||(getValue(Env_F_Nor_S4) == 1)) //if don't set times of step 4 or set normal sending in step 4
+        {
+          putValue(Env_F_T_out_T2_S4,0);
+          putValue(Env_F_T_out_T4_S4,0);
+          putValue(Env_F_Abnor_HD_S4,0);
+          putValue(Env_F_Abnor_len_S4,0);
+          putValue(Env_F_Abnor_ID_S4,0);
+          putValue(Env_F_Abnor_CS_S4,0);
+          putValue(Env_WrongParity_S4,0);
+        }
+        
+        if(Option_step[tam + number_of_response_position] == 0)            //if don't set times of step 4
+        {
+          putValue(Env_F_Nor_S4,0);
+          putValue(Env_Change_Occupant_S4,0);
+          putValue(Env_Change_Fault_Infor_S4,0);
+          putValue(Env_Change_Buckle_S4,0);
+          putValue(Env_Change_DataRecording_S4,0);
+          putValue(Env_Change_WeightUpper_S4, 0);
+          putValue(Env_Change_WeightLower_S4, 0);
+          putValue(Env_Change_VehicleID_S4, 0);
+          putValue(Env_Change_StatusDiagReq_S4, 0);
+          putValue(Env_Change_CauseOfFltDiagReq_S4, 0);
+        }
+
+        if(getValue(Env_F_Nor_S4) == 1) //if set normal sending
+        {
+          Option_step[tam + normal_option_position] = normal_option_position;
+        }
+        else
+        {
+          //don't set normal sending
+          Option_step[tam + normal_option_position] = 0;
+          
+          // set T2 time out error
+          if( getValue(Env_F_T_out_T2_S4) != 0)
+            Option_step[tam + T2_timeout_position] = T2_timeout_position;
+          else 
+            Option_step[tam + T2_timeout_position] = 0;
+      
+          //set header error
+          if( getValue(Env_F_Abnor_HD_S4) != 0)
+            Option_step[tam + header_error_position] = header_error_position;
+          else 
+            Option_step[tam + header_error_position] = 0;
+      
+          //set lenght error
+          if( getValue(Env_F_Abnor_len_S4) != 0)
+            Option_step[tam + length_error_position] = length_error_position;
+          else
+            Option_step[tam + length_error_position] = 0;
+    
+          //set id error
+          if(getValue(Env_F_Abnor_ID_S4) != 0)
+            Option_step[tam + id_error_position] = id_error_position;
+          else
+            Option_step[tam + id_error_position] = 0;
+      
+          //set checksum error
+          if( getValue(Env_F_Abnor_CS_S4) != 0)
+            Option_step[tam + checksum_error_position] = checksum_error_position;
+          else
+            Option_step[tam + checksum_error_position] = 0;
+      
+          //set T4 Timeout error
+          if( getValue(Env_F_T_out_T4_S4) != 0)
+            Option_step[tam + t4_timeout_position] = t4_timeout_position;
+          else
+            Option_step[tam + t4_timeout_position] = 0; 
+            
+          // set wrong parity
+          if( getValue(Env_WrongParity_S4) != 0)
+            Option_step[tam + wrong_parity_position] = wrong_parity_position;
+          else
+            Option_step[tam + wrong_parity_position] = 0;
+        }
+        // change occupant value
+        if( getValue(Env_Change_Occupant_S4) != 0)
+        {
+          Option_step[tam + change_occupant_position] = change_occupant_position;
+          Occupant_step[i] = getValue(Env_Occupant_Value_S4);
+        }
+        else
+        {
+          Option_step[tam + change_occupant_position] = 0;
+          Occupant_step[i] = default_occupant_status;
+        }
+         
+        // change fault information value
+        if( getValue(Env_Change_Fault_Infor_S4) != 0)
+        {
+          Option_step[tam + change_fault_info_position] = change_fault_info_position;
+          Fault_infor_step[i] = getValue(Env_Fault_Infor_S4);
+        }
+        else
+        {
+          Option_step[tam + change_fault_info_position] = 0;
+          Fault_infor_step[i] = default_fault_infor;
+        }
+        
+        // change buckle SW value
+        if( getValue(Env_Change_Buckle_S4) != 0)
+        {
+          Option_step[tam + change_buckle_position] = change_buckle_position;
+          Buckle_step[i] = getValue(Env_Buckle_Value_S4);
+        }
+        else
+        {
+          Option_step[tam + change_buckle_position] = 0;
+          Buckle_step[i] = default_buckle_sw;
+        }
+        
+        // change Data Recording value
+        if( getValue(Env_Change_DataRecording_S4) != 0)
+        {
+          Option_step[tam + change_datarecording_position] = change_datarecording_position;
+          DataRecording_step[i] = getValue(Env_DataRecording_Value_S4);
+        }
+        else
+        {
+          Option_step[tam + change_datarecording_position] = 0;
+          DataRecording_step[i] = default_data_recording;
+        }
+        
+        // change Weight Upper value
+        if(getValue(Env_Change_WeightUpper_S4) != 0)
+        {
+          Option_step[tam + change_weightUpper_position] = change_weightUpper_position;
+          weightUpper_Step[i] = getValue(Env_WeightUpper_Value_S4);
+        }
+        else
+        {
+          Option_step[tam + change_weightUpper_position] = 0;
+          weightUpper_Step[i] = occupant_weight_up;
+        }
+        
+        // change Weight Lower value
+        if(getValue(Env_Change_WeightLower_S4) != 0)
+        {
+          Option_step[tam + change_weightLower_position] = change_weightLower_position;
+          weightLower_Step[i] = getValue(Env_WeightLower_Value_S4);
+        }
+        else
+        {
+          Option_step[tam + change_weightLower_position] = 0;
+          weightLower_Step[i] = occupant_weight_low;
+        }
+        
+        // change vehicle ID value
+        if(getValue(Env_Change_VehicleID_S4) != 0)
+        {
+          Option_step[tam + change_vehicleId_position] = change_datarecording_position;
+          vehicleID1_step[i] = getValue(Env_VehicleIDUpper_Value_S4);
+          vehicleID2_step[i] = getValue(Env_VehicleIDLower_Value_S4); 
+        }
+        else
+        {
+          Option_step[tam + change_vehicleId_position] = 0;
+          vehicleID1_step[i] = vehicleID1;
+          vehicleID2_step[i] = vehicleID2;
+        }
+        
+        // change Status DiagReq value
+        if((getValue(Env_Change_StatusDiagReq_S4) != 0) && 
+          ((rb_ocs_isClearCmdEnabled != 0) || (rb_ocs_isCalibCmdEnabled != 0) || (rb_ocs_isCALChkCmdEnabled != 0)))
+          /* If get */
+        {
+          Option_step[tam + change_statusDiagCmd_position] = change_statusDiagCmd_position;
+          statusDiag_step[i] = getValue(Env_StatusDiagReq_Value_S4);
+        }
+        else
+        {
+          Option_step[tam + change_statusDiagCmd_position] = 0;
+          statusDiag_step[i] = calChkStatusForReqStart_u8;
+          putValue(Env_Change_StatusDiagReq_S4, 0);
+        }
+        
+        // change Cause of flt DiagReq value
+        if((getValue(Env_Change_CauseOfFltDiagReq_S4) != 0) &&
+          ((rb_ocs_isCalibCmdEnabled != 0) || (rb_ocs_isCALChkCmdEnabled != 0)))
+        {
+          Option_step[tam + change_causeOfFltDiagCmd_position] = change_causeOfFltDiagCmd_position;
+          causeOfFltDiag_step[i] = getValue(Env_CauseOfFltDiagReq_Value_S4);
+        }
+        else
+        {
+          Option_step[tam + change_causeOfFltDiagCmd_position] = 0;
+          causeOfFltDiag_step[i] = calChkCauseOfFltForReqStart_u8;
+          putValue(Env_Change_CauseOfFltDiagReq_S4, 0);
+        }
+      }
+      
+      if(i == 4)  //step 5
+      {
+        tam = i*number_of_element_one_step;
+        Option_step[tam + number_of_response_position] = getValue(EnvFaultCombN5);
+        if((Option_step[tam + number_of_response_position] == 0)||(getValue(Env_F_Nor_S5) == 1)) //if don't set times of step 5 or set normal sending in step 5
+        {
+          putValue(Env_F_T_out_T2_S5,0);
+          putValue(Env_F_T_out_T4_S5,0);
+          putValue(Env_F_Abnor_HD_S5,0);
+          putValue(Env_F_Abnor_len_S5,0);
+          putValue(Env_F_Abnor_ID_S5,0);
+          putValue(Env_F_Abnor_CS_S5,0);
+          putValue(Env_WrongParity_S5,0);
+        }
+        
+        if(Option_step[tam + number_of_response_position] == 0)            //if don't set times of step 5
+        {
+          putValue(Env_F_Nor_S5,0);
+          putValue(Env_Change_Occupant_S5,0);
+          putValue(Env_Change_Fault_Infor_S5,0);
+          putValue(Env_Change_Buckle_S5,0);
+          putValue(Env_Change_DataRecording_S5,0);
+          putValue(Env_Change_WeightUpper_S5, 0);
+          putValue(Env_Change_WeightLower_S5, 0);
+          putValue(Env_Change_VehicleID_S5, 0);
+          putValue(Env_Change_StatusDiagReq_S5, 0);
+          putValue(Env_Change_CauseOfFltDiagReq_S5, 0);
+        }
+
+        if(getValue(Env_F_Nor_S5) == 1) //if set normal sending
+        {
+          Option_step[tam + normal_option_position] = normal_option_position;
+        }
+        else
+        {
+          //don't set normal sending
+          Option_step[tam + normal_option_position] = 0;
+          
+          // set T2 time out error
+          if( getValue(Env_F_T_out_T2_S5) != 0)
+            Option_step[tam + T2_timeout_position] = T2_timeout_position;
+          else 
+            Option_step[tam + T2_timeout_position] = 0;
+      
+          //set header error
+          if( getValue(Env_F_Abnor_HD_S5) != 0)
+            Option_step[tam + header_error_position] = header_error_position;
+          else 
+            Option_step[tam + header_error_position] = 0;
+      
+          //set lenght error
+          if( getValue(Env_F_Abnor_len_S5) != 0)
+            Option_step[tam + length_error_position] = length_error_position;
+          else
+            Option_step[tam + length_error_position] = 0;
+    
+          //set id error
+          if(getValue(Env_F_Abnor_ID_S5) != 0)
+            Option_step[tam + id_error_position] = id_error_position;
+          else
+            Option_step[tam + id_error_position] = 0;
+      
+          //set checksum error
+          if( getValue(Env_F_Abnor_CS_S5) != 0)
+            Option_step[tam + checksum_error_position] = checksum_error_position;
+          else
+            Option_step[tam + checksum_error_position] = 0;
+      
+          //set T4 Timeout error
+          if( getValue(Env_F_T_out_T4_S5) != 0)
+           Option_step[tam + t4_timeout_position] = t4_timeout_position;
+          else
+            Option_step[tam + t4_timeout_position] = 0; 
+            
+          // set wrong parity
+          if( getValue(Env_WrongParity_S5) != 0)
+            Option_step[tam + wrong_parity_position] = wrong_parity_position;
+          else
+            Option_step[tam + wrong_parity_position] = 0;
+        }
+        // change occupant value
+        if( getValue(Env_Change_Occupant_S5) != 0)
+        {
+          Option_step[tam + change_occupant_position] = change_occupant_position;
+          Occupant_step[i] = getValue(Env_Occupant_Value_S5);
+        }
+        else
+        {
+          Option_step[tam + change_occupant_position] = 0;
+          Occupant_step[i] = default_occupant_status;
+        }
+        
+        // change fault information value
+        if( getValue(Env_Change_Fault_Infor_S5) != 0)
+        {
+          Option_step[tam + change_fault_info_position] = change_fault_info_position;
+          Fault_infor_step[i] = getValue(Env_Fault_Infor_S5);
+        }
+        else
+        {
+          Option_step[tam + change_fault_info_position] = 0;
+          Fault_infor_step[i] = default_fault_infor;
+        }
+        
+        // change buckle SW value
+        if( getValue(Env_Change_Buckle_S5) != 0)
+        {
+          Option_step[tam + change_buckle_position] = change_buckle_position;
+          Buckle_step[i] = getValue(Env_Buckle_Value_S5);
+        }
+        else
+        {
+          Option_step[tam + change_buckle_position] = 0;
+          Buckle_step[i] = default_buckle_sw;
+        }
+        
+        // change Data Recording value
+        if( getValue(Env_Change_DataRecording_S5) != 0)
+        {
+          Option_step[tam + change_datarecording_position] = change_datarecording_position;
+          DataRecording_step[i] = getValue(Env_DataRecording_Value_S5);
+        }
+        else
+        {
+          Option_step[tam + change_datarecording_position] = 0;
+          DataRecording_step[i] = default_data_recording;
+        }
+        
+        // change Weight Upper value
+        if(getValue(Env_Change_WeightUpper_S5) != 0)
+        {
+          Option_step[tam + change_weightUpper_position] = change_weightUpper_position;
+          weightUpper_Step[i] = getValue(Env_WeightUpper_Value_S5);
+        }
+        else
+        {
+          Option_step[tam + change_weightUpper_position] = 0;
+          weightUpper_Step[i] = occupant_weight_up;
+        }
+        
+        // change Weight Lower value
+        if(getValue(Env_Change_WeightLower_S5) != 0)
+        {
+          Option_step[tam + change_weightLower_position] = change_weightLower_position;
+          weightLower_Step[i] = getValue(Env_WeightLower_Value_S5);
+        }
+        else
+        {
+          Option_step[tam + change_weightLower_position] = 0;
+          weightLower_Step[i] = occupant_weight_low;
+        }
+        
+        // change vehicle ID value
+        if(getValue(Env_Change_VehicleID_S5) != 0)
+        {
+          Option_step[tam + change_vehicleId_position] = change_datarecording_position;
+          vehicleID1_step[i] = getValue(Env_VehicleIDUpper_Value_S5);
+          vehicleID2_step[i] = getValue(Env_VehicleIDLower_Value_S5); 
+        }
+        else
+        {
+          Option_step[tam + change_vehicleId_position] = 0;
+          vehicleID1_step[i] = vehicleID1;
+          vehicleID2_step[i] = vehicleID2;
+        }
+        
+        // change Status DiagReq value
+        if((getValue(Env_Change_StatusDiagReq_S5) != 0) && 
+          ((rb_ocs_isClearCmdEnabled != 0) || (rb_ocs_isCalibCmdEnabled != 0) || (rb_ocs_isCALChkCmdEnabled != 0)))
+          /* If get */
+        {
+          Option_step[tam + change_statusDiagCmd_position] = change_statusDiagCmd_position;
+          statusDiag_step[i] = getValue(Env_StatusDiagReq_Value_S5);
+        }
+        else
+        {
+          Option_step[tam + change_statusDiagCmd_position] = 0;
+          statusDiag_step[i] = calChkStatusForReqStart_u8;
+          putValue(Env_Change_StatusDiagReq_S5, 0);
+        }
+        
+        // change Cause of flt DiagReq value
+        if((getValue(Env_Change_CauseOfFltDiagReq_S5) != 0) &&
+          ((rb_ocs_isCalibCmdEnabled != 0) || (rb_ocs_isCALChkCmdEnabled != 0)))
+        {
+          Option_step[tam + change_causeOfFltDiagCmd_position] = change_causeOfFltDiagCmd_position;
+          causeOfFltDiag_step[i] = getValue(Env_CauseOfFltDiagReq_Value_S5);
+        }
+        else
+        {
+          Option_step[tam + change_causeOfFltDiagCmd_position] = 0;
+          causeOfFltDiag_step[i] = calChkCauseOfFltForReqStart_u8;
+          putValue(Env_Change_CauseOfFltDiagReq_S5, 0);
+        }
+      }
+      
+      if(i == 5)  //step 6
+      {
+        tam = i * number_of_element_one_step;
+        Option_step[tam + number_of_response_position] = getValue(EnvFaultCombN6);
+        if((Option_step[tam + number_of_response_position] == 0)||(getValue(Env_F_Nor_S6) == 1)) //if don't set times of step 6 or set normal sending in step 6
+        {
+          putValue(Env_F_T_out_T2_S6,0);
+          putValue(Env_F_T_out_T4_S6,0);
+          putValue(Env_F_Abnor_HD_S6,0);
+          putValue(Env_F_Abnor_len_S6,0);
+          putValue(Env_F_Abnor_ID_S6,0);
+          putValue(Env_F_Abnor_CS_S6,0);
+          putValue(Env_WrongParity_S6,0);
+        }
+        
+        if(Option_step[tam + number_of_response_position] == 0)            //if don't set times of step 6
+        {
+          putValue(Env_F_Nor_S6,0);
+          putValue(Env_Change_Occupant_S6,0);
+          putValue(Env_Change_Fault_Infor_S6,0);
+          putValue(Env_Change_Buckle_S6,0);
+          putValue(Env_Change_DataRecording_S6,0);
+          putValue(Env_Change_WeightUpper_S6, 0);
+          putValue(Env_Change_WeightLower_S6, 0);
+          putValue(Env_Change_VehicleID_S6, 0);
+          putValue(Env_Change_StatusDiagReq_S6, 0);
+          putValue(Env_Change_CauseOfFltDiagReq_S6, 0);
+        }
+
+        if(getValue(Env_F_Nor_S6) == 1) //if set normal sending
+        {
+          Option_step[tam + normal_option_position] = normal_option_position;
+        }
+        else
+        {
+          //don't set normal sending
+          Option_step[tam + normal_option_position] = 0;
+          
+          // set T2 time out error
+          if( getValue(Env_F_T_out_T2_S6) != 0)
+            Option_step[tam + T2_timeout_position] = T2_timeout_position;
+          else 
+            Option_step[tam + T2_timeout_position] = 0;
+      
+          //set header error
+          if( getValue(Env_F_Abnor_HD_S6) != 0)
+            Option_step[tam + header_error_position] = header_error_position;
+          else 
+            Option_step[tam + header_error_position] = 0;
+      
+          //set lenght error
+          if( getValue(Env_F_Abnor_len_S6) != 0)
+            Option_step[tam + length_error_position] = length_error_position;
+          else
+            Option_step[tam + length_error_position] = 0;
+    
+          //set id error
+          if(getValue(Env_F_Abnor_ID_S6) != 0)
+            Option_step[tam + id_error_position] = id_error_position;
+          else
+            Option_step[tam + id_error_position] = 0;
+      
+          //set checksum error
+          if( getValue(Env_F_Abnor_CS_S6) != 0)
+            Option_step[tam + checksum_error_position] = checksum_error_position;
+          else
+            Option_step[tam + checksum_error_position] = 0;
+      
+          //set T4 Timeout error
+          if( getValue(Env_F_T_out_T4_S6) != 0)
+           Option_step[tam + t4_timeout_position] = t4_timeout_position;
+          else
+            Option_step[tam + t4_timeout_position] = 0; 
+            
+          // set wrong parity
+          if( getValue(Env_WrongParity_S6) != 0)
+            Option_step[tam + wrong_parity_position] = wrong_parity_position;
+          else
+            Option_step[tam + wrong_parity_position] = 0;
+        }
+        // change occupant value
+        if( getValue(Env_Change_Occupant_S6) != 0)
+        {
+          Option_step[tam + change_occupant_position] = change_occupant_position;
+          Occupant_step[i] = getValue(Env_Occupant_Value_S6);
+        }
+        else
+        {
+          Option_step[tam + change_occupant_position] = 0;
+          Occupant_step[i] = default_occupant_status;
+        }
+        
+        // change fault information value
+        if( getValue(Env_Change_Fault_Infor_S6) != 0)
+        {
+          Option_step[tam + change_fault_info_position] = change_fault_info_position;
+          Fault_infor_step[i] = getValue(Env_Fault_Infor_S6);
+        }
+        else
+        {
+          Option_step[tam + change_fault_info_position] = 0;
+          Fault_infor_step[i] = default_fault_infor;
+        }
+        
+        // change buckle SW value
+        if( getValue(Env_Change_Buckle_S6) != 0)
+        {
+          Option_step[tam + change_buckle_position] = change_buckle_position;
+          Buckle_step[i] = getValue(Env_Buckle_Value_S6);
+        }
+        else
+        {
+          Option_step[tam + change_buckle_position] = 0;
+          Buckle_step[i] = default_buckle_sw;
+        }
+        
+        // change Data Recording value
+        if( getValue(Env_Change_DataRecording_S6) != 0)
+        {
+          Option_step[tam + change_datarecording_position] = change_datarecording_position;
+          DataRecording_step[i] = getValue(Env_DataRecording_Value_S6);
+        }
+        else
+        {
+          Option_step[tam + change_datarecording_position] = 0;
+          DataRecording_step[i] = default_data_recording;
+        }
+        
+        // change Weight Upper value
+        if(getValue(Env_Change_WeightUpper_S6) != 0)
+        {
+          Option_step[tam + change_weightUpper_position] = change_weightUpper_position;
+          weightUpper_Step[i] = getValue(Env_WeightUpper_Value_S6);
+        }
+        else
+        {
+          Option_step[tam + change_weightUpper_position] = 0;
+          weightUpper_Step[i] = occupant_weight_up;
+        }
+        
+        // change Weight Lower value
+        if(getValue(Env_Change_WeightLower_S6) != 0)
+        {
+          Option_step[tam + change_weightLower_position] = change_weightLower_position;
+          weightLower_Step[i] = getValue(Env_WeightLower_Value_S6);
+        }
+        else
+        {
+          Option_step[tam + change_weightLower_position] = 0;
+          weightLower_Step[i] = occupant_weight_low;
+        }
+        
+        // change vehicle ID value
+        if(getValue(Env_Change_VehicleID_S6) != 0)
+        {
+          Option_step[tam + change_vehicleId_position] = change_datarecording_position;
+          vehicleID1_step[i] = getValue(Env_VehicleIDUpper_Value_S6);
+          vehicleID2_step[i] = getValue(Env_VehicleIDLower_Value_S6); 
+        }
+        else
+        {
+          Option_step[tam + change_vehicleId_position] = 0;
+          vehicleID1_step[i] = vehicleID1;
+          vehicleID2_step[i] = vehicleID2;
+        }
+        
+        // change Status DiagReq value
+        if((getValue(Env_Change_StatusDiagReq_S6) != 0) && 
+          ((rb_ocs_isClearCmdEnabled != 0) || (rb_ocs_isCalibCmdEnabled != 0) || (rb_ocs_isCALChkCmdEnabled != 0)))
+          /* If get */
+        {
+          Option_step[tam + change_statusDiagCmd_position] = change_statusDiagCmd_position;
+          statusDiag_step[i] = getValue(Env_StatusDiagReq_Value_S6);
+        }
+        else
+        {
+          Option_step[tam + change_statusDiagCmd_position] = 0;
+          statusDiag_step[i] = calChkStatusForReqStart_u8;
+          putValue(Env_Change_StatusDiagReq_S6, 0);
+        }
+        
+        // change Cause of flt DiagReq value
+        if((getValue(Env_Change_CauseOfFltDiagReq_S6) != 0) &&
+          ((rb_ocs_isCalibCmdEnabled != 0) || (rb_ocs_isCALChkCmdEnabled != 0)))
+        {
+          Option_step[tam + change_causeOfFltDiagCmd_position] = change_causeOfFltDiagCmd_position;
+          causeOfFltDiag_step[i] = getValue(Env_CauseOfFltDiagReq_Value_S6);
+        }
+        else
+        {
+          Option_step[tam + change_causeOfFltDiagCmd_position] = 0;
+          causeOfFltDiag_step[i] = calChkCauseOfFltForReqStart_u8;
+          putValue(Env_Change_CauseOfFltDiagReq_S6, 0);
+        }
+      }
+      
+      if(i == 6) 
+      /* Step 7 */
+      {
+        tam = i*number_of_element_one_step;
+        Option_step[tam + number_of_response_position] = getValue(EnvFaultCombN7);
+        if((Option_step[tam + number_of_response_position] == 0)||(getValue(Env_F_Nor_S7) == 1)) //if don't set times of step 7 or set normal sending in step 7
+        {
+          putValue(Env_F_T_out_T2_S7,0);
+          putValue(Env_F_T_out_T4_S7,0);
+          putValue(Env_F_Abnor_HD_S7,0);
+          putValue(Env_F_Abnor_len_S7,0);
+          putValue(Env_F_Abnor_ID_S7,0);
+          putValue(Env_F_Abnor_CS_S7,0);
+          putValue(Env_WrongParity_S7,0);
+        }
+        
+        if(Option_step[tam + number_of_response_position] == 0)            //if don't set times of step 7
+        {
+          putValue(Env_F_Nor_S7,0);
+          putValue(Env_Change_Occupant_S7,0);
+          putValue(Env_Change_Fault_Infor_S7,0);
+          putValue(Env_Change_Buckle_S7,0);
+          putValue(Env_Change_DataRecording_S7,0);
+          putValue(Env_Change_WeightUpper_S7, 0);
+          putValue(Env_Change_WeightLower_S7, 0);
+          putValue(Env_Change_VehicleID_S7, 0);
+          putValue(Env_Change_StatusDiagReq_S7, 0);
+          putValue(Env_Change_CauseOfFltDiagReq_S7, 0);
+        }
+
+        if(getValue(Env_F_Nor_S7) == 1) //if set normal sending
+        {
+          Option_step[tam + normal_option_position] = normal_option_position;
+        }
+        else
+        {
+          //don't set normal sending
+          Option_step[tam + normal_option_position] = 0;
+          
+          // set T2 time out error
+          if( getValue(Env_F_T_out_T2_S7) != 0)
+            Option_step[tam + T2_timeout_position] = T2_timeout_position;
+          else 
+            Option_step[tam + T2_timeout_position] = 0;
+      
+          //set header error
+          if( getValue(Env_F_Abnor_HD_S7) != 0)
+            Option_step[tam + header_error_position] = header_error_position;
+          else 
+            Option_step[tam + header_error_position] = 0;
+      
+          //set lenght error
+          if( getValue(Env_F_Abnor_len_S7) != 0)
+            Option_step[tam + length_error_position] = length_error_position;
+          else
+            Option_step[tam + length_error_position] = 0;
+    
+          //set id error
+          if(getValue(Env_F_Abnor_ID_S7) != 0)
+            Option_step[tam + id_error_position] = id_error_position;
+          else
+            Option_step[tam + id_error_position] = 0;
+      
+          //set checksum error
+          if( getValue(Env_F_Abnor_CS_S7) != 0)
+            Option_step[tam + checksum_error_position] = checksum_error_position;
+          else
+            Option_step[tam + checksum_error_position] = 0;
+      
+          //set T4 Timeout error
+          if( getValue(Env_F_T_out_T4_S7) != 0)
+           Option_step[tam + t4_timeout_position] = t4_timeout_position;
+          else
+            Option_step[tam + t4_timeout_position] = 0; 
+            
+          // set wrong parity
+          if( getValue(Env_WrongParity_S7) != 0)
+            Option_step[tam + wrong_parity_position] = wrong_parity_position;
+          else
+            Option_step[tam + wrong_parity_position] = 0;
+        }
+        // change occupant value
+        if( getValue(Env_Change_Occupant_S7) != 0)
+        {
+          Option_step[tam + change_occupant_position] = change_occupant_position;
+          Occupant_step[i] = getValue(Env_Occupant_Value_S7);
+        }
+        else
+        {
+          Option_step[tam + change_occupant_position] = 0;
+          Occupant_step[i] = default_occupant_status;
+        }
+        
+        // change fault information value
+        if( getValue(Env_Change_Fault_Infor_S7) != 0)
+        {
+          Option_step[tam + change_fault_info_position] = change_fault_info_position;
+          Fault_infor_step[i] = getValue(Env_Fault_Infor_S7);
+        }
+        else
+        {
+          Option_step[tam + change_fault_info_position] = 0;
+          Fault_infor_step[i] = default_fault_infor;
+        }
+        
+        // change buckle SW value
+        if( getValue(Env_Change_Buckle_S7) != 0)
+        {
+          Option_step[tam + change_buckle_position] = change_buckle_position;
+          Buckle_step[i] = getValue(Env_Buckle_Value_S7);
+        }
+        else
+        {
+          Option_step[tam + change_buckle_position] = 0;
+          Buckle_step[i] = default_buckle_sw;
+        }
+        
+        // change Data Recording value
+        if( getValue(Env_Change_DataRecording_S7) != 0)
+        {
+          Option_step[tam + change_datarecording_position] = change_datarecording_position;
+          DataRecording_step[i] = getValue(Env_DataRecording_Value_S7);
+        }
+        else
+        {
+          Option_step[tam + change_datarecording_position] = 0;
+          DataRecording_step[i] = default_data_recording;
+        }
+        
+        // change Weight Upper value
+        if(getValue(Env_Change_WeightUpper_S7) != 0)
+        {
+          Option_step[tam + change_weightUpper_position] = change_weightUpper_position;
+          weightUpper_Step[i] = getValue(Env_WeightUpper_Value_S7);
+        }
+        else
+        {
+          Option_step[tam + change_weightUpper_position] = 0;
+          weightUpper_Step[i] = occupant_weight_up;
+        }
+        
+        // change Weight Lower value
+        if(getValue(Env_Change_WeightLower_S7) != 0)
+        {
+          Option_step[tam + change_weightLower_position] = change_weightLower_position;
+          weightLower_Step[i] = getValue(Env_WeightLower_Value_S7);
+        }
+        else
+        {
+          Option_step[tam + change_weightLower_position] = 0;
+          weightLower_Step[i] = occupant_weight_low;
+        }
+        
+        // change vehicle ID value
+        if(getValue(Env_Change_VehicleID_S7) != 0)
+        {
+          Option_step[tam + change_vehicleId_position] = change_datarecording_position;
+          vehicleID1_step[i] = getValue(Env_VehicleIDUpper_Value_S7);
+          vehicleID2_step[i] = getValue(Env_VehicleIDLower_Value_S7); 
+        }
+        else
+        {
+          Option_step[tam + change_vehicleId_position] = 0;
+          vehicleID1_step[i] = vehicleID1;
+          vehicleID2_step[i] = vehicleID2;
+        }
+        
+        // change Status DiagReq value
+        if((getValue(Env_Change_StatusDiagReq_S7) != 0) && 
+          ((rb_ocs_isClearCmdEnabled != 0) || (rb_ocs_isCalibCmdEnabled != 0) || (rb_ocs_isCALChkCmdEnabled != 0)))
+          /* If get */
+        {
+          Option_step[tam + change_statusDiagCmd_position] = change_statusDiagCmd_position;
+          statusDiag_step[i] = getValue(Env_StatusDiagReq_Value_S7);
+        }
+        else
+        {
+          Option_step[tam + change_statusDiagCmd_position] = 0;
+          statusDiag_step[i] = calChkStatusForReqStart_u8;
+          putValue(Env_Change_StatusDiagReq_S7, 0);
+        }
+        
+        // change Cause of flt DiagReq value
+        if((getValue(Env_Change_CauseOfFltDiagReq_S7) != 0) &&
+          ((rb_ocs_isCalibCmdEnabled != 0) || (rb_ocs_isCALChkCmdEnabled != 0)))
+        {
+          Option_step[tam + change_causeOfFltDiagCmd_position] = change_causeOfFltDiagCmd_position;
+          causeOfFltDiag_step[i] = getValue(Env_CauseOfFltDiagReq_Value_S7);
+        }
+        else
+        {
+          Option_step[tam + change_causeOfFltDiagCmd_position] = 0;
+          causeOfFltDiag_step[i] = calChkCauseOfFltForReqStart_u8;
+          putValue(Env_Change_CauseOfFltDiagReq_S7, 0);
+        }
+      }
+      
+      if(i==7)  //step 8
+      {
+        tam = i*number_of_element_one_step;
+        Option_step[tam + number_of_response_position] = getValue(EnvFaultCombN8);
+        if((Option_step[tam + number_of_response_position] == 0)||(getValue(Env_F_Nor_S8) == 1)) //if don't set times of step 8 or set normal sending in step 8
+        {
+          putValue(Env_F_T_out_T2_S8,0);
+          putValue(Env_F_T_out_T4_S8,0);
+          putValue(Env_F_Abnor_HD_S8,0);
+          putValue(Env_F_Abnor_len_S8,0);
+          putValue(Env_F_Abnor_ID_S8,0);
+          putValue(Env_F_Abnor_CS_S8,0);
+          putValue(Env_WrongParity_S8,0);
+        }
+        
+        if(Option_step[tam + number_of_response_position] == 0)            //if don't set times of step 8
+        {
+          putValue(Env_F_Nor_S8,0);
+          putValue(Env_Change_Occupant_S8,0);
+          putValue(Env_Change_Fault_Infor_S8,0);
+          putValue(Env_Change_Buckle_S8,0);
+          putValue(Env_Change_DataRecording_S8,0);
+          putValue(Env_Change_WeightUpper_S8, 0);
+          putValue(Env_Change_WeightLower_S8, 0);
+          putValue(Env_Change_VehicleID_S8, 0);
+          putValue(Env_Change_StatusDiagReq_S8, 0);
+          putValue(Env_Change_CauseOfFltDiagReq_S8, 0);
+        }
+
+        if(getValue(Env_F_Nor_S8) == 1) //if set normal sending
+        {
+          Option_step[tam + normal_option_position] = normal_option_position;
+        }
+        else
+        {
+          //don't set normal sending
+          Option_step[tam + normal_option_position] = 0;
+          
+          // set T2 time out error
+          if( getValue(Env_F_T_out_T2_S8) != 0)
+            Option_step[tam + T2_timeout_position] = T2_timeout_position;
+          else 
+            Option_step[tam + T2_timeout_position] = 0;
+      
+          //set header error
+          if( getValue(Env_F_Abnor_HD_S8) != 0)
+            Option_step[tam + header_error_position] = header_error_position;
+          else 
+            Option_step[tam + header_error_position] = 0;
+      
+          //set lenght error
+          if( getValue(Env_F_Abnor_len_S8) != 0)
+            Option_step[tam + length_error_position] = length_error_position;
+          else
+            Option_step[tam + length_error_position] = 0;
+    
+          //set id error
+          if(getValue(Env_F_Abnor_ID_S8) != 0)
+            Option_step[tam + id_error_position] = id_error_position;
+          else
+            Option_step[tam + id_error_position] = 0;
+      
+          //set checksum error
+          if( getValue(Env_F_Abnor_CS_S8) != 0)
+            Option_step[tam + checksum_error_position] = checksum_error_position;
+          else
+            Option_step[tam + checksum_error_position] = 0;
+      
+          //set T4 Timeout error
+          if( getValue(Env_F_T_out_T4_S8) != 0)
+           Option_step[tam + t4_timeout_position] = t4_timeout_position;
+          else
+            Option_step[tam + t4_timeout_position] = 0; 
+            
+          // set wrong parity
+          if( getValue(Env_WrongParity_S8) != 0)
+            Option_step[tam + wrong_parity_position] = wrong_parity_position;
+          else
+            Option_step[tam + wrong_parity_position] = 0;
+        }
+        // change occupant value
+        if( getValue(Env_Change_Occupant_S8) != 0)
+        {
+          Option_step[tam + change_occupant_position] = change_occupant_position;
+          Occupant_step[i] = getValue(Env_Occupant_Value_S8);
+        }
+        else
+        {
+          Option_step[tam + change_occupant_position] = 0;
+          Occupant_step[i] = default_occupant_status;
+        }
+        
+        // change fault information value
+        if( getValue(Env_Change_Fault_Infor_S8) != 0)
+        {
+          Option_step[tam + change_fault_info_position] = change_fault_info_position;
+          Fault_infor_step[i] = getValue(Env_Fault_Infor_S8);
+        }
+        else
+        {
+          Option_step[tam + change_fault_info_position] = 0;
+          Fault_infor_step[i] = default_fault_infor;
+        }
+        
+        // change buckle SW value
+        if( getValue(Env_Change_Buckle_S8) != 0)
+        {
+          Option_step[tam + change_buckle_position] = change_buckle_position;
+          Buckle_step[i] = getValue(Env_Buckle_Value_S8);
+        }
+        else
+        {
+          Option_step[tam + change_buckle_position] = 0;
+          Buckle_step[i] = default_buckle_sw;
+        }
+        
+        // change Data Recording value
+        if( getValue(Env_Change_DataRecording_S8) != 0)
+        {
+          Option_step[tam + change_datarecording_position] = change_datarecording_position;
+          DataRecording_step[i] = getValue(Env_DataRecording_Value_S8);
+        }
+        else
+        {
+          Option_step[tam + change_datarecording_position] = 0;
+          DataRecording_step[i] = default_data_recording;
+        }
+        
+        // change Weight Upper value
+        if(getValue(Env_Change_WeightUpper_S8) != 0)
+        {
+          Option_step[tam + change_weightUpper_position] = change_weightUpper_position;
+          weightUpper_Step[i] = getValue(Env_WeightUpper_Value_S8);
+        }
+        else
+        {
+          Option_step[tam + change_weightUpper_position] = 0;
+          weightUpper_Step[i] = occupant_weight_up;
+        }
+        
+        // change Weight Lower value
+        if(getValue(Env_Change_WeightLower_S8) != 0)
+        {
+          Option_step[tam + change_weightLower_position] = change_weightLower_position;
+          weightLower_Step[i] = getValue(Env_WeightLower_Value_S8);
+        }
+        else
+        {
+          Option_step[tam + change_weightLower_position] = 0;
+          weightLower_Step[i] = occupant_weight_low;
+        }
+        
+        // change vehicle ID value
+        if(getValue(Env_Change_VehicleID_S8) != 0)
+        {
+          Option_step[tam + change_vehicleId_position] = change_datarecording_position;
+          vehicleID1_step[i] = getValue(Env_VehicleIDUpper_Value_S8);
+          vehicleID2_step[i] = getValue(Env_VehicleIDLower_Value_S8); 
+        }
+        else
+        {
+          Option_step[tam + change_vehicleId_position] = 0;
+          vehicleID1_step[i] = vehicleID1;
+          vehicleID2_step[i] = vehicleID2;
+        }
+        
+        // change Status DiagReq value
+        if((getValue(Env_Change_StatusDiagReq_S8) != 0) && 
+          ((rb_ocs_isClearCmdEnabled != 0) || (rb_ocs_isCalibCmdEnabled != 0) || (rb_ocs_isCALChkCmdEnabled != 0)))
+          /* If get */
+        {
+          Option_step[tam + change_statusDiagCmd_position] = change_statusDiagCmd_position;
+          statusDiag_step[i] = getValue(Env_StatusDiagReq_Value_S8);
+        }
+        else
+        {
+          Option_step[tam + change_statusDiagCmd_position] = 0;
+          statusDiag_step[i] = calChkStatusForReqStart_u8;
+          putValue(Env_Change_StatusDiagReq_S8, 0);
+        }
+        
+        // change Cause of flt DiagReq value
+        if((getValue(Env_Change_CauseOfFltDiagReq_S8) != 0) &&
+          ((rb_ocs_isCalibCmdEnabled != 0) || (rb_ocs_isCALChkCmdEnabled != 0)))
+        {
+          Option_step[tam + change_causeOfFltDiagCmd_position] = change_causeOfFltDiagCmd_position;
+          causeOfFltDiag_step[i] = getValue(Env_CauseOfFltDiagReq_Value_S8);
+        }
+        else
+        {
+          Option_step[tam + change_causeOfFltDiagCmd_position] = 0;
+          causeOfFltDiag_step[i] = calChkCauseOfFltForReqStart_u8;
+          putValue(Env_Change_CauseOfFltDiagReq_S8, 0);
+        }
+      }
+      
+    }
+    /* Step 5: Print Opt and data array to System panel */
+    writeLineEx(0,kINFO, "************************* input step *************************");
+    writeLineEx(0,kINFO, "Option_step9");
+    for (i = 0; i < number_of_step; ++i)
+    {
+      writeLineEx(0,kINFO, "Option_step %d = ", (i+1));
+      tam = (i+1) * number_of_element_one_step;
+      for (j = i * number_of_element_one_step; j < ((i+1) * number_of_element_one_step); ++j)
+      {
+        writeEx(0,kINFO, "%d, ", Option_step[j]);
+      }
+    }
+    
+//    writeLineEx(0,kINFO, "Occupant_step = ");
+//    for (i = 0; i < number_of_step; ++i)
+//    {
+//      writeEx(0,kINFO, "%x, ", Occupant_step[i]);
+//    }
+//    
+//    writeLineEx(0,kINFO, "Fault_infor_step = ");
+//    for (i = 0; i < number_of_step; ++i)
+//    {
+//      writeEx(0,kINFO, "%x, ", Fault_infor_step[i]);
+//    }
+//    
+//    writeLineEx(0,kINFO, "Buckle_step = ");
+//    for (i = 0; i < number_of_step; ++i)
+//    {
+//      writeEx(0,kINFO, "%x, ", Buckle_step[i]);
+//    }
+    
+//    writeLineEx(0,kINFO, "DataRecording_step = ");
+//    for (i = 0; i < number_of_step; ++i)
+//    {
+//      writeEx(0,kINFO, "%x, ", DataRecording_step[i]);
+//    }
+//    
+    writeLineEx(0,kINFO, "Occupant Weight (Upper) = ");
+    for (i = 0; i < number_of_step; ++i)
+    {
+      writeEx(0,kINFO, "%x, ", weightUpper_Step[i]);
+    }
+    
+    writeLineEx(0,kINFO, "Occupant Weight (Lower) = ");
+    for (i = 0; i < number_of_step; ++i)
+    {
+      writeEx(0,kINFO, "%x, ", weightLower_Step[i]);
+    }
+//    
+//    writeLineEx(0,kINFO, "Vehicle ID (Upper) = ");
+//    for (i = 0; i < number_of_step; ++i)
+//    {
+//      writeEx(0,kINFO, "%x, ", vehicleID1_step[i]);
+//    }
+//    
+//    writeLineEx(0,kINFO, "Vehicle ID (Lower) = ");
+//    for (i = 0; i < number_of_step; ++i)
+//    {
+//      writeEx(0,kINFO, "%x, ", vehicleID2_step[i]);
+//    }
+    
+//    writeLineEx(0,kINFO, "Status for DiagCmd (Clear, Calib, CALChkCmd) = ");
+//    for (i = 0; i < number_of_step; ++i)
+//    {
+//      writeEx(0,kINFO, "%x, ", statusDiag_step[i]);
+//    }
+//    
+//    writeLineEx(0,kINFO, "Cause of flt for DiagCmd (Calib, CALChkCmd) = ");
+//    for (i = 0; i < number_of_step; ++i)
+//    {
+//      writeEx(0,kINFO, "%x, ", causeOfFltDiag_step[i]);
+//    }
+    writeLineEx(0,kINFO, "temporary_step_begin = %d",temporary_step_begin);
+    writeLineEx(0,kINFO, "temporary_step_end = %d",temporary_step_end);
+    writeLineEx(0,kINFO, "***************************************************************");
+    
+    number_of_used_steps=0;
+    a=0;
+    
+    set_normal_s1 = 0;
+    set_normal_s2 = 0;
+    set_normal_s3 = 0;
+    set_normal_s4 = 0;
+    set_normal_s5 = 0;
+    set_normal_s6 = 0;
+    set_normal_s7 = 0;
+    set_normal_s8 = 0;
+    
+    /* Step 6: Check empty step and remove it, reallocate step */
+    for(i = 0; i < number_of_step; i++)
+    { 
+      allow_set_normal = 0;
+      count_option_fault = 0;
+      count_option_change_value = 0;
+      /* Reset variables when each loop */
+      tam = a*number_of_element_one_step;
+
+
+      // count number of option_fault and option_change_value, which is enabled in one step
+      for(b = (tam+1); b < (tam+number_of_element_one_step); b++)
+      {
+        if(Option_step[b] != 0)
+        /* if Option is enabled */
+        { 
+          if((Option_step[b] == change_occupant_position)||(Option_step[b]==change_fault_info_position) || 
+            (Option_step[b]==change_buckle_position)||(Option_step[b]==change_datarecording_position) || (Option_step[b]==change_weightUpper_position) ||
+            (Option_step[b]==change_weightLower_position) || (Option_step[b]==change_vehicleId_position) || (Option_step[b]==change_statusDiagCmd_position) ||
+            (Option_step[b]==change_causeOfFltDiagCmd_position))
+          /* If current option is value */
+          {
+            count_option_change_value++;
+          }
+          else
+          /* If current option is fault */
+          {
+            count_option_fault++;
+          }
+        }
+        else
+        {
+          /* Do nothing */
+        }
+      }
+       
+      /* Use case: User forget set Normal but only set */
+      if((count_option_change_value != 0) && (count_option_fault == 0))
+      /* If there is not have fault opt, but value opt is enabled */
+      {
+        if((i == 0)&&(getValue(Env_F_Nor_S1) == 0))
+        /* If Normal Opt of S1 is not enable */
+        {
+          putValue(Env_F_Nor_S1,1);
+          set_normal_s1 = 1;
+        }
+        else if((i == 1)&&(getValue(Env_F_Nor_S2) == 0))
+        {
+          putValue(Env_F_Nor_S2,1);
+          set_normal_s2 = 1;
+        }
+        else if((i == 2)&&(getValue(Env_F_Nor_S3) == 0))
+        {
+          putValue(Env_F_Nor_S3,1);
+          set_normal_s3 = 1;
+        }
+        else if((i == 3)&&(getValue(Env_F_Nor_S4) == 0))
+        {
+          putValue(Env_F_Nor_S4,1);
+          set_normal_s4 = 1;
+        }
+        else if((i == 4)&&(getValue(Env_F_Nor_S5) == 0))
+        {
+          putValue(Env_F_Nor_S5,1);
+          set_normal_s5 = 1;
+        }
+        else if((i == 5)&&(getValue(Env_F_Nor_S6) == 0))
+        {
+          putValue(Env_F_Nor_S6,1);
+          set_normal_s6 = 1;
+        }
+        else if((i == 6)&&(getValue(Env_F_Nor_S7) == 0))
+        {
+          putValue(Env_F_Nor_S7,1);
+          set_normal_s7 = 1;
+        }
+        else if((i == 7)&&(getValue(Env_F_Nor_S8) == 0))
+        {
+          putValue(Env_F_Nor_S8,1);
+          set_normal_s8 = 1;
+        }
+      }
+      
+      if((count_option_change_value == 0) && (count_option_fault == 0)) 
+      /* If there is not have fault opt and value opt enable, remove empty step */
+      {
+        /* Step 1: Shift to left 1 step, all opt */
+        for(j = a; j < number_of_step; j++)
+        {
+          tam = j * number_of_element_one_step;
+          for(k = tam; k < (tam+number_of_element_one_step); k++)
+          {
+            Option_step[k] = Option_step[k + number_of_element_one_step];
+          }
+          Occupant_step[j] = Occupant_step[j+1];
+          Fault_infor_step[j] = Fault_infor_step[j+1];
+          Buckle_step[j] = Buckle_step[j+1];
+          DataRecording_step[j] = DataRecording_step[j+1];
+        }
+
+        /* Step 2: Decrease loop step */
+        if((a+1) < temporary_step_begin)
+        /* If current step is less than start step of loop */
+        {
+          temporary_step_begin--;
+          temporary_step_end--;
+          /* Decrease begin step and end step of loop */
+        }
+        else if(((a+1) >= temporary_step_begin) && ((a+1) <= temporary_step_end))
+        /* If current step is empty and between begin step and end step of loop */
+        {
+          temporary_step_end--;
+        }
+        else
+        /* If current step is greater than end of loop */
+        {
+          /* Do nothing */
+        }
+        
+        /* Step3: Set number of response of current step is 0 */
+        if(i == 0)
+          putValue(EnvFaultCombN1,0);
+        else if(i == 1)
+          putValue(EnvFaultCombN2,0);
+        else if(i == 2)
+          putValue(EnvFaultCombN3,0);
+        else if(i == 3)
+          putValue(EnvFaultCombN4,0);
+        else if(i == 4)
+          putValue(EnvFaultCombN5,0);
+        else if(i == 5)
+          putValue(EnvFaultCombN6,0);
+        else if(i == 6)
+          putValue(EnvFaultCombN7,0);
+        else if(i == 7)
+          putValue(EnvFaultCombN8,0);
+      }
+      else
+      /* If step is not empty */
+      {
+        a++;
+        /* Increment step */
+        
+        if((temporary_step_begin <= (i+1)) && (temporary_step_end >= (i+1)))
+        /* If current step is empty and between begin step and end step of loop */
+        {
+          number_of_response_in_loop = number_of_response_in_loop + Option_step[tam];
+          /* Accummulation number of response between begin step and end step of loop */
+        }
+        else
+        {
+          /* Do nothing */
+        }
+        number_of_used_steps++;
+      }
+    }
+    
+//    writeLineEx(0,kINFO, "number_of_response_in_loop = %d",number_of_response_in_loop);
+//    writeLineEx(0,kINFO, "************************ processed step ************************");
+//    writeLineEx(0,kINFO, "Option_step1 = %d %d %d %d %d %d %d %d %d %d %d %d %d",Option_step[0], Option_step[1],Option_step[2],Option_step[3],Option_step[4],Option_step[5],Option_step[6],Option_step[7],Option_step[8], Option_step[9],Option_step[10],Option_step[11],Option_step[12]);
+//    writeLineEx(0,kINFO, "Option_step2 = %d %d %d %d %d %d %d %d %d %d %d %d %d",Option_step[13],Option_step[14],Option_step[15], Option_step[16],Option_step[17],Option_step[18],Option_step[19],Option_step[20],Option_step[21],Option_step[22],Option_step[23],Option_step[24],Option_step[25]);
+//    writeLineEx(0,kINFO, "Option_step3 = %d %d %d %d %d %d %d %d %d %d %d %d %d",Option_step[26],Option_step[27],Option_step[28], Option_step[29],Option_step[30],Option_step[31],Option_step[32],Option_step[33],Option_step[34],Option_step[35],Option_step[36],Option_step[37],Option_step[38]);
+//    writeLineEx(0,kINFO, "Option_step4 = %d %d %d %d %d %d %d %d %d %d %d %d %d",Option_step[39],Option_step[40],Option_step[41], Option_step[42],Option_step[43],Option_step[44],Option_step[45],Option_step[46],Option_step[47],Option_step[48],Option_step[49],Option_step[50],Option_step[51]);
+//    writeLineEx(0,kINFO, "Option_step5 = %d %d %d %d %d %d %d %d %d %d %d %d %d",Option_step[52],Option_step[53],Option_step[54], Option_step[55],Option_step[56],Option_step[57],Option_step[58],Option_step[59],Option_step[60],Option_step[61],Option_step[62],Option_step[63],Option_step[64]);
+//    writeLineEx(0,kINFO, "Option_step6 = %d %d %d %d %d %d %d %d %d %d %d %d %d",Option_step[65],Option_step[66],Option_step[67], Option_step[68],Option_step[69],Option_step[70],Option_step[71],Option_step[72],Option_step[73],Option_step[74],Option_step[75],Option_step[76],Option_step[77]);
+//    writeLineEx(0,kINFO, "Option_step7 = %d %d %d %d %d %d %d %d %d %d %d %d %d",Option_step[78],Option_step[79],Option_step[80], Option_step[81],Option_step[82],Option_step[83],Option_step[84],Option_step[85],Option_step[86],Option_step[87],Option_step[88],Option_step[89],Option_step[90]);
+//    writeLineEx(0,kINFO, "Option_step8 = %d %d %d %d %d %d %d %d %d %d %d %d %d",Option_step[91],Option_step[92],Option_step[93], Option_step[94],Option_step[95],Option_step[96],Option_step[97],Option_step[98],Option_step[99],Option_step[100],Option_step[101],Option_step[102],Option_step[103]);
+//    
+//    writeLineEx(0,kINFO, "Occupant_step = %x, %x, %x, %x, %x, %x, %x, %x",Occupant_step[0],Occupant_step[1],Occupant_step[2],Occupant_step[3], Occupant_step[4],Occupant_step[5],Occupant_step[6],Occupant_step[7]);
+//    writeLineEx(0,kINFO, "Fault_infor_step = %x, %x, %x, %x, %x, %x, %x, %x",Fault_infor_step[0],Fault_infor_step[1],Fault_infor_step[2],Fault_infor_step[3],Fault_infor_step[4],Fault_infor_step[5],Fault_infor_step[6],Fault_infor_step[7]);
+//    writeLineEx(0,kINFO, "Buckle_step = %x, %x, %x, %x, %x, %x, %x, %x",Buckle_step[0],Buckle_step[1],Buckle_step[2],Buckle_step[3],Buckle_step[4],Buckle_step[5],Buckle_step[6],Buckle_step[7]);
+//    writeLineEx(0,kINFO, "DataRecording_step = %x, %x, %x, %x, %x, %x, %x, %x",DataRecording_step[0],DataRecording_step[1],DataRecording_step[2],DataRecording_step[3],DataRecording_step[4],DataRecording_step[5],DataRecording_step[6],DataRecording_step[7]);
+//    writeLineEx(0,kINFO, "number_of_response_in_loop = %d",number_of_response_in_loop);
+//    writeLineEx(0,kINFO, "***************************************************************");
+    
+        /* Step 5: Print Opt and data array to System panel */
+    writeLineEx(0,kINFO, "************************* input step *************************");
+    writeLineEx(0,kINFO, "Option_step9");
+    for (i = 0; i < number_of_step; ++i)
+    {
+      writeLineEx(0,kINFO, "Option_step %d = ", (i+1));
+      tam = (i+1) * number_of_element_one_step;
+      for (j = i * number_of_element_one_step; j < ((i+1) * number_of_element_one_step); ++j)
+      {
+        writeEx(0,kINFO, "%d, ", Option_step[j]);
+      }
+    }
+    
+    writeLineEx(0,kINFO, "Status for DiagCmd (Clear, Calib, CALChkCmd) = ");
+    for (i = 0; i < number_of_step; ++i)
+    {
+      writeEx(0,kINFO, "%x, ", statusDiag_step[i]);
+    }
+    
+    writeLineEx(0,kINFO, "Cause of flt for DiagCmd (Calib, CALChkCmd) = ");
+    for (i = 0; i < number_of_step; ++i)
+    {
+      writeEx(0,kINFO, "%x, ", causeOfFltDiag_step[i]);
+    }
+    
+    allow_sending = 1;
+    putValue(Env_response_auto,allow_sending);
+    /* Make "Automatic Response" is light */
+    number_of_response_in_step = Option_step[number_of_response_position];
+    /* Get number of response in first step */
+    
+    //set up loop for changing value in status command
+    if ((use_loop_step != 0) && (getValue(Env_LoopTimes_Step) > number_of_response_in_loop))
+    {
+      looptimes_step = getValue(Env_LoopTimes_Step);
+      step_begin = temporary_step_begin;
+      step_end = temporary_step_end;
+      number_of_used_steps = number_of_used_steps - (step_end - step_begin);
+    }
+    else
+    {
+      use_loop_step = 0;
+      putValue(Env_Loop_Steps,0);
+      looptimes_step = 0;
+    }
+    writeLineEx(0,kINFO, "looptimes_step = %d",looptimes_step);
+    writeLineEx(0,kINFO, "number_of_used_steps = %d",number_of_used_steps);
+    writeLineEx(0,kINFO, "temporary_step_begin = %d",temporary_step_begin);
+    writeLineEx(0,kINFO, "temporary_step_end = %d",temporary_step_end);
+    writeLineEx(0,kINFO, "step_begin = %d",step_begin);
+    writeLineEx(0,kINFO, "step_end = %d",step_end);
+    writeLineEx(0,kINFO, "count_step = %d",count_step);
+    // clear reception and transmission display
+    putValue(EnvReceptionPortA,    gEmptyBuffer, 0);
+    putValue(EnvTransmissionPortA, gEmptyBuffer, 0);
+    gNumberOfReceivedBytes = 0;
+    count_cmd = 0;
+    start_observe = 1;
+    if (number_of_used_steps == 0)
+    {
+      writeLineEx(0,kINFO, "WRONG CONDITION OR NO INPUT IS SET");
+    }
+}
+
+on envVar Env_set_input_bt
+{
+  if(getValue(this)!=1)
+      return;
+  serial_address[0] = getValue(Env_Input_0);
+  serial_address[1] = getValue(Env_Input_1);
+  serial_address[2] = getValue(Env_Input_2);
+  serial_address[3] = getValue(Env_Input_3);
+  serial_address[4] = getValue(Env_Input_4);
+  serial_address[5] = getValue(Env_Input_5);
+  serial_address[6] = getValue(Env_Input_6);
+  serial_address[7] = getValue(Env_Input_7);
+  serial_address[8] = getValue(Env_Input_8);
+  serial_address[9] = getValue(Env_Input_9);
+  serial_address[10] = getValue(Env_Input_15); // S-FR
+  serial_address[11] = getValue(Env_Input_16);
+  serial_address[12] = getValue(Env_Input_17);
+  serial_address[13] = getValue(Env_Input_18);
+  serial_address[14] = getValue(Env_Input_19);
+  serial_address[15] = getValue(Env_Input_10); // S-RL
+  serial_address[16] = getValue(Env_Input_11);
+  serial_address[17] = getValue(Env_Input_12);
+  serial_address[18] = getValue(Env_Input_13);
+  serial_address[19] = getValue(Env_Input_14);
+  serial_address[20] = getValue(Env_Input_20);
+  serial_address[21] = getValue(Env_Input_21);
+  serial_address[22] = getValue(Env_Input_22);
+  serial_address[23] = getValue(Env_Input_23);
+  serial_address[24] = getValue(Env_Input_24);
+  
+  readDetailFltCode_address[0] = getValue(Env_Input_0_ReadFltCode);
+    readDetailFltCode_address[1] = getValue(Env_Input_1_ReadFltCode);
+    readDetailFltCode_address[2] = getValue(Env_Input_2_ReadFltCode);
+    readDetailFltCode_address[3] = getValue(Env_Input_3_ReadFltCode);
+    readDetailFltCode_address[4] = getValue(Env_Input_4_ReadFltCode);
+    readDetailFltCode_address[5] = getValue(Env_Input_5_ReadFltCode);
+    readDetailFltCode_address[6] = getValue(Env_Input_6_ReadFltCode);
+    readDetailFltCode_address[7] = getValue(Env_Input_7_ReadFltCode);
+    readDetailFltCode_address[8] = getValue(Env_Input_8_ReadFltCode);
+    readDetailFltCode_address[9] = getValue(Env_Input_9_ReadFltCode);
+    readDetailFltCode_address[10] = getValue(Env_Input_10_ReadFltCode); 
+    readDetailFltCode_address[11] = getValue(Env_Input_11_ReadFltCode);
+    readDetailFltCode_address[12] = getValue(Env_Input_12_ReadFltCode);
+    readDetailFltCode_address[13] = getValue(Env_Input_13_ReadFltCode);
+    readDetailFltCode_address[14] = getValue(Env_Input_14_ReadFltCode);
+    readDetailFltCode_address[15] = getValue(Env_Input_15_ReadFltCode);
+    readDetailFltCode_address[16] = getValue(Env_Input_16_ReadFltCode);
+    readDetailFltCode_address[17] = getValue(Env_Input_17_ReadFltCode);
+    readDetailFltCode_address[18] = getValue(Env_Input_18_ReadFltCode);
+    readDetailFltCode_address[19] = getValue(Env_Input_19_ReadFltCode);
+    readDetailFltCode_address[20] = getValue(Env_Input_20_ReadFltCode);
+    readDetailFltCode_address[21] = getValue(Env_Input_21_ReadFltCode);
+    readDetailFltCode_address[22] = getValue(Env_Input_22_ReadFltCode);
+    readDetailFltCode_address[23] = getValue(Env_Input_23_ReadFltCode);
+    readDetailFltCode_address[24] = getValue(Env_Input_24_ReadFltCode);
+    readDetailFltCode_address[25] = getValue(Env_Input_25_ReadFltCode);
+    readDetailFltCode_address[26] = getValue(Env_Input_26_ReadFltCode);
+    readDetailFltCode_address[27] = getValue(Env_Input_27_ReadFltCode);
+    /* Get Env of Read Detail flt code information to local */
+  
+  for (i = 0; i < 25; ++i)
+  {
+    rb_ocs_memoryOCSSimulate_au8[i] = serial_address[i];
+  }
+  for (i = 0; i < 28; ++i)
+  {
+    rb_ocs_memoryOCSSimulate_au8[i + 0x19] = readDetailFltCode_address[i];
+  }
+  
+  vehicleID1 = getValue(Env_input_vehicleID_1);
+  vehicleID2 = getValue(Env_input_vehicleID_2);
+  default_occupant_status = getValue(Env_input_occupant_status);
+  occupant_weight_up = getValue(Env_input_occupant_weight_upper);
+  occupant_weight_low = getValue(Env_input_occupant_weight_lower);
+  default_fault_infor = getValue(Env_input_fault_infor);
+  default_buckle_sw = getValue(Env_input_buckle_sw_status);
+  default_data_recording = getValue(Env_input_Default_DataRecording);
+  
+  clearedStatusForReqStart_u8 = getValue(Env_ClearCmdStart_Status);
+  /* Set default value to clearedStatusForReqStart_u8 variable from Env variable */
+  clearedStatusForReqStatus_u8 = getValue(Env_ClearCmdStatus_Status);  
+  /* Set default value to clearedStatusForReqStatus_u8 variable from Env variable */
+  clearedStatusNumberInProc_u8 = getValue(Env_ClearCmdStatus_NoInProc);
+  /* Set default value to clearedStatusForReqStatus_u8 variable from Env variable */
+  calibStatusForReqStart_u8 = getValue(Env_CalibCmdStart_Status);
+  /* Set default value to clearedStatusForReqStatus_u8 variable from Env variable */
+  calibCauseOfFltForReqStart_u8 = getValue(Env_CalibCmdStart_CauseOfFlt);
+  /* Set default value to clearedStatusForReqStatus_u8 variable from Env variable */
+  calibStatusForReqStatus_u8 = getValue(Env_CalibCmdStatus_Status);
+  /* Set default value to clearedStatusForReqStatus_u8 variable from Env variable */
+  calibCauseOfFltForReqStatus_u8 = getValue(Env_CalibCmdStatus_CauseOfFlt);
+  /* Set default value to clearedStatusForReqStatus_u8 variable from Env variable */
+  calibStatusNumberInProc_u8 = getValue(Env_CalibCmdStatus_NoInProc);
+  /* Set default value to clearedStatusForReqStatus_u8 variable from Env variable */
+  calChkStatusForReqStart_u8 = getValue(Env_CALChkCmdStart_Status);
+  /* Variable holds OCS-ECU CAL Check status of Response when A/B ECU transmits CALCheckCmd (Request to start) */
+  calChkCauseOfFltForReqStart_u8 = getValue(Env_CALChkCmdStart_CauseOfFlt);
+  /* Variable holds OCS-ECU CAL Check Cause of flt of Response when A/B ECU transmits CALCheckCmd (Request to start) */
+  calChkStatusForReqStatus_u8 = getValue(Env_CALChkCmdStatus_Status);
+  /* Variable holds OCS-ECU CAL Check status of Response when A/B ECU transmits CALCheckCmd (Request the status) */
+  calChkCauseOfFltForReqStatus_u8 = getValue(Env_CALChkCmdStatus_CauseOfFlt);
+  /* Variable holds OCS-ECU CAL Check Cause of flt of Response when A/B ECU transmits CALCheckCmd (Request the status) */
+  calChkStatusNumberInProc_u8 = getValue(Env_CALChkCmdStatus_NoInProc);
+  /* Variable holds number response, which has In Process status, when A/B ECU transmits CALCheckCmd (Request the status) */
+  
+  for(i=0;i<number_of_step+1;i++)
+  {
+    Occupant_step[i] = default_occupant_status;
+    Fault_infor_step[i] = default_fault_infor;
+    Buckle_step[i] = default_buckle_sw;
+    DataRecording_step[i] = default_data_recording;
+    weightUpper_Step[i] = occupant_weight_up;
+    weightLower_Step[i] = occupant_weight_low;
+    vehicleID1_step[i] = vehicleID1;
+    vehicleID2_step[i] = vehicleID2;
+    statusDiag_step[i] = calChkStatusForReqStart_u8;
+    causeOfFltDiag_step[i] = calChkCauseOfFltForReqStart_u8;
+  }
+}
+
+on envVar Env_start_responding
+{
+  if(getValue(this)!=1)
+      return;
+  //Turn on or Turn off Automatic Response Mode
+  if(allow_sending == 0)
+    allow_sending = 1;
+  else
+    allow_sending = 0;
+  putValue(Env_response_auto,allow_sending);
+  
+  serial_address[0] = getValue(Env_Input_0); // OCS-ECU
+  serial_address[1] = getValue(Env_Input_1);
+  serial_address[2] = getValue(Env_Input_2);
+  serial_address[3] = getValue(Env_Input_3);
+  serial_address[4] = getValue(Env_Input_4);
+  serial_address[5] = getValue(Env_Input_5); // S-FL
+  serial_address[6] = getValue(Env_Input_6);
+  serial_address[7] = getValue(Env_Input_7);
+  serial_address[8] = getValue(Env_Input_8);
+  serial_address[9] = getValue(Env_Input_9);
+  serial_address[10] = getValue(Env_Input_15); // S-FR
+  serial_address[11] = getValue(Env_Input_16);
+  serial_address[12] = getValue(Env_Input_17);
+  serial_address[13] = getValue(Env_Input_18);
+  serial_address[14] = getValue(Env_Input_19);
+  serial_address[15] = getValue(Env_Input_10); // S-RL
+  serial_address[16] = getValue(Env_Input_11);
+  serial_address[17] = getValue(Env_Input_12);
+  serial_address[18] = getValue(Env_Input_13);
+  serial_address[19] = getValue(Env_Input_14);
+  serial_address[20] = getValue(Env_Input_20); // S-RR
+  serial_address[21] = getValue(Env_Input_21);
+  serial_address[22] = getValue(Env_Input_22);
+  serial_address[23] = getValue(Env_Input_23);
+  serial_address[24] = getValue(Env_Input_24);
+  
+    readDetailFltCode_address[0] = getValue(Env_Input_0_ReadFltCode);
+    readDetailFltCode_address[1] = getValue(Env_Input_1_ReadFltCode);
+    readDetailFltCode_address[2] = getValue(Env_Input_2_ReadFltCode);
+    readDetailFltCode_address[3] = getValue(Env_Input_3_ReadFltCode);
+    readDetailFltCode_address[4] = getValue(Env_Input_4_ReadFltCode);
+    readDetailFltCode_address[5] = getValue(Env_Input_5_ReadFltCode);
+    readDetailFltCode_address[6] = getValue(Env_Input_6_ReadFltCode);
+    readDetailFltCode_address[7] = getValue(Env_Input_7_ReadFltCode);
+    readDetailFltCode_address[8] = getValue(Env_Input_8_ReadFltCode);
+    readDetailFltCode_address[9] = getValue(Env_Input_9_ReadFltCode);
+    readDetailFltCode_address[10] = getValue(Env_Input_10_ReadFltCode); 
+    readDetailFltCode_address[11] = getValue(Env_Input_11_ReadFltCode);
+    readDetailFltCode_address[12] = getValue(Env_Input_12_ReadFltCode);
+    readDetailFltCode_address[13] = getValue(Env_Input_13_ReadFltCode);
+    readDetailFltCode_address[14] = getValue(Env_Input_14_ReadFltCode);
+    readDetailFltCode_address[15] = getValue(Env_Input_15_ReadFltCode);
+    readDetailFltCode_address[16] = getValue(Env_Input_16_ReadFltCode);
+    readDetailFltCode_address[17] = getValue(Env_Input_17_ReadFltCode);
+    readDetailFltCode_address[18] = getValue(Env_Input_18_ReadFltCode);
+    readDetailFltCode_address[19] = getValue(Env_Input_19_ReadFltCode);
+    readDetailFltCode_address[20] = getValue(Env_Input_20_ReadFltCode);
+    readDetailFltCode_address[21] = getValue(Env_Input_21_ReadFltCode);
+    readDetailFltCode_address[22] = getValue(Env_Input_22_ReadFltCode);
+    readDetailFltCode_address[23] = getValue(Env_Input_23_ReadFltCode);
+    readDetailFltCode_address[24] = getValue(Env_Input_24_ReadFltCode);
+    readDetailFltCode_address[25] = getValue(Env_Input_25_ReadFltCode);
+    readDetailFltCode_address[26] = getValue(Env_Input_26_ReadFltCode);
+    readDetailFltCode_address[27] = getValue(Env_Input_27_ReadFltCode);
+  
+  for (i = 0; i < 25; ++i)
+  {
+    rb_ocs_memoryOCSSimulate_au8[i] = serial_address[i];
+  }
+  for (i = 0; i < 28; ++i)
+  {
+    rb_ocs_memoryOCSSimulate_au8[i + 0x19] = readDetailFltCode_address[i];
+  }
+    
+  /* Get Env of Read Detail flt code information to local */
+  
+  vehicleID1 = getValue(Env_input_vehicleID_1);
+  vehicleID2 = getValue(Env_input_vehicleID_2);
+  default_occupant_status = getValue(Env_input_occupant_status);
+  occupant_weight_up = getValue(Env_input_occupant_weight_upper);
+  occupant_weight_low = getValue(Env_input_occupant_weight_lower);
+  default_fault_infor = getValue(Env_input_fault_infor);
+  default_buckle_sw = getValue(Env_input_buckle_sw_status);
+  default_data_recording = getValue(Env_input_Default_DataRecording);
+  
+  clearedStatusForReqStart_u8 = getValue(Env_ClearCmdStart_Status);
+  /* Set default value to clearedStatusForReqStart_u8 variable from Env variable */
+  clearedStatusForReqStatus_u8 = getValue(Env_ClearCmdStatus_Status);  
+  /* Set default value to clearedStatusForReqStatus_u8 variable from Env variable */
+  clearedStatusNumberInProc_u8 = getValue(Env_ClearCmdStatus_NoInProc);
+  /* Set default value to clearedStatusForReqStatus_u8 variable from Env variable */
+  calibStatusForReqStart_u8 = getValue(Env_CalibCmdStart_Status);
+  /* Set default value to clearedStatusForReqStatus_u8 variable from Env variable */
+  calibCauseOfFltForReqStart_u8 = getValue(Env_CalibCmdStart_CauseOfFlt);
+  /* Set default value to clearedStatusForReqStatus_u8 variable from Env variable */
+  calibStatusForReqStatus_u8 = getValue(Env_CalibCmdStatus_Status);
+  /* Set default value to clearedStatusForReqStatus_u8 variable from Env variable */
+  calibCauseOfFltForReqStatus_u8 = getValue(Env_CalibCmdStatus_CauseOfFlt);
+  /* Set default value to clearedStatusForReqStatus_u8 variable from Env variable */
+  calibStatusNumberInProc_u8 = getValue(Env_CalibCmdStatus_NoInProc);
+  /* Set default value to clearedStatusForReqStatus_u8 variable from Env variable */
+  calChkStatusForReqStart_u8 = getValue(Env_CALChkCmdStart_Status);
+  /* Variable holds OCS-ECU CAL Check status of Response when A/B ECU transmits CALCheckCmd (Request to start) */
+  calChkCauseOfFltForReqStart_u8 = getValue(Env_CALChkCmdStart_CauseOfFlt);
+  /* Variable holds OCS-ECU CAL Check Cause of flt of Response when A/B ECU transmits CALCheckCmd (Request to start) */
+  calChkStatusForReqStatus_u8 = getValue(Env_CALChkCmdStatus_Status);
+  /* Variable holds OCS-ECU CAL Check status of Response when A/B ECU transmits CALCheckCmd (Request the status) */
+  calChkCauseOfFltForReqStatus_u8 = getValue(Env_CALChkCmdStatus_CauseOfFlt);
+  /* Variable holds OCS-ECU CAL Check Cause of flt of Response when A/B ECU transmits CALCheckCmd (Request the status) */
+  calChkStatusNumberInProc_u8 = getValue(Env_CALChkCmdStatus_NoInProc);
+  /* Variable holds number response, which has In Process status, when A/B ECU transmits CALCheckCmd (Request the status) */
+  
+  for(i=0;i<number_of_step+1;i++)
+  {
+    Occupant_step[i] = default_occupant_status;
+    Fault_infor_step[i] = default_fault_infor;
+    Buckle_step[i] = default_buckle_sw;
+    DataRecording_step[i] = default_data_recording;
+    weightUpper_Step[i] = occupant_weight_up;
+    weightLower_Step[i] = occupant_weight_low;
+    vehicleID1_step[i] = vehicleID1;
+    vehicleID2_step[i] = vehicleID2;
+    statusDiag_step[i] = calChkStatusForReqStart_u8;
+    causeOfFltDiag_step[i] = calChkCauseOfFltForReqStart_u8;
+  }
+}
+
+/* Event of ComboBox OCS-ECU Cleared Status of ClearCmd (Request) */
+on envVar Env_ClearCmd_RequestStartOpt
+{
+  if(getValue(this)==0xFF)
+  {
+    SetControlVisibility("PortA", "ClearStatusForStart_OtherValue", 1);
+  }
+  else
+  {
+    SetControlVisibility("PortA", "ClearStatusForStart_OtherValue", 0);
+    clearedStatusForReqStart_u8 = getValue(this);
+    putValue(Env_ClearCmdStart_Status, clearedStatusForReqStart_u8);
+  }
+}
+
+/* Event of ComboBox ClearCmd (Status) */
+on envVar Env_ClearCmd_RequestStatusOpt
+{
+  if(getValue(this)==0xFF)
+  {
+    SetControlVisibility("PortA", "ClearStatusForStatus_OtherValue", 1);
+  }
+  else
+  {
+    SetControlVisibility("PortA", "ClearStatusForStatus_OtherValue", 0);
+    clearedStatusForReqStatus_u8 = getValue(this);
+    putValue(Env_ClearCmdStatus_Status, clearedStatusForReqStatus_u8);
+  }
+}
+
+/* Event of ComboBox Calibration Result of CalibCmd (Start) */
+on envVar Env_CalibCmd_RequestStartOpt
+{
+  if(0xFF == getValue(this))
+  {
+    SetControlVisibility("PortA", "CalibStatusStart_OtherValue", 1);
+  }
+  else
+  {
+    SetControlVisibility("PortA", "CalibStatusStart_OtherValue", 0);
+    calibStatusForReqStart_u8 = getValue(this);
+    putValue(Env_CalibCmdStart_Status, calibStatusForReqStart_u8);
+  }
+}
+
+/* Event of ComboBox Cause of fault of CalibCmd (Start) */
+on envVar Env_CalibCmd_FailureStartOpt
+{
+  if(0xFF == getValue(this))
+  {
+    SetControlVisibility("PortA", "CalibCauseOfFltStart_OtherValue", 1);
+  }
+  else
+  {
+    SetControlVisibility("PortA", "CalibCauseOfFltStart_OtherValue", 0);
+    calibCauseOfFltForReqStart_u8 = getValue(this);
+    putValue(Env_CalibCmdStart_CauseOfFlt, calibCauseOfFltForReqStart_u8);
+  }
+}
+
+/* Event of ComboBox Last Calibration Result of CalibCmd (Status) */
+on envVar Env_CalibCmd_RequestStatusOpt
+{
+  if(0xFF == getValue(this))
+  {
+    SetControlVisibility("PortA", "CalibStatusStatus_OtherValue", 1);
+  }
+  else
+  {
+    SetControlVisibility("PortA", "CalibStatusStatus_OtherValue", 0);
+    calibStatusForReqStatus_u8 = getValue(this);
+    putValue(Env_CalibCmdStatus_Status, calibStatusForReqStatus_u8);
+  }
+}
+
+/* Event of ComboBox Cause of Fault of CalibCmd (Status) */
+on envVar Env_CalibCmd_FailureStatusOpt
+{
+  if(0xFF == getValue(this))
+  {
+    SetControlVisibility("PortA", "CalibCauseOfFltStatus_OtherValue", 1);
+  }
+  else
+  {
+    SetControlVisibility("PortA", "CalibCauseOfFltStatus_OtherValue", 0);
+    calibCauseOfFltForReqStatus_u8 = getValue(this);
+    putValue(Env_CalibCmdStatus_CauseOfFlt, calibCauseOfFltForReqStatus_u8);
+  }
+}
+
+/* Event of ComboBox CAL Check result of CAL Chk Cmd (Start) */
+on envVar Env_CALChkCmd_RequestStartOpt
+{
+  if(0xFF == getValue(this))
+  {
+    SetControlVisibility("PortA", "CALChkStatusStart_OtherValue", 1);
+  }
+  else
+  {
+    SetControlVisibility("PortA", "CALChkStatusStart_OtherValue", 0);
+    calChkStatusForReqStart_u8 = getValue(this);
+    putValue(Env_CALChkCmdStart_Status, calChkStatusForReqStart_u8);
+  }
+}
+
+/* Event of ComboBox Cause of Fault of CAL Chk Cmd (Start) */
+on envVar Env_CALChkCmd_FailureStartOpt
+{
+  if(0xFF == getValue(this))
+  {
+    SetControlVisibility("PortA", "CalChkCauseOfFltStart_OtherValue", 1);
+  }
+  else
+  {
+    SetControlVisibility("PortA", "CalChkCauseOfFltStart_OtherValue", 0);
+    calChkCauseOfFltForReqStart_u8 = getValue(this);
+    putValue(Env_CALChkCmdStart_CauseOfFlt, calChkCauseOfFltForReqStart_u8);
+  }
+}
+
+/* Event of ComboBox Cause of Fault of CalibCmd (Status) */
+on envVar Env_CALChkCmd_RequestStatusOpt
+{
+  if(0xFF == getValue(this))
+  {
+    SetControlVisibility("PortA", "CALChkStatusStatus_OtherValue", 1);
+  }
+  else
+  {
+    SetControlVisibility("PortA", "CALChkStatusStatus_OtherValue", 0);
+    calChkStatusForReqStatus_u8 = getValue(this);
+    putValue(Env_CALChkCmdStatus_Status, calChkStatusForReqStatus_u8);
+  }
+}
+
+/* Event of ComboBox Cause of Fault of CalibCmd (Status) */
+on envVar Env_CALChkCmd_FailureStatusOpt
+{
+  if(0xFF == getValue(this))
+  {
+    SetControlVisibility("PortA", "CALChkCauseOfFltStatus_OtherValue", 1);
+  }
+  else
+  {
+    SetControlVisibility("PortA", "CALChkCauseOfFltStatus_OtherValue", 0);
+    calChkCauseOfFltForReqStatus_u8 = getValue(this);
+    putValue(Env_CALChkCmdStatus_CauseOfFlt, calChkCauseOfFltForReqStatus_u8);
+  }
+}
+
+on envVar Env_Change_StatusDiagReq_S1
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_StatusDiagReq_S1", 1);
+  else
+    SetControlVisibility("PortA", "Input_StatusDiagReq_S1", 0); 
+}
+
+on envVar Env_Change_StatusDiagReq_S2
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_StatusDiagReq_S2", 1);
+  else
+    SetControlVisibility("PortA", "Input_StatusDiagReq_S2", 0); 
+}
+
+on envVar Env_Change_StatusDiagReq_S3
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_StatusDiagReq_S3", 1);
+  else
+    SetControlVisibility("PortA", "Input_StatusDiagReq_S3", 0); 
+}
+
+on envVar Env_Change_StatusDiagReq_S4
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_StatusDiagReq_S4", 1);
+  else
+    SetControlVisibility("PortA", "Input_StatusDiagReq_S4", 0); 
+}
+
+on envVar Env_Change_StatusDiagReq_S5
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_StatusDiagReq_S5", 1);
+  else
+    SetControlVisibility("PortA", "Input_StatusDiagReq_S5", 0); 
+}
+
+on envVar Env_Change_StatusDiagReq_S6
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_StatusDiagReq_S6", 1);
+  else
+    SetControlVisibility("PortA", "Input_StatusDiagReq_S6", 0); 
+}
+
+on envVar Env_Change_StatusDiagReq_S7
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_StatusDiagReq_S7", 1);
+  else
+    SetControlVisibility("PortA", "Input_StatusDiagReq_S7", 0); 
+}
+
+on envVar Env_Change_StatusDiagReq_S8
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_StatusDiagReq_S8", 1);
+  else
+    SetControlVisibility("PortA", "Input_StatusDiagReq_S8", 0); 
+}
+
+on envVar Env_Change_CauseOfFltDiagReq_S1
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_CauseOfFltDiagReq_S1", 1);
+  else
+    SetControlVisibility("PortA", "Input_CauseOfFltDiagReq_S1", 0); 
+}
+
+on envVar Env_Change_CauseOfFltDiagReq_S2
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_CauseOfFltDiagReq_S2", 1);
+  else
+    SetControlVisibility("PortA", "Input_CauseOfFltDiagReq_S2", 0); 
+}
+
+on envVar Env_Change_CauseOfFltDiagReq_S3
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_CauseOfFltDiagReq_S3", 1);
+  else
+    SetControlVisibility("PortA", "Input_CauseOfFltDiagReq_S3", 0); 
+}
+
+on envVar Env_Change_CauseOfFltDiagReq_S4
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_CauseOfFltDiagReq_S4", 1);
+  else
+    SetControlVisibility("PortA", "Input_CauseOfFltDiagReq_S4", 0); 
+}
+
+on envVar Env_Change_CauseOfFltDiagReq_S5
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_CauseOfFltDiagReq_S5", 1);
+  else
+    SetControlVisibility("PortA", "Input_CauseOfFltDiagReq_S5", 0); 
+}
+
+on envVar Env_Change_CauseOfFltDiagReq_S6
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_CauseOfFltDiagReq_S6", 1);
+  else
+    SetControlVisibility("PortA", "Input_CauseOfFltDiagReq_S6", 0); 
+}
+
+on envVar Env_Change_CauseOfFltDiagReq_S7
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_CauseOfFltDiagReq_S7", 1);
+  else
+    SetControlVisibility("PortA", "Input_CauseOfFltDiagReq_S7", 0); 
+}
+
+on envVar Env_Change_CauseOfFltDiagReq_S8
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_CauseOfFltDiagReq_S8", 1);
+  else
+    SetControlVisibility("PortA", "Input_CauseOfFltDiagReq_S8", 0); 
+}
+
+on envVar Env_Change_WeightUpper_S1
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_WeightUpper_S1", 1);
+  else
+    SetControlVisibility("PortA", "Input_WeightUpper_S1", 0); 
+}
+
+on envVar Env_Change_WeightUpper_S2
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_WeightUpper_S2", 1);
+  else
+    SetControlVisibility("PortA", "Input_WeightUpper_S2", 0); 
+}
+
+on envVar Env_Change_WeightUpper_S3
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_WeightUpper_S3", 1);
+  else
+    SetControlVisibility("PortA", "Input_WeightUpper_S3", 0); 
+}
+
+on envVar Env_Change_WeightUpper_S4
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_WeightUpper_S4", 1);
+  else
+    SetControlVisibility("PortA", "Input_WeightUpper_S4", 0); 
+}
+
+on envVar Env_Change_WeightUpper_S5
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_WeightUpper_S5", 1);
+  else
+    SetControlVisibility("PortA", "Input_WeightUpper_S5", 0); 
+}
+
+on envVar Env_Change_WeightUpper_S6
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_WeightUpper_S6", 1);
+  else
+    SetControlVisibility("PortA", "Input_WeightUpper_S6", 0); 
+}
+
+on envVar Env_Change_WeightUpper_S7
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_WeightUpper_S7", 1);
+  else
+    SetControlVisibility("PortA", "Input_WeightUpper_S7", 0); 
+}
+
+on envVar Env_Change_WeightUpper_S8
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_WeightUpper_S8", 1);
+  else
+    SetControlVisibility("PortA", "Input_WeightUpper_S8", 0); 
+}
+
+on envVar Env_Change_WeightLower_S1
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_WeightLower_S1", 1);
+  else
+    SetControlVisibility("PortA", "Input_WeightLower_S1", 0); 
+}
+
+on envVar Env_Change_WeightLower_S2
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_WeightLower_S2", 1);
+  else
+    SetControlVisibility("PortA", "Input_WeightLower_S2", 0); 
+}
+
+on envVar Env_Change_WeightLower_S3
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_WeightLower_S3", 1);
+  else
+    SetControlVisibility("PortA", "Input_WeightLower_S3", 0); 
+}
+
+on envVar Env_Change_WeightLower_S4
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_WeightLower_S4", 1);
+  else
+    SetControlVisibility("PortA", "Input_WeightLower_S4", 0); 
+}
+
+on envVar Env_Change_WeightLower_S5
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_WeightLower_S5", 1);
+  else
+    SetControlVisibility("PortA", "Input_WeightLower_S5", 0); 
+}
+
+on envVar Env_Change_WeightLower_S6
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_WeightLower_S6", 1);
+  else
+    SetControlVisibility("PortA", "Input_WeightLower_S6", 0); 
+}
+
+on envVar Env_Change_WeightLower_S7
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_WeightLower_S7", 1);
+  else
+    SetControlVisibility("PortA", "Input_WeightLower_S7", 0); 
+}
+
+on envVar Env_Change_WeightLower_S8
+{
+  if(getValue(this)==1)
+    SetControlVisibility("PortA", "Input_WeightLower_S8", 1);
+  else
+    SetControlVisibility("PortA", "Input_WeightLower_S8", 0); 
+}
+
+on envVar Env_Change_VehicleID_S1
+{
+  if(getValue(this)==1)
+  {
+    SetControlVisibility("PortA", "Input_VehicleIDUpper_S1", 1);
+    SetControlVisibility("PortA", "Input_VehicleIDLower_S1", 1);
+  }
+  else
+  {    
+    SetControlVisibility("PortA", "Input_VehicleIDUpper_S1", 0);
+    SetControlVisibility("PortA", "Input_VehicleIDLower_S1", 0); 
+  }
+}
+
+on envVar Env_Change_VehicleID_S2
+{
+  if(getValue(this)==1)
+  {
+    SetControlVisibility("PortA", "Input_VehicleIDUpper_S2", 1);
+    SetControlVisibility("PortA", "Input_VehicleIDLower_S2", 1);
+  }
+  else
+  {    
+    SetControlVisibility("PortA", "Input_VehicleIDUpper_S2", 0);
+    SetControlVisibility("PortA", "Input_VehicleIDLower_S2", 0); 
+  }
+}
+
+on envVar Env_Change_VehicleID_S3
+{
+  if(getValue(this)==1)
+  {
+    SetControlVisibility("PortA", "Input_VehicleIDUpper_S3", 1);
+    SetControlVisibility("PortA", "Input_VehicleIDLower_S3", 1);
+  }
+  else
+  {    
+    SetControlVisibility("PortA", "Input_VehicleIDUpper_S3", 0);
+    SetControlVisibility("PortA", "Input_VehicleIDLower_S3", 0); 
+  }
+}
+
+on envVar Env_Change_VehicleID_S4
+{
+  if(getValue(this)==1)
+  {
+    SetControlVisibility("PortA", "Input_VehicleIDUpper_S4", 1);
+    SetControlVisibility("PortA", "Input_VehicleIDLower_S4", 1);
+  }
+  else
+  {    
+    SetControlVisibility("PortA", "Input_VehicleIDUpper_S4", 0);
+    SetControlVisibility("PortA", "Input_VehicleIDLower_S4", 0); 
+  }
+}
+
+on envVar Env_Change_VehicleID_S5
+{
+  if(getValue(this)==1)
+  {
+    SetControlVisibility("PortA", "Input_VehicleIDUpper_S5", 1);
+    SetControlVisibility("PortA", "Input_VehicleIDLower_S5", 1);
+  }
+  else
+  {    
+    SetControlVisibility("PortA", "Input_VehicleIDUpper_S5", 0);
+    SetControlVisibility("PortA", "Input_VehicleIDLower_S5", 0); 
+  }
+}
+
+on envVar Env_Change_VehicleID_S6
+{
+  if(getValue(this)==1)
+  {
+    SetControlVisibility("PortA", "Input_VehicleIDUpper_S6", 1);
+    SetControlVisibility("PortA", "Input_VehicleIDLower_S6", 1);
+  }
+  else
+  {    
+    SetControlVisibility("PortA", "Input_VehicleIDUpper_S6", 0);
+    SetControlVisibility("PortA", "Input_VehicleIDLower_S6", 0); 
+  }
+}
+
+on envVar Env_Change_VehicleID_S7
+{
+  if(getValue(this)==1)
+  {
+    SetControlVisibility("PortA", "Input_VehicleIDUpper_S7", 1);
+    SetControlVisibility("PortA", "Input_VehicleIDLower_S7", 1);
+  }
+  else
+  {    
+    SetControlVisibility("PortA", "Input_VehicleIDUpper_S7", 0);
+    SetControlVisibility("PortA", "Input_VehicleIDLower_S7", 0); 
+  }
+}
+
+on envVar Env_Change_VehicleID_S8
+{
+  if(getValue(this)==1)
+  {
+    SetControlVisibility("PortA", "Input_VehicleIDUpper_S8", 1);
+    SetControlVisibility("PortA", "Input_VehicleIDLower_S8", 1);
+  }
+  else
+  {    
+    SetControlVisibility("PortA", "Input_VehicleIDUpper_S8", 0);
+    SetControlVisibility("PortA", "Input_VehicleIDLower_S8", 0); 
+  }
+}
+
+on envVar Env_EnableStepForClearCmd
+{
+  if(getValue(this)==1)
+  {
+    SetControlVisibility("PortA", "Status(DiagCmd)", 1);
+  }
+  else
+  {
+    if ((getValue(Env_EnableStepForCalibCmd) == 0) && (getValue(Env_EnableStepForCALChkCmd) == 0))
+    /* If CalibCmd && CALCheckCmd Create Step Opt is not tick */
+    {
+      SetControlVisibility("PortA", "Status(DiagCmd)", 0);
+    }
+  }
+}
+
+on envVar Env_EnableStepForCalibCmd
+{
+  if(getValue(this)==1)
+  {
+    SetControlVisibility("PortA", "Status(DiagCmd)", 1);
+    SetControlVisibility("PortA", "CauseOfFlt(DiagCmd)", 1);
+  }
+  else
+  {
+    if ((getValue(Env_EnableStepForCALChkCmd) == 0) )
+    /* If CalibCmd && CALCheckCmd Create Step Opt is not tick */
+    {
+      if (getValue(Env_EnableStepForClearCmd) == 0)
+      {
+        SetControlVisibility("PortA", "Status(DiagCmd)", 0);
+      }
+      SetControlVisibility("PortA", "CauseOfFlt(DiagCmd)", 0);
+    }
+  }
+}
+
+on envVar Env_EnableStepForCALChkCmd
+{
+  if(getValue(this)==1)
+  {
+    SetControlVisibility("PortA", "Status(DiagCmd)", 1);
+    SetControlVisibility("PortA", "CauseOfFlt(DiagCmd)", 1);
+  }
+  else
+  {     
+    if ((getValue(Env_EnableStepForCalibCmd) == 0) )
+    /* If CalibCmd && CALCheckCmd Create Step Opt is not tick */
+    {
+      if (getValue(Env_EnableStepForClearCmd) == 0)
+      {
+        SetControlVisibility("PortA", "Status(DiagCmd)", 0);
+      }
+      SetControlVisibility("PortA", "CauseOfFlt(DiagCmd)", 0);
+    }
+  }
+}
+
+RS232OnReceive( dword port, byte buffer[], dword number )
+{ 
+//  writeLineEx(0,kINFO, "****************************************************************");
+//  writeLineEx(0,kINFO,"%d",number);
+//    if(number==1)
+//      writeLineEx(0,kINFO,"%x",buffer[0]);
+//    else if(number==2)
+//      writeLineEx(0,kINFO,"%x %x",buffer[0],buffer[1]);
+//    else if(number==3)
+//      writeLineEx(0,kINFO,"%x %x %x",buffer[0],buffer[1],buffer[2]);
+//    else if(number==4)
+//      writeLineEx(0,kINFO,"%x %x %x %x",buffer[0],buffer[1],buffer[2],buffer[3]);
+//    else if(number==5)
+//      writeLineEx(0,kINFO,"%x %x %x %x %x",buffer[0],buffer[1],buffer[2],buffer[3],buffer[4]);
+//    else if(number==6)
+//      writeLineEx(0,kINFO,"%x %x %x %x %x %x",buffer[0],buffer[1],buffer[2],buffer[3],buffer[4],buffer[5]);
+//    else if(number==7)
+//      writeLineEx(0,kINFO,"%x %x %x %x %x %x %x",buffer[0],buffer[1],buffer[2],buffer[3],buffer[4],buffer[5],buffer[6]);
+//    else if(number==8)
+//      writeLineEx(0,kINFO,"%x %x %x %x %x %x %x %x ",buffer[0],buffer[1],buffer[2],buffer[3],buffer[4],buffer[5],buffer[6],buffer[7]);
+//    else
+//      writeLineEx(0,kINFO,"%x %x %x %x %x %x %x %x %x ",buffer[0],buffer[1],buffer[2],buffer[3],buffer[4],buffer[5],buffer[6],buffer[7],buffer[8]);
+  gT2Value = 5;
+  if(buffer[0]==0x91)
+  /* Check header */
+  {
+    continue_value_receive = 0;
+    // indicate data reception
+    putValue(EnvReceptionIndicationPortA,1);
+    gSending = 0;
+  }
+  
+  for(i=0;i<number;i++)
+  {
+    receive_buffer[i+continue_value_receive] = buffer[i];
+  }
+  continue_value_receive = continue_value_receive + number;
+  
+  // collect data to display as long as buffer has space for it
+  if ( (gNumberOfReceivedBytes+number)>(kBUFFER_SIZE) )
+  { 
+    gNumberOfReceivedBytes = 0;  // Reset Buffer
+  } 
+  numberOfBytesToCopy = number;
+
+  if ( numberOfBytesToCopy==0 )
+  {
+    return; // nothing to add
+  }
+ 
+  CopyBuffer(gReceiverBuffer,gNumberOfReceivedBytes,buffer,numberOfBytesToCopy);
+  gNumberOfReceivedBytes += numberOfBytesToCopy; 
+  
+  sending_data_recording = 0; 
+  rb_ocs_isClearCmdReceived = 0;
+  rb_ocs_isCALChkCmdReceived = 0;
+  rb_ocs_isCalibCmdReceived = 0;
+  if(receive_buffer[0]==0x91)
+  {
+    switch (receive_buffer[2])
+    {
+      case 0x01:
+      {
+        if ((receive_buffer[3] == 0x19) || (receive_buffer[3] == 0x29))
+        {
+          rb_ocs_isReadFCReceived = 1;
+        }
+      }
+      break;
+      case 0x10:
+      {
+        rb_ocs_isClearCmdReceived = 1;
+      }
+      break;
+      case 0x11:
+      {
+        rb_ocs_isCalibCmdReceived = 1;
+      }
+      break;
+      case 0x12:
+      {
+        rb_ocs_isCALChkCmdReceived = 1;
+      }
+      break;
+      case 0x22:
+      {
+        sending_data_recording = 1;
+      }
+      break;
+      default:
+        ;
+    }
+  }
+  
+  gT2Value = 5;
+  writeLineEx(0,kINFO,"number_of_used_steps = %x",number_of_used_steps);
+  if (number_of_used_steps != 0 || alway_timeout_t2 != 0)
+  {
+    if (alway_timeout_t2 == 1)
+    {
+      gT2Value = input_t2;
+      debugTesting = 1;
+      writeLineEx(0,kINFO,"Always time out : timeout = %x",gT2Value);
+    }
+    else
+    {
+      if ((fault_for_DataRecording_only == 1) || (rb_ocs_isCalibCmdEnabled == 1) || (rb_ocs_isClearCmdEnabled == 1) || (rb_ocs_isCALChkCmdEnabled == 1) ||
+        (rb_ocs_isReadFCEnabled == 1))
+      /* If Tester would like to Test for DataRecording or CalibCmd or ClearCmd or CALChkCmd */
+      {
+        debugTesting = 2;
+          if ((sending_data_recording == 1) || (rb_ocs_isCalibCmdReceived == 1) || (rb_ocs_isClearCmdReceived == 1) || (rb_ocs_isCALChkCmdReceived == 1) ||
+              (rb_ocs_isReadFCReceived == 1))
+          /* If receive DataRecordingCmd, CalibCmd, ClearCmd, CALChkCmd 's response */
+          {
+            debugTesting = 3;
+            if (Option_step[T2_timeout_position] == T2_timeout_position)
+            {
+              gT2Value = input_t2;
+            }
+            else
+            {
+              /* Do nothing */
+            }
+          }
+          else
+          {
+            /* Do nothing */
+          }
+      }
+      else
+      /* If Tester would like to Test for other command */
+      {
+        if (Option_step[T2_timeout_position] == T2_timeout_position)
+        {
+          gT2Value = input_t2;
+        }
+        else
+        {
+          gT2Value = 5;
+        }
+      }
+    }
+  }
+  
+  cancelTimer(tTimerP2);
+  
+  if(continue_value_receive>3)
+  {
+    if((receive_buffer[1] <= continue_value_receive) && (allow_sending == 1))
+    {
+      setTimer(tTimerP2,gT2Value);
+      writeLineEx(0,kINFO,"timeout = %x",gT2Value);
+    }
+  }
+  putValue(EnvReceptionPortA, gReceiverBuffer, gNumberOfReceivedBytes);
+  cancelTimer(tBytesReceived);
+  setTimer(tBytesReceived,500);
+  writeLineEx(0,kINFO,"%x ",debugTesting);
+}
+
+CopyBuffer( byte destBuffer[], dword destOffset, byte srcBuffer[], dword srcNumber )
+{
+  dword i;
+  for (i=0; i<srcNumber; i++)
+  {
+    destBuffer[destOffset+i] = srcBuffer[i];
+  }
+}
+
+RS232OnSend( dword port, byte buffer[], dword number )
+{
+  if(display_mode==display_flow)
+    writeLineEx(0,kINFO,"Transmission of %d bytes from port %d completed !", number, port);
+}
+
+RS232OnError( dword port, dword errorFlags )
+{
+  // set state
+  gSending = 0;
+  writeLineEx(0,kERROR,"Error handler called with error code %d !", errorFlags);
+
+  if ( errorFlags & 1 )
+    writeLineEx(0,1,"%d informs of send error",errorFlags);
+  if ( errorFlags & 2 )
+    writeLineEx(0,1,"%d informs of receive error",errorFlags);
+  if ( errorFlags & 4 )
+    writeLineEx(0,1,"%d informs of frame error",errorFlags);
+  if ( errorFlags & 8 )
+    writeLineEx(0,1,"%d informs of parity error",errorFlags);
+  if ( errorFlags & 16 )
+    writeLineEx(0,1,"%d informs of overrun error",errorFlags);
+  if ( errorFlags & 32 )
+    writeLineEx(0,1,"%d informs of receiver overrun error",errorFlags);
+  if ( errorFlags & 64 )
+    writeLineEx(0,1,"%d informs of break state",errorFlags);
+  if ( errorFlags & 128 )
+    writeLineEx(0,1,"%d informs of send timeout error",errorFlags);
+}
+
+Create_Response()
+{
+  count_cmd++;
+  if(display_mode==display_command_response)
+  {
+    if((start_observe==1))
+    {
+    writeLineEx(0,kINFO, "***********************************************************");
+    writeLineEx(0,kINFO,"Command %d",count_cmd);
+    if(receive_buffer[1]==5)
+      writeLineEx(0,kINFO,"command = %x %x %x %x %x",receive_buffer[0],receive_buffer[1],receive_buffer[2],receive_buffer[3],receive_buffer[4]);
+    else if(receive_buffer[1]==6)
+      writeLineEx(0,kINFO,"command = %x %x %x %x %x %x",receive_buffer[0],receive_buffer[1],receive_buffer[2],receive_buffer[3],receive_buffer[4],receive_buffer[5]);
+    else if(receive_buffer[1]==8)
+      writeLineEx(0,kINFO,"command = %x %x %x %x %x %x %x %x ",receive_buffer[0],receive_buffer[1],receive_buffer[2],receive_buffer[3],receive_buffer[4],receive_buffer[5],receive_buffer[6],receive_buffer[7]);
+    else if(receive_buffer[1]==9)
+      writeLineEx(0,kINFO,"command = %x %x %x %x %x %x %x %x ",receive_buffer[0],receive_buffer[1],receive_buffer[2],receive_buffer[3],receive_buffer[4],receive_buffer[5],receive_buffer[6],receive_buffer[7],receive_buffer[8]);
+    else
+      writeLineEx(0,kINFO,"command = %x %x %x %x %x %x %x %x %x %x",receive_buffer[0],receive_buffer[1],receive_buffer[2],receive_buffer[3],receive_buffer[4],receive_buffer[5],receive_buffer[6],receive_buffer[7],receive_buffer[8],receive_buffer[9]);
+    }
+  }
+  
+  if(Option_step[wrong_parity_position] != wrong_parity_position)
+  parity = getValue(EnvParityPortA);
+  /* 1. Set up correct parity */
+  
+  send_buffer[0] = 0x61;
+  /* 2. Create header of Response */
+    
+  switch (receive_buffer[2]) 
+  /* 2. Create CommandID, couse Command ID to detect kind of response */
+  {          
+    case 0x01:     
+    /* If Command ID is MemoryReadCommand */
+    {
+      send_buffer[2] = 0x01;
+      /* Set Command ID */
+      
+      
+      if((receive_buffer[3] == 0x70)&&(receive_buffer[4] == 0x02))
+      // If Top Address is 0x70, A/B ECU would like to read Vehicle ID
+      {        
+        send_buffer[1] = 0x06;          
+        send_buffer[3] = vehicleID1_step[0];
+        send_buffer[4] = vehicleID2_step[0];
+      }
+      else
+      {
+        send_buffer[1] = receive_buffer[4] + 0x04;
+        j = 3;
+        for(i = receive_buffer[3]; i < (receive_buffer[3] + receive_buffer[4]); ++i)
+        {
+          send_buffer[j] = rb_ocs_memoryOCSSimulate_au8[i];
+          ++j;
+        }
+      }
+    }
+    break;
+    
+    case 0x33:
+    /* If Command ID is StatusCommand */
+    {
+      //lenghth
+      send_buffer[1] = 0x09;
+      
+      //ID
+      send_buffer[2] = 0x33;
+            
+      //Occupant Status
+      send_buffer[3] = Occupant_step[0];
+        
+      //Fault information
+      send_buffer[6] = Fault_infor_step[0];
+        
+      //Buckle SW status
+      send_buffer[7] = Buckle_step[0];
+      
+      //Occupant weight upper
+      send_buffer[4] = weightUpper_Step[0];
+      
+      //Occupant weight lower
+      send_buffer[5] = weightLower_Step[0];       
+    }
+    break;
+    
+    case 0x22:  
+    /* If Command ID is DataRecordingCommand */
+    {
+      send_buffer[1] = 0x05;
+      send_buffer[2] = 0x22;
+      send_buffer[3] = DataRecording_step[0];
+    }
+    break;
+    
+    case 0x10:
+    /* If Command ID is ClearCommand */
+    {
+      send_buffer[1] = 0x05;
+      /* Packet bytes number of Response is 05h */
+      send_buffer[2] = receive_buffer[2];
+      /* Command ID of Response is 0x10 */
+      send_buffer[3] = statusDiag_step[0]; 
+      /* statusDiag of first step */
+    }
+    break;
+    
+    case 0x11:
+    case 0x12:
+    /* If Command ID is CalibrationCmd  or CALChkCmd*/
+    {
+      send_buffer[1] = 0x06;
+      /* Packet bytes number of Response is 06h */
+      send_buffer[2] = receive_buffer[2];
+      /* Command ID of Response is 0x11 */
+      send_buffer[3] = statusDiag_step[0];
+      /* statusDiag of first step */
+      send_buffer[4] = causeOfFltDiag_step[0];
+      /* causeOfFlt of first step */
+    }
+    break;
+    
+    default:
+    /* If A/B ECU transmit command with wrong ID */
+    {
+      send_buffer[1] = 0x05;
+      send_buffer[2] = receive_buffer[2];
+      /* Command ID of Response is 0x11 */
+      send_buffer[3] = 0xFF;
+      /* Indicate transmit wrong ID */
+    }
+      break;
+  }
+  length = send_buffer[1];  
+  send_buffer[length-1] = 0;   
+    
+  /* Create check sum byte */
+  for(i=0;i<(length-1);i++)
+  {
+    send_buffer[length-1] = send_buffer[length-1] + send_buffer[i];
+  }
+  send_buffer[length-1] = ~(send_buffer[length-1])+1;
+  
+  
+  if(length <= 0x00)
+  /* If length is not correct, print this line to System console */
+  {
+    if(display_mode==display_flow)
+      writeLineEx(0,kWARN,"Only more than one byte can be transmitted ! Please fill in some characters to send !");
+    return;
+  }
+  
+  if ((looptimes_step > 0)&&
+    (((sending_data_recording == 1) && (fault_for_DataRecording_only == 1)) || (fault_for_DataRecording_only == 0)))
+  {
+    if((looptimes_step > 0)&&(count_step >= step_begin))
+    {
+      looptimes_step--;
+    }
+  }
+  else
+  {
+    
+  }
+  writeLineEx(0,kINFO,"response = %x %x %x %x %x %x %x %x %x %x",send_buffer[0],send_buffer[1],send_buffer[2],send_buffer[3],send_buffer[4],send_buffer[5],send_buffer[6],send_buffer[7],send_buffer[8],send_buffer[9]);
+}
+
+Create_Condition_and_Send_Response()
+{
+//  writeLineEx(0,kINFO, "Option_step1 = %d %d %d %d %d %d %d %d %d %d %d %d %d",Option_step[0], Option_step[1],Option_step[2],Option_step[3],Option_step[4],Option_step[5],Option_step[6],Option_step[7],Option_step[8], Option_step[9],Option_step[10],Option_step[11],Option_step[12]);
+//  writeLineEx(0,kINFO, "Option_step2 = %d %d %d %d %d %d %d %d %d %d %d %d %d",Option_step[13],Option_step[14],Option_step[15], Option_step[16],Option_step[17],Option_step[18],Option_step[19],Option_step[20],Option_step[21],Option_step[22],Option_step[23],Option_step[24],Option_step[25]);
+//  writeLineEx(0,kINFO, "Option_step3 = %d %d %d %d %d %d %d %d %d %d %d %d %d",Option_step[26],Option_step[27],Option_step[28], Option_step[29],Option_step[30],Option_step[31],Option_step[32],Option_step[33],Option_step[34],Option_step[35],Option_step[36],Option_step[37],Option_step[38]);
+//  writeLineEx(0,kINFO, "Option_step4 = %d %d %d %d %d %d %d %d %d %d %d %d %d",Option_step[39],Option_step[40],Option_step[41], Option_step[42],Option_step[43],Option_step[44],Option_step[45],Option_step[46],Option_step[47],Option_step[48],Option_step[49],Option_step[50],Option_step[51]);
+//  writeLineEx(0,kINFO, "Option_step5 = %d %d %d %d %d %d %d %d %d %d %d %d %d",Option_step[52],Option_step[53],Option_step[54], Option_step[55],Option_step[56],Option_step[57],Option_step[58],Option_step[59],Option_step[60],Option_step[61],Option_step[62],Option_step[63],Option_step[64]);
+//  writeLineEx(0,kINFO, "Option_step6 = %d %d %d %d %d %d %d %d %d %d %d %d %d",Option_step[65],Option_step[66],Option_step[67], Option_step[68],Option_step[69],Option_step[70],Option_step[71],Option_step[72],Option_step[73],Option_step[74],Option_step[75],Option_step[76],Option_step[77]);
+//  writeLineEx(0,kINFO, "Option_step7 = %d %d %d %d %d %d %d %d %d %d %d %d %d",Option_step[78],Option_step[79],Option_step[80], Option_step[81],Option_step[82],Option_step[83],Option_step[84],Option_step[85],Option_step[86],Option_step[87],Option_step[88],Option_step[89],Option_step[90]);
+//  writeLineEx(0,kINFO, "Option_step8 = %d %d %d %d %d %d %d %d %d %d %d %d %d",Option_step[91],Option_step[92],Option_step[93], Option_step[94],Option_step[95],Option_step[96],Option_step[97],Option_step[98],Option_step[99],Option_step[100],Option_step[101],Option_step[102],Option_step[103]);
+//  
+//  writeLineEx(0,kINFO, "Occupant_step = %x, %x, %x, %x, %x, %x, %x, %x",Occupant_step[0],Occupant_step[1],Occupant_step[2],Occupant_step[3], Occupant_step[4],Occupant_step[5],Occupant_step[6],Occupant_step[7]);
+//  writeLineEx(0,kINFO, "Fault_infor_step = %x, %x, %x, %x, %x, %x, %x, %x",Fault_infor_step[0],Fault_infor_step[1],Fault_infor_step[2],Fault_infor_step[3],Fault_infor_step[4],Fault_infor_step[5],Fault_infor_step[6],Fault_infor_step[7]);
+//  writeLineEx(0,kINFO, "Buckle_step = %x, %x, %x, %x, %x, %x, %x, %x",Buckle_step[0],Buckle_step[1],Buckle_step[2],Buckle_step[3],Buckle_step[4],Buckle_step[5],Buckle_step[6],Buckle_step[7]);
+//  writeLineEx(0,kINFO, "DataRecording_step = %x, %x, %x, %x, %x, %x, %x, %x",DataRecording_step[0],DataRecording_step[1],DataRecording_step[2],DataRecording_step[3],DataRecording_step[4],DataRecording_step[5],DataRecording_step[6],DataRecording_step[7]);
+//  
+//  writeLineEx(0,kINFO, "count_step = %d",count_step);
+//  writeLineEx(0,kINFO, "looptimes_step = %d",looptimes_step);
+//  writeLineEx(0,kINFO, "number_of_response_in_step = %x",number_of_response_in_step);
+  writeLineEx(0,kINFO,"number_of_response_in_step = %d",number_of_response_in_step);
+  if(create_fault == 1)
+  {
+    if((number_of_response_in_step > 0)||(always_abnormalresponseCS != 0))
+    {
+      if((fault_for_DataRecording_only==0)||((fault_for_DataRecording_only==1)&&(sending_data_recording==1)))
+      { 
+        //Abnormal data header
+        if(Option_step[header_error_position] == header_error_position)                                                
+          send_buffer[0]++;                                                 
+      
+        //Abnormal data length
+        if(Option_step[length_error_position] == length_error_position)                                                
+          send_buffer[1]--;  
+          //send_buffer[1]++; 
+      
+        //Abnormal data ID
+        if(Option_step[id_error_position] == id_error_position)                                                
+          send_buffer[2]++;
+        
+//********************* create checksum byte again ***********************//
+        send_buffer[length-1] = 0;   
+        length = send_buffer[1];
+        //send_buffer[length-2] = 0x00;
+        for(i=0;i<(length-1);i++)                                           
+        {                                                                   
+          send_buffer[length-1] = send_buffer[length-1] + send_buffer[i];  
+        }                                                                   
+        send_buffer[length-1] = ~(send_buffer[length-1])+1;                 
+//************************************************************************//
+        writeLineEx(0,kINFO, "always_abnormalresponseCS = %d",always_abnormalresponseCS);
+        //Abnormal data checksum
+        if((Option_step[checksum_error_position] == checksum_error_position)||(always_abnormalresponseCS != 0))
+          send_buffer[length-1]++;
+      
+        //Create wrong parity
+        if(Option_step[wrong_parity_position]==wrong_parity_position)
+        {
+          if(getValue(EnvParityPortA) == 2)
+            parity = 1;
+          else if(getValue(EnvParityPortA) == 1)
+            parity = 2;
+        } 
+ 
+        // Time out T4
+        if(Option_step[t4_timeout_position] == t4_timeout_position) 
+        {
+          if(Rs232Configure(getValue(EnvPortA),10400,getValue(EnvDataBitsPortA),getValue(EnvStopbitsPortA),parity,0)==1)
+            if(display_mode==display_flow)
+              writeLineEx(0,kINFO, "Return Parity Bit - EVEN - value of serial port %d !", getValue(EnvPortA));    
+          else
+            if(display_mode==display_flow)
+              writeLineEx(0,kERROR,"An error occurred during initialization of the serial port %d.", getValue(EnvPortA));
+       
+          if( 1 == rs232WriteByte(getValue(EnvPortA), send_buffer[0])) 
+            if(display_mode==display_flow)
+              writeLineEx(0,kINFO, "**************************** INFO : SEND RESPONSE %d - T4 TIME OUT - STEP %d - FOR COMBINATION TEST ****************************",number_of_response_in_step, number_of_response_in_step);
+          else
+            if(display_mode==display_flow)
+              writeLineEx(0,kERROR,"An error occurred during write of 1 byte data to the serial port %d with T4 delay.", getValue(EnvPortA)); 
+              
+          T4_delay = input_t4;  // This value will be adapt for each project          
+          setTimer (tTimerT4,T4_delay); 
+          sending_timeout_T4 = 1;
+            
+          if(display_mode==display_flow)
+            writeLineEx(0,kINFO,"**************************** sent1 ****************************");
+        }
+      }
+    }
+  }
+  //Send Response  
+  Send_Response();
+
+  //Process Data to control Simulator
+  // writeLineEx(0,kINFO, "number_of_response_in_step = %d",number_of_response_in_step);
+  // writeLineEx(0,kINFO, "Create fault = %d",create_fault);
+  if(create_fault == 1)
+  {
+    number_of_response_in_step--;
+    if ((looptimes_step == 0)&&(use_loop_step == 1))
+    {
+      for(i=0;i<(step_end-step_begin)+1;i++)
+      {
+        for(j=0;j<lenght_option_step - number_of_element_one_step;j++)
+        {
+          Option_step[j] = Option_step[j+number_of_element_one_step];
+        }
+        for(j=0;j<number_of_step;j++)
+        {
+          Occupant_step[j] = Occupant_step[j+1];
+          Fault_infor_step[j] = Fault_infor_step[j+1];
+          Buckle_step[j] = Buckle_step[j+1];
+          DataRecording_step[j] = DataRecording_step[j+1];
+          weightUpper_Step[j] = weightUpper_Step[j+1];
+          weightLower_Step[j] = weightLower_Step[j+1];
+          vehicleID1_step[j] = vehicleID1_step[j+1];
+          vehicleID2_step[j] = vehicleID2_step[j+1];
+          statusDiag_step[j] = statusDiag_step[j+1];
+          causeOfFltDiag_step[j] = causeOfFltDiag_step[j+1];
+        }
+      }
+      number_of_response_in_step = Option_step[0];
+      putValue(Env_Flag_LoopCompleted, 1);
+      number_of_used_steps--;
+      looptimes_step--;
+    }
+    
+    if (number_of_response_in_step <= 0)
+    {
+      //Process Data in "Option_step"
+      if((((looptimes_step>0)&&(step_begin <= count_step)))&&
+        (((sending_data_recording==1)&&(fault_for_DataRecording_only==1))||(fault_for_DataRecording_only==0)))
+      {
+       /* This is only use when Loop happens, */ 
+        for(i=0;i<number_of_element_one_step;i++)
+        {
+          Temporary_Option_step[i] = Option_step[i];
+        }
+        for(i=0;i<(step_end-step_begin)*number_of_element_one_step;i++)
+        {
+          Option_step[i] = Option_step[i+number_of_element_one_step];
+        }
+        a=(step_end-step_begin)*number_of_element_one_step;
+        for(i=0;i<number_of_element_one_step;i++)
+        {
+          Option_step[a+i] = Temporary_Option_step[i];
+        }
+        
+        tam = step_end-step_begin;
+        swap_value_occupant = Occupant_step[0];
+        swap_value_fault_infor = Fault_infor_step[0];
+        swap_value_buckle_step = Buckle_step[0];
+        swap_value_data_recording = DataRecording_step[0];
+        for(i = 0; i < step_end-step_begin; i++)
+        {
+          Occupant_step[i] = Occupant_step[i+1];
+          Fault_infor_step[i] = Fault_infor_step[i+1];
+          Buckle_step[i] = Buckle_step[i+1];
+          DataRecording_step[i] = DataRecording_step[i+1];
+        }
+        Occupant_step[tam] = swap_value_occupant;
+        Fault_infor_step[tam] = swap_value_fault_infor;
+        Buckle_step[tam] = swap_value_buckle_step;
+        DataRecording_step[tam] = swap_value_data_recording;
+        /* Swap step and data */
+      }
+      else
+      {       
+        for(i = 0; i < (lenght_option_step - number_of_element_one_step); i++)
+        {
+          Option_step[i] = Option_step[i+number_of_element_one_step];
+        }
+        
+        for(i=0;i<number_of_step;i++)
+        {
+          Occupant_step[i] = Occupant_step[i+1];
+          Fault_infor_step[i] = Fault_infor_step[i+1];
+          Buckle_step[i] = Buckle_step[i+1];
+          DataRecording_step[i] = DataRecording_step[i+1];
+          weightUpper_Step[i] = weightUpper_Step[i+1];
+          weightLower_Step[i] = weightLower_Step[i+1];
+          vehicleID1_step[i] = vehicleID1_step[i+1];
+          vehicleID2_step[i] = vehicleID2_step[i+1];
+          statusDiag_step[i] = statusDiag_step[i+1];
+          causeOfFltDiag_step[i] = causeOfFltDiag_step[i+1];
+        }
+        --number_of_used_steps;
+        if (number_of_used_steps == 0)
+        {
+          putValue(Env_Flag_StepCompleted, 1);
+        }
+        writeLineEx(0,kINFO, "looptimes_step<0");
+      }
+        
+      number_of_response_in_step = Option_step[number_of_response_position];
+      gT2Value = 2;
+      count_step++;
+    }
+  }
+  
+  // collect response data as long as buffer has space for it (only for using TSG4)                                                 
+  if ( (gNumberOfReceivedBytes+length)>kBUFFER_SIZE )                                                 // This line has to be uncomment if using TSG4
+  {                                                                                                   // This line has to be uncomment if using TSG4
+    numberOfBytesToCopy = kBUFFER_SIZE-gNumberOfReceivedBytes; // no more than that ! it is full now  // This line has to be uncomment if using TSG4
+    gNumberOfReceivedBytes = 0;                                                                       // This line has to be uncomment if using TSG4
+  }                                                                                                   // This line has to be uncomment if using TSG4
+  else                                                                                                // This line has to be uncomment if using TSG4
+  {                                                                                                   // This line has to be uncomment if using TSG4
+    numberOfBytesToCopy = length;                                                                     // This line has to be uncomment if using TSG4
+  }                                                                                                   // This line has to be uncomment if using TSG4
+  CopyBuffer(gReceiverBuffer,gNumberOfReceivedBytes,send_buffer,numberOfBytesToCopy);                 // This line has to be uncomment if using TSG4
+  gNumberOfReceivedBytes += numberOfBytesToCopy;                                                      // This line has to be uncomment if using TSG4
+    
+  putValue(EnvReceptionPortA, gReceiverBuffer, gNumberOfReceivedBytes);
+  gSending = 1;
+  
+//  if(start_observe==1)
+//  if(display_mode==display_command_response)
+//  {
+//    if(send_buffer[1]==5)
+//      writeLineEx(0,kINFO,"response = %x %x %x %x %x",send_buffer[0],send_buffer[1],send_buffer[2],send_buffer[3],send_buffer[4]);
+//    else if(send_buffer[1]==6)
+//      writeLineEx(0,kINFO,"response = %x %x %x %x %x %x",send_buffer[0],send_buffer[1],send_buffer[2],send_buffer[3],send_buffer[4],send_buffer[5]);
+//    else if(send_buffer[1]==7)
+//      writeLineEx(0,kINFO,"response = %x %x %x %x %x %x %x",send_buffer[0],send_buffer[1],send_buffer[2],send_buffer[3],send_buffer[4],send_buffer[5],send_buffer[6]);
+//    else if(send_buffer[1]==8)
+//      writeLineEx(0,kINFO,"response = %x %x %x %x %x %x %x %x",send_buffer[0],send_buffer[1],send_buffer[2],send_buffer[3],send_buffer[4],send_buffer[5],send_buffer[6],send_buffer[7]);
+//    else if(send_buffer[1]==9)
+//      writeLineEx(0,kINFO,"response = %x %x %x %x %x %x %x %x %x",send_buffer[0],send_buffer[1],send_buffer[2],send_buffer[3],send_buffer[4],send_buffer[5],send_buffer[6],send_buffer[7],send_buffer[8]);
+//    else
+//      writeLineEx(0,kINFO,"response = %x %x %x %x %x %x %x %x %x %x",send_buffer[0],send_buffer[1],send_buffer[2],send_buffer[3],send_buffer[4],send_buffer[5],send_buffer[6],send_buffer[7],send_buffer[8],send_buffer[9]);
+//  }
+}
+
+Send_Response()
+{
+  if( sending_timeout_T4 == 0)
+  { 
+//    if(Option_step[wrong_parity_position] == wrong_parity_position) 
+//    {
+//      if(getValue(EnvParityPortA) == 2)
+//        parity = 1;
+//      else if(getValue(EnvParityPortA) == 1)
+//        parity = 2;
+//    }
+
+    
+    if(Rs232Configure(getValue(EnvPortA),10400,getValue(EnvDataBitsPortA),getValue(EnvStopbitsPortA),parity,0)==1)
+    {
+      if(display_mode == display_flow)
+        writeLineEx(0,kINFO, "Return Parity Bit - EVEN - value of serial port %d !", getValue(EnvPortA));    
+    }
+    else
+    {
+      if(display_mode == display_flow)
+        writeLineEx(0,kERROR,"An error occurred during initialization of the serial port %d.", getValue(EnvPortA));
+    }
+          
+    if(display_mode == display_flow)
+    {
+      writeLineEx(0,kINFO, "get_Parity = %d",getValue(EnvParityPortA));
+      writeLineEx(0,kINFO, "Parity = %d",parity);
+      writeLineEx(0,kINFO, "length = %d",length);
+    }
+    
+    if(0==Rs232Send(getValue(EnvPortA), send_buffer, length))
+    {
+      if(display_mode==display_flow)
+        writeLineEx(0,kERROR,"An error occurred during write of block byte data to the serial port.", getValue(EnvPortA));
+    }
+    else 
+    {
+      if(display_mode==display_flow)
+        writeLineEx(0,kINFO,"**************************** sent ****************************");
+    }
+  }
+}
+
+set_ValueOfResponse_inStep()
+{
+  putValue(Env_Occupant_Value_S1,getValue(Env_input_occupant_status));
+  putValue(Env_Occupant_Value_S2,getValue(Env_input_occupant_status));
+  putValue(Env_Occupant_Value_S3,getValue(Env_input_occupant_status));
+  putValue(Env_Occupant_Value_S4,getValue(Env_input_occupant_status));
+  putValue(Env_Occupant_Value_S5,getValue(Env_input_occupant_status));
+  putValue(Env_Occupant_Value_S6,getValue(Env_input_occupant_status));
+  putValue(Env_Occupant_Value_S7,getValue(Env_input_occupant_status));
+  putValue(Env_Occupant_Value_S8,getValue(Env_input_occupant_status));
+  /* Put value of default Occupant Status to Occupant Status in Step */
+  
+  putValue(Env_Fault_Infor_S1,getValue(Env_input_fault_infor));
+  putValue(Env_Fault_Infor_S2,getValue(Env_input_fault_infor));
+  putValue(Env_Fault_Infor_S3,getValue(Env_input_fault_infor));
+  putValue(Env_Fault_Infor_S4,getValue(Env_input_fault_infor));
+  putValue(Env_Fault_Infor_S5,getValue(Env_input_fault_infor));
+  putValue(Env_Fault_Infor_S6,getValue(Env_input_fault_infor));
+  putValue(Env_Fault_Infor_S7,getValue(Env_input_fault_infor));
+  putValue(Env_Fault_Infor_S8,getValue(Env_input_fault_infor));
+  /* Put value of default Fault Information to Fault Information in Step */
+  
+  putValue(Env_Buckle_Value_S1,getValue(Env_input_buckle_sw_status));
+  putValue(Env_Buckle_Value_S2,getValue(Env_input_buckle_sw_status));
+  putValue(Env_Buckle_Value_S3,getValue(Env_input_buckle_sw_status));
+  putValue(Env_Buckle_Value_S4,getValue(Env_input_buckle_sw_status));
+  putValue(Env_Buckle_Value_S5,getValue(Env_input_buckle_sw_status));
+  putValue(Env_Buckle_Value_S6,getValue(Env_input_buckle_sw_status));
+  putValue(Env_Buckle_Value_S7,getValue(Env_input_buckle_sw_status));
+  putValue(Env_Buckle_Value_S8,getValue(Env_input_buckle_sw_status));
+  /* Put value of default Buckle SW status to Fault Information in Step */
+  
+  putValue(Env_DataRecording_Value_S1,getValue(Env_input_Default_DataRecording));
+  putValue(Env_DataRecording_Value_S2,getValue(Env_input_Default_DataRecording));
+  putValue(Env_DataRecording_Value_S3,getValue(Env_input_Default_DataRecording));
+  putValue(Env_DataRecording_Value_S4,getValue(Env_input_Default_DataRecording));
+  putValue(Env_DataRecording_Value_S5,getValue(Env_input_Default_DataRecording));
+  putValue(Env_DataRecording_Value_S6,getValue(Env_input_Default_DataRecording));
+  putValue(Env_DataRecording_Value_S7,getValue(Env_input_Default_DataRecording));
+  putValue(Env_DataRecording_Value_S8,getValue(Env_input_Default_DataRecording));
+  /* Put value of default status of Data Recording to status of Data Recording in Step */
+  
+  putValue(Env_DataRecording_Value_S1,getValue(Env_input_Default_DataRecording));
+  putValue(Env_DataRecording_Value_S2,getValue(Env_input_Default_DataRecording));
+  putValue(Env_DataRecording_Value_S3,getValue(Env_input_Default_DataRecording));
+  putValue(Env_DataRecording_Value_S4,getValue(Env_input_Default_DataRecording));
+  putValue(Env_DataRecording_Value_S5,getValue(Env_input_Default_DataRecording));
+  putValue(Env_DataRecording_Value_S6,getValue(Env_input_Default_DataRecording));
+  putValue(Env_DataRecording_Value_S7,getValue(Env_input_Default_DataRecording));
+  putValue(Env_DataRecording_Value_S8,getValue(Env_input_Default_DataRecording));
+  /* Put value of default status of Data Recording to status of Data Recording in Step */
+  
+  putValue(Env_WeightUpper_Value_S1,getValue(Env_input_occupant_weight_upper));
+  putValue(Env_WeightUpper_Value_S2,getValue(Env_input_occupant_weight_upper));
+  putValue(Env_WeightUpper_Value_S3,getValue(Env_input_occupant_weight_upper));
+  putValue(Env_WeightUpper_Value_S4,getValue(Env_input_occupant_weight_upper));
+  putValue(Env_WeightUpper_Value_S5,getValue(Env_input_occupant_weight_upper));
+  putValue(Env_WeightUpper_Value_S6,getValue(Env_input_occupant_weight_upper));
+  putValue(Env_WeightUpper_Value_S7,getValue(Env_input_occupant_weight_upper));
+  putValue(Env_WeightUpper_Value_S8,getValue(Env_input_occupant_weight_upper));
+  /* Put value of default Occupant weight (upper) to Occupant weight (upper) in Step */
+  
+  putValue(Env_WeightLower_Value_S1,getValue(Env_input_occupant_weight_lower));
+  putValue(Env_WeightLower_Value_S2,getValue(Env_input_occupant_weight_lower));
+  putValue(Env_WeightLower_Value_S3,getValue(Env_input_occupant_weight_lower));
+  putValue(Env_WeightLower_Value_S4,getValue(Env_input_occupant_weight_lower));
+  putValue(Env_WeightLower_Value_S5,getValue(Env_input_occupant_weight_lower));
+  putValue(Env_WeightLower_Value_S6,getValue(Env_input_occupant_weight_lower));
+  putValue(Env_WeightLower_Value_S7,getValue(Env_input_occupant_weight_lower));
+  putValue(Env_WeightLower_Value_S8,getValue(Env_input_occupant_weight_lower));
+  /* Put value of default Occupant weight (lower) to Occupant weight (lower) in Step */
+  
+  putValue(Env_VehicleIDUpper_Value_S1,getValue(Env_input_vehicleID_1));
+  putValue(Env_VehicleIDUpper_Value_S2,getValue(Env_input_vehicleID_1));
+  putValue(Env_VehicleIDUpper_Value_S3,getValue(Env_input_vehicleID_1));
+  putValue(Env_VehicleIDUpper_Value_S4,getValue(Env_input_vehicleID_1));
+  putValue(Env_VehicleIDUpper_Value_S5,getValue(Env_input_vehicleID_1));
+  putValue(Env_VehicleIDUpper_Value_S6,getValue(Env_input_vehicleID_1));
+  putValue(Env_VehicleIDUpper_Value_S7,getValue(Env_input_vehicleID_1));
+  putValue(Env_VehicleIDUpper_Value_S8,getValue(Env_input_vehicleID_1));
+  /* Put value of default Vehicle ID (upper) to Vehicle ID (upper) in Step */
+  
+  putValue(Env_VehicleIDLower_Value_S1,getValue(Env_input_vehicleID_2));
+  putValue(Env_VehicleIDLower_Value_S2,getValue(Env_input_vehicleID_2));
+  putValue(Env_VehicleIDLower_Value_S3,getValue(Env_input_vehicleID_2));
+  putValue(Env_VehicleIDLower_Value_S4,getValue(Env_input_vehicleID_2));
+  putValue(Env_VehicleIDLower_Value_S5,getValue(Env_input_vehicleID_2));
+  putValue(Env_VehicleIDLower_Value_S6,getValue(Env_input_vehicleID_2));
+  putValue(Env_VehicleIDLower_Value_S7,getValue(Env_input_vehicleID_2));
+  putValue(Env_VehicleIDLower_Value_S8,getValue(Env_input_vehicleID_2));
+  /* Put value of default Vehicle ID (upper) to Vehicle ID (upper) in Step */
+  
+  /* Reset count step */
+  putValue(Env_Flag_LoopCompleted, 0);
+  putValue(Env_Flag_StepCompleted, 0);
+}
+
+rb_ocs_CreateNormalResponse()
+{
+  if(Option_step[wrong_parity_position] != wrong_parity_position)
+  parity = getValue(EnvParityPortA);
+  /* 1. Set up correct parity */
+  
+  send_buffer[0] = 0x61;
+  /* 2. Create header of Response */
+    
+  switch (receive_buffer[2]) 
+  /* 2. Create CommandID, couse Command ID to detect kind of response */
+  {          
+    case 0x01:     
+    /* If Command ID is MemoryReadCommand */
+    {
+      send_buffer[2] = 0x01;
+      /* Set Command ID */
+      
+      if((receive_buffer[3] == 0x70)&&(receive_buffer[4] == 0x02))
+      // If Top Address is 0x70, A/B ECU would like to read Vehicle ID
+      {        
+        send_buffer[1] = 0x06;          
+        send_buffer[3] = vehicleID1_step[0];
+        send_buffer[4] = vehicleID2_step[0];
+      }
+      else
+      {
+        send_buffer[1] = receive_buffer[4] + 0x04;
+        j = 3;
+        for(i = receive_buffer[3]; i < (receive_buffer[3] + receive_buffer[4]); ++i)
+        {
+          send_buffer[j] = rb_ocs_memoryOCSSimulate_au8[i];
+          ++j;
+        }
+      }
+    }
+    break;
+    
+    case 0x33:
+    /* If Command ID is StatusCommand */
+    {
+      //lenghth
+      send_buffer[1] = 0x09;
+      
+      //ID
+      send_buffer[2] = 0x33;
+         
+      //Occupant Status
+      send_buffer[3] = default_occupant_status;
+        
+      //Fault information
+      send_buffer[6] = default_fault_infor;
+        
+      //Buckle SW status
+      send_buffer[7] = default_buckle_sw;
+      
+      //Occupant weight upper
+      send_buffer[4] = occupant_weight_up;
+      
+      //Occupant weight lower
+      send_buffer[5] = occupant_weight_low;       
+    }
+    break;
+    
+    case 0x22:  
+    /* If Command ID is DataRecordingCommand */
+    {
+      send_buffer[1] = 0x05;
+      send_buffer[2] = 0x22;
+      send_buffer[3] = default_data_recording;
+    }
+    break;
+    
+    case 0x10:
+    /* If Command ID is ClearCommand */
+    {
+      send_buffer[1] = 0x05;
+      /* Packet bytes number of Response is 05h */
+      send_buffer[2] = receive_buffer[2];
+      /* Command ID of Response is 0x10 */
+      if(receive_buffer[3] == 0x11)
+      /* If A/B ECU request to start */
+      {
+        send_buffer[3] = clearedStatusForReqStart_u8;
+        /* Assign Tx buffer with clearedStatusForReqStart_u8, which get value from Env variable */
+        clearedStatusNumberInProc_u8 = clearedStatusNumberInProc_u8;
+      }
+      else if (receive_buffer[3] == 0x18)
+      {
+        if (clearedStatusNumberInProc_u8 == 0)
+        /* If clearedStatusNumberInProc_u8 is zero, it means OCS-ECU shall transmit latest ClearStatus */
+        {
+            send_buffer[3] = clearedStatusForReqStatus_u8;
+            /* Assign Tx buffer with clearedStatusForReqStatus_u8, which get value from Env variable */
+        }
+        else
+        /* If not */
+        {
+            send_buffer[3] = 0x87;
+            /* Assign Tx buffer with 0x87 */
+            --clearedStatusNumberInProc_u8;
+            /* Decrement ClearedCmd of Response */
+        }
+      }
+      else
+      {
+        send_buffer[3] = 0xFF;
+      }
+    }
+    break;
+    
+    case 0x11:
+    /* If Command ID is CalibrationCmd */
+    {
+      send_buffer[1] = 0x06;
+      /* Packet bytes number of Response is 06h */
+      send_buffer[2] = receive_buffer[2];
+      /* Command ID of Response is 0x11 */
+      if(receive_buffer[3] == 0x31)
+      /* If A/B ECU request to start */
+      {
+        send_buffer[3] = calibStatusForReqStart_u8;
+        /* Assign Tx buffer with calibStatusForReqStart_u8, which get value from Env variable */
+        send_buffer[4] = calibCauseOfFltForReqStart_u8;
+        /* Assign Tx buffer with calibCauseOfFltForReqStart_u8, which get value from Env variable */
+        calibStatusNumberInProc_u8 = calibStatusNumberInProc_u8;
+      }
+      else if (receive_buffer[3] == 0x38)
+      /* If A/B ECU request the status */
+      {
+        if (calibStatusNumberInProc_u8 == 0)
+        /* If clearedStatusNumberInProc_u8 is zero, it means OCS-ECU shall transmit latest ClearStatus */
+        {
+            send_buffer[3] = calibStatusForReqStatus_u8;
+            /* Assign Tx buffer with calibStatusForReqStatus_u8, which get value from Env variable */
+            send_buffer[4] = calibCauseOfFltForReqStatus_u8;
+            /* Assign Tx buffer with calibCauseOfFltForReqStatus_u8, which get value from Env variable */
+        }
+        else
+        /* If not */
+        {
+            send_buffer[3] = 0x87;
+            /* Assign Tx buffer with 0x87 */
+            send_buffer[4] = 0x0F;
+            /* Assign Tx buffer with 0x0F */
+            --calibStatusNumberInProc_u8;
+            /* Decrement CalibCmd of Response */
+        }
+      }
+      else
+      {
+        send_buffer[3] = 0xFF;
+        send_buffer[4] = 0xFF;
+      }
+    }
+    break;
+    
+    case 0x12:
+    /* If Command ID is CALCheckCmd */
+    {
+      send_buffer[1] = 0x06;
+      /* Packet bytes number of Response is 06h */
+      send_buffer[2] = receive_buffer[2];
+      /* Command ID of Response is 0x12 */
+      if(receive_buffer[3] == 0x41)
+      /* If A/B ECU request to start */
+      {
+        send_buffer[3] = calChkStatusForReqStart_u8;
+        /* Assign Tx buffer with calibStatusForReqStart_u8, which get value from Env variable */
+        send_buffer[4] = calChkCauseOfFltForReqStart_u8;
+        /* Assign Tx buffer with calibCauseOfFltForReqStart_u8, which get value from Env variable */
+        calChkStatusNumberInProc_u8 = calChkStatusNumberInProc_u8;
+      }
+      else if (receive_buffer[3] == 0x48)
+      /* If A/B ECU request the status */
+      {
+        if (calChkStatusNumberInProc_u8 == 0)
+        /* If clearedStatusNumberInProc_u8 is zero, it means OCS-ECU shall transmit latest ClearStatus */
+        {
+            send_buffer[3] = calChkStatusForReqStatus_u8;
+            /* Assign Tx buffer with calibStatusForReqStatus_u8, which get value from Env variable */
+            send_buffer[4] = calChkCauseOfFltForReqStatus_u8;
+            /* Assign Tx buffer with calibCauseOfFltForReqStatus_u8, which get value from Env variable */
+        }
+        else
+        /* If not */
+        {
+            send_buffer[3] = 0x87;
+            /* Assign Tx buffer with 0x87 */
+            send_buffer[4] = 0x0F;
+            /* Assign Tx buffer with 0x0F */
+            --calChkStatusNumberInProc_u8;
+            /* Decrement CalibCmd of Response */
+        }
+      }
+      else
+      {
+        send_buffer[3] = 0xFF;
+        send_buffer[4] = 0xFF;
+      }
+    }
+    break;
+    
+    default:
+      break;
+  }
+  length = send_buffer[1];  
+  send_buffer[length-1] = 0;   
+    
+  /* Create check sum byte */
+  for(i=0;i<(length-1);i++)
+  {
+    send_buffer[length-1] = send_buffer[length-1] + send_buffer[i];
+  }
+  send_buffer[length-1] = ~(send_buffer[length-1])+1;
+  
+  if((always_abnormalresponseCS != 0))
+  {
+    send_buffer[length-1]++;
+  }
+
+  if(length <= 0x00)
+  {
+    if(display_mode==display_flow)
+      writeLineEx(0,kWARN,"Only more than one byte can be transmitted ! Please fill in some characters to send !");
+    return;
+  }
+}

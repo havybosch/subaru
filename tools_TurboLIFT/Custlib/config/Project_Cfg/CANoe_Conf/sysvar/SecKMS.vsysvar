@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<systemvariables version="4">
+  <namespace name="" comment="" interface="">
+    <namespace name="Security_KMS" comment="" interface="">
+      <variable anlyzLocal="2" readOnly="false" valueSequence="false" unit="" name="Array_CustomKey" comment="" bitcount="32" isSigned="false" encoding="65001" type="data" arrayLength="0" />
+      <variable anlyzLocal="2" readOnly="false" valueSequence="false" unit="" name="Array_CustomKeyForVerification" comment="" bitcount="32" isSigned="false" encoding="65001" type="data" arrayLength="0" />
+      <variable anlyzLocal="2" readOnly="false" valueSequence="false" unit="" name="Array_RandomNum" comment="" bitcount="32" isSigned="false" encoding="65001" type="data" arrayLength="0" />
+      <variable anlyzLocal="2" readOnly="false" valueSequence="false" unit="" name="Button_ReadSingle_SafeKeyNumber" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" />
+      <variable anlyzLocal="2" readOnly="false" valueSequence="false" unit="" name="Button_VerifyPlant_MultipleECU" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" />
+      <variable anlyzLocal="2" readOnly="false" valueSequence="false" unit="" name="Button_WritePlant_MultipleECU" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" />
+      <variable anlyzLocal="2" readOnly="false" valueSequence="false" unit="" name="Button_WriteSingle_CustomKey" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" />
+      <variable anlyzLocal="2" readOnly="false" valueSequence="false" unit="" name="Button_WriteSingle_DefaultAll" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" />
+      <variable anlyzLocal="2" readOnly="false" valueSequence="false" unit="" name="Button_WriteSingle_DefaultMaster" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" />
+      <variable anlyzLocal="2" readOnly="false" valueSequence="false" unit="" name="CGW_Cyclic_time" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="20" />
+      <variable anlyzLocal="2" readOnly="false" valueSequence="false" unit="" name="KeyID" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="4" />
+      <variable anlyzLocal="2" readOnly="false" valueSequence="false" unit="" name="KeyUsage" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="1">
+        <valuetable name="KeyUsage" definesMinMax="false">
+          <valuetableentry value="0" lowerBound="0" upperBound="0" description="AES" displayString="AES" />
+          <valuetableentry value="1" lowerBound="1" upperBound="1" description="MAC" displayString="MAC" />
+          <valuetableentry value="3" lowerBound="3" upperBound="3" description="Invalid" displayString="Invalid" />
+        </valuetable>
+      </variable>
+      <variable anlyzLocal="2" readOnly="false" valueSequence="false" unit="" name="SetNum" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="3" />
+      <variable anlyzLocal="2" readOnly="false" valueSequence="false" unit="" name="Trigger_VeriPlant_TurboLIFT" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" />
+      <variable anlyzLocal="2" readOnly="false" valueSequence="false" unit="" name="Trigger_WritePlant_TurboLIFT" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" />
+      <variable anlyzLocal="2" readOnly="false" valueSequence="false" unit="" name="VerifyValidity" comment="" bitcount="32" isSigned="true" encoding="65001" type="int" startValue="1">
+        <valuetable name="Validity" definesMinMax="false">
+          <valuetableentry value="0" lowerBound="0" upperBound="0" description="Invalid" displayString="Invalid" />
+          <valuetableentry value="1" lowerBound="1" upperBound="1" description="Valid" displayString="Valid" />
+        </valuetable>
+      </variable>
+    </namespace>
+  </namespace>
+</systemvariables>

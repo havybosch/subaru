@@ -1,0 +1,213 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_:
+VAL_TABLE_ Data_Simuation 22 "AEBS status" 21 "Traction Control Status" 20 "Stability control" 19 "Turn Signal " 18 "Parking Brake " 17 "Lane departure status" 16 "Tire Pressure Monitoring Status" 15 "ESF Status" 14 "CSF Status" 13 "Antilock braking system status" 12 "Motor RPM" 11 "ACSF B1 status" 10 "ACSF A status" 9 "Brake Warning Indicator Status" 8 "Engine RPM" 7 "Yaw Rate" 6 "Adaptive Cruise Control Status" 5 "Cruise Control System" 4 "Gear Position" 3 "Steering input" 2 "Service brake, on/off" 1 "Accelerator pedal, % full" 0 "Speed, vehicle indicated" ;
+
+
+BO_ 3221225472 VECTOR__INDEPENDENT_SIG_MSG: 0 Vector__XXX
+ SG_ New_Signal_19 : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ New_Signal_18 : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ New_Signal_17 : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ New_Signal_16 : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ New_Signal_15 : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ New_Signal_14 : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ New_Signal_13 : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ New_Signal_12 : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ New_Signal_11 : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Fast_Diag_byte3 : 0|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Fast_Diag_byte2 : 0|8@0+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 1 New_Message_16: 8 Vector__XXX
+ SG_ New_Signal_21 : 56|8@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 0 New_Message_15: 8 Vector__XXX
+ SG_ New_Signal_20 : 48|8@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 1587 Fast_Diag: 8 Vector__XXX
+ SG_ Fast_Diag_byte7 : 63|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Fast_Diag_byte6 : 55|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Fast_Diag_byte5 : 47|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Fast_Diag_byte4 : 39|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Fast_Diag_byte3 : 31|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Fast_Diag_byte2 : 23|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Fast_Diag_byte1 : 15|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Fast_Diag_byte0 : 7|8@0+ (1,0) [0|0] "" Vector__XXX
+
+
+
+EV_ Env_24EDR_MSG40AWithoutMode15_: 0 [0|0] "" 0 1 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_VehVActlBrk_D_Qf_FreeAdj: 0 [0|0] "" 0 2 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_SteeringPosition_FreeAdj: 0 [0|0] "" 0 3 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvT_MSG_ENG1S60_Trans0: 0 [0|0] "" 0 4 DUMMY_NODE_VECTOR3 Vector__XXX;
+
+EV_ EnvT_MSG_ENG1S60: 0 [0|0] "" 0 5 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_CAN_ACK_On: 0 [0|0] "" 0 6 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_CAN_ACK_Off: 0 [0|0] "" 0 7 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_Enable_MACFv: 0 [0|0] "" 1 8 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_ResetCnt_debug: 1 [0|1048575] "" 0 9 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_TripCnt_debug: 1 [0|1048575] "" 0 10 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_24EDR_sampleDataT0: 0 [0|255] "" 255 11 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_24EDR_LEDState: 0 [0|0] "" 0 12 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_24EDR_CtrlBut_: 0 [0|0] "" 0 13 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_24EDR_DataSimul_: 0 [0|0] "" 0 14 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_24EDR_Unobtain_: 0 [0|0] "" 0 15 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_24EDR_Valid_: 0 [0|0] "" 0 16 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_24EDR_Invalid_: 0 [0|0] "" 0 17 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvFBrakeSysFeatures_MAC: 0 [0|0] "" 0 18 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvFDesiredTorqBrk_MAC: 0 [0|0] "" 0 19 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_SteeringPosition_Error: 0 [0|1] "" 0 20 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvFCGW_Sync: 0 [0|0] "" 0 21 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvError_crashoutput_brk_MAC: 0 [0|0] "" 0 22 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvMsg_crashoutput_brk_MAC: 0 [0|0] "" 0 23 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvVerify_crashoutput_brk_MAC: 0 [0|0] "" 0 24 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_Qbit_Error: 0 [0|0] "" 0 25 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvFAEB_Longitudinal_Reqt_Pt_MAC: 0 [0|0] "" 0 26 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvFAEB_Longitudinal_Req_Brk_MAC: 0 [0|0] "" 0 27 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvFEPAS_SAS_Info_2_MAC: 0 [0|0] "" 0 28 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvError_crashoutput_MAC: 0 [0|0] "" 0 29 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvMsg_crashoutput_MAC: 0 [0|0] "" 0 30 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvVerify_crashoutput_MAC: 0 [0|0] "" 0 31 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvError_RCMStatusMessage_2_MAC: 0 [0|0] "" 0 32 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvMsg_RCMStatusMessage_2_MAC: 0 [0|0] "" 0 33 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvVerify_RCMStatusMessage_2_MAC: 0 [0|0] "" 0 34 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvError_RCMStatusMessage_MAC: 0 [0|0] "" 0 35 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvMsg_RCMStatusMessage_MAC: 0 [0|0] "" 0 36 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvVerify_RCMStatusMessage_MAC: 0 [0|0] "" 0 37 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvError_RCM_Long_Acc_MAC: 0 [0|0] "" 0 38 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvMsg_RCM_Long_Acc_MAC: 0 [0|0] "" 0 39 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvVerify_RCM_Long_Acc_MAC: 0 [0|0] "" 0 40 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvError_RCM_Late_Acc_MAC: 0 [0|0] "" 0 41 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvMsg_RCM_Late_Acc_MAC: 0 [0|0] "" 0 42 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvVerify_RCM_Late_Acc_MAC: 0 [0|0] "" 0 43 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvError_RCM_Yaw_Rate_MAC: 0 [0|0] "" 0 44 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvMsg_RCM_Yaw_Rate_MAC: 0 [0|0] "" 0 45 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvVerify_RCM_Yaw_Rate_MAC: 0 [0|0] "" 0 46 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_CGW_Sync_SendOnce: 0 [0|0] "" 0 47 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_CGW_Sync_FailMAC: 0 [0|0] "" 0 48 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvBurnTimer_: 0 [0|0] "" 0 49 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_SEC_AES_Seed: 0 [0|0] "" 0 50 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_SEC_AES_Key: 0 [0|0] "" 0 51 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_WL_Mismatch_Error: 0 [0|0] "" 0 52 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_PADI_Mismatch_Error: 0 [0|0] "" 0 53 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_Reset_Trigger: 0 [0|0] "" 0 54 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_BCMInfor1_MAC_Cs_Error: 0 [0|0] "" 0 55 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_BCMInfor1_MAC_Cnt_Error: 0 [0|0] "" 0 56 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvFBCM_Information1_MAC: 0 [0|0] "" 0 57 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_HECSwtchB_1_Cs_Error: 0 [0|0] "" 0 58 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_HECSwtchB_1_Cnt_Error: 0 [0|0] "" 0 59 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvFCruise_Multi_Switch_1_MAC: 0 [0|0] "" 0 60 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvVehVActlBrk_No_Cs_: 1 [0|0] "" 0 61 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvVehVActlBrk_No_Cnt_: 1 [0|0] "" 0 62 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvFWheelData_2_MAC: 0 [0|0] "" 0 63 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvVehVActlBrk_No_Cs_: 1 [0|0] "" 0 64 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvVehVActlBrk_No_Cnt_: 1 [0|0] "" 0 65 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvFHvac_Control_Info2_MAC: 0 [0|0] "" 0 66 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvEDR_SetUndefault_All: 0 [0|0] "" 0 67 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_P_Dummy: 0 [0|1] "" 0 68 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+ENVVAR_DATA_ Env_SEC_AES_Seed: 16;
+ENVVAR_DATA_ Env_SEC_AES_Key: 16;
+
+CM_ BO_ 3221225472 "This is a message for not used signals, created by Vector CANdb++ DBC OLE DB Provider.";
+VAL_ Env_24EDR_sampleDataT0 22 "AEBS status" 21 "Traction Control Status" 20 "Stability control" 19 "Turn Signal " 18 "Parking Brake " 17 "Lane departure status" 16 "Tire Pressure Monitoring Status" 15 "ESF Status" 14 "CSF Status" 13 "Antilock braking system status" 12 "Motor RPM" 11 "ACSF B1 status" 10 "ACSF A status" 9 "Brake Warning Indicator Status" 8 "Engine RPM" 7 "Yaw Rate" 6 "Adaptive Cruise Control Status" 5 "Cruise Control System" 4 "Gear Position" 3 "Steering input" 2 "Service brake, on/off" 1 "Accelerator pedal, % full" 0 "Speed, vehicle indicated" ;
+VAL_ Env_24EDR_DataSimul_ 22 "AEBS status" 21 "Traction Control Status" 20 "Stability control" 19 "Turn Signal " 18 "Parking Brake " 17 "Lane departure status" 16 "Tire Pressure Monitoring Status" 15 "ESF Status" 14 "CSF Status" 13 "Antilock braking system status" 12 "Motor RPM" 11 "ACSF B1 status" 10 "ACSF A status" 9 "Brake Warning Indicator Status" 8 "Engine RPM" 7 "Yaw Rate" 6 "Adaptive Cruise Control Status" 5 "Cruise Control System" 4 "Gear Position" 3 "Steering input" 2 "Service brake, on/off" 1 "Accelerator pedal, % full" 0 "Speed, vehicle indicated" ;
+

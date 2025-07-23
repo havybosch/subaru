@@ -1,0 +1,22 @@
+<script language="JavaScript" type="text/javascript">
+function selectPerlVersion(element) {
+  if (element.value.substring(0,1) == '/') {
+    location.href = element.value;
+  }
+}
+</script>
+
+<select id="perl_version_select" name="version-chooser" onChange="selectPerlVersion(this)">
+  <option selected>Select...
+  <optgroup label="Perl 5 version 12">
+    <option value="/index.html">Perl 5.12.0
+  </optgroup>
+  <optgroup label="Perl 5 version 10">
+    <option value="/5.10.1/index.html">Perl 5.10.1
+    <option value="/5.10.0/index.html">Perl 5.10.0
+  </optgroup>
+  <optgroup label="Perl 5 version 8">
+    <option value="/5.8.9/index.html">Perl 5.8.9
+    <option value="/5.8.8/index.html">Perl 5.8.8
+  </optgroup>
+</select>

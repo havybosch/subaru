@@ -1,0 +1,201 @@
+; CC/EPY2-Kopplin	
+; example SMA660, SMA680, SMA690  SPI , C-sample configuration file	
+; compatible with QuaTeDLL version 7 or higher	
+
+;READ THIS FIRST!
+;----------------
+;
+;The ROM content was originally defined for the TIA660 which is used for SMA660, SMA665 
+;and all PAS6e/UFS6e variants. With the latest firmware update we only support the 
+;internal sensors SMA660 and SMA665. But still we need the ROM files to be loaded. 
+;That’s why there are still the old parameters included. This means for the SMA660 and 
+;SMA665, please do not edit the content of the ROM file. Then everything will work. 
+
+	
+[SMA6xx]	; Do not edit this line!
+version = 3	; Do not edit this line!
+	
+;-------------------------------	
+psi_spi_en = 2	; 1: PSI device 
+	; 2: SPI device 
+	
+;------------------------------- 	
+;communication_mode = 0	; 0: PSI5-P10P-500/3L, CH1+CH2, Sync, 125kbs/s, slot: 1-2
+	; 1: PSI5-A10P-250/1L, CH2, Async, 125kbs/s, slot: -
+	; 2: PSI5-A10P-250/1H, CH1, Async, 189kbs/s, slot: -
+	; 3: PSI5-A10P-250/1H, CH2, Async, 189kbs/s, slot: -
+	; 4: PSI5-P10P-500/3L, CH1, Sync, 125kbs/s, slot: 1
+	; 5: PSI5-P10P-500/3L, CH1, Sync, 125kbs/s, slot: 2
+	; 6: PSI5-P10P-500/3L, CH1, Sync, 125kbs/s, slot: 3
+	; 7: PSI5-A10P-250/1VL, CH1, Async, 83kbs/s, slot: -
+	; 8: PSI5-P10P-500/4H, CH1, Sync, 189kbs/s, slot: 1
+	; 9: PSI5-P10P-500/4H, CH1, Sync, 189kbs/s, slot: 2
+	; 10: PSI5-P10P-500/4H, CH1, Sync, 189kbs/s, slot: 3
+	; 11: PSI5-P10P-500/4H, CH1, Sync, 189kbs/s, slot: 4
+	; 12: PSI5-P10P-500/2VL, CH1, Sync, 83kbs/s, slot: 1
+	; 13: PSI5-P10P-500/2VL, CH1, Sync, 83kbs/s, slot: 2
+	; 14: PSI5-S10P500/3L, CH1, Sync, 125kbs/s, slot: daisy chain
+	; 15: PSI5-S10P500/3L, CH2, Sync, 125kbs/s, slot: daisy chain
+	; 16: PSI5-P10P-500/3L, CH2, Sync, 125kbs/s, slot: 1
+	; 17: PSI5-P10P-500/3L, CH2, Sync, 125kbs/s, slot: 2
+	; 18: PSI5-P10P-500/3L, CH2, Sync, 125kbs/s, slot: 3
+	; 19: PSI5-A10P-250/1VL, CH2, Async, 83kbs/s, slot: -
+	; 20: PSI5-P10P-500/4H, CH2, Sync, 189kbs/s, slot: 1
+	; 21: PSI5-P10P-500/4H, CH2, Sync, 189kbs/s, slot: 2
+	; 22: PSI5-P10P-500/4H, CH2, Sync, 189kbs/s, slot: 3
+	; 23: PSI5-P10P-500/4H, CH2, Sync, 189kbs/s, slot: 4
+	; 24: PSI5-P10P-500/2VL, CH2, Sync, 83kbs/s, slot: 1
+	; 25: PSI5-P10P-500/2VL, CH2, Sync, 83kbs/s, slot: 2
+	; 26: PSI5-S10P500/4H, CH1, Sync, 189kbs/s, slot: daisy chain
+	; 27: PSI5-S10P500/4H, CH2, Sync, 189kbs/s, slot: daisy chain
+	; 28: PSI5-A10P-250/1L, CH1, Async, 125kbs/s, slot: -
+	; 29: PSI5-P10P-500/4H, CH1+CH2, Sync, 189kbs/s, slot: 1-2
+	; 30: PSI5-P10P-500/4H, CH1+CH2, Sync, 189kbs/s, slot: 3-4
+	; 31: PSI5-P10P-500/2VL, CH1+CH2, Sync, 83kbs/s, slot: 1-2
+	
+;-------------------------------	
+;manufacturer = 0x10	; 8bit [hex] 
+	
+;-------------------------------	
+;customer_data = 0x0	; 4bit [hex] 
+	
+;-------------------------------	
+;sgb_axis_ch1 = 1	; 0: SGB axis beta (y) 
+	; 1: SGB axis alpha (x) 
+	; 2: SGB axis gamma (z)
+	
+;-------------------------------	
+;sgb_axis_ch2 = 1	; 0: SGB axis beta (y) 
+	; 1: SGB axis alpha (x) 
+	; 2: SGB axis gamma (z)
+	
+;-------------------------------	
+;filter_mode = 0	; 0: 426 Hz
+	; 1: 213 Hz
+	; 2: 106 Hz
+	; 3:  53 Hz
+	
+;-------------------------------	
+;range = 8	; 8: 120g, SMA660, PAS6e 
+	; 9: 240g 
+	; 10: 480g, UFS6e
+	
+;-------------------------------	
+;sampling_time_z = 0	; 0: after 6µs of sync pulse 
+	; 1: before data transmission 
+	
+;------------------------------- 	
+;housing_code = 0x0A	; 6bit [hex]
+	
+;------------------------------- 	
+;customer_series_code = 0x1CA	; 12bit [hex], valid range 0x0000..0x0FFF
+	
+;------------------------------- 	
+;manufacturing_date = 0x3789	; 14bit [hex], valid range 0x0000..0x3FFF
+	
+;-------------------------------	
+;lot_number = 0x5	; 4bit [hex]
+	
+;-------------------------------	
+;line_number = 0x5	; 4bit [hex]
+	
+;------------------------------- 	
+series_number = 0x9876543210AB	; 48bit [hex]
+	
+	
+	
+; do not edit this section 	
+[SMA6xx_OTP]	; Do not edit this line!
+version = 3	; Do not edit this line!
+	
+; direct access to OTP data	
+; will be overwritten by the symbolic parameter of section [SMA6xx] if defined 	
+	
+; OTP ASIC area	
+;------------------------------- 	
+OTP_0 = 0x42	
+OTP_1 = 0x6c	
+OTP_2 = 0x4d	
+OTP_3 = 0x09	
+OTP_4 = 0x0d	
+OTP_5 = 0xbd	
+OTP_6 = 0x31	
+OTP_7 = 0x11	
+OTP_8 = 0x84	
+OTP_9 = 0x06	
+OTP_10 = 0x9d	
+OTP_11 = 0x16	
+OTP_12 = 0x00	
+OTP_13 = 0x00	
+OTP_14 = 0xbb	
+OTP_15 = 0x80	
+	
+; OTP SMA area	
+;------------------------------- 	
+OTP_16 = 0x02	
+OTP_17 = 0x00	
+OTP_18 = 0x50	
+OTP_19 = 0x50	
+OTP_20 = 0x64	
+OTP_21 = 0x00	
+OTP_22 = 0x00	
+OTP_23 = 0x00	
+OTP_24 = 0x00	
+OTP_25 = 0x00	
+OTP_26 = 0xB8	; -1152LSB, -72g 	
+OTP_27 = 0x4C	; +1216LSB, +76g
+OTP_28 = 0xB9	; -1136LSB, -71g 	
+OTP_29 = 0x4D	; +1232LSB, +77g	
+OTP_30 = 0xc5	
+OTP_31 = 0x80	
+	
+; OTP ENG area	
+;------------------------------- 	
+OTP_32 = 0x01	; CCUT_DISABLE(1), ASSD_EN(0) 
+OTP_33 = 0x20	; ASSD_LIMIT(7..0)
+OTP_34 = 0x68	; ASSD_BITE_THR(7), MOTP_ASSD_FREQ(5..4) 
+OTP_35 = 0x01	; ASSD_BITE_THR(0), rest must be zero
+OTP_36 = 0x00	; PAS_SINGLE(7), FOC_MEAN(6), SIGN_CH2(5), SIGN_CH1(4), BITE_SIGN_CH2(3), BITE_SIGN_CH1(2), ...
+OTP_37 = 0x00	; ASSD_FLAG_CNT(5..4) 
+OTP_38 = 0x00	
+OTP_39 = 0x00	
+OTP_40 = 0x00	
+OTP_41 = 0x00	
+OTP_42 = 0x00	
+OTP_43 = 0x00	
+OTP_44 = 0x00	
+OTP_45 = 0x00	
+OTP_46 = 0x03	
+OTP_47 = 0x80	
+	
+; OTP PAS area	
+;------------------------------- 	
+OTP_48 = 0x00	
+OTP_49 = 0x00	
+OTP_50 = 0x00	
+OTP_51 = 0x00	
+OTP_52 = 0x20	
+OTP_53 = 0x00	
+OTP_54 = 0x00	
+OTP_55 = 0x00	
+OTP_56 = 0x00	
+OTP_57 = 0x60	
+OTP_58 = 0x00	
+OTP_59 = 0x00	
+OTP_60 = 0x00	
+OTP_61 = 0x00	
+OTP_62 = 0x20	
+OTP_63 = 0x80	
+	
+;------------------------------- 	
+otp_crc = 1	; 0: CRC re-calculation off 
+	; 1: CRC re-calculation on (required for customer data) 
+	
+;------------------------------- 	
+;current_quiet = 40	; 0..255 (x * 32mA/256)
+;current_communication = 104	; 0..255 (x * 64mA/256)
+; none or both parameters must be set 	
+	
+;------------------------------- 	
+;  end of file	
+;------------------------------- 	

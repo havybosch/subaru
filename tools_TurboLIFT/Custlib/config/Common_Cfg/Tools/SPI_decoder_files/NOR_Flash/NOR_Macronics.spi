@@ -1,0 +1,1837 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="NOR_Macronics.spi" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="NOR_Macronics.spi">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="asicReference" type="xs:unsignedInt" minOccurs="0" />
+                <xs:element name="asicReferenceNode" type="xs:unsignedByte" minOccurs="0" />
+                <xs:element name="asicMaskMOSI" msdata:DataType="SPIMaidPlus.LongWord, SPIMaidPlus, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" type="xs:anyType" minOccurs="0" />
+                <xs:element name="asicValueMOSI" msdata:DataType="SPIMaidPlus.LongWord, SPIMaidPlus, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" type="xs:anyType" minOccurs="0" />
+                <xs:element name="asicDecodingMOSI" msdata:DataType="SPIMaidPlus.MessageDecoder+decodingType, SPIMaidPlus, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" type="xs:anyType" minOccurs="0" />
+                <xs:element name="asicPropertyMOSI" type="xs:int" minOccurs="0" />
+                <xs:element name="asicTextMOSI" type="xs:string" minOccurs="0" />
+                <xs:element name="asicMaskMISO" msdata:DataType="SPIMaidPlus.LongWord, SPIMaidPlus, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" type="xs:anyType" minOccurs="0" />
+                <xs:element name="asicValueMISO" msdata:DataType="SPIMaidPlus.LongWord, SPIMaidPlus, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" type="xs:anyType" minOccurs="0" />
+                <xs:element name="asicDecodingMISO" msdata:DataType="SPIMaidPlus.MessageDecoder+decodingType, SPIMaidPlus, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" type="xs:anyType" minOccurs="0" />
+                <xs:element name="asicPropertyMISO" type="xs:int" minOccurs="0" />
+                <xs:element name="asicTextMISO" type="xs:string" minOccurs="0" />
+                <xs:element name="asicVisible" type="xs:boolean" minOccurs="0" />
+                <xs:element name="asicGraficMOSI" type="xs:boolean" minOccurs="0" />
+                <xs:element name="asicGraficMISO" type="xs:boolean" minOccurs="0" />
+                <xs:element name="asicInstLength" type="xs:unsignedInt" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <NOR_Macronics.spi>
+    <asicReference>0</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>4278190080</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>50331648</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-16744448</asicPropertyMOSI>
+    <asicTextMOSI>READ</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>0</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>32</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>0</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16777215</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>4</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI>Address</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>0</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>32</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>0</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>0</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO>DataOut</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>8</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>1</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>4278190080</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>184549376</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-8372160</asicPropertyMOSI>
+    <asicTextMOSI>FAST_READ</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>0</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>32</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>2</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>4278190080</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>3137339392</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-32768</asicPropertyMOSI>
+    <asicTextMOSI>2READ</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>0</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>32</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>3</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>4278190080</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>989855744</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-16711936</asicPropertyMOSI>
+    <asicTextMOSI>DREAD</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>0</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>32</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>4</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>4278190080</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>3942645760</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-8355776</asicPropertyMOSI>
+    <asicTextMOSI>4READ</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>0</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>32</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>5</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>4278190080</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>1795162112</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-8355712</asicPropertyMOSI>
+    <asicTextMOSI>QREAD</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>0</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>32</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>6</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>4278190080</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>33554432</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-16744193</asicPropertyMOSI>
+    <asicTextMOSI>PAGE_PROGRAM</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>0</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>32</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>6</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16777215</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>4</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI>Address</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>0</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>32</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>6</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>0</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>8</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>7</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>4278190080</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>939524096</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-8323073</asicPropertyMOSI>
+    <asicTextMOSI>QUAD_PAGE_PROGRAM</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>0</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>32</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>8</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>4278190080</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>536870912</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-16760704</asicPropertyMOSI>
+    <asicTextMOSI>SECTOR_ERASE</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>0</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>32</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>8</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16777215</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>4</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI>Address</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>0</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>32</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>9</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>4278190080</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>1375731712</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-12550016</asicPropertyMOSI>
+    <asicTextMOSI>BLOCK_ERASE_32K</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>0</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>32</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>10</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>4278190080</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>3623878656</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-16744193</asicPropertyMOSI>
+    <asicTextMOSI>BLOCK_ERASE_64K</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>0</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>32</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>11</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>4278190080</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>1610612736</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-16744256</asicPropertyMOSI>
+    <asicTextMOSI>CHIP_ERASE</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>0</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>32</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>12</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>4278190080</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>1509949440</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-8355648</asicPropertyMOSI>
+    <asicTextMOSI>READ_SFDP</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>0</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>32</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>13</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>4278190080</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>2667577344</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-32513</asicPropertyMOSI>
+    <asicTextMOSI>RDID</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>0</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>32</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>13</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16711680</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>3</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO>JEDEC_Manufacturer</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>32</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>13</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>65535</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>3</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO>JEDEC_DeviceID</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>32</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>14</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>4278190080</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>2566914048</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-8388353</asicPropertyMOSI>
+    <asicTextMOSI>RESET</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>0</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>32</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>15</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>4278190080</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>1711276032</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-8355585</asicPropertyMOSI>
+    <asicTextMOSI>RESET_ENABLE</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>0</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>32</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>16</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>65280</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>11008</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-8355840</asicPropertyMOSI>
+    <asicTextMOSI>RDSCUR</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>0</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>16</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>64</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO>E_FAIL</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>16</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>32</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO>P_FAIL</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>16</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>8</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO>ESB</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>16</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>4</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO>PSB</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>16</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>2</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO>LDSO</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>16</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>1</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO>SecuredOTP</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>17</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>65280</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>1280</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-16776961</asicPropertyMOSI>
+    <asicTextMOSI>RDSR</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>0</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>17</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>128</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO>SRWD</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>17</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>64</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO>QE</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>17</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>32</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO>BP3</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>17</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>16</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO>BP2</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>17</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>8</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO>BP1</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>17</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>4</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO>BP0</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>17</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>2</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO>WEL</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>17</asicReference>
+    <asicReferenceNode>1</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>0</asicDecodingMOSI>
+    <asicPropertyMOSI>-1</asicPropertyMOSI>
+    <asicTextMOSI />
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>1</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>4</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO>WIP</asicTextMISO>
+    <asicVisible>true</asicVisible>
+    <asicInstLength>16</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>18</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>255</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>6</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-8388353</asicPropertyMOSI>
+    <asicTextMOSI>WREN</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>0</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>8</asicInstLength>
+  </NOR_Macronics.spi>
+  <NOR_Macronics.spi>
+    <asicReference>19</asicReference>
+    <asicReferenceNode>0</asicReferenceNode>
+    <asicMaskMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>4278190080</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMOSI>
+    <asicValueMOSI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>3221225472</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMOSI>
+    <asicDecodingMOSI>1</asicDecodingMOSI>
+    <asicPropertyMOSI>-4144960</asicPropertyMOSI>
+    <asicTextMOSI>Burst_Read</asicTextMOSI>
+    <asicMaskMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicMaskMISO>
+    <asicValueMISO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Value>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+        <unsignedInt>0</unsignedInt>
+      </Value>
+    </asicValueMISO>
+    <asicDecodingMISO>0</asicDecodingMISO>
+    <asicPropertyMISO>-1</asicPropertyMISO>
+    <asicTextMISO />
+    <asicVisible>true</asicVisible>
+    <asicInstLength>32</asicInstLength>
+  </NOR_Macronics.spi>
+</NewDataSet>

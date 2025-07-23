@@ -1,0 +1,185 @@
+; PSI5DEVICE RFG-Version 2.7 14.10.2016
+; compatible with QuaTeDLL version 7H or higher
+
+[PSI5DEVICE]  ; Do not edit this line!
+version = 3  ; Do not edit this line!
+
+;PSI5Device_PAS6s_f_CM17_v1.rom
+;Bus Mode Sensor #2/3 @125 kbps(PSI5-P10P-500/3L)
+
+
+Ch0_Init2_Data1-14 = 0x62042214905000 ; status data 1..14 of sensor ID Initialization phase 2
+;Ch1_Init2_Data1-14 = 0x62042214905000 ; status data 1..14 of sensor ID Initialization phase 2
+
+; optional parameter. overwrites the parameter ChX_Init2_Data15..32
+manufacturing_date = 0x3789
+lot_line_number = 0x00
+series_number = 0x9876543210BE
+
+; init 2 data of channel 0
+Ch0_Init2_Data1 = 0x00000006
+Ch0_Init2_Data2 = 0x00000002
+Ch0_Init2_Data3 = 0x00000000
+Ch0_Init2_Data4 = 0x00000004
+Ch0_Init2_Data5 = 0x00000002
+Ch0_Init2_Data6 = 0x00000002
+Ch0_Init2_Data7 = 0x00000001
+Ch0_Init2_Data8 = 0x00000004
+Ch0_Init2_Data9 = 0x00000009
+Ch0_Init2_Data10 = 0x00000000
+Ch0_Init2_Data11 = 0x00000005
+Ch0_Init2_Data12 = 0x00000000
+Ch0_Init2_Data13 = 0x00000000
+Ch0_Init2_Data14 = 0x00000000
+Ch0_Init2_Data15 = 0x00000003
+Ch0_Init2_Data16 = 0x00000007
+Ch0_Init2_Data17 = 0x00000008
+Ch0_Init2_Data18 = 0x00000009
+Ch0_Init2_Data19 = 0x00000000
+Ch0_Init2_Data20 = 0x00000000
+Ch0_Init2_Data21 = 0x00000009
+Ch0_Init2_Data22 = 0x00000008
+Ch0_Init2_Data23 = 0x00000007
+Ch0_Init2_Data24 = 0x00000006
+Ch0_Init2_Data25 = 0x00000005
+Ch0_Init2_Data26 = 0x00000004
+Ch0_Init2_Data27 = 0x00000003
+Ch0_Init2_Data28 = 0x00000002
+Ch0_Init2_Data29 = 0x00000001
+Ch0_Init2_Data30 = 0x00000000
+Ch0_Init2_Data31 = 0x0000000B
+Ch0_Init2_Data32 = 0x0000000E
+
+; init 2 data of channel 1 
+Ch1_Init2_Data1 = 0x00000006
+Ch1_Init2_Data2 = 0x00000002
+Ch1_Init2_Data3 = 0x00000000
+Ch1_Init2_Data4 = 0x00000004
+Ch1_Init2_Data5 = 0x00000002
+Ch1_Init2_Data6 = 0x00000002
+Ch1_Init2_Data7 = 0x00000001
+Ch1_Init2_Data8 = 0x00000004
+Ch1_Init2_Data9 = 0x00000009
+Ch1_Init2_Data10 = 0x00000000
+Ch1_Init2_Data11 = 0x00000005
+Ch1_Init2_Data12 = 0x00000000
+Ch1_Init2_Data13 = 0x00000000
+Ch1_Init2_Data14 = 0x00000000
+Ch1_Init2_Data15 = 0x00000003
+Ch1_Init2_Data16 = 0x00000007
+Ch1_Init2_Data17 = 0x00000008
+Ch1_Init2_Data18 = 0x00000009
+Ch1_Init2_Data19 = 0x00000000
+Ch1_Init2_Data20 = 0x00000000
+Ch1_Init2_Data21 = 0x00000009
+Ch1_Init2_Data22 = 0x00000008
+Ch1_Init2_Data23 = 0x00000007
+Ch1_Init2_Data24 = 0x00000006
+Ch1_Init2_Data25 = 0x00000005
+Ch1_Init2_Data26 = 0x00000004
+Ch1_Init2_Data27 = 0x00000003
+Ch1_Init2_Data28 = 0x00000002
+Ch1_Init2_Data29 = 0x00000001
+Ch1_Init2_Data30 = 0x00000000
+Ch1_Init2_Data31 = 0x0000000B
+Ch1_Init2_Data32 = 0x0000000E
+
+; do not edit this section 
+[PSI5DEVICE_OTP] ; Do not edit this line!
+version = 1 ; Do not edit this line!
+
+deviceName = PAS6s_f/UFS6s_f
+
+controller = 0x7
+switch = 0x0
+numChannels = 1
+slot_sel_ch0 = 0x2
+slot_sel_ch1 = 0x0
+init1_timer = 0x10A4F0
+
+rangeMax_ch0 = +480
+rangeMin_ch0 = -480
+zeroValue_ch0 = 0
+inputDataWidth_ch0 = 10
+outputDataWidth_ch0 = 10
+outputResolution_ch0 = 10
+rangeMax_ch1 = +480
+rangeMin_ch1 = -480
+zeroValue_ch1 = 0
+inputDataWidth_ch1 = 0
+outputDataWidth_ch1 = 0
+outputResolution_ch1 = 0
+
+; init 3 data of channel 0
+Ch0_Init3_Data1 = 0x000001E7
+Ch0_Init3_Data2 = 0x000001E7
+Ch0_Init3_Data3 = 0x000001E7
+Ch0_Init3_Data4 = 0x000001E7
+Ch0_Init3_Data5 = 0x000001E7
+Ch0_Init3_Data6 = 0x000001E7
+Ch0_Init3_Data7 = 0x000001E7
+Ch0_Init3_Data8 = 0x000001E7
+Ch0_Init3_Data9 = 0x000001E7
+Ch0_Init3_Data10 = 0x000001E7
+Ch0_Init3_Data11 = 0x000001E7
+Ch0_Init3_Data12 = 0x000001E7
+Ch0_Init3_Data13 = 0x000001E7
+Ch0_Init3_Data14 = 0x000001E7
+Ch0_Init3_Data15 = 0x000001E7
+Ch0_Init3_Data16 = 0x000001E7
+Ch0_Init3_Data16 = 0x000001E7
+Ch0_Init3_Data17 = 0x80000000
+
+; PSI core configuration
+OTP_0 = 0x0
+OTP_1 = 0x48
+OTP_2 = 0x0
+OTP_3 = 0x0
+OTP_4 = 0x0
+OTP_5 = 0x0
+OTP_6 = 0x0
+OTP_7 = 0x0
+OTP_8 = 0x0
+OTP_9 = 0xA
+OTP_10 = 0x0
+OTP_11 = 0x0
+OTP_12 = 0x0
+OTP_13 = 0x0
+OTP_14 = 0x2
+OTP_15 = 0x1
+OTP_16 = 0x0
+OTP_17 = 0xD80
+OTP_18 = 0x0
+OTP_19 = 0x0
+OTP_20 = 0x0
+OTP_21 = 0x0
+OTP_22 = 0x0
+OTP_23 = 0x0
+OTP_24 = 0x0
+OTP_25 = 0x0
+OTP_26 = 0x0
+OTP_27 = 0x0
+OTP_28 = 0x0
+OTP_29 = 0x0
+OTP_30 = 0x0
+OTP_31 = 0x0
+OTP_32 = 0x0
+OTP_33 = 0x0
+OTP_34 = 0x1
+OTP_35 = 0x0
+OTP_36 = 0x0
+OTP_37 = 0x0
+OTP_38 = 0x0
+OTP_39 = 0x0
+OTP_40 = 0x6B
+OTP_41 = 0x0
+OTP_42 = 0x0
+OTP_43 = 0x0
+OTP_44 = 0x0
+
+current_quiet = 40 ;       0..255 (x * 32mA/256))
+current_communication = 104 ;        0..255 (x * 64mA/256)
+
+;-------------------------------
+;  end of file
+;-------------------------------

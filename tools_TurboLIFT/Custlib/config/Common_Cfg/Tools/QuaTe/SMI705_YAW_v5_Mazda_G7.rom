@@ -1,0 +1,83 @@
+; CC-PS/EPY2			
+; example SMI705 C-sample configuration file			
+; compatible with QuaTeDLL version 7F or higher			
+			
+[SMI700]	; Do not edit this line!		
+version = 5	; Do not edit this line!		
+			
+; define sensor SMI700 / SMI705 / SMI710 / SMI715 / SMI740			
+;------------------------------- 			
+CHIPADDR = 1			
+	; 0: SMI700_0 /          / SMI740_0 (Yaw redundant)		
+	; 1: SMI700_1 / SMI705_1 / SMI740_1 (Yaw)		
+	; 2: SMI710_0 /          /   (Pitch)		
+	; 3: SMI710_1 / SMI715_1 /   (Roll)		
+;------------------------------- 			
+; channel assignment 			
+			
+			
+SID_RATE_LF = 0x16	; 5bit [hex]		
+SID_ACC1_LF = 0x14	; 5bit [hex]		
+SID_ACC2_LF = 0x13	; 5bit [hex]		
+SID_RATE_HF = 0x1F	; 5bit [hex]		
+SID_ACC1_HF = 0x15	; 5bit [hex]		
+SID_ACC2_HF = 0x1F	; 5bit [hex]		
+			
+; test specific parameters			
+;-------------------------------			
+			
+			
+;------------------------------- 			
+OFFSETVALUE_ACC1_LF = 0	; use offset value from VDA parameter file, 5000LSB/g		
+OFFSETVALUE_ACC1_HF = 0	; use offset value from VDA parameter file, 500LSB/g 		
+			
+;------------------------------- 			
+OFFSETVALUE_ACC2_LF = -5000	; use offset value from VDA parameter file, 5000LSB/g 		
+OFFSETVALUE_ACC2_HF = -500	; use offset value from VDA parameter file , 500LSB/g 		
+			
+;------------------------------- 			
+NOISE_RATE_LF = 0	; 		
+NOISE_ACC1_LF = 0	; adds 2^n LSB noise  		
+NOISE_ACC2_LF = 0	; 		
+			
+NOISE_RATE_HF = 0	; 		
+NOISE_ACC1_HF = 0	; adds 2^n LSB noise  		
+NOISE_ACC2_HF = 0	; 		
+			
+; The OTP is QuaTe specific and has nothing to do with the SMI7 OTP			
+;------------------------------- 			
+OTP_64 = 0x1A12	; RD_ASIC_SERIAL_NR_0		
+OTP_65 = 0x9544	; RD_ASIC_SERIAL_NR_1		
+OTP_66 = 0xAD0F	; RD_ASIC_SERIAL_NR_2		
+OTP_67 = 0x0700	; RD_ASIC_NAME		
+OTP_68 = 0x0024	; RD_ASIC_REVISION		
+OTP_69 = 0x5806	; RD_SMI_SERIAL_NR_0		
+OTP_70 = 0x01B4	; RD_SMI_SERIAL_NR_1		
+OTP_71 = 0x4000	; RD_SMI_SERIAL_NR_2		
+OTP_72 = 0x4321	; RD_CUSTOMER_SERIAL_NR		
+OTP_32 = 0xF448	; TEMP_1		
+OTP_33 = 0x0000	; ERROR_FLAG_BANK_0		
+OTP_34 = 0x0000	; ERROR_FLAG_BANK_1		
+OTP_35 = 0x0000	; ERROR_FLAG_BANK_2		
+OTP_36 = 0x0000	; ERROR_FLAG_BANK_3		
+OTP_37 = 0x0000	; ERROR_FLAG_BANK_4		
+OTP_38 = 0x0000	; ERROR_FLAG_BANK_5		
+OTP_39 = 0x0000	; ERROR_FLAG_BANK_6		
+OTP_40 = 0x0000	; ERROR_FLAG_BANK_7		
+OTP_41 = 0x0000	; ERROR_FLAG_BANK_8		
+OTP_42 = 0x0000	; ERROR_FLAG_BANK_9		
+			
+			
+OTP_43 = 0x0424	; ERROR_COUNTER_1 = ACC1_LF / ERROR_COUNTER_0 = ACC1_HF		
+OTP_44 = 0x0424	; ERROR_COUNTER_3 = ACC2_LF / ERROR_COUNTER_2 = ACC2_HF		
+OTP_45 = 0x2424	; ERROR_COUNTER_5 = RATE_LF /  ERROR_COUNTER_4 = RATE_HF		
+			
+OTP_25 = 0xF448	; TEMP_2		
+OTP_13 = 0x00AB	; RESET_VECTOR		
+OTP_1  = 0x03F6	; Rate Sensor IDs HF and LF		
+OTP_2  = 0x02B4	; ACC1 Sensor IDs HF and LF		
+OTP_3  = 0x03F3	; ACC2 Sensor IDs HF and LF		
+			
+;------------------------------- 			
+; end configuration file			
+;------------------------------- 			

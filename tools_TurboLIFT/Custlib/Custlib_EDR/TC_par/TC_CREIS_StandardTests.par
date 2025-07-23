@@ -1,0 +1,75 @@
+## This file is generated using CREIS Configuration Generator Tool - Revision: 1.10  ##
+## This file is generated from *.mdb: C:/Users/arl6kor/Desktop/Binh/TurbotLift_typeC/Projects/JOEM_Platform/Subaru_AB12/config/Tools/CrashFile/MDSProject_1113/MDSng/CrashFiles/20161114/ES1TR8_SRT_SU1200_0A3BE0_1R-d161114_testSCIcrashset.mdb ##
+
+[TC_CREIS_StandardTests.1_Single_EDR_Front_Inflatable_State_1]
+MDSDB = 'C:\Users\arl6kor\Desktop\Binh\TurbotLift_typeC\Projects\JOEM_Platform\Subaru_AB12\config\Tools\CrashFile\MDSProject_1113\MDSng\CrashFiles\20161114\ES1TR8_SRT_SU1200_0A3BE0_1R-d161114_testSCIcrashset.mdb'
+Crash_No = '1'
+CrashName = 'Single_EDR_Front_Inflatable'
+Crash_Iteration = '1'
+
+[TC_CREIS_StandardTests.2_Single_EDR_SideLeft_Inflatable_State_1]
+MDSDB = 'C:\Users\arl6kor\Desktop\Binh\TurbotLift_typeC\Projects\JOEM_Platform\Subaru_AB12\config\Tools\CrashFile\MDSProject_1113\MDSng\CrashFiles\20161114\ES1TR8_SRT_SU1200_0A3BE0_1R-d161114_testSCIcrashset.mdb'
+Crash_No = '2'
+CrashName = 'Single_EDR_SideLeft_Inflatable'
+Crash_Iteration = '1'
+
+[TC_CREIS_StandardTests.3_Single_EDR_SideRight_Inflatable_State_1]
+MDSDB = 'C:\Users\arl6kor\Desktop\Binh\TurbotLift_typeC\Projects\JOEM_Platform\Subaru_AB12\config\Tools\CrashFile\MDSProject_1113\MDSng\CrashFiles\20161114\ES1TR8_SRT_SU1200_0A3BE0_1R-d161114_testSCIcrashset.mdb'
+Crash_No = '3'
+CrashName = 'Single_EDR_SideRight_Inflatable'
+Crash_Iteration = '1'
+
+[TC_CREIS_StandardTests.4_Single_EDR_Rollover_Inflatable_State_1]
+MDSDB = 'C:\Users\arl6kor\Desktop\Binh\TurbotLift_typeC\Projects\JOEM_Platform\Subaru_AB12\config\Tools\CrashFile\MDSProject_1113\MDSng\CrashFiles\20161114\ES1TR8_SRT_SU1200_0A3BE0_1R-d161114_testSCIcrashset.mdb'
+Crash_No = '4'
+CrashName = 'Single_EDR_Rollover_Inflatable'
+Crash_Iteration = '1'
+
+[TC_CREIS_StandardTests.5_Multi_Cust_Front_Inflatable_SideLeft_Inflatable_State_1]
+MDSDB = 'C:\Users\arl6kor\Desktop\Binh\TurbotLift_typeC\Projects\JOEM_Platform\Subaru_AB12\config\Tools\CrashFile\MDSProject_1113\MDSng\CrashFiles\20161114\ES1TR8_SRT_SU1200_0A3BE0_1R-d161114_testSCIcrashset.mdb'
+Crash_No = '5'
+CrashName = 'Multi_Cust_Front_Inflatable_SideLeft_Inflatable'
+Crash_Iteration = '1'
+
+[TC_CREIS_StandardTests.6_Multi_Cust_Front_Inflatable_SideRight_Inflatable_State_1]
+MDSDB = 'C:\Users\arl6kor\Desktop\Binh\TurbotLift_typeC\Projects\JOEM_Platform\Subaru_AB12\config\Tools\CrashFile\MDSProject_1113\MDSng\CrashFiles\20161114\ES1TR8_SRT_SU1200_0A3BE0_1R-d161114_testSCIcrashset.mdb'
+Crash_No = '6'
+CrashName = 'Multi_Cust_Front_Inflatable_SideRight_Inflatable'
+Crash_Iteration = '1'
+
+[TC_CREIS_StandardTests.7_Multi_Cust_Rear_NonInflatable_Rollover_Inflatable_State_1]
+MDSDB = 'C:\Users\arl6kor\Desktop\Binh\TurbotLift_typeC\Projects\JOEM_Platform\Subaru_AB12\config\Tools\CrashFile\MDSProject_1113\MDSng\CrashFiles\20161114\ES1TR8_SRT_SU1200_0A3BE0_1R-d161114_testSCIcrashset.mdb'
+Crash_No = '7'
+CrashName = 'Multi_Cust_Rear_NonInflatable_Rollover_Inflatable'
+Crash_Iteration = '1'
+
+[TC_CREIS_StandardTests.8_Multi_Cust_RO_Inf_SideR_Inf_1_State_1]
+MDSDB = 'C:\Users\arl6kor\Desktop\Binh\TurbotLift_typeC\Projects\JOEM_Platform\Subaru_AB12\config\Tools\CrashFile\MDSProject_1113\MDSng\CrashFiles\20161114\ES1TR8_SRT_SU1200_0A3BE0_1R-d161114_testSCIcrashset.mdb'
+Crash_No = '8'
+CrashName = 'Multi_Cust_RO_Inf_SideR_Inf_1'
+Crash_Iteration = '1'
+
+[TC_CREIS_StandardTests.9_Multi_Cust_Front_Inf_Rear_NonInf_RO_Inf_State_1]
+MDSDB = 'C:\Users\arl6kor\Desktop\Binh\TurbotLift_typeC\Projects\JOEM_Platform\Subaru_AB12\config\Tools\CrashFile\MDSProject_1113\MDSng\CrashFiles\20161114\ES1TR8_SRT_SU1200_0A3BE0_1R-d161114_testSCIcrashset.mdb'
+Crash_No = '9'
+CrashName = 'Multi_Cust_Front_Inf_Rear_NonInf_RO_Inf'
+Crash_Iteration = '1'
+
+[TC_CREIS_StandardTests.10_Multi_Cust_Rear_NonInf_SideL_Inf_RO_Inf_1_State_1]
+MDSDB = 'C:\Users\arl6kor\Desktop\Binh\TurbotLift_typeC\Projects\JOEM_Platform\Subaru_AB12\config\Tools\CrashFile\MDSProject_1113\MDSng\CrashFiles\20161114\ES1TR8_SRT_SU1200_0A3BE0_1R-d161114_testSCIcrashset.mdb'
+Crash_No = '10'
+CrashName = 'Multi_Cust_Rear_NonInf_SideL_Inf_RO_Inf_1'
+Crash_Iteration = '1'
+
+[TC_CREIS_StandardTests.11_Multi_Cust_SideR_Inf_Rear_NonInf_RO_Inf_State_1]
+MDSDB = 'C:\Users\arl6kor\Desktop\Binh\TurbotLift_typeC\Projects\JOEM_Platform\Subaru_AB12\config\Tools\CrashFile\MDSProject_1113\MDSng\CrashFiles\20161114\ES1TR8_SRT_SU1200_0A3BE0_1R-d161114_testSCIcrashset.mdb'
+Crash_No = '11'
+CrashName = 'Multi_Cust_SideR_Inf_Rear_NonInf_RO_Inf'
+Crash_Iteration = '1'
+
+[TC_CREIS_StandardTests.12_Multi_Cust_Front_Inf_Rear_NonInf_SideR_Inf_State_1]
+MDSDB = 'C:\Users\arl6kor\Desktop\Binh\TurbotLift_typeC\Projects\JOEM_Platform\Subaru_AB12\config\Tools\CrashFile\MDSProject_1113\MDSng\CrashFiles\20161114\ES1TR8_SRT_SU1200_0A3BE0_1R-d161114_testSCIcrashset.mdb'
+Crash_No = '12'
+CrashName = 'Multi_Cust_Front_Inf_Rear_NonInf_SideR_Inf'
+Crash_Iteration = '1'
+

@@ -1,0 +1,31 @@
+/*@!Encoding:1252*/
+includes
+{
+  #include "TestScenario.cin"
+}
+
+variables
+{
+  
+}
+
+void MainTest()
+{
+ cf_testPreparation();
+ //ctc_WindowDownUp();
+ //ctc_RequestLock();
+ //ctc_AutoLock();
+}
+
+void cf_testPreparation()
+{
+ /* Add Description of Test Module */
+ TestModuleDescription("Sample test cases written in CAPL.");
+ 
+ /* Add Information into Test engineer Information Table */
+ TestReportAddEngineerInfo("Company", "Vector Informatik Pvt. Ltd.");
+ TestReportAddEngineerInfo("Tester name", "Shyam Sundhar");
+ TestReportAddSetupInfo("CANoe", "Version 13.0");
+ TestReportAddSetupInfo("vTestStudio", "Version 5.0");
+ TestReportAddSUTInfo ("SUT", "Doors ECU");
+}

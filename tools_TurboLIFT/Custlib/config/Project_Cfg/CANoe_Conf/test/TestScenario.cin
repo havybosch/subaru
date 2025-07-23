@@ -1,0 +1,4979 @@
+/*@!Encoding:932*/
+/***********************************************************************
+ * @file TestScenario.cin
+ * @brief ???????
+ **********************************************************************/
+
+variables
+{
+//----------------------------------------------------------------------
+// @????????
+//----------------------------------------------------------------------
+
+  enum enTestType {
+    TESTENV_TYPEA,
+    TESTENV_TYPEB,
+    TESTENV_TYPEC,
+    TESTENV_TYPED,
+    TESTENV_TYPEE,
+    TESTENV_TYPEF
+  };
+
+  struct stTestScenarioBlock {
+    byte index;             /* ???????? */
+    char cmd[20];           /* ?????? */
+    char param1[100];       /* Param1 */
+    char param2[20];        /* Param2 */
+    char param3[20];        /* Param3 */
+    char param4[20];        /* Param4 */
+    char param5[20];        /* Param5 */
+  };
+}
+//??????????????
+
+
+testcase M1_1(void)
+{
+  struct stTestScenarioBlock scenario[5] = {
+    {1,"RCVNODE_START","","","","",""},
+    {2,"WAITKEY","???????????????ON???????","","","",""},
+    {3,"PRIMARY_START","","","","",""},
+    {4,"LOGSTART","60000","","","",""},
+    {5,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEA);
+}
+
+testcase M2_1(void)
+{
+  struct stTestScenarioBlock scenario[4] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????ON???????","","","",""},
+    {3,"WAIT","10000","","","",""},
+    {4,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPED);
+}
+
+testcase M2_2(void)
+{
+  struct stTestScenarioBlock scenario[8] = {
+    {1,"WAITKEY","??????????????ACK?????????????????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","1","","",""},
+    {4,"ADD","_VAR_DWORD1","1","","",""},
+    {5,"JUMPLESS","3","_VAR_DWORD1","15","",""},
+    {6,"WAITKEY","???????????????ON???????","","","",""},
+    {7,"WAIT","10000","","","",""},
+    {8,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPED);
+}
+
+testcase M2_3(void)
+{
+  struct stTestScenarioBlock scenario[4] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????ON???????","","","",""},
+    {3,"WAIT","10000","","","",""},
+    {4,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPED);
+}
+
+testcase M2_4(void)
+{
+  struct stTestScenarioBlock scenario[8] = {
+    {1,"WAITKEY","??????????????ACK?????????????????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","1","","",""},
+    {4,"ADD","_VAR_DWORD1","1","","",""},
+    {5,"JUMPLESS","3","_VAR_DWORD1","15","",""},
+    {6,"WAITKEY","???????????????ON???????","","","",""},
+    {7,"WAIT","10000","","","",""},
+    {8,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPED);
+}
+
+testcase M2_5(void)
+{
+  struct stTestScenarioBlock scenario[7] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????ON???????","","","",""},
+    {3,"SEND_SYNC","1","1","","",""},
+    {4,"WAIT","5000","","","",""},
+    {5,"WAITKEY","??????????????????????????","","","",""},
+    {6,"WAIT","10000","","","",""},
+    {7,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPED);
+}
+
+testcase M2_6(void)
+{
+  struct stTestScenarioBlock scenario[7] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????ON???????","","","",""},
+    {3,"SEND_SYNC","1","1","","",""},
+    {4,"WAIT","5000","","","",""},
+    {5,"WAITKEY","???????????????OFF?ON???????","","","",""},
+    {6,"WAIT","10000","","","",""},
+    {7,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPED);
+}
+
+testcase M2_7(void)
+{
+  struct stTestScenarioBlock scenario[7] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????ON???????","","","",""},
+    {3,"SEND_SYNC","1","1","","",""},
+    {4,"WAIT","5000","","","",""},
+    {5,"WAITKEY","????????????ECU???????????","","","",""},
+    {6,"WAIT","10000","","","",""},
+    {7,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPED);
+}
+
+testcase M3_1(void)
+{
+  struct stTestScenarioBlock scenario[5] = {
+    {1,"RCVNODE_START","","","","",""},
+    {2,"WAITKEY","???????????????ON???????","","","",""},
+    {3,"PRIMARY_START","","","","",""},
+    {4,"LOGSTART","60000","","","",""},
+    {5,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEA);
+}
+
+testcase M4_1(void)
+{
+  struct stTestScenarioBlock scenario[5] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"LOGPRINT","SecondaryStart","","","",""},
+    {3,"WAITKEY","???????????????ON???????","","","",""},
+    {4,"WAIT","10000","","","",""},
+    {5,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPED);
+}
+
+testcase M5_1A(void)
+{
+  struct stTestScenarioBlock scenario[8] = {
+    {1,"RCVNODE_START","","","","",""},
+    {2,"WAITKEY","???????????????ON???????","","","",""},
+    {3,"PRIMARY_START","","","","",""},
+    {4,"LOGSTART","60000","","","",""},
+    {5,"WAIT","10000","","","",""},
+    {6,"PRIMARY_STOP","","","","",""},
+    {7,"PRIMARY_START","","","","",""},
+    {8,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEA);
+}
+
+testcase M5_1B(void)
+{
+  struct stTestScenarioBlock scenario[8] = {
+    {1,"RCVNODE_START","","","","",""},
+    {2,"WAITKEY","???????????????ON???????","","","",""},
+    {3,"PRIMARY_START","","","","",""},
+    {4,"LOGSTART","60000","","","",""},
+    {5,"WAIT","10000","","","",""},
+    {6,"PRIMARY_STOP","","","","",""},
+    {7,"PRIMARY_START","","","","",""},
+    {8,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEA);
+}
+
+testcase M5_2A(void)
+{
+  struct stTestScenarioBlock scenario[5] = {
+    {1,"RCVNODE_START","","","","",""},
+    {2,"WAITKEY","???????????????ON???????","","","",""},
+    {3,"PRIMARY_START","","","","",""},
+    {4,"LOGSTART","60000","","","",""},
+    {5,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEA);
+}
+
+testcase M5_2B(void)
+{
+  struct stTestScenarioBlock scenario[5] = {
+    {1,"RCVNODE_START","","","","",""},
+    {2,"WAITKEY","???????????????ON???????","","","",""},
+    {3,"PRIMARY_START","","","","",""},
+    {4,"LOGSTART","60000","","","",""},
+    {5,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEA);
+}
+
+testcase M6_1A(void)
+{
+  struct stTestScenarioBlock scenario[5] = {
+    {1,"RCVNODE_START","","","","",""},
+    {2,"WAITKEY","???????????????ON???????","","","",""},
+    {3,"PRIMARY_START","","","","",""},
+    {4,"LOGSTART","60000","","","",""},
+    {5,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEA);
+}
+
+testcase M6_1B(void)
+{
+  struct stTestScenarioBlock scenario[5] = {
+    {1,"RCVNODE_START","","","","",""},
+    {2,"WAITKEY","???????????????ON???????","","","",""},
+    {3,"PRIMARY_START","","","","",""},
+    {4,"LOGSTART","60000","","","",""},
+    {5,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEA);
+}
+
+testcase M7_1A(void)
+{
+  struct stTestScenarioBlock scenario[9] = {
+    {1,"RCVNODE_START","","","","",""},
+    {2,"WAITKEY","???????????????ON???????","","","",""},
+    {3,"LOGSTART","","","","",""},
+    {4,"WAIT","1000","","","",""},
+    {5,"SEND_SYNC","1","1","","",""},
+    {6,"WAIT","1000","","","",""},
+    {7,"SEND_SYNC","2","2","","",""},
+    {8,"WAITKEY","???????????????????????????","","","",""},
+    {9,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M7_1B(void)
+{
+  struct stTestScenarioBlock scenario[9] = {
+    {1,"RCVNODE_START","","","","",""},
+    {2,"WAITKEY","???????????????ON???????","","","",""},
+    {3,"LOGSTART","","","","",""},
+    {4,"WAIT","1000","","","",""},
+    {5,"SEND_SYNC","1","1","","",""},
+    {6,"WAIT","1000","","","",""},
+    {7,"SEND_SYNC","2","2","","",""},
+    {8,"WAITKEY","???????????????????????????","","","",""},
+    {9,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M8_1A(void)
+{
+  struct stTestScenarioBlock scenario[10] = {
+    {1,"RCVNODE_START","","","","",""},
+    {2,"WAITKEY","???????????????ON???????","","","",""},
+    {3,"LOGSTART","60000","","","",""},
+    {4,"WAIT","1000","","","",""},
+    {5,"SET","_VAR_DWORD1","0xffff0","","",""},
+    {6,"SEND_SYNC","1","_VAR_DWORD1","","",""},
+    {7,"ADD","_VAR_DWORD1","1","","",""},
+    {8,"WAIT","900","","","",""},
+    {9,"JUMPLESS","6","_VAR_DWORD1","0x100000","",""},
+    {10,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M8_1B(void)
+{
+  struct stTestScenarioBlock scenario[10] = {
+    {1,"RCVNODE_START","","","","",""},
+    {2,"WAITKEY","???????????????ON???????","","","",""},
+    {3,"LOGSTART","60000","","","",""},
+    {4,"WAIT","1000","","","",""},
+    {5,"SET","_VAR_DWORD1","0xffff0","","",""},
+    {6,"SEND_SYNC","1","_VAR_DWORD1","","",""},
+    {7,"ADD","_VAR_DWORD1","1","","",""},
+    {8,"WAIT","900","","","",""},
+    {9,"JUMPLESS","6","_VAR_DWORD1","0x100000","",""},
+    {10,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M9_1A(void)
+{
+  struct stTestScenarioBlock scenario[13] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","6","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","6","1","",""},
+    {6,"WAIT","10","","","",""},
+    {7,"CALL","Sid14","","","",""},
+    {8,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {9,"SEND_AUTH","1","6","3","",""},
+    {10,"WAIT","<Timeout>","","","",""},
+    {11,"CALL","Sid19","0x02","0x02","",""},
+    {12,"CALL","ChkReadDTC","0xE40100","0x02","0x02","1"},
+    {13,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M9_1B(void)
+{
+  struct stTestScenarioBlock scenario[10] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","6","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","6","1","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {8,"SEND_AUTH","1","6","3","",""},
+    {9,"WAIT","5000","","","",""},
+    {10,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M9_2A(void)
+{
+  struct stTestScenarioBlock scenario[13] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","6","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","6","1","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"CALL","Sid14","","","",""},
+    {8,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {9,"SEND_AUTH","1","6","5","",""},
+    {10,"WAIT","<Timeout>","","","",""},
+    {11,"CALL","Sid19","0x02","0x02","",""},
+    {12,"CALL","ChkReadDTC","0xE40100","0x02","0x02","1"},
+    {13,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M9_2B(void)
+{
+  struct stTestScenarioBlock scenario[10] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","6","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","6","1","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {8,"SEND_AUTH","1","6","5","",""},
+    {9,"WAIT","5000","","","",""},
+    {10,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M9_3A(void)
+{
+  struct stTestScenarioBlock scenario[15] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","2","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","2","1","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"SEND_SYNC","1","6","","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"CALL","Sid14","","","",""},
+    {10,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {11,"SEND_AUTH","1","6","3","",""},
+    {12,"WAIT","<Timeout>","","","",""},
+    {13,"CALL","Sid19","0x02","0x02","",""},
+    {14,"CALL","ChkReadDTC","0xE40100","0x02","0x02","1"},
+    {15,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M9_3B(void)
+{
+  struct stTestScenarioBlock scenario[12] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","2","","",""},
+    {4,"SIM_SECONDARY_START","100","","","",""},
+    {5,"SEND_AUTH","1","2","1","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"SEND_SYNC","1","6","","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {10,"SEND_AUTH","1","6","3","",""},
+    {11,"WAIT","5000","","","",""},
+    {12,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M9_4A(void)
+{
+  struct stTestScenarioBlock scenario[15] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","5","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","5","1","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"SEND_SYNC","1","6","","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"CALL","Sid14","","","",""},
+    {10,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {11,"SEND_AUTH","1","5","3","",""},
+    {12,"WAIT","<Timeout>","","","",""},
+    {13,"CALL","Sid19","0x02","0x02","",""},
+    {14,"CALL","ChkReadDTC","0xE40100","0x02","0x02","1"},
+    {15,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M9_4B(void)
+{
+  struct stTestScenarioBlock scenario[12] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","5","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","5","1","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"SEND_SYNC","1","6","","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {10,"SEND_AUTH","1","5","3","",""},
+    {11,"WAIT","5000","","","",""},
+    {12,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M9_5A(void)
+{
+  struct stTestScenarioBlock scenario[15] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","5","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","5","1","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"SEND_SYNC","1","6","","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"CALL","Sid14","","","",""},
+    {10,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {11,"SEND_AUTH","1","5","5","",""},
+    {12,"WAIT","<Timeout>","","","",""},
+    {13,"CALL","Sid19","0x02","0x02","",""},
+    {14,"CALL","ChkReadDTC","0xE40100","0x02","0x02","1"},
+    {15,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M9_5B(void)
+{
+  struct stTestScenarioBlock scenario[12] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","5","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","5","1","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"SEND_SYNC","1","6","","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {10,"SEND_AUTH","1","5","5","",""},
+    {11,"WAIT","5000","","","",""},
+    {12,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M9_6A(void)
+{
+  struct stTestScenarioBlock scenario[15] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","1","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","1","1","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"SEND_SYNC","1","6","","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"CALL","Sid14","","","",""},
+    {10,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {11,"SEND_AUTH","1","5","3","",""},
+    {12,"WAIT","<Timeout>","","","",""},
+    {13,"CALL","Sid19","0x02","0x02","",""},
+    {14,"CALL","ChkReadDTC","0xE40100","0x02","0x02","1"},
+    {15,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M9_6B(void)
+{
+  struct stTestScenarioBlock scenario[12] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","1","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","1","1","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"SEND_SYNC","1","6","","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {10,"SEND_AUTH","1","5","3","",""},
+    {11,"WAIT","5000","","","",""},
+    {12,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M9_7A(void)
+{
+  struct stTestScenarioBlock scenario[13] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","6","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","7","1","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"CALL","Sid14","","","",""},
+    {8,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {9,"SEND_AUTH","1","7","3","",""},
+    {10,"WAIT","<Timeout>","","","",""},
+    {11,"CALL","Sid19","0x02","0x02","",""},
+    {12,"CALL","ChkReadDTC","0xE40100","0x02","0x02","1"},
+    {13,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M9_7B(void)
+{
+  struct stTestScenarioBlock scenario[10] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","6","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","7","1","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {8,"SEND_AUTH","1","7","3","",""},
+    {9,"WAIT","5000","","","",""},
+    {10,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M9_8A(void)
+{
+  struct stTestScenarioBlock scenario[13] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","6","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","7","1","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"CALL","Sid14","","","",""},
+    {8,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {9,"SEND_AUTH","1","7","5","",""},
+    {10,"WAIT","<Timeout>","","","",""},
+    {11,"CALL","Sid19","0x02","0x02","",""},
+    {12,"CALL","ChkReadDTC","0xE40100","0x02","0x02","1"},
+    {13,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M9_8B(void)
+{
+  struct stTestScenarioBlock scenario[10] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","6","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","7","1","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {8,"SEND_AUTH","1","7","5","",""},
+    {9,"WAIT","5000","","","",""},
+    {10,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M9_9A(void)
+{
+  struct stTestScenarioBlock scenario[15] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","2","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","3","1","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"SEND_SYNC","1","6","","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"CALL","Sid14","","","",""},
+    {10,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {11,"SEND_AUTH","1","7","3","",""},
+    {12,"WAIT","<Timeout>","","","",""},
+    {13,"CALL","Sid19","0x02","0x02","",""},
+    {14,"CALL","ChkReadDTC","0xE40100","0x02","0x02","1"},
+    {15,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M9_9B(void)
+{
+  struct stTestScenarioBlock scenario[12] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","2","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","3","1","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"SEND_SYNC","1","6","","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {10,"SEND_AUTH","1","7","3","",""},
+    {11,"WAIT","5000","","","",""},
+    {12,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M9_10A(void)
+{
+  struct stTestScenarioBlock scenario[15] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","4","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","4","1","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"SEND_SYNC","1","6","","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"CALL","Sid14","","","",""},
+    {10,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {11,"SEND_AUTH","1","4","3","",""},
+    {12,"WAIT","<Timeout>","","","",""},
+    {13,"CALL","Sid19","0x02","0x02","",""},
+    {14,"CALL","ChkReadDTC","0xE40100","0x02","0x02","1"},
+    {15,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M9_10B(void)
+{
+  struct stTestScenarioBlock scenario[12] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","4","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","4","1","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"SEND_SYNC","1","6","","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {10,"SEND_AUTH","1","4","3","",""},
+    {11,"WAIT","5000","","","",""},
+    {12,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M9_11A(void)
+{
+  struct stTestScenarioBlock scenario[15] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","4","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","4","1","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"SEND_SYNC","1","6","","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"CALL","Sid14","","","",""},
+    {10,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {11,"SEND_AUTH","1","4","5","",""},
+    {12,"WAIT","<Timeout>","","","",""},
+    {13,"CALL","Sid19","0x02","0x02","",""},
+    {14,"CALL","ChkReadDTC","0xE40100","0x02","0x02","1"},
+    {15,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M9_11B(void)
+{
+  struct stTestScenarioBlock scenario[12] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","4","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","4","1","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"SEND_SYNC","1","6","","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {10,"SEND_AUTH","1","4","5","",""},
+    {11,"WAIT","5000","","","",""},
+    {12,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M9_12A(void)
+{
+  struct stTestScenarioBlock scenario[15] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","1","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","1","1","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"SEND_SYNC","1","7","","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"CALL","Sid14","","","",""},
+    {10,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {11,"SEND_AUTH","1","5","3","",""},
+    {12,"WAIT","<Timeout>","","","",""},
+    {13,"CALL","Sid19","0x02","0x02","",""},
+    {14,"CALL","ChkReadDTC","0xE40100","0x02","0x02","1"},
+    {15,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M9_12B(void)
+{
+  struct stTestScenarioBlock scenario[12] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","1","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","1","1","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"SEND_SYNC","1","7","","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {10,"SEND_AUTH","1","5","3","",""},
+    {11,"WAIT","5000","","","",""},
+    {12,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M9_13A(void)
+{
+  struct stTestScenarioBlock scenario[13] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","6","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","8","1","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"CALL","Sid14","","","",""},
+    {8,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {9,"SEND_AUTH","1","8","3","",""},
+    {10,"WAIT","<Timeout>","","","",""},
+    {11,"CALL","Sid19","0x02","0x02","",""},
+    {12,"CALL","ChkReadDTC","0xE40100","0x02","0x02","1"},
+    {13,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M9_13B(void)
+{
+  struct stTestScenarioBlock scenario[10] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","6","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","8","1","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {8,"SEND_AUTH","1","8","3","",""},
+    {9,"WAIT","5000","","","",""},
+    {10,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M9_14A(void)
+{
+  struct stTestScenarioBlock scenario[13] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","6","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","8","1","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"CALL","Sid14","","","",""},
+    {8,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {9,"SEND_AUTH","1","8","5","",""},
+    {10,"WAIT","<Timeout>","","","",""},
+    {11,"CALL","Sid19","0x02","0x02","",""},
+    {12,"CALL","ChkReadDTC","0xE40100","0x02","0x02","1"},
+    {13,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M9_14B(void)
+{
+  struct stTestScenarioBlock scenario[10] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","6","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","8","1","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {8,"SEND_AUTH","1","8","5","",""},
+    {9,"WAIT","5000","","","",""},
+    {10,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M9_15A(void)
+{
+  struct stTestScenarioBlock scenario[15] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","1","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","3","1","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"SEND_SYNC","1","5","","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"CALL","Sid14","","","",""},
+    {10,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {11,"SEND_AUTH","1","7","3","",""},
+    {12,"WAIT","<Timeout>","","","",""},
+    {13,"CALL","Sid19","0x02","0x02","",""},
+    {14,"CALL","ChkReadDTC","0xE40100","0x02","0x02","1"},
+    {15,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M9_15B(void)
+{
+  struct stTestScenarioBlock scenario[12] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","1","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","3","1","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"SEND_SYNC","1","5","","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {10,"SEND_AUTH","1","7","3","",""},
+    {11,"WAIT","5000","","","",""},
+    {12,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M10_1(void)
+{
+  struct stTestScenarioBlock scenario[5] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????ON??1020ms????????????","","","",""},
+    {3,"SEND_AUTH","0","0","1","",""},
+    {4,"WAIT","10000","","","",""},
+    {5,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M10_2(void)
+{
+  struct stTestScenarioBlock scenario[8] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"PERI_SEND_FIXEDSYNC","1","1","","",""},
+    {3,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {4,"WAITKEY","???????????????ON??1020m????????????","","","",""},
+    {5,"SEND_AUTH","1","1","1","",""},
+    {6,"SYNC_STOP","","","","",""},
+    {7,"WAIT","10000","","","",""},
+    {8,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M10_3(void)
+{
+  struct stTestScenarioBlock scenario[7] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????ON???????","","","",""},
+    {3,"WAIT","1020","","","",""},
+    {4,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {5,"SEND_AUTH","0","0","1","",""},
+    {6,"WAIT","10000","","","",""},
+    {7,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M10_4(void)
+{
+  struct stTestScenarioBlock scenario[9] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"PERI_SEND_FIXEDSYNC","1","","","",""},
+    {3,"WAITKEY","???????????????ON???????","","","",""},
+    {4,"WAIT","1020","","","",""},
+    {5,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {6,"SEND_AUTH","1","1","1","",""},
+    {7,"SYNC_STOP","","","","",""},
+    {8,"WAIT","10000","","","",""},
+    {9,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M10_5(void)
+{
+  struct stTestScenarioBlock scenario[7] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"SET_MACTX","0","0x0000000","","",""},
+    {3,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {4,"WAITKEY","???????????????ON??1020ms????????????","","","",""},
+    {5,"SEND_AUTH","0","0","1","",""},
+    {6,"WAIT","10000","","","",""},
+    {7,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M10_6(void)
+{
+  struct stTestScenarioBlock scenario[9] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"PERI_SEND_FIXEDSYNC","1","1","","",""},
+    {3,"SET_MACTX","0","0x0000000","","",""},
+    {4,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {5,"WAITKEY","???????????????ON??1020ms????????????","","","",""},
+    {6,"SEND_AUTH","1","1","1","",""},
+    {7,"SYNC_STOP","","","","",""},
+    {8,"WAIT","10000","","","",""},
+    {9,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M10_7(void)
+{
+  struct stTestScenarioBlock scenario[8] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"SET_MACTX","0","0x0000000","","",""},
+    {3,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {4,"WAITKEY","???????????????ON???????","","","",""},
+    {5,"WAIT","1020","","","",""},
+    {6,"SEND_AUTH","0","0","1","",""},
+    {7,"WAIT","10000","","","",""},
+    {8,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M10_8(void)
+{
+  struct stTestScenarioBlock scenario[9] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????ON???????","","","",""},
+    {3,"SEND_SYNC","1","1","","",""},
+    {4,"SET_MACTX","0","0x0000000","","",""},
+    {5,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {6,"WAIT","1020","","","",""},
+    {7,"SEND_AUTH","1","1","1","",""},
+    {8,"WAIT","10000","","","",""},
+    {9,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M10_9(void)
+{
+  struct stTestScenarioBlock scenario[13] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????ON???????","","","",""},
+    {3,"SEND_SYNC","1","1","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","1","_VAR_DWORD1","",""},
+    {6,"ADD","_VAR_DWORD1","1","","",""},
+    {7,"JUMPLESS","4","_VAR_DWORD1","3","",""},
+    {8,"WAITKEY","??????????????????????????","","","",""},
+    {9,"WAIT","1020","","","",""},
+    {10,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {11,"SEND_AUTH","0","0","1","",""},
+    {12,"WAIT","10000","","","",""},
+    {13,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M10_10(void)
+{
+  struct stTestScenarioBlock scenario[13] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????ON???????","","","",""},
+    {3,"SEND_SYNC","1","1","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","1","_VAR_DWORD1","",""},
+    {6,"ADD","_VAR_DWORD1","1","","",""},
+    {7,"JUMPLESS","4","_VAR_DWORD1","3","",""},
+    {8,"WAITKEY","???????????????OFF?ON???????","","","",""},
+    {9,"WAIT","1020","","","",""},
+    {10,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {11,"SEND_AUTH","0","0","1","",""},
+    {12,"WAIT","10000","","","",""},
+    {13,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M10_11(void)
+{
+  struct stTestScenarioBlock scenario[13] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????ON???????","","","",""},
+    {3,"SEND_SYNC","1","1","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","1","_VAR_DWORD1","",""},
+    {6,"ADD","_VAR_DWORD1","1","","",""},
+    {7,"JUMPLESS","4","_VAR_DWORD1","3","",""},
+    {8,"WAITKEY","????????????ECU???????????","","","",""},
+    {9,"WAIT","1020","","","",""},
+    {10,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {11,"SEND_AUTH","0","0","1","",""},
+    {12,"WAIT","10000","","","",""},
+    {13,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M10_12(void)
+{
+  struct stTestScenarioBlock scenario[8] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????ON???????","","","",""},
+    {3,"SET_MACTX","0","0x0000000","","",""},
+    {4,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {5,"WAITKEY","?????????????????????1020ms????????????","","","",""},
+    {6,"SEND_AUTH","0","0","1","",""},
+    {7,"WAIT","10000","","","",""},
+    {8,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M10_13(void)
+{
+  struct stTestScenarioBlock scenario[8] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????ON???????","","","",""},
+    {3,"SET_MACTX","0","0x0000000","","",""},
+    {4,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {5,"WAITKEY","???????????????OFF?ON??1020ms????????????","","","",""},
+    {6,"SEND_AUTH","0","0","1","",""},
+    {7,"WAIT","10000","","","",""},
+    {8,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M10_14(void)
+{
+  struct stTestScenarioBlock scenario[8] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????ON???????","","","",""},
+    {3,"SET_MACTX","0","0x0000000","","",""},
+    {4,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {5,"WAITKEY","????????????ECU??????1020ms????????????","","","",""},
+    {6,"SEND_AUTH","0","0","1","",""},
+    {7,"WAIT","10000","","","",""},
+    {8,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M11_1(void)
+{
+  struct stTestScenarioBlock scenario[9] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","1","","",""},
+    {4,"SET_MACTX","0","0x0000000","","",""},
+    {5,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {6,"WAIT","1000","","","",""},
+    {7,"SEND_AUTH","1","1","1","",""},
+    {8,"WAIT","10000","","","",""},
+    {9,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M12_1A(void)
+{
+  struct stTestScenarioBlock scenario[13] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","1","","",""},
+    {4,"SET_SENDDATA","1","4","0xfffffffd","",""},
+    {5,"SET_MACTX","2","1","1","1",""},
+    {6,"WAIT","100","","","",""},
+    {7,"CALL","Sid14","","","",""},
+    {8,"SET_SENDDATA","1","4","0xfffffffe","",""},
+    {9,"SEND_AUTH","1","1","1","",""},
+    {10,"WAIT","<Timeout>","","","",""},
+    {11,"CALL","Sid19","0x02","0x02","",""},
+    {12,"CALL","ChkReadDTC","0xE40100","0x02","0x02",""},
+    {13,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M12_1B(void)
+{
+  struct stTestScenarioBlock scenario[10] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","1","","",""},
+    {4,"SET_SENDDATA","1","4","0xfffffffd","",""},
+    {5,"SET_MACTX","2","1","1","1",""},
+    {6,"WAIT","1000","","","",""},
+    {7,"SET_SENDDATA","1","4","0xfffffffe","",""},
+    {8,"SEND_AUTH","1","1","1","",""},
+    {9,"WAIT","10000","","","",""},
+    {10,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M12_2A(void)
+{
+  struct stTestScenarioBlock scenario[13] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","1","","",""},
+    {4,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {5,"SET_MACTX","2","1","1","1",""},
+    {6,"WAIT","100","","","",""},
+    {7,"CALL","Sid14","","","",""},
+    {8,"SET_SENDDATA","1","4","0xfffffffe","",""},
+    {9,"SEND_AUTH","1","1","1","",""},
+    {10,"WAIT","<Timeout>","","","",""},
+    {11,"CALL","Sid19","0x02","0x02","",""},
+    {12,"CALL","ChkReadDTC","0xE40100","0x02","0x02",""},
+    {13,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M12_2B(void)
+{
+  struct stTestScenarioBlock scenario[10] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","1","","",""},
+    {4,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {5,"SET_MACTX","2","1","1","1",""},
+    {6,"WAIT","1000","","","",""},
+    {7,"SET_SENDDATA","1","4","0xfffffffe","",""},
+    {8,"SEND_AUTH","1","1","1","",""},
+    {9,"WAIT","10000","","","",""},
+    {10,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M13_1A(void)
+{
+  struct stTestScenarioBlock scenario[13] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","10","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","10","1","",""},
+    {6,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {7,"WAIT","100","","","",""},
+    {8,"CALL","Sid14","","","",""},
+    {9,"SEND_AUTH","1","5","3","",""},
+    {10,"WAIT","<Timeout>","","","",""},
+    {11,"CALL","Sid19","0x02","0x02","",""},
+    {12,"CALL","ChkReadDTC","0xE40100","0x02","0x02",""},
+    {13,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M13_1B(void)
+{
+  struct stTestScenarioBlock scenario[10] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","10","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","10","1","",""},
+    {6,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {7,"WAIT","100","","","",""},
+    {8,"SEND_AUTH","1","5","3","",""},
+    {9,"WAIT","10000","","","",""},
+    {10,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M13_2A(void)
+{
+  struct stTestScenarioBlock scenario[13] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","10","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","10","1","",""},
+    {6,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {7,"WAIT","100","","","",""},
+    {8,"CALL","Sid14","","","",""},
+    {9,"SEND_AUTH","1","4","3","",""},
+    {10,"WAIT","<Timeout>","","","",""},
+    {11,"CALL","Sid19","0x02","0x02","",""},
+    {12,"CALL","ChkReadDTC","0xE40100","0x02","0x02",""},
+    {13,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M13_2B(void)
+{
+  struct stTestScenarioBlock scenario[10] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","10","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","10","1","",""},
+    {6,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {7,"WAIT","100","","","",""},
+    {8,"SEND_AUTH","1","4","3","",""},
+    {9,"WAIT","10000","","","",""},
+    {10,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M13_3A(void)
+{
+  struct stTestScenarioBlock scenario[13] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","10","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","10","1","",""},
+    {6,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {7,"WAIT","100","","","",""},
+    {8,"CALL","Sid14","","","",""},
+    {9,"SEND_AUTH","1","6","3","",""},
+    {10,"WAIT","<Timeout>","","","",""},
+    {11,"CALL","Sid19","0x02","0x02","",""},
+    {12,"CALL","ChkReadDTC","0xE40100","0x02","0x02",""},
+    {13,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M13_3B(void)
+{
+  struct stTestScenarioBlock scenario[10] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","10","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","10","1","",""},
+    {6,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {7,"WAIT","100","","","",""},
+    {8,"SEND_AUTH","1","6","3","",""},
+    {9,"WAIT","10000","","","",""},
+    {10,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M13_4A(void)
+{
+  struct stTestScenarioBlock scenario[13] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","10","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","10","1","",""},
+    {6,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {7,"WAIT","100","","","",""},
+    {8,"CALL","Sid14","","","",""},
+    {9,"SEND_AUTH","1","3","3","",""},
+    {10,"WAIT","<Timeout>","","","",""},
+    {11,"CALL","Sid19","0x02","0x02","",""},
+    {12,"CALL","ChkReadDTC","0xE40100","0x02","0x02",""},
+    {13,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M13_4B(void)
+{
+  struct stTestScenarioBlock scenario[10] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","10","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","10","1","",""},
+    {6,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {7,"WAIT","100","","","",""},
+    {8,"SEND_AUTH","1","3","3","",""},
+    {9,"WAIT","10000","","","",""},
+    {10,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M13_5A(void)
+{
+  struct stTestScenarioBlock scenario[13] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","10","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","10","1","",""},
+    {6,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {7,"WAIT","100","","","",""},
+    {8,"CALL","Sid14","","","",""},
+    {9,"SEND_AUTH","1","7","3","",""},
+    {10,"WAIT","<Timeout>","","","",""},
+    {11,"CALL","Sid19","0x02","0x02","",""},
+    {12,"CALL","ChkReadDTC","0xE40100","0x02","0x02",""},
+    {13,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M13_5B(void)
+{
+  struct stTestScenarioBlock scenario[10] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","10","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_AUTH","1","10","1","",""},
+    {6,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {7,"WAIT","100","","","",""},
+    {8,"SEND_AUTH","1","7","3","",""},
+    {9,"WAIT","10000","","","",""},
+    {10,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M14_1(void)
+{
+  struct stTestScenarioBlock scenario[5] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_AUTH","0","0","1","",""},
+    {4,"WAIT","10000","","","",""},
+    {5,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M15_1A(void)
+{
+  struct stTestScenarioBlock scenario[30] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","1","","",""},
+    {4,"WAIT","20","","","",""},
+    {5,"ADD","_VAR_DWORD1","1","","",""},
+    {6,"SEND_AUTH","1","1","_VAR_DWORD1","",""},
+    {7,"JUMPLESS","4","_VAR_DWORD1","255","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"CALL","Sid14","","","",""},
+    {10,"SEND_AUTH","1","1","255","",""},
+    {11,"WAIT","<Timeout>","","","",""},
+    {12,"CALL","Sid19","0x02","0x02","",""},
+    {13,"CALL","ChkReadDTC","0xE40100","0x02","0x02","1"},
+    {14,"CALL","Sid14","","","",""},
+    {15,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {16,"SEND_AUTH","1","1","0xfe","",""},
+    {17,"WAIT","<Timeout>","","","",""},
+    {18,"CALL","Sid19","0x02","0x02","",""},
+    {19,"CALL","ChkReadDTC","0xE40100","0x02","0x02",""},
+    {20,"CALL","Sid14","","","",""},
+    {21,"SEND_AUTH","1","1","1","",""},
+    {22,"WAIT","<Timeout>","","","",""},
+    {23,"CALL","Sid19","0x02","0x02","",""},
+    {24,"CALL","ChkReadDTC","0xE40100","0x02","0x02",""},
+    {25,"CALL","Sid14","","","",""},
+    {26,"SEND_AUTH","1","1","0x80","",""},
+    {27,"WAIT","<Timeout>","","","",""},
+    {28,"CALL","Sid19","0x02","0x02","",""},
+    {29,"CALL","ChkReadDTC","0xE40100","0x02","0x02",""},
+    {30,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M15_1B(void)
+{
+  struct stTestScenarioBlock scenario[18] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","1","","",""},
+    {4,"WAIT","20","","","",""},
+    {5,"ADD","_VAR_DWORD1","1","","",""},
+    {6,"SEND_AUTH","1","1","_VAR_DWORD1","",""},
+    {7,"JUMPLESS","4","_VAR_DWORD1","255","255","1"},
+    {8,"WAIT","100","","","",""},
+    {9,"SEND_AUTH","1","1","255","",""},
+    {10,"WAIT","10000","","","",""},
+    {11,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {12,"SEND_AUTH","1","1","0xfe","",""},
+    {13,"WAIT","10000","","","",""},
+    {14,"SEND_AUTH","1","1","1","",""},
+    {15,"WAIT","10000","","","",""},
+    {16,"SEND_AUTH","1","1","0x80","",""},
+    {17,"WAIT","100","","","",""},
+    {18,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M16_1A(void)
+{
+  struct stTestScenarioBlock scenario[11] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","0xfffff","","",""},
+    {4,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {5,"WAIT","100","","","",""},
+    {6,"CALL","Sid14","","","",""},
+    {7,"SEND_AUTH","1","0xfffff","0xff","",""},
+    {8,"WAIT","<Timeout>","","","",""},
+    {9,"CALL","Sid19","0x02","0x02","",""},
+    {10,"CALL","ChkReadDTC","0xE40100","0x02","0x02","1"},
+    {11,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M16_1B(void)
+{
+  struct stTestScenarioBlock scenario[8] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","0xfffff","","",""},
+    {4,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {5,"WAIT","100","","","",""},
+    {6,"SEND_AUTH","1","0xfffff","0xff","",""},
+    {7,"WAIT","1000","","","",""},
+    {8,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M16_2A(void)
+{
+  struct stTestScenarioBlock scenario[11] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","0xfffff","","",""},
+    {4,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {5,"WAIT","100","","","",""},
+    {6,"CALL","Sid14","","","",""},
+    {7,"SEND_AUTH","1","0xfffff","0xfe","",""},
+    {8,"WAIT","<Timeout>","","","",""},
+    {9,"CALL","Sid19","0x02","0x02","",""},
+    {10,"CALL","ChkReadDTC","0xE40100","0x02","0x02",""},
+    {11,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M16_2B(void)
+{
+  struct stTestScenarioBlock scenario[8] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","0xfffff","","",""},
+    {4,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {5,"WAIT","100","","","",""},
+    {6,"SEND_AUTH","1","0xfffff","0xfe","",""},
+    {7,"WAIT","1000","","","",""},
+    {8,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M16_3A(void)
+{
+  struct stTestScenarioBlock scenario[11] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","0xfffff","","",""},
+    {4,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {5,"WAIT","100","","","",""},
+    {6,"CALL","Sid14","","","",""},
+    {7,"SEND_AUTH","1","0xfffff","1","",""},
+    {8,"WAIT","<Timeout>","","","",""},
+    {9,"CALL","Sid19","0x02","0x02","",""},
+    {10,"CALL","ChkReadDTC","0xE40100","0x02","0x02",""},
+    {11,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M16_3B(void)
+{
+  struct stTestScenarioBlock scenario[8] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","0xfffff","","",""},
+    {4,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {5,"WAIT","100","","","",""},
+    {6,"SEND_AUTH","1","0xfffff","1","",""},
+    {7,"WAIT","1000","","","",""},
+    {8,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M16_4A(void)
+{
+  struct stTestScenarioBlock scenario[11] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","0xfffff","","",""},
+    {4,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {5,"WAIT","100","","","",""},
+    {6,"CALL","Sid14","","","",""},
+    {7,"SEND_AUTH","1","0xfffff","128","",""},
+    {8,"WAIT","<Timeout>","","","",""},
+    {9,"CALL","Sid19","0x02","0x02","",""},
+    {10,"CALL","ChkReadDTC","0xE40100","0x02","0x02",""},
+    {11,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M16_4B(void)
+{
+  struct stTestScenarioBlock scenario[8] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","0xfffff","","",""},
+    {4,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {5,"WAIT","100","","","",""},
+    {6,"SEND_AUTH","1","0xfffff","128","",""},
+    {7,"WAIT","1000","","","",""},
+    {8,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M17_1(void)
+{
+  struct stTestScenarioBlock scenario[37] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"SECONDARY_START","","","","",""},
+    {3,"LOGSTART","","","","",""},
+    {4,"WAIT","1000","","","",""},
+    {5,"SEND_SYNC","1","1","","",""},
+    {6,"WAIT","300","","","",""},
+    {7,"SET_MACTX","0","0x0000000","","",""},
+    {8,"SEND_AUTH","1","1","1","",""},
+    {9,"WAIT","<Timeout>","","","",""},
+    {10,"CALL","ReadVerifyNG","1","1","",""},
+    {11,"WAIT","1000","","","",""},
+    {12,"SEND_SYNC","1","2","","",""},
+    {13,"WAIT","300","","","",""},
+    {14,"SEND_AUTH","1","2","1","",""},
+    {15,"WAIT","20","","","",""},
+    {16,"SET","_VAR_DWORD1","0","","",""},
+    {17,"SET_MACTX","0","0x0000000","","",""},
+    {18,"SEND_AUTH","1","2","2","",""},
+    {19,"WAIT","20","","","",""},
+    {20,"ADD","_VAR_DWORD1","1","","",""},
+    {21,"JUMPLESS","17","_VAR_DWORD1","2","",""},
+    {22,"SEND_AUTH","1","2","2","",""},
+    {23,"WAIT","20","","","",""},
+    {24,"SET","_VAR_DWORD1","0","","",""},
+    {25,"SET_MACTX","0","0x0000000","","",""},
+    {26,"SEND_AUTH","1","2","3","",""},
+    {27,"WAIT","20","","","",""},
+    {28,"ADD","_VAR_DWORD1","1","","",""},
+    {29,"JUMPLESS","25","_VAR_DWORD1","3","",""},
+    {30,"WAIT","<Timeout>","","","",""},
+    {31,"CALL","ReadVerifyNG","1","3","",""},
+    {32,"WAIT","1000","","","",""},
+    {33,"SET_MACTX","0","0x0000000","","",""},
+    {34,"SEND_AUTH","1","2","3","",""},
+    {35,"WAIT","<Timeout>","","","",""},
+    {36,"CALL","ReadVerifyNG","1","1","",""},
+    {37,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M17_2(void)
+{
+  struct stTestScenarioBlock scenario[31] = {
+    {1,"WAITKEY","???????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SEND_SYNC","1","1","","",""},
+    {4,"CALL","Sid14","","","",""},
+    {5,"SET_MACTX","0","0x0000000","","",""},
+    {6,"SEND_AUTH","1","1","1","",""},
+    {7,"WAIT","<Timeout>","","","",""},
+    {8,"CALL","Sid19","0x02","0x02","",""},
+    {9,"CALL","ChkReadDTC","0xE40100","0x02","0x02",""},
+    {10,"WAIT","1000","","","",""},
+    {11,"CALL","Sid14","","","",""},
+    {12,"SET_MACTX","0","0x0000000","","",""},
+    {13,"SEND_AUTH","1","1","1","",""},
+    {14,"WAIT","<Timeout>","","","",""},
+    {15,"CALL","Sid19","0x02","0x02","",""},
+    {16,"CALL","ChkReadDTC","0xE40100","0x02","0x02",""},
+    {17,"CALL","Sid14","","","",""},
+    {18,"WAIT","<Timeout>","","","",""},
+    {19,"CALL","Sid19","0x02","0x02","",""},
+    {20,"CALL","ChkReadDTC","0xE40100","0x02","0x02","1"},
+    {21,"WAIT","1000","","","",""},
+    {22,"CALL","Sid14","","","",""},
+    {23,"SET_MACTX","0","0x0000000","","",""},
+    {24,"SEND_AUTH","1","1","1","",""},
+    {25,"WAIT","<Timeout>","","","",""},
+    {26,"WAITKEY","??OperationCycle??????????","","","",""},
+    {27,"SEND_AUTH","1","1","1","",""},
+    {28,"WAIT","1000","","","",""},
+    {29,"CALL","Sid19","0x02","0x08","",""},
+    {30,"CALL","ChkReadDTC","0xE40100","0x08","0x08",""},
+    {31,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEC);
+}
+
+testcase M18_1(void)
+{
+  struct stTestScenarioBlock scenario[5] = {
+    {1,"RCVNODE_START","","","","",""},
+    {2,"SECONDARY_START","","","","",""},
+    {3,"WAITKEY","FV???????????ON???????","","","",""},
+    {4,"LOGSTART","60000","","","",""},
+    {5,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEA);
+}
+
+testcase M19_1(void)
+{
+  struct stTestScenarioBlock scenario[6] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"RCVNODE_START","","","","",""},
+    {3,"SECONDARY_START","","","","",""},
+    {4,"WAITKEY","FV???????????ON???????","","","",""},
+    {5,"WAIT","10000","","","",""},
+    {6,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEA);
+}
+
+testcase M20_1(void)
+{
+  struct stTestScenarioBlock scenario[5] = {
+    {1,"RCVNODE_START","","","","",""},
+    {2,"SECONDARY_START","","","","",""},
+    {3,"WAITKEY","FV???????????ON???????","","","",""},
+    {4,"LOGSTART","60000","","","",""},
+    {5,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEA);
+}
+
+testcase M21_1(void)
+{
+  struct stTestScenarioBlock scenario[7] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"RCVNODE_START","","","","",""},
+    {3,"SECONDARY_START","","","","",""},
+    {4,"LOGPRINT","IG-ON","","","",""},
+    {5,"WAITKEY","FV???????????ON???????","","","",""},
+    {6,"WAIT","10000","","","",""},
+    {7,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEA);
+}
+
+testcase M22_1(void)
+{
+  struct stTestScenarioBlock scenario[6] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"RCVNODE_START","","","","",""},
+    {3,"SECONDARY_START","","","","",""},
+    {4,"WAITKEY","FV???????????ON???????","","","",""},
+    {5,"WAIT","10000","","","",""},
+    {6,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEA);
+}
+
+testcase M22_2(void)
+{
+  struct stTestScenarioBlock scenario[6] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"RCVNODE_START","","","","",""},
+    {3,"SECONDARY_START","","","","",""},
+    {4,"WAITKEY","FV???????????ON???????","","","",""},
+    {5,"WAIT","10000","","","",""},
+    {6,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEA);
+}
+
+testcase M23_1(void)
+{
+  struct stTestScenarioBlock scenario[13] = {
+    {1,"RCVNODE_START","","","","",""},
+    {2,"SECONDARY_START","","","","",""},
+    {3,"WAITKEY","FV???????????ON???????","","","",""},
+    {4,"LOGSTART","","","","",""},
+    {5,"WAIT","1000","","","",""},
+    {6,"LOGPRINT","PRIMARY_STARTUP_START","","","",""},
+    {7,"WAITKEY","FV???????????OFF?ON???????","","","",""},
+    {8,"LOGPRINT","PRIMARY_STARTUP_END","","","",""},
+    {9,"WAIT","10000","","","",""},
+    {10,"LOGPRINT","PRIMARY_STARTUP_START","","","",""},
+    {11,"WAITKEY","FV???????????OFF?ON???????","","","",""},
+    {12,"LOGPRINT","PRIMARY_STARTUP_END","","","",""},
+    {13,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEA);
+}
+
+testcase M23_2(void)
+{
+  struct stTestScenarioBlock scenario[13] = {
+    {1,"RCVNODE_START","","","","",""},
+    {2,"SECONDARY_START","","","","",""},
+    {3,"WAITKEY","FV???????????ON???????","","","",""},
+    {4,"LOGSTART","","","","",""},
+    {5,"WAIT","1000","","","",""},
+    {6,"LOGPRINT","PRIMARY_STARTUP_START","","","",""},
+    {7,"WAITKEY","FV??????????????????????","","","",""},
+    {8,"LOGPRINT","PRIMARY_STARTUP_END","","","",""},
+    {9,"WAIT","10000","","","",""},
+    {10,"LOGPRINT","PRIMARY_STARTUP_START","","","",""},
+    {11,"WAITKEY","FV???????????OFF?ON???????","","","",""},
+    {12,"LOGPRINT","PRIMARY_STARTUP_END","","","",""},
+    {13,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEA);
+}
+
+testcase M23_3(void)
+{
+  struct stTestScenarioBlock scenario[13] = {
+    {1,"RCVNODE_START","","","","",""},
+    {2,"SECONDARY_START","","","","",""},
+    {3,"WAITKEY","FV???????????ON???????","","","",""},
+    {4,"LOGSTART","","","","",""},
+    {5,"WAIT","1000","","","",""},
+    {6,"LOGPRINT","PRIMARY_STARTUP_START","","","",""},
+    {7,"WAITKEY","FV????????ECU?????????????","","","",""},
+    {8,"LOGPRINT","PRIMARY_STARTUP_END","","","",""},
+    {9,"WAIT","10000","","","",""},
+    {10,"LOGPRINT","PRIMARY_STARTUP_START","","","",""},
+    {11,"WAITKEY","FV???????????OFF?ON???????","","","",""},
+    {12,"LOGPRINT","PRIMARY_STARTUP_END","","","",""},
+    {13,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEA);
+}
+
+testcase M23_4(void)
+{
+  struct stTestScenarioBlock scenario[13] = {
+    {1,"RCVNODE_START","","","","",""},
+    {2,"SECONDARY_START","","","","",""},
+    {3,"WAITKEY","FV???????????ON???????","","","",""},
+    {4,"LOGSTART","","","","",""},
+    {5,"WAIT","1000","","","",""},
+    {6,"LOGPRINT","PRIMARY_STARTUP_START","","","",""},
+    {7,"WAITKEY","FV???????????OFF?ON???????","","","",""},
+    {8,"LOGPRINT","PRIMARY_STARTUP_END","","","",""},
+    {9,"WAIT","10000","","","",""},
+    {10,"LOGPRINT","PRIMARY_STARTUP_START","","","",""},
+    {11,"WAITKEY","FV???????????OFF?ON???????","","","",""},
+    {12,"LOGPRINT","PRIMARY_STARTUP_END","","","",""},
+    {13,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEA);
+}
+
+testcase M24_1(void)
+{
+  struct stTestScenarioBlock scenario[13] = {
+    {1,"RCVNODE_START","","","","",""},
+    {2,"SECONDARY_START","","","","",""},
+    {3,"WAITKEY","FV???????????ON???????","","","",""},
+    {4,"LOGSTART","","","","",""},
+    {5,"WAITKEY","FV?????????????????0xFFFE???????????","","","",""},
+    {6,"WAITKEY","FV???????????OFF???????","","","",""},
+    {7,"LOGPRINT","IG-ON","","","",""},
+    {8,"WAITKEY","FV???????????ON???????","","","",""},
+    {9,"WAITKEY","FV???????????OFF???????","","","",""},
+    {10,"LOGPRINT","IG-ON","","","",""},
+    {11,"WAITKEY","FV???????????ON???????","","","",""},
+    {12,"WAIT","10000","","","",""},
+    {13,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEA);
+}
+
+testcase M25_1(void)
+{
+  struct stTestScenarioBlock scenario[9] = {
+    {1,"RCVNODE_START","","","","",""},
+    {2,"SECONDARY_START","","","","",""},
+    {3,"WAITKEY","FV???????????ON???????","","","",""},
+    {4,"LOGSTART","60000","","","",""},
+    {5,"WAIT","30000","","","",""},
+    {6,"WAITKEY","FV???????????OFF???????","","","",""},
+    {7,"LOGPRINT","IG-ON","","","",""},
+    {8,"WAITKEY","FV???????????ON???????","","","",""},
+    {9,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEA);
+}
+
+testcase M26_1(void)
+{
+  struct stTestScenarioBlock scenario[5] = {
+    {1,"LOGSTART","60000","","","",""},
+    {2,"RCVNODE_START","","","","",""},
+    {3,"SECONDARY_START","","","","",""},
+    {4,"WAITKEY","FV???????????ON???????","","","",""},
+    {5,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEA);
+}
+
+testcase M27_1(void)
+{
+  struct stTestScenarioBlock scenario[6] = {
+    {1,"RCVNODE_START","","","","",""},
+    {2,"SECONDARY_START","","","","",""},
+    {3,"WAITKEY","FV???????????ON???????","","","",""},
+    {4,"WAITKEY","FV?????????????????0xFFFE0???????????","","","",""},
+    {5,"LOGSTART","60000","","","",""},
+    {6,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEA);
+}
+
+testcase M28_1(void)
+{
+  struct stTestScenarioBlock scenario[5] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SEND_SYNC","1","0","","",""},
+    {4,"WAIT","10000","","","",""},
+    {5,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M28_2(void)
+{
+  struct stTestScenarioBlock scenario[5] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SEND_SYNC","2","0","","",""},
+    {4,"WAIT","10000","","","",""},
+    {5,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M28_3(void)
+{
+  struct stTestScenarioBlock scenario[5] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SEND_SYNC","0xffff","0","","",""},
+    {4,"WAIT","10000","","","",""},
+    {5,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M28_4(void)
+{
+  struct stTestScenarioBlock scenario[7] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SEND_SYNC","5","5","","",""},
+    {4,"WAIT","1000","","","",""},
+    {5,"SEND_SYNC","6","0","","",""},
+    {6,"WAIT","10000","","","",""},
+    {7,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M28_5(void)
+{
+  struct stTestScenarioBlock scenario[7] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SEND_SYNC","5","5","","",""},
+    {4,"WAIT","1000","","","",""},
+    {5,"SEND_SYNC","7","0","","",""},
+    {6,"WAIT","10000","","","",""},
+    {7,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M28_6(void)
+{
+  struct stTestScenarioBlock scenario[7] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SEND_SYNC","5","5","","",""},
+    {4,"WAIT","1000","","","",""},
+    {5,"SEND_SYNC","0xffff","0","","",""},
+    {6,"WAIT","10000","","","",""},
+    {7,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M28_7(void)
+{
+  struct stTestScenarioBlock scenario[5] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SEND_SYNC","0","1","","",""},
+    {4,"WAIT","10000","","","",""},
+    {5,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M28_8(void)
+{
+  struct stTestScenarioBlock scenario[5] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SEND_SYNC","0","2","","",""},
+    {4,"WAIT","10000","","","",""},
+    {5,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M28_9(void)
+{
+  struct stTestScenarioBlock scenario[5] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SEND_SYNC","0","0xfffff","","",""},
+    {4,"WAIT","10000","","","",""},
+    {5,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M28_10(void)
+{
+  struct stTestScenarioBlock scenario[7] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SEND_SYNC","5","5","","",""},
+    {4,"WAIT","1000","","","",""},
+    {5,"SEND_SYNC","5","6","","",""},
+    {6,"WAIT","10000","","","",""},
+    {7,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M28_11(void)
+{
+  struct stTestScenarioBlock scenario[7] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SEND_SYNC","5","5","","",""},
+    {4,"WAIT","1000","","","",""},
+    {5,"SEND_SYNC","5","7","","",""},
+    {6,"WAIT","10000","","","",""},
+    {7,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M28_12(void)
+{
+  struct stTestScenarioBlock scenario[7] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SEND_SYNC","5","5","","",""},
+    {4,"WAIT","1000","","","",""},
+    {5,"SEND_SYNC","5","0xfffff","","",""},
+    {6,"WAIT","10000","","","",""},
+    {7,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M29_1(void)
+{
+  struct stTestScenarioBlock scenario[8] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SEND_SYNC","3","3","","",""},
+    {4,"SET_MACTX","0","0x0000000","","",""},
+    {5,"WAIT","1000","","","",""},
+    {6,"SEND_SYNC","4","4","","",""},
+    {7,"WAIT","10000","","","",""},
+    {8,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M29_2(void)
+{
+  struct stTestScenarioBlock scenario[8] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SEND_SYNC","3","3","","",""},
+    {4,"SET_MACTX","0","0x0000000","","",""},
+    {5,"WAIT","1000","","","",""},
+    {6,"SEND_SYNC","2","2","","",""},
+    {7,"WAIT","10000","","","",""},
+    {8,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M30_1(void)
+{
+  struct stTestScenarioBlock scenario[7] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SEND_SYNC","1","1","","",""},
+    {4,"WAIT","1000","","","",""},
+    {5,"SEND_SYNC","1","1","","",""},
+    {6,"WAIT","10000","","","",""},
+    {7,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M31_1(void)
+{
+  struct stTestScenarioBlock scenario[7] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SEND_SYNC","0xffef","1","","",""},
+    {4,"WAIT","1000","","","",""},
+    {5,"SEND_SYNC","0xffee","1","","",""},
+    {6,"WAIT","10000","","","",""},
+    {7,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M31_2(void)
+{
+  struct stTestScenarioBlock scenario[7] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SEND_SYNC","0xffef","1","","",""},
+    {4,"WAIT","1000","","","",""},
+    {5,"SEND_SYNC","0xffed","1","","",""},
+    {6,"WAIT","10000","","","",""},
+    {7,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M31_3(void)
+{
+  struct stTestScenarioBlock scenario[7] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SEND_SYNC","0xffef","1","","",""},
+    {4,"WAIT","1000","","","",""},
+    {5,"SEND_SYNC","1","1","","",""},
+    {6,"WAIT","10000","","","",""},
+    {7,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M31_4(void)
+{
+  struct stTestScenarioBlock scenario[7] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SEND_SYNC","1","0xfffff","","",""},
+    {4,"WAIT","1000","","","",""},
+    {5,"SEND_SYNC","1","0xffffe","","",""},
+    {6,"WAIT","10000","","","",""},
+    {7,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M31_5(void)
+{
+  struct stTestScenarioBlock scenario[7] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SEND_SYNC","1","0xfffff","","",""},
+    {4,"WAIT","1000","","","",""},
+    {5,"SEND_SYNC","1","0xffffd","","",""},
+    {6,"WAIT","10000","","","",""},
+    {7,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M31_6(void)
+{
+  struct stTestScenarioBlock scenario[7] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SEND_SYNC","1","0xfffff","","",""},
+    {4,"WAIT","1000","","","",""},
+    {5,"SEND_SYNC","1","1","","",""},
+    {6,"WAIT","10000","","","",""},
+    {7,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M31_7(void)
+{
+  struct stTestScenarioBlock scenario[7] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SEND_SYNC","1","0xffffe","","",""},
+    {4,"WAIT","1000","","","",""},
+    {5,"SEND_SYNC","1","0xffffd","","",""},
+    {6,"WAIT","10000","","","",""},
+    {7,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M31_8(void)
+{
+  struct stTestScenarioBlock scenario[7] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SEND_SYNC","1","0xffffe","","",""},
+    {4,"WAIT","1000","","","",""},
+    {5,"SEND_SYNC","1","0xffffc","","",""},
+    {6,"WAIT","10000","","","",""},
+    {7,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M31_9(void)
+{
+  struct stTestScenarioBlock scenario[7] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SEND_SYNC","1","0xffffe","","",""},
+    {4,"WAIT","1000","","","",""},
+    {5,"SEND_SYNC","1","1","","",""},
+    {6,"WAIT","10000","","","",""},
+    {7,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M32_1(void)
+{
+  struct stTestScenarioBlock scenario[6] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SET_MACTX","1","1","3","",""},
+    {4,"SEND_SYNC","2","3","","",""},
+    {5,"WAIT","10000","","","",""},
+    {6,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M32_2(void)
+{
+  struct stTestScenarioBlock scenario[6] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SET_MACTX","1","3","3","",""},
+    {4,"SEND_SYNC","2","3","","",""},
+    {5,"WAIT","10000","","","",""},
+    {6,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M32_3(void)
+{
+  struct stTestScenarioBlock scenario[6] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SET_MACTX","1","2","2","",""},
+    {4,"SEND_SYNC","2","3","","",""},
+    {5,"WAIT","10000","","","",""},
+    {6,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M32_4(void)
+{
+  struct stTestScenarioBlock scenario[6] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SET_MACTX","1","2","4","",""},
+    {4,"SEND_SYNC","2","3","","",""},
+    {5,"WAIT","10000","","","",""},
+    {6,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M33_1(void)
+{
+  struct stTestScenarioBlock scenario[21] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"SET_MACTX","0","0x0000000","","",""},
+    {3,"SEND_SYNC","0xffef","1","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SET_MACTX","0","0x0000000","","",""},
+    {6,"SEND_SYNC","0xffff","1","","",""},
+    {7,"WAIT","100","","","",""},
+    {8,"SET_MACTX","0","0x0000000","","",""},
+    {9,"SEND_SYNC","15","1","","",""},
+    {10,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {11,"WAITKEY","VerifyStart????????????","","","",""},
+    {12,"SET_MACTX","0","0x0000000","","",""},
+    {13,"SEND_SYNC","16","1","","",""},
+    {14,"WAIT","1000","","","",""},
+    {15,"SET_MACTX","0","0x0000000","","",""},
+    {16,"SEND_SYNC","16","2","","",""},
+    {17,"WAIT","1000","","","",""},
+    {18,"SET_MACTX","0","0x0000000","","",""},
+    {19,"SEND_SYNC","16","3","","",""},
+    {20,"WAIT","10000","","","",""},
+    {21,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M34_1(void)
+{
+  struct stTestScenarioBlock scenario[5] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SEND_SYNC","1","1","","",""},
+    {4,"WAIT","10000","","","",""},
+    {5,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M34_2(void)
+{
+  struct stTestScenarioBlock scenario[5] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SEND_SYNC","0","1","","",""},
+    {4,"WAIT","10000","","","",""},
+    {5,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M34_3(void)
+{
+  struct stTestScenarioBlock scenario[5] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SEND_SYNC","1","0","","",""},
+    {4,"WAIT","10000","","","",""},
+    {5,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M34_4(void)
+{
+  struct stTestScenarioBlock scenario[5] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SEND_SYNC","0","0","","",""},
+    {4,"WAIT","10000","","","",""},
+    {5,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M34_5(void)
+{
+  struct stTestScenarioBlock scenario[8] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SEND_SYNC","1","1","","",""},
+    {4,"LOGPRINT","SECONDARY_STARTUP","","","",""},
+    {5,"WAITKEY","??????????????????????????????????????","","","",""},
+    {6,"SEND_SYNC","1","0","","",""},
+    {7,"WAIT","10000","","","",""},
+    {8,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M34_6(void)
+{
+  struct stTestScenarioBlock scenario[8] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SEND_SYNC","1","1","","",""},
+    {4,"LOGPRINT","SECONDARY_STARTUP","","","",""},
+    {5,"WAITKEY","???????????????????????????OFF?ON???????","","","",""},
+    {6,"SEND_SYNC","1","0","","",""},
+    {7,"WAIT","10000","","","",""},
+    {8,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M34_7(void)
+{
+  struct stTestScenarioBlock scenario[8] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SEND_SYNC","1","1","","",""},
+    {4,"LOGPRINT","SECONDARY_STARTUP","","","",""},
+    {5,"WAITKEY","????????????????????????ECU???????????","","","",""},
+    {6,"SEND_SYNC","1","0","","",""},
+    {7,"WAIT","10000","","","",""},
+    {8,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M34_8(void)
+{
+  struct stTestScenarioBlock scenario[5] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SEND_SYNC","0xffff","0xfffff","","",""},
+    {4,"WAIT","10000","","","",""},
+    {5,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M35_1(void)
+{
+  struct stTestScenarioBlock scenario[8] = {
+    {1,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","1000","","","",""},
+    {4,"SEND_SYNC","0xffff","1","","",""},
+    {5,"WAIT","1000","","","",""},
+    {6,"SEND_SYNC","1","1","","",""},
+    {7,"WAIT","10000","","","",""},
+    {8,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M35_2(void)
+{
+  struct stTestScenarioBlock scenario[8] = {
+    {1,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","1000","","","",""},
+    {4,"SEND_SYNC","0xffff","1","","",""},
+    {5,"WAIT","1000","","","",""},
+    {6,"SEND_SYNC","16","1","","",""},
+    {7,"WAIT","10000","","","",""},
+    {8,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M35_3(void)
+{
+  struct stTestScenarioBlock scenario[8] = {
+    {1,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","1000","","","",""},
+    {4,"SEND_SYNC","0xffff","1","","",""},
+    {5,"WAIT","1000","","","",""},
+    {6,"SEND_SYNC","17","1","","",""},
+    {7,"WAIT","10000","","","",""},
+    {8,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M35_4(void)
+{
+  struct stTestScenarioBlock scenario[8] = {
+    {1,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","1000","","","",""},
+    {4,"SEND_SYNC","0xfff0","1","","",""},
+    {5,"WAIT","1000","","","",""},
+    {6,"SEND_SYNC","1","1","","",""},
+    {7,"WAIT","10000","","","",""},
+    {8,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M35_5(void)
+{
+  struct stTestScenarioBlock scenario[8] = {
+    {1,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","1000","","","",""},
+    {4,"SEND_SYNC","0xfff0","1","","",""},
+    {5,"WAIT","1000","","","",""},
+    {6,"SEND_SYNC","16","1","","",""},
+    {7,"WAIT","10000","","","",""},
+    {8,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M35_6(void)
+{
+  struct stTestScenarioBlock scenario[8] = {
+    {1,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","1000","","","",""},
+    {4,"SEND_SYNC","0xfff0","1","","",""},
+    {5,"WAIT","1000","","","",""},
+    {6,"SEND_SYNC","17","1","","",""},
+    {7,"WAIT","10000","","","",""},
+    {8,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M35_7(void)
+{
+  struct stTestScenarioBlock scenario[8] = {
+    {1,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","1000","","","",""},
+    {4,"SEND_SYNC","0xffef","1","","",""},
+    {5,"WAIT","1000","","","",""},
+    {6,"SEND_SYNC","1","1","","",""},
+    {7,"WAIT","10000","","","",""},
+    {8,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M35_8(void)
+{
+  struct stTestScenarioBlock scenario[8] = {
+    {1,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","1000","","","",""},
+    {4,"SEND_SYNC","0xffef","1","","",""},
+    {5,"WAIT","1000","","","",""},
+    {6,"SEND_SYNC","16","1","","",""},
+    {7,"WAIT","10000","","","",""},
+    {8,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M35_9(void)
+{
+  struct stTestScenarioBlock scenario[8] = {
+    {1,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","1000","","","",""},
+    {4,"SEND_SYNC","0xffef","1","","",""},
+    {5,"WAIT","1000","","","",""},
+    {6,"SEND_SYNC","17","1","","",""},
+    {7,"WAIT","10000","","","",""},
+    {8,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M36_1(void)
+{
+  struct stTestScenarioBlock scenario[44] = {
+    {1,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {2,"SECONDARY_START","","","","",""},
+    {3,"LOGSTART","","","","",""},
+    {4,"SEND_SYNC","1","2","","",""},
+    {5,"WAIT","20","","","",""},
+    {6,"SEND_SYNC","1","2","","",""},
+    {7,"WAIT","20","","","",""},
+    {8,"SET","_VAR_DWORD1","0","","",""},
+    {9,"SEND_SYNC","1","1","","",""},
+    {10,"WAIT","20","","","",""},
+    {11,"ADD","_VAR_DWORD1","1","","",""},
+    {12,"JUMPLESS","9","_VAR_DWORD1","2","",""},
+    {13,"SET","_VAR_DWORD1","0","","",""},
+    {14,"SET_MACTX","0","0x0000000","","",""},
+    {15,"SEND_SYNC","1","3","","",""},
+    {16,"WAIT","20","","","",""},
+    {17,"ADD","_VAR_DWORD1","1","","",""},
+    {18,"JUMPLESS","14","_VAR_DWORD1","4","",""},
+    {19,"WAIT","<Timeout>","","","",""},
+    {20,"CALL","ReadVerifyNG","0","6","",""},
+    {21,"WAIT","1000","","","",""},
+    {22,"SEND_SYNC","1","3","","",""},
+    {23,"WAIT","100","","","",""},
+    {24,"SET","_VAR_DWORD1","0","","",""},
+    {25,"SEND_SYNC","1","2","","",""},
+    {26,"ADD","_VAR_DWORD1","1","","",""},
+    {27,"WAIT","100","","","",""},
+    {28,"JUMPLESS","25","_VAR_DWORD1","2","",""},
+    {29,"SEND_SYNC","1","4","","",""},
+    {30,"WAIT","100","","","",""},
+    {31,"SET","_VAR_DWORD1","0","","",""},
+    {32,"SET_MACTX","0","0x0000000","","",""},
+    {33,"SEND_SYNC","1","5","","",""},
+    {34,"WAIT","100","","","",""},
+    {35,"ADD","_VAR_DWORD1","1","","",""},
+    {36,"JUMPLESS","32","_VAR_DWORD1","3","",""},
+    {37,"WAIT","<Timeout>","","","",""},
+    {38,"CALL","ReadVerifyNG","0","3","",""},
+    {39,"WAIT","1000","","","",""},
+    {40,"SET_MACTX","0","0x0000000","","",""},
+    {41,"SEND_SYNC","1","5","","",""},
+    {42,"WAIT","<Timeout>","","","",""},
+    {43,"CALL","ReadVerifyNG","0","1","",""},
+    {44,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M36_2(void)
+{
+  struct stTestScenarioBlock scenario[28] = {
+    {1,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"CALL","Sid14","","","",""},
+    {4,"SET_MACTX","0","0x0000000","","",""},
+    {5,"SEND_SYNC","1","1","","",""},
+    {6,"WAIT","<Timeout>","","","",""},
+    {7,"CALL","Sid19","0x02","0x02","",""},
+    {8,"CALL","ChkReadDTC","0xE40100","0x02","0x02",""},
+    {9,"CALL","Sid14","","","",""},
+    {10,"SET_MACTX","0","0x0000000","","",""},
+    {11,"SEND_SYNC","1","1","","",""},
+    {12,"WAIT","<Timeout>","","","",""},
+    {13,"CALL","Sid19","0x02","0x02","",""},
+    {14,"CALL","ChkReadDTC","0xE40100","0x02","0x02",""},
+    {15,"CALL","Sid14","","","",""},
+    {16,"WAIT","<Timeout>","","","",""},
+    {17,"CALL","Sid19","0x02","0x02","",""},
+    {18,"CALL","ChkReadDTC","0xE40100","0x02","0x02","1"},
+    {19,"WAIT","1000","","","",""},
+    {20,"SET_MACTX","0","0x0000000","","",""},
+    {21,"SEND_SYNC","1","2","","",""},
+    {22,"WAIT","<Timeout>","","","",""},
+    {23,"WAITKEY","??OperationCycle??????????","","","",""},
+    {24,"SEND_SYNC","1","2","","",""},
+    {25,"WAIT","1000","","","",""},
+    {26,"CALL","Sid19","0x02","0x08","",""},
+    {27,"CALL","ChkReadDTC","0xE40100","0x08","0x08",""},
+    {28,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M37_1(void)
+{
+  struct stTestScenarioBlock scenario[4] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"WAITKEY","KeyValueVerifyTime???????????","","","",""},
+    {4,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M37_2(void)
+{
+  struct stTestScenarioBlock scenario[7] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SEND_SYNC","1","1","","",""},
+    {4,"WAIT","100","","","",""},
+    {5,"SEND_SYNC","1","2","","",""},
+    {6,"WAITKEY","KeyValueVerifyTime???????????","","","",""},
+    {7,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M37_3(void)
+{
+  struct stTestScenarioBlock scenario[11] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SET_MACTX","0","0x0000000","","",""},
+    {4,"SEND_SYNC","1","1","","",""},
+    {5,"WAIT","100","","","",""},
+    {6,"ADD","_VAR_DWORD1","1","","",""},
+    {7,"JUMPLESS","3","_VAR_DWORD1","5","",""},
+    {8,"WAITKEY","KeyValueVerifyTime???????????","","","",""},
+    {9,"CALL","Sid19","0x02","0x08","",""},
+    {10,"CALL","ChkReadDTC","0xE40000","0x08","0x08","0"},
+    {11,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M37_4(void)
+{
+  struct stTestScenarioBlock scenario[10] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","???????????????????????????ON???????","","","",""},
+    {3,"SET","_VAR_DWORD1","1","","",""},
+    {4,"SEND_SYNC","1","_VAR_DWORD1","","",""},
+    {5,"WAIT","100","","","",""},
+    {6,"ADD","_VAR_DWORD1","1","","",""},
+    {7,"JUMPLESS","4","_VAR_DWORD1","4","",""},
+    {8,"WAIT","1000","","","",""},
+    {9,"WAITKEY","KeyValueVerifyTime???????????","","","",""},
+    {10,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEB);
+}
+
+testcase M38_1(void)
+{
+  struct stTestScenarioBlock scenario[4] = {
+    {1,"RCVNODE_START","","","","",""},
+    {2,"WAITKEY","?????????????????ON???????","","","",""},
+    {3,"LOGSTART","60000","","","",""},
+    {4,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEA);
+}
+
+testcase M39_1A(void)
+{
+  struct stTestScenarioBlock scenario[4] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","?????????????????ON???????","","","",""},
+    {3,"WAIT","10000","","","",""},
+    {4,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEF);
+}
+
+testcase M39_1B(void)
+{
+  struct stTestScenarioBlock scenario[4] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","?????????????????ON???????","","","",""},
+    {3,"WAIT","10000","","","",""},
+    {4,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEF);
+}
+
+testcase M39_2A(void)
+{
+  struct stTestScenarioBlock scenario[4] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","?????????????????ON???????","","","",""},
+    {3,"WAIT","10000","","","",""},
+    {4,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEF);
+}
+
+testcase M39_2B(void)
+{
+  struct stTestScenarioBlock scenario[4] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","?????????????????ON???????","","","",""},
+    {3,"WAIT","10000","","","",""},
+    {4,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEF);
+}
+
+testcase M39_3A(void)
+{
+  struct stTestScenarioBlock scenario[6] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","?????????????????ON???????","","","",""},
+    {3,"WAIT","1000","","","",""},
+    {4,"WAITKEY","????????????????????????????","","","",""},
+    {5,"WAIT","10000","","","",""},
+    {6,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEF);
+}
+
+testcase M39_3B(void)
+{
+  struct stTestScenarioBlock scenario[6] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","?????????????????ON???????","","","",""},
+    {3,"WAIT","1000","","","",""},
+    {4,"WAITKEY","????????????????????????????","","","",""},
+    {5,"WAIT","10000","","","",""},
+    {6,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEF);
+}
+
+testcase M39_4A(void)
+{
+  struct stTestScenarioBlock scenario[6] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","?????????????????ON???????","","","",""},
+    {3,"WAIT","1000","","","",""},
+    {4,"WAITKEY","?????????????????OFF?ON???????","","","",""},
+    {5,"WAIT","10000","","","",""},
+    {6,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEF);
+}
+
+testcase M39_4B(void)
+{
+  struct stTestScenarioBlock scenario[6] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","?????????????????ON???????","","","",""},
+    {3,"WAIT","1000","","","",""},
+    {4,"WAITKEY","?????????????????OFF?ON???????","","","",""},
+    {5,"WAIT","10000","","","",""},
+    {6,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEF);
+}
+
+testcase M39_5A(void)
+{
+  struct stTestScenarioBlock scenario[6] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","?????????????????ON???????","","","",""},
+    {3,"WAIT","1000","","","",""},
+    {4,"WAITKEY","??????????????ECU???????????","","","",""},
+    {5,"WAIT","10000","","","",""},
+    {6,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEF);
+}
+
+testcase M39_5B(void)
+{
+  struct stTestScenarioBlock scenario[6] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","?????????????????ON???????","","","",""},
+    {3,"WAIT","1000","","","",""},
+    {4,"WAITKEY","??????????????ECU???????????","","","",""},
+    {5,"WAIT","10000","","","",""},
+    {6,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEF);
+}
+
+testcase M40_1(void)
+{
+  struct stTestScenarioBlock scenario[4] = {
+    {1,"RCVNODE_START","","","","",""},
+    {2,"WAITKEY","?????????????????ON???????","","","",""},
+    {3,"LOGSTART","60000","","","",""},
+    {4,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEA);
+}
+
+testcase M41_1(void)
+{
+  struct stTestScenarioBlock scenario[4] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","?????????????????ON???????","","","",""},
+    {3,"WAIT","10000","","","",""},
+    {4,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEF);
+}
+
+testcase M42_1A(void)
+{
+  struct stTestScenarioBlock scenario[5] = {
+    {1,"RCVNODE_START","","","","",""},
+    {2,"WAITKEY","?????????????????ON???????","","","",""},
+    {3,"LOGSTART","60000","","","",""},
+    {4,"WAITKEY","?????????????????OFF?ON???????","","","",""},
+    {5,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEA);
+}
+
+testcase M42_1B(void)
+{
+  struct stTestScenarioBlock scenario[5] = {
+    {1,"RCVNODE_START","","","","",""},
+    {2,"WAITKEY","?????????????????ON???????","","","",""},
+    {3,"LOGSTART","60000","","","",""},
+    {4,"WAITKEY","?????????????????OFF?ON???????","","","",""},
+    {5,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEA);
+}
+
+testcase M42_2A(void)
+{
+  struct stTestScenarioBlock scenario[4] = {
+    {1,"RCVNODE_START","","","","",""},
+    {2,"WAITKEY","?????????????????ON???????","","","",""},
+    {3,"LOGSTART","60000","","","",""},
+    {4,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEA);
+}
+
+testcase M42_2B(void)
+{
+  struct stTestScenarioBlock scenario[4] = {
+    {1,"RCVNODE_START","","","","",""},
+    {2,"WAITKEY","?????????????????ON???????","","","",""},
+    {3,"LOGSTART","60000","","","",""},
+    {4,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEA);
+}
+
+testcase M43_1A(void)
+{
+  struct stTestScenarioBlock scenario[4] = {
+    {1,"RCVNODE_START","","","","",""},
+    {2,"WAITKEY","?????????????????ON???????","","","",""},
+    {3,"LOGSTART","60000","","","",""},
+    {4,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEA);
+}
+
+testcase M43_1B(void)
+{
+  struct stTestScenarioBlock scenario[4] = {
+    {1,"RCVNODE_START","","","","",""},
+    {2,"WAITKEY","?????????????????ON???????","","","",""},
+    {3,"LOGSTART","60000","","","",""},
+    {4,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEA);
+}
+
+testcase M43_2A(void)
+{
+  struct stTestScenarioBlock scenario[4] = {
+    {1,"RCVNODE_START","","","","",""},
+    {2,"WAITKEY","?????????????????ON???????","","","",""},
+    {3,"LOGSTART","60000","","","",""},
+    {4,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEA);
+}
+
+testcase M43_2B(void)
+{
+  struct stTestScenarioBlock scenario[4] = {
+    {1,"RCVNODE_START","","","","",""},
+    {2,"WAITKEY","?????????????????ON???????","","","",""},
+    {3,"LOGSTART","60000","","","",""},
+    {4,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEA);
+}
+
+testcase M44_1A(void)
+{
+  struct stTestScenarioBlock scenario[4] = {
+    {1,"RCVNODE_START","","","","",""},
+    {2,"WAITKEY","?????????????????ON???????","","","",""},
+    {3,"LOGSTART","60000","","","",""},
+    {4,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEA);
+}
+
+testcase M44_1B(void)
+{
+  struct stTestScenarioBlock scenario[4] = {
+    {1,"RCVNODE_START","","","","",""},
+    {2,"WAITKEY","?????????????????ON???????","","","",""},
+    {3,"LOGSTART","60000","","","",""},
+    {4,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEA);
+}
+
+testcase M45_1A(void)
+{
+  struct stTestScenarioBlock scenario[7] = {
+    {1,"RCVNODE_START","","","","",""},
+    {2,"WAITKEY","?????????????????ON???????","","","",""},
+    {3,"LOGSTART","60000","","","",""},
+    {4,"PRINT","???????????????????????0xfffe0??????????","","","",""},
+    {5,"WAIT","5000","","","",""},
+    {6,"JUMPNEQ","5","_VAR_RESETCNT","0xfffff","",""},
+    {7,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEA);
+}
+
+testcase M45_1B(void)
+{
+  struct stTestScenarioBlock scenario[7] = {
+    {1,"RCVNODE_START","","","","",""},
+    {2,"WAITKEY","?????????????????ON???????","","","",""},
+    {3,"LOGSTART","60000","","","",""},
+    {4,"PRINT","???????????????????????0xfffe0??????????","","","",""},
+    {5,"WAIT","5000","","","",""},
+    {6,"JUMPNEQ","5","_VAR_RESETCNT","0xfffff","",""},
+    {7,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEA);
+}
+
+testcase M46_1A(void)
+{
+  struct stTestScenarioBlock scenario[16] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {5,"ADD","_VAR_DWORD1","2","","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"JUMPLESS","6","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {8,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {9,"WAIT","10","","","",""},
+    {10,"CALL","Sid14","","","",""},
+    {11,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {12,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","3","",""},
+    {13,"WAIT","<Timeout>","","","",""},
+    {14,"CALL","Sid19","0x02","0x02","",""},
+    {15,"CALL","ChkReadDTC","0xE40100","0x02","0x02","1"},
+    {16,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M46_1B(void)
+{
+  struct stTestScenarioBlock scenario[13] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {5,"ADD","_VAR_DWORD1","2","","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"JUMPLESS","6","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {8,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {9,"WAIT","10","","","",""},
+    {10,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {11,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","3","",""},
+    {12,"WAIT","5000","","","",""},
+    {13,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M46_2A(void)
+{
+  struct stTestScenarioBlock scenario[16] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {5,"ADD","_VAR_DWORD1","2","","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"JUMPLESS","6","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {8,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {9,"WAIT","10","","","",""},
+    {10,"CALL","Sid14","","","",""},
+    {11,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {12,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","5","",""},
+    {13,"WAIT","<Timeout>","","","",""},
+    {14,"CALL","Sid19","0x02","0x02","",""},
+    {15,"CALL","ChkReadDTC","0xE40100","0x02","0x02","1"},
+    {16,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M46_2B(void)
+{
+  struct stTestScenarioBlock scenario[13] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {5,"ADD","_VAR_DWORD1","2","","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"JUMPLESS","6","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {8,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {9,"WAIT","10","","","",""},
+    {10,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {11,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","5","",""},
+    {12,"WAIT","5000","","","",""},
+    {13,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M46_3A(void)
+{
+  struct stTestScenarioBlock scenario[19] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {5,"ADD","_VAR_DWORD1","2","","",""},
+    {6,"SET","_VAR_DWORD2","_VAR_DWORD1","","",""},
+    {7,"ADD","_VAR_DWORD2","4","","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"JUMPLESS","8","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {10,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {11,"WAIT","100","","","",""},
+    {12,"JUMPLESS","11","_VAR_RESETCNT","_VAR_DWORD2","",""},
+    {13,"CALL","Sid14","","","",""},
+    {14,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {15,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD2","3","",""},
+    {16,"WAIT","<Timeout>","","","",""},
+    {17,"CALL","Sid19","0x02","0x02","",""},
+    {18,"CALL","ChkReadDTC","0xE40100","0x02","0x02","1"},
+    {19,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M46_3B(void)
+{
+  struct stTestScenarioBlock scenario[16] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {5,"ADD","_VAR_DWORD1","2","","",""},
+    {6,"SET","_VAR_DWORD2","_VAR_DWORD1","","",""},
+    {7,"ADD","_VAR_DWORD2","4","","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"JUMPLESS","8","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {10,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {11,"WAIT","100","","","",""},
+    {12,"JUMPLESS","11","_VAR_RESETCNT","_VAR_DWORD2","",""},
+    {13,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {14,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD2","3","",""},
+    {15,"WAIT","5000","","","",""},
+    {16,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M46_4A(void)
+{
+  struct stTestScenarioBlock scenario[24] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {5,"ADD","_VAR_DWORD1","1","","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"JUMPLESS","6","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {10,"AND","_VAR_DWORD1","0x0f","","",""},
+    {11,"JUMPEQ","8","_VAR_DWORD1","3","",""},
+    {12,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {13,"SET","_VAR_DWORD2","_VAR_RESETCNT","","",""},
+    {14,"ADD","_VAR_DWORD2","1","","",""},
+    {15,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {16,"WAIT","100","","","",""},
+    {17,"JUMPLESS","16","_VAR_RESETCNT","_VAR_DWORD2","",""},
+    {18,"CALL","Sid14","","","",""},
+    {19,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {20,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","3","",""},
+    {21,"WAIT","<Timeout>","","","",""},
+    {22,"CALL","Sid19","0x02","0x02","",""},
+    {23,"CALL","ChkReadDTC","0xE40100","0x02","0x02","1"},
+    {24,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M46_4B(void)
+{
+  struct stTestScenarioBlock scenario[21] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {5,"ADD","_VAR_DWORD1","1","","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"JUMPLESS","6","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {10,"AND","_VAR_DWORD1","0x0f","","",""},
+    {11,"JUMPEQ","8","_VAR_DWORD1","3","",""},
+    {12,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {13,"SET","_VAR_DWORD2","_VAR_RESETCNT","","",""},
+    {14,"ADD","_VAR_DWORD2","1","","",""},
+    {15,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {16,"WAIT","100","","","",""},
+    {17,"JUMPLESS","16","_VAR_RESETCNT","_VAR_DWORD2","",""},
+    {18,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {19,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","3","",""},
+    {20,"WAIT","5000","","","",""},
+    {21,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M46_5A(void)
+{
+  struct stTestScenarioBlock scenario[24] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {5,"ADD","_VAR_DWORD1","1","","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"JUMPLESS","6","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {10,"AND","_VAR_DWORD1","0x0f","","",""},
+    {11,"JUMPEQ","8","_VAR_DWORD1","3","",""},
+    {12,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {13,"SET","_VAR_DWORD2","_VAR_RESETCNT","","",""},
+    {14,"ADD","_VAR_DWORD2","1","","",""},
+    {15,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {16,"WAIT","100","","","",""},
+    {17,"JUMPLESS","16","_VAR_RESETCNT","_VAR_DWORD2","",""},
+    {18,"CALL","Sid14","","","",""},
+    {19,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {20,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","5","",""},
+    {21,"WAIT","<Timeout>","","","",""},
+    {22,"CALL","Sid19","0x02","0x02","",""},
+    {23,"CALL","ChkReadDTC","0xE40100","0x02","0x02","1"},
+    {24,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M46_5B(void)
+{
+  struct stTestScenarioBlock scenario[21] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {5,"ADD","_VAR_DWORD1","1","","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"JUMPLESS","6","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {10,"AND","_VAR_DWORD1","0x0f","","",""},
+    {11,"JUMPEQ","8","_VAR_DWORD1","3","",""},
+    {12,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {13,"SET","_VAR_DWORD2","_VAR_RESETCNT","","",""},
+    {14,"ADD","_VAR_DWORD2","1","","",""},
+    {15,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {16,"WAIT","100","","","",""},
+    {17,"JUMPLESS","16","_VAR_RESETCNT","_VAR_DWORD2","",""},
+    {18,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {19,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","5","",""},
+    {20,"WAIT","5000","","","",""},
+    {21,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M46_6A(void)
+{
+  struct stTestScenarioBlock scenario[25] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {5,"ADD","_VAR_DWORD1","1","","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"JUMPLESS","6","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {10,"AND","_VAR_DWORD1","0x0f","","",""},
+    {11,"JUMPEQ","8","_VAR_DWORD1","3","",""},
+    {12,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {13,"SET","_VAR_DWORD2","_VAR_RESETCNT","","",""},
+    {14,"ADD","_VAR_DWORD2","5","","",""},
+    {15,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {16,"WAIT","100","","","",""},
+    {17,"JUMPLESS","16","_VAR_RESETCNT","_VAR_DWORD2","",""},
+    {18,"CALL","Sid14","","","",""},
+    {19,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {20,"SUB","_VAR_DWORD2","1","","",""},
+    {21,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD2","3","",""},
+    {22,"WAIT","<Timeout>","","","",""},
+    {23,"CALL","Sid19","0x02","0x02","",""},
+    {24,"CALL","ChkReadDTC","0xE40100","0x02","0x02","1"},
+    {25,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M46_6B(void)
+{
+  struct stTestScenarioBlock scenario[22] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {5,"ADD","_VAR_DWORD1","1","","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"JUMPLESS","6","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {10,"AND","_VAR_DWORD1","0x0f","","",""},
+    {11,"JUMPEQ","8","_VAR_DWORD1","3","",""},
+    {12,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {13,"SET","_VAR_DWORD2","_VAR_RESETCNT","","",""},
+    {14,"ADD","_VAR_DWORD2","5","","",""},
+    {15,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {16,"WAIT","100","","","",""},
+    {17,"JUMPLESS","16","_VAR_RESETCNT","_VAR_DWORD2","",""},
+    {18,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {19,"SUB","_VAR_DWORD2","1","","",""},
+    {20,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD2","3","",""},
+    {21,"WAIT","5000","","","",""},
+    {22,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M46_7A(void)
+{
+  struct stTestScenarioBlock scenario[24] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {5,"ADD","_VAR_DWORD1","1","","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"JUMPLESS","6","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {10,"AND","_VAR_DWORD1","0x0f","","",""},
+    {11,"JUMPEQ","8","_VAR_DWORD1","3","",""},
+    {12,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {13,"SET","_VAR_DWORD2","_VAR_RESETCNT","","",""},
+    {14,"ADD","_VAR_DWORD2","1","","",""},
+    {15,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {16,"WAIT","100","","","",""},
+    {17,"JUMPLESS","16","_VAR_RESETCNT","_VAR_DWORD2","",""},
+    {18,"CALL","Sid14","","","",""},
+    {19,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {20,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD2","3","",""},
+    {21,"WAIT","<Timeout>","","","",""},
+    {22,"CALL","Sid19","0x02","0x02","",""},
+    {23,"CALL","ChkReadDTC","0xE40100","0x02","0x02","1"},
+    {24,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M46_7B(void)
+{
+  struct stTestScenarioBlock scenario[21] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {5,"ADD","_VAR_DWORD1","1","","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"JUMPLESS","6","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {10,"AND","_VAR_DWORD1","0x0f","","",""},
+    {11,"JUMPEQ","8","_VAR_DWORD1","3","",""},
+    {12,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {13,"SET","_VAR_DWORD2","_VAR_RESETCNT","","",""},
+    {14,"ADD","_VAR_DWORD2","1","","",""},
+    {15,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {16,"WAIT","100","","","",""},
+    {17,"JUMPLESS","16","_VAR_RESETCNT","_VAR_DWORD2","",""},
+    {18,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {19,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD2","3","",""},
+    {20,"WAIT","5000","","","",""},
+    {21,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M46_8A(void)
+{
+  struct stTestScenarioBlock scenario[24] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {5,"ADD","_VAR_DWORD1","1","","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"JUMPLESS","6","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {10,"AND","_VAR_DWORD1","0x0f","","",""},
+    {11,"JUMPEQ","8","_VAR_DWORD1","3","",""},
+    {12,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {13,"SET","_VAR_DWORD2","_VAR_RESETCNT","","",""},
+    {14,"ADD","_VAR_DWORD2","1","","",""},
+    {15,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {16,"WAIT","100","","","",""},
+    {17,"JUMPLESS","16","_VAR_RESETCNT","_VAR_DWORD2","",""},
+    {18,"CALL","Sid14","","","",""},
+    {19,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {20,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD2","5","",""},
+    {21,"WAIT","<Timeout>","","","",""},
+    {22,"CALL","Sid19","0x02","0x02","",""},
+    {23,"CALL","ChkReadDTC","0xE40100","0x02","0x02","1"},
+    {24,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M46_8B(void)
+{
+  struct stTestScenarioBlock scenario[21] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {5,"ADD","_VAR_DWORD1","1","","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"JUMPLESS","6","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {10,"AND","_VAR_DWORD1","0x0f","","",""},
+    {11,"JUMPEQ","8","_VAR_DWORD1","3","",""},
+    {12,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {13,"SET","_VAR_DWORD2","_VAR_RESETCNT","","",""},
+    {14,"ADD","_VAR_DWORD2","1","","",""},
+    {15,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {16,"WAIT","100","","","",""},
+    {17,"JUMPLESS","16","_VAR_RESETCNT","_VAR_DWORD2","",""},
+    {18,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {19,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD2","5","",""},
+    {20,"WAIT","5000","","","",""},
+    {21,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M46_9A(void)
+{
+  struct stTestScenarioBlock scenario[26] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {5,"ADD","_VAR_DWORD1","1","","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"JUMPLESS","6","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {10,"AND","_VAR_DWORD1","0x0f","","",""},
+    {11,"JUMPEQ","8","_VAR_DWORD1","3","",""},
+    {12,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {13,"ADD","_VAR_DWORD1","1","","",""},
+    {14,"SET","_VAR_DWORD2","_VAR_RESETCNT","","",""},
+    {15,"ADD","_VAR_DWORD2","4","","",""},
+    {16,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {17,"WAIT","100","","","",""},
+    {18,"JUMPLESS","17","_VAR_RESETCNT","_VAR_DWORD2","",""},
+    {19,"CALL","Sid14","","","",""},
+    {20,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {21,"ADD","_VAR_DWORD2","1","","",""},
+    {22,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD2","3","",""},
+    {23,"WAIT","<Timeout>","","","",""},
+    {24,"CALL","Sid19","0x02","0x02","",""},
+    {25,"CALL","ChkReadDTC","0xE40100","0x02","0x02","1"},
+    {26,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M46_9B(void)
+{
+  struct stTestScenarioBlock scenario[23] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {5,"ADD","_VAR_DWORD1","1","","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"JUMPLESS","6","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {10,"AND","_VAR_DWORD1","0x0f","","",""},
+    {11,"JUMPEQ","8","_VAR_DWORD1","3","",""},
+    {12,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {13,"ADD","_VAR_DWORD1","1","","",""},
+    {14,"SET","_VAR_DWORD2","_VAR_RESETCNT","","",""},
+    {15,"ADD","_VAR_DWORD2","4","","",""},
+    {16,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {17,"WAIT","100","","","",""},
+    {18,"JUMPLESS","17","_VAR_RESETCNT","_VAR_DWORD2","",""},
+    {19,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {20,"ADD","_VAR_DWORD2","1","","",""},
+    {21,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD2","3","",""},
+    {22,"WAIT","5000","","","",""},
+    {23,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M46_10A(void)
+{
+  struct stTestScenarioBlock scenario[24] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {5,"ADD","_VAR_DWORD1","1","","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"JUMPLESS","6","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {10,"AND","_VAR_DWORD1","0x0f","","",""},
+    {11,"JUMPLESS","8","2","_VAR_DWORD1","",""},
+    {12,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {13,"SET","_VAR_DWORD2","_VAR_RESETCNT","","",""},
+    {14,"ADD","_VAR_DWORD2","2","","",""},
+    {15,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {16,"WAIT","100","","","",""},
+    {17,"JUMPLESS","16","_VAR_RESETCNT","_VAR_DWORD2","",""},
+    {18,"CALL","Sid14","","","",""},
+    {19,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {20,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","3","",""},
+    {21,"WAIT","<Timeout>","","","",""},
+    {22,"CALL","Sid19","0x02","0x02","",""},
+    {23,"CALL","ChkReadDTC","0xE40100","0x02","0x02","1"},
+    {24,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M46_10B(void)
+{
+  struct stTestScenarioBlock scenario[21] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {5,"ADD","_VAR_DWORD1","1","","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"JUMPLESS","6","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {10,"AND","_VAR_DWORD1","0x0f","","",""},
+    {11,"JUMPLESS","8","2","_VAR_DWORD1","",""},
+    {12,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {13,"SET","_VAR_DWORD2","_VAR_RESETCNT","","",""},
+    {14,"ADD","_VAR_DWORD2","2","","",""},
+    {15,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {16,"WAIT","100","","","",""},
+    {17,"JUMPLESS","16","_VAR_RESETCNT","_VAR_DWORD2","",""},
+    {18,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {19,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","3","",""},
+    {20,"WAIT","5000","","","",""},
+    {21,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M46_11A(void)
+{
+  struct stTestScenarioBlock scenario[24] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {5,"ADD","_VAR_DWORD1","1","","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"JUMPLESS","6","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {10,"AND","_VAR_DWORD1","0x0f","","",""},
+    {11,"JUMPLESS","8","2","_VAR_DWORD1","",""},
+    {12,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {13,"SET","_VAR_DWORD2","_VAR_RESETCNT","","",""},
+    {14,"ADD","_VAR_DWORD2","2","","",""},
+    {15,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {16,"WAIT","100","","","",""},
+    {17,"JUMPLESS","16","_VAR_RESETCNT","_VAR_DWORD2","",""},
+    {18,"CALL","Sid14","","","",""},
+    {19,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {20,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","5","",""},
+    {21,"WAIT","<Timeout>","","","",""},
+    {22,"CALL","Sid19","0x02","0x02","",""},
+    {23,"CALL","ChkReadDTC","0xE40100","0x02","0x02","1"},
+    {24,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M46_11B(void)
+{
+  struct stTestScenarioBlock scenario[21] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {5,"ADD","_VAR_DWORD1","1","","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"JUMPLESS","6","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {10,"AND","_VAR_DWORD1","0x0f","","",""},
+    {11,"JUMPLESS","8","2","_VAR_DWORD1","",""},
+    {12,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {13,"SET","_VAR_DWORD2","_VAR_RESETCNT","","",""},
+    {14,"ADD","_VAR_DWORD2","2","","",""},
+    {15,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {16,"WAIT","100","","","",""},
+    {17,"JUMPLESS","16","_VAR_RESETCNT","_VAR_DWORD2","",""},
+    {18,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {19,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","5","",""},
+    {20,"WAIT","5000","","","",""},
+    {21,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M46_12A(void)
+{
+  struct stTestScenarioBlock scenario[25] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {5,"ADD","_VAR_DWORD1","1","","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"JUMPLESS","6","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {10,"AND","_VAR_DWORD1","0x0f","","",""},
+    {11,"JUMPLESS","8","2","_VAR_DWORD1","",""},
+    {12,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {13,"SET","_VAR_DWORD2","_VAR_RESETCNT","","",""},
+    {14,"ADD","_VAR_DWORD2","6","","",""},
+    {15,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {16,"WAIT","100","","","",""},
+    {17,"JUMPLESS","16","_VAR_RESETCNT","_VAR_DWORD2","",""},
+    {18,"CALL","Sid14","","","",""},
+    {19,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {20,"SUB","_VAR_DWORD2","2","","",""},
+    {21,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD2","3","",""},
+    {22,"WAIT","<Timeout>","","","",""},
+    {23,"CALL","Sid19","0x02","0x02","",""},
+    {24,"CALL","ChkReadDTC","0xE40100","0x02","0x02","1"},
+    {25,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M46_12B(void)
+{
+  struct stTestScenarioBlock scenario[22] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {5,"ADD","_VAR_DWORD1","1","","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"JUMPLESS","6","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {10,"AND","_VAR_DWORD1","0x0f","","",""},
+    {11,"JUMPLESS","8","2","_VAR_DWORD1","",""},
+    {12,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {13,"SET","_VAR_DWORD2","_VAR_RESETCNT","","",""},
+    {14,"ADD","_VAR_DWORD2","6","","",""},
+    {15,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {16,"WAIT","100","","","",""},
+    {17,"JUMPLESS","16","_VAR_RESETCNT","_VAR_DWORD2","",""},
+    {18,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {19,"SUB","_VAR_DWORD2","2","","",""},
+    {20,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD2","3","",""},
+    {21,"WAIT","5000","","","",""},
+    {22,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M46_13A(void)
+{
+  struct stTestScenarioBlock scenario[24] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {5,"ADD","_VAR_DWORD1","1","","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"JUMPLESS","6","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {10,"AND","_VAR_DWORD1","0x0f","","",""},
+    {11,"JUMPLESS","8","2","_VAR_DWORD1","",""},
+    {12,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {13,"SET","_VAR_DWORD2","_VAR_RESETCNT","","",""},
+    {14,"ADD","_VAR_DWORD2","2","","",""},
+    {15,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {16,"WAIT","100","","","",""},
+    {17,"JUMPLESS","16","_VAR_RESETCNT","_VAR_DWORD2","",""},
+    {18,"CALL","Sid14","","","",""},
+    {19,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {20,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD2","3","",""},
+    {21,"WAIT","<Timeout>","","","",""},
+    {22,"CALL","Sid19","0x02","0x02","",""},
+    {23,"CALL","ChkReadDTC","0xE40100","0x02","0x02","1"},
+    {24,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M46_13B(void)
+{
+  struct stTestScenarioBlock scenario[21] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {5,"ADD","_VAR_DWORD1","1","","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"JUMPLESS","6","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {10,"AND","_VAR_DWORD1","0x0f","","",""},
+    {11,"JUMPLESS","8","2","_VAR_DWORD1","",""},
+    {12,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {13,"SET","_VAR_DWORD2","_VAR_RESETCNT","","",""},
+    {14,"ADD","_VAR_DWORD2","2","","",""},
+    {15,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {16,"WAIT","100","","","",""},
+    {17,"JUMPLESS","16","_VAR_RESETCNT","_VAR_DWORD2","",""},
+    {18,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {19,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD2","3","",""},
+    {20,"WAIT","5000","","","",""},
+    {21,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M46_14A(void)
+{
+  struct stTestScenarioBlock scenario[24] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {5,"ADD","_VAR_DWORD1","1","","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"JUMPLESS","6","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {10,"AND","_VAR_DWORD1","0x0f","","",""},
+    {11,"JUMPLESS","8","2","_VAR_DWORD1","",""},
+    {12,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {13,"SET","_VAR_DWORD2","_VAR_RESETCNT","","",""},
+    {14,"ADD","_VAR_DWORD2","2","","",""},
+    {15,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {16,"WAIT","100","","","",""},
+    {17,"JUMPLESS","16","_VAR_RESETCNT","_VAR_DWORD2","",""},
+    {18,"CALL","Sid14","","","",""},
+    {19,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {20,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD2","5","",""},
+    {21,"WAIT","<Timeout>","","","",""},
+    {22,"CALL","Sid19","0x02","0x02","",""},
+    {23,"CALL","ChkReadDTC","0xE40100","0x02","0x02","1"},
+    {24,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M46_14B(void)
+{
+  struct stTestScenarioBlock scenario[21] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {5,"ADD","_VAR_DWORD1","1","","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"JUMPLESS","6","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {10,"AND","_VAR_DWORD1","0x0f","","",""},
+    {11,"JUMPLESS","8","2","_VAR_DWORD1","",""},
+    {12,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {13,"SET","_VAR_DWORD2","_VAR_RESETCNT","","",""},
+    {14,"ADD","_VAR_DWORD2","2","","",""},
+    {15,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {16,"WAIT","100","","","",""},
+    {17,"JUMPLESS","16","_VAR_RESETCNT","_VAR_DWORD2","",""},
+    {18,"SET_SENDDATA","_VAR_TRIPCNT","4","0xffffffff","",""},
+    {19,"SEND_AUTH","1","_VAR_DWORD2","5","",""},
+    {20,"WAIT","5000","","","",""},
+    {21,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M46_15A(void)
+{
+  struct stTestScenarioBlock scenario[26] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {5,"ADD","_VAR_DWORD1","1","","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"JUMPLESS","6","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {10,"AND","_VAR_DWORD1","0x0f","","",""},
+    {11,"JUMPLESS","8","2","_VAR_DWORD1","",""},
+    {12,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {13,"ADD","_VAR_DWORD1","2","","",""},
+    {14,"SET","_VAR_DWORD2","_VAR_RESETCNT","","",""},
+    {15,"ADD","_VAR_DWORD2","4","","",""},
+    {16,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {17,"WAIT","100","","","",""},
+    {18,"JUMPLESS","17","_VAR_RESETCNT","_VAR_DWORD2","",""},
+    {19,"CALL","Sid14","","","",""},
+    {20,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {21,"ADD","_VAR_DWORD2","2","","",""},
+    {22,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD2","3","",""},
+    {23,"WAIT","<Timeout>","","","",""},
+    {24,"CALL","Sid19","0x02","0x02","",""},
+    {25,"CALL","ChkReadDTC","0xE40100","0x02","0x02","1"},
+    {26,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M46_15B(void)
+{
+  struct stTestScenarioBlock scenario[23] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {5,"ADD","_VAR_DWORD1","1","","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"JUMPLESS","6","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {10,"AND","_VAR_DWORD1","0x0f","","",""},
+    {11,"JUMPLESS","8","2","_VAR_DWORD1","",""},
+    {12,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {13,"ADD","_VAR_DWORD1","2","","",""},
+    {14,"SET","_VAR_DWORD2","_VAR_RESETCNT","","",""},
+    {15,"ADD","_VAR_DWORD2","4","","",""},
+    {16,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {17,"WAIT","100","","","",""},
+    {18,"JUMPLESS","17","_VAR_RESETCNT","_VAR_DWORD2","",""},
+    {19,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {20,"ADD","_VAR_DWORD2","2","","",""},
+    {21,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD2","3","",""},
+    {22,"WAIT","5000","","","",""},
+    {23,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M47_1(void)
+{
+  struct stTestScenarioBlock scenario[7] = {
+    {1,"WAITKEY","????????????????????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {4,"SEND_AUTH","1","1","1","",""},
+    {5,"WAITKEY","?????????????????ON???????","","","",""},
+    {6,"WAIT","10000","","","",""},
+    {7,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M47_2(void)
+{
+  struct stTestScenarioBlock scenario[7] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","?????????????????ON???????","","","",""},
+    {3,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {4,"WAIT","1020","","","",""},
+    {5,"SEND_AUTH","_VAR_TRIPCNT","_VAR_RESETCNT","1","",""},
+    {6,"WAIT","10000","","","",""},
+    {7,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M47_3(void)
+{
+  struct stTestScenarioBlock scenario[8] = {
+    {1,"WAITKEY","????????????????????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SET_MACTX","0","0x0000000","","",""},
+    {4,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {5,"SEND_AUTH","1","1","1","",""},
+    {6,"WAITKEY","?????????????????ON???????","","","",""},
+    {7,"WAIT","10000","","","",""},
+    {8,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M47_4(void)
+{
+  struct stTestScenarioBlock scenario[8] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"SET_MACTX","0","0x0000000","","",""},
+    {3,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {4,"WAITKEY","?????????????????ON???????","","","",""},
+    {5,"WAIT","1020","","","",""},
+    {6,"SEND_AUTH","_VAR_TRIPCNT","_VAR_RESETCNT","1","",""},
+    {7,"WAIT","10000","","","",""},
+    {8,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M47_5(void)
+{
+  struct stTestScenarioBlock scenario[13] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","?????????????????ON???????","","","",""},
+    {3,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {4,"SET","_VAR_DWORD2","1","","",""},
+    {5,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","_VAR_DWORD2","",""},
+    {6,"ADD","_VAR_DWORD2","1","","",""},
+    {7,"JUMPLESS","5","_VAR_DWORD2","3","",""},
+    {8,"WAITKEY","????????????????????????????","","","",""},
+    {9,"WAIT","1020","","","",""},
+    {10,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {11,"SEND_AUTH","_VAR_TRIPCNT","_VAR_RESETCNT","1","",""},
+    {12,"WAIT","10000","","","",""},
+    {13,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M47_6(void)
+{
+  struct stTestScenarioBlock scenario[13] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","?????????????????ON???????","","","",""},
+    {3,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {4,"SET","_VAR_DWORD2","1","","",""},
+    {5,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","_VAR_DWORD2","",""},
+    {6,"ADD","_VAR_DWORD2","1","","",""},
+    {7,"JUMPLESS","5","_VAR_DWORD2","3","",""},
+    {8,"WAITKEY","?????????????????OFF?ON???????","","","",""},
+    {9,"WAIT","1020","","","",""},
+    {10,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {11,"SEND_AUTH","_VAR_TRIPCNT","_VAR_RESETCNT","1","",""},
+    {12,"WAIT","10000","","","",""},
+    {13,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M47_7(void)
+{
+  struct stTestScenarioBlock scenario[13] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","?????????????????ON???????","","","",""},
+    {3,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {4,"SET","_VAR_DWORD2","1","","",""},
+    {5,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","_VAR_DWORD2","",""},
+    {6,"ADD","_VAR_DWORD2","1","","",""},
+    {7,"JUMPLESS","5","_VAR_DWORD2","3","",""},
+    {8,"WAITKEY","??????????????ECU??????????","","","",""},
+    {9,"WAIT","1020","","","",""},
+    {10,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {11,"SEND_AUTH","_VAR_TRIPCNT","_VAR_RESETCNT","1","",""},
+    {12,"WAIT","10000","","","",""},
+    {13,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M47_8(void)
+{
+  struct stTestScenarioBlock scenario[8] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","?????????????????ON???????","","","",""},
+    {3,"SET_MACTX","0","0x0000000","","",""},
+    {4,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {5,"WAITKEY","???????????????????????1020ms????????????","","","",""},
+    {6,"SEND_AUTH","_VAR_TRIPCNT","_VAR_RESETCNT","1","",""},
+    {7,"WAIT","10000","","","",""},
+    {8,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M47_9(void)
+{
+  struct stTestScenarioBlock scenario[8] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","?????????????????ON???????","","","",""},
+    {3,"SET_MACTX","0","0x0000000","","",""},
+    {4,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {5,"WAITKEY","?????????????????OFF?ON??1020ms????????????","","","",""},
+    {6,"SEND_AUTH","_VAR_TRIPCNT","_VAR_RESETCNT","1","",""},
+    {7,"WAIT","10000","","","",""},
+    {8,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M47_10(void)
+{
+  struct stTestScenarioBlock scenario[8] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"WAITKEY","?????????????????ON???????","","","",""},
+    {3,"SET_MACTX","0","0x0000000","","",""},
+    {4,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {5,"WAITKEY","??????????????ECU??????1020ms????????????","","","",""},
+    {6,"SEND_AUTH","_VAR_TRIPCNT","_VAR_RESETCNT","1","",""},
+    {7,"WAIT","10000","","","",""},
+    {8,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M48_1(void)
+{
+  struct stTestScenarioBlock scenario[9] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","1000","","","",""},
+    {4,"SET_MACTX","0","0x0000000","","",""},
+    {5,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {6,"WAIT","1000","","","",""},
+    {7,"SEND_AUTH","_VAR_TRIPCNT","_VAR_RESETCNT","1","",""},
+    {8,"WAIT","10000","","","",""},
+    {9,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M49_1A(void)
+{
+  struct stTestScenarioBlock scenario[16] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {5,"ADD","_VAR_DWORD1","2","","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"JUMPLESS","6","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {8,"SET_SENDDATA","1","4","0xfffffffd","",""},
+    {9,"SET_MACTX","2","_VAR_TRIPCNT","_VAR_RESETCNT","1",""},
+    {10,"CALL","Sid14","","","",""},
+    {11,"SET_SENDDATA","1","4","0xfffffffe","",""},
+    {12,"SEND_AUTH","_VAR_TRIPCNT","_VAR_RESETCNT","1","",""},
+    {13,"WAIT","<Timeout>","","","",""},
+    {14,"CALL","Sid19","0x02","0x02","",""},
+    {15,"CALL","ChkReadDTC","0xE40100","0x02","0x02",""},
+    {16,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M49_1B(void)
+{
+  struct stTestScenarioBlock scenario[13] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {5,"ADD","_VAR_DWORD1","2","","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"JUMPLESS","6","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {8,"SET_SENDDATA","1","4","0xfffffffd","",""},
+    {9,"SET_MACTX","2","_VAR_TRIPCNT","_VAR_RESETCNT","1",""},
+    {10,"SET_SENDDATA","1","4","0xfffffffe","",""},
+    {11,"SEND_AUTH","_VAR_TRIPCNT","_VAR_RESETCNT","1","",""},
+    {12,"WAIT","10000","","","",""},
+    {13,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M49_2A(void)
+{
+  struct stTestScenarioBlock scenario[16] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {5,"ADD","_VAR_DWORD1","2","","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"JUMPLESS","6","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {8,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {9,"SET_MACTX","2","_VAR_TRIPCNT","_VAR_RESETCNT","1",""},
+    {10,"CALL","Sid14","","","",""},
+    {11,"SET_SENDDATA","1","4","0xfffffffe","",""},
+    {12,"SEND_AUTH","_VAR_TRIPCNT","_VAR_RESETCNT","1","",""},
+    {13,"WAIT","<Timeout>","","","",""},
+    {14,"CALL","Sid19","0x02","0x02","",""},
+    {15,"CALL","ChkReadDTC","0xE40100","0x02","0x02",""},
+    {16,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M49_2B(void)
+{
+  struct stTestScenarioBlock scenario[13] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {5,"ADD","_VAR_DWORD1","2","","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"JUMPLESS","6","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {8,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {9,"SET_MACTX","2","_VAR_TRIPCNT","_VAR_RESETCNT","1",""},
+    {10,"SET_SENDDATA","1","4","0xfffffffe","",""},
+    {11,"SEND_AUTH","_VAR_TRIPCNT","_VAR_RESETCNT","1","",""},
+    {12,"WAIT","10000","","","",""},
+    {13,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M50_1A(void)
+{
+  struct stTestScenarioBlock scenario[22] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"JUMPLESS","5","_VAR_RESETCNT","5","",""},
+    {4,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {5,"ADD","_VAR_DWORD1","1","","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"JUMPLESS","6","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {10,"AND","_VAR_DWORD1","0x0f","","",""},
+    {11,"JUMPEQ","8","_VAR_DWORD1","0","",""},
+    {12,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {13,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {14,"WAIT","100","","","",""},
+    {15,"CALL","Sid14","","","",""},
+    {16,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {17,"SUB","_VAR_DWORD1","5","","",""},
+    {18,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","3","",""},
+    {19,"WAIT","<Timeout>","","","",""},
+    {20,"CALL","Sid19","0x02","0x02","",""},
+    {21,"CALL","ChkReadDTC","0xE40100","0x02","0x02",""},
+    {22,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M50_1B(void)
+{
+  struct stTestScenarioBlock scenario[19] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"JUMPLESS","5","_VAR_RESETCNT","5","",""},
+    {4,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {5,"ADD","_VAR_DWORD1","1","","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"JUMPLESS","6","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {8,"WAIT","100","","","",""},
+    {9,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {10,"AND","_VAR_DWORD1","0x0f","","",""},
+    {11,"JUMPEQ","8","_VAR_DWORD1","0","",""},
+    {12,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {13,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {14,"WAIT","100","","","",""},
+    {15,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {16,"SUB","_VAR_DWORD1","5","","",""},
+    {17,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","3","",""},
+    {18,"WAIT","10000","","","",""},
+    {19,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M50_2A(void)
+{
+  struct stTestScenarioBlock scenario[23] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"JUMPLESS","3","_VAR_RESETCNT","6","",""},
+    {5,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {6,"ADD","_VAR_DWORD1","1","","",""},
+    {7,"WAIT","100","","","",""},
+    {8,"JUMPLESS","7","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {9,"WAIT","100","","","",""},
+    {10,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {11,"AND","_VAR_DWORD1","0x0f","","",""},
+    {12,"JUMPLESS","9","_VAR_DWORD1","2","",""},
+    {13,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {14,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {15,"WAIT","100","","","",""},
+    {16,"CALL","Sid14","","","",""},
+    {17,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {18,"SUB","_VAR_DWORD1","6","","",""},
+    {19,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","3","",""},
+    {20,"WAIT","<Timeout>","","","",""},
+    {21,"CALL","Sid19","0x02","0x02","",""},
+    {22,"CALL","ChkReadDTC","0xE40100","0x02","0x02",""},
+    {23,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M50_2B(void)
+{
+  struct stTestScenarioBlock scenario[20] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"JUMPLESS","3","_VAR_RESETCNT","6","",""},
+    {5,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {6,"ADD","_VAR_DWORD1","1","","",""},
+    {7,"WAIT","100","","","",""},
+    {8,"JUMPLESS","7","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {9,"WAIT","100","","","",""},
+    {10,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {11,"AND","_VAR_DWORD1","0x0f","","",""},
+    {12,"JUMPLESS","9","_VAR_DWORD1","2","",""},
+    {13,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {14,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {15,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {16,"WAIT","100","","","",""},
+    {17,"SUB","_VAR_DWORD1","6","","",""},
+    {18,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","3","",""},
+    {19,"WAIT","10000","","","",""},
+    {20,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M50_3A(void)
+{
+  struct stTestScenarioBlock scenario[23] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"JUMPLESS","3","_VAR_RESETCNT","4","",""},
+    {5,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {6,"ADD","_VAR_DWORD1","1","","",""},
+    {7,"WAIT","100","","","",""},
+    {8,"JUMPLESS","7","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {9,"WAIT","100","","","",""},
+    {10,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {11,"AND","_VAR_DWORD1","0x0f","","",""},
+    {12,"JUMPEQ","9","_VAR_DWORD1","3","",""},
+    {13,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {14,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {15,"WAIT","100","","","",""},
+    {16,"CALL","Sid14","","","",""},
+    {17,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {18,"SUB","_VAR_DWORD1","4","","",""},
+    {19,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","3","",""},
+    {20,"WAIT","<Timeout>","","","",""},
+    {21,"CALL","Sid19","0x02","0x02","",""},
+    {22,"CALL","ChkReadDTC","0xE40100","0x02","0x02",""},
+    {23,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M50_3B(void)
+{
+  struct stTestScenarioBlock scenario[20] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"JUMPLESS","3","_VAR_RESETCNT","4","",""},
+    {5,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {6,"ADD","_VAR_DWORD1","1","","",""},
+    {7,"WAIT","100","","","",""},
+    {8,"JUMPLESS","7","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {9,"WAIT","100","","","",""},
+    {10,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {11,"AND","_VAR_DWORD1","0x0f","","",""},
+    {12,"JUMPEQ","9","_VAR_DWORD1","3","",""},
+    {13,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {14,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {15,"WAIT","100","","","",""},
+    {16,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {17,"SUB","_VAR_DWORD1","4","","",""},
+    {18,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","3","",""},
+    {19,"WAIT","10000","","","",""},
+    {20,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M50_4A(void)
+{
+  struct stTestScenarioBlock scenario[23] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"JUMPLESS","3","_VAR_RESETCNT","7","",""},
+    {5,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {6,"ADD","_VAR_DWORD1","1","","",""},
+    {7,"WAIT","100","","","",""},
+    {8,"JUMPLESS","7","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {9,"WAIT","100","","","",""},
+    {10,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {11,"AND","_VAR_DWORD1","0x0f","","",""},
+    {12,"JUMPLESS","9","2","_VAR_DWORD1","",""},
+    {13,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {14,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {15,"WAIT","100","","","",""},
+    {16,"CALL","Sid14","","","",""},
+    {17,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {18,"SUB","_VAR_DWORD1","7","","",""},
+    {19,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","3","",""},
+    {20,"WAIT","<Timeout>","","","",""},
+    {21,"CALL","Sid19","0x02","0x02","",""},
+    {22,"CALL","ChkReadDTC","0xE40100","0x02","0x02",""},
+    {23,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M50_4B(void)
+{
+  struct stTestScenarioBlock scenario[20] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"JUMPLESS","3","_VAR_RESETCNT","7","",""},
+    {5,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {6,"ADD","_VAR_DWORD1","1","","",""},
+    {7,"WAIT","100","","","",""},
+    {8,"JUMPLESS","7","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {9,"WAIT","100","","","",""},
+    {10,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {11,"AND","_VAR_DWORD1","0x0f","","",""},
+    {12,"JUMPLESS","9","2","_VAR_DWORD1","",""},
+    {13,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {14,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {15,"WAIT","100","","","",""},
+    {16,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {17,"SUB","_VAR_DWORD1","7","","",""},
+    {18,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","3","",""},
+    {19,"WAIT","10000","","","",""},
+    {20,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M50_5A(void)
+{
+  struct stTestScenarioBlock scenario[23] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"JUMPLESS","3","_VAR_RESETCNT","3","",""},
+    {5,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {6,"ADD","_VAR_DWORD1","1","","",""},
+    {7,"WAIT","100","","","",""},
+    {8,"JUMPLESS","7","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {9,"WAIT","100","","","",""},
+    {10,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {11,"AND","_VAR_DWORD1","0x0f","","",""},
+    {12,"JUMPLESS","9","_VAR_DWORD1","2","",""},
+    {13,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {14,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {15,"WAIT","100","","","",""},
+    {16,"CALL","Sid14","","","",""},
+    {17,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {18,"SUB","_VAR_DWORD1","3","","",""},
+    {19,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","3","",""},
+    {20,"WAIT","<Timeout>","","","",""},
+    {21,"CALL","Sid19","0x02","0x02","",""},
+    {22,"CALL","ChkReadDTC","0xE40100","0x02","0x02",""},
+    {23,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M50_5B(void)
+{
+  struct stTestScenarioBlock scenario[20] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"JUMPLESS","3","_VAR_RESETCNT","3","",""},
+    {5,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {6,"ADD","_VAR_DWORD1","1","","",""},
+    {7,"WAIT","100","","","",""},
+    {8,"JUMPLESS","7","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {9,"WAIT","100","","","",""},
+    {10,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {11,"AND","_VAR_DWORD1","0x0f","","",""},
+    {12,"JUMPLESS","9","_VAR_DWORD1","2","",""},
+    {13,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {14,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {15,"WAIT","100","","","",""},
+    {16,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {17,"SUB","_VAR_DWORD1","3","","",""},
+    {18,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","3","",""},
+    {19,"WAIT","10000","","","",""},
+    {20,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M51_1(void)
+{
+  struct stTestScenarioBlock scenario[7] = {
+    {1,"LOGSTART","","","","",""},
+    {2,"PRINT","?????????????????ON???????","","","",""},
+    {3,"WAIT","100","","","",""},
+    {4,"JUMPLESS","3","_VAR_RESETCNT","1","",""},
+    {5,"SEND_AUTH","_VAR_TRIPCNT","_VAR_RESETCNT","1","",""},
+    {6,"WAIT","10000","","","",""},
+    {7,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M52_1A(void)
+{
+  struct stTestScenarioBlock scenario[33] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {4,"ADD","_VAR_DWORD1","2","","",""},
+    {5,"WAIT","100","","","",""},
+    {6,"JUMPLESS","5","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {7,"SET","_VAR_DWORD2","3","","",""},
+    {8,"WAIT","20","","","",""},
+    {9,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","_VAR_DWORD2","",""},
+    {10,"ADD","_VAR_DWORD2","4","","",""},
+    {11,"JUMPLESS","8","_VAR_DWORD2","256","",""},
+    {12,"WAIT","100","","","",""},
+    {13,"CALL","Sid14","","","",""},
+    {14,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","255","",""},
+    {15,"WAIT","<Timeout>","","","",""},
+    {16,"CALL","Sid19","0x02","0x02","",""},
+    {17,"CALL","ChkReadDTC","0xE40100","0x02","0x02","1"},
+    {18,"CALL","Sid14","","","",""},
+    {19,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","0xfe","",""},
+    {20,"WAIT","<Timeout>","","","",""},
+    {21,"CALL","Sid19","0x02","0x02","",""},
+    {22,"CALL","ChkReadDTC","0xE40100","0x02","0x02",""},
+    {23,"CALL","Sid14","","","",""},
+    {24,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {25,"WAIT","<Timeout>","","","",""},
+    {26,"CALL","Sid19","0x02","0x02","",""},
+    {27,"CALL","ChkReadDTC","0xE40100","0x02","0x02",""},
+    {28,"CALL","Sid14","","","",""},
+    {29,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","0x80","",""},
+    {30,"WAIT","<Timeout>","","","",""},
+    {31,"CALL","Sid19","0x02","0x02","",""},
+    {32,"CALL","ChkReadDTC","0xE40100","0x02","0x02",""},
+    {33,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M52_1B(void)
+{
+  struct stTestScenarioBlock scenario[21] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {4,"ADD","_VAR_DWORD1","2","","",""},
+    {5,"WAIT","100","","","",""},
+    {6,"JUMPLESS","5","_VAR_RESETCNT","_VAR_DWORD1","",""},
+    {7,"SET","_VAR_DWORD2","3","","","1"},
+    {8,"WAIT","20","","","",""},
+    {9,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","_VAR_DWORD2","",""},
+    {10,"ADD","_VAR_DWORD2","4","","",""},
+    {11,"JUMPLESS","8","_VAR_DWORD2","256","",""},
+    {12,"WAIT","100","","","",""},
+    {13,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","255","",""},
+    {14,"WAIT","10000","","","",""},
+    {15,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","0xfe","",""},
+    {16,"WAIT","10000","","","",""},
+    {17,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {18,"WAIT","10000","","","",""},
+    {19,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","0x80","",""},
+    {20,"WAIT","100","","","",""},
+    {21,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M53_1A(void)
+{
+  struct stTestScenarioBlock scenario[13] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"PRINT","???????????????????????0xffe0????????","","","",""},
+    {4,"WAIT","1000","","","",""},
+    {5,"JUMPLESS","4","_VAR_RESETCNT","0xfffff","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"CALL","Sid14","","","",""},
+    {8,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {9,"SEND_AUTH","_VAR_TRIPCNT","0xfffff","0xff","",""},
+    {10,"WAIT","<Timeout>","","","",""},
+    {11,"CALL","Sid19","0x02","0x02","",""},
+    {12,"CALL","ChkReadDTC","0xE40100","0x02","0x02","1"},
+    {13,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M53_1B(void)
+{
+  struct stTestScenarioBlock scenario[10] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"PRINT","???????????????????????0xffe0????????","","","",""},
+    {4,"WAIT","1000","","","",""},
+    {5,"JUMPLESS","4","_VAR_RESETCNT","0xfffff","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {8,"SEND_AUTH","_VAR_TRIPCNT","0xfffff","0xff","",""},
+    {9,"WAIT","1000","","","",""},
+    {10,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M53_2A(void)
+{
+  struct stTestScenarioBlock scenario[13] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"PRINT","???????????????????????0xffe0????????","","","",""},
+    {4,"WAIT","1000","","","",""},
+    {5,"JUMPLESS","4","_VAR_RESETCNT","0xfffff","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"CALL","Sid14","","","",""},
+    {8,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {9,"SEND_AUTH","_VAR_TRIPCNT","0xfffff","0xfe","",""},
+    {10,"WAIT","<Timeout>","","","",""},
+    {11,"CALL","Sid19","0x02","0x02","",""},
+    {12,"CALL","ChkReadDTC","0xE40100","0x02","0x02",""},
+    {13,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M53_2B(void)
+{
+  struct stTestScenarioBlock scenario[10] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"PRINT","???????????????????????0xffe0????????","","","",""},
+    {4,"WAIT","1000","","","",""},
+    {5,"JUMPLESS","4","_VAR_RESETCNT","0xfffff","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {8,"SEND_AUTH","_VAR_TRIPCNT","0xfffff","0xfe","",""},
+    {9,"WAIT","1000","","","",""},
+    {10,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M53_3A(void)
+{
+  struct stTestScenarioBlock scenario[13] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"PRINT","???????????????????????0xffe0????????","","","",""},
+    {4,"WAIT","1000","","","",""},
+    {5,"JUMPLESS","4","_VAR_RESETCNT","0xfffff","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"CALL","Sid14","","","",""},
+    {8,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {9,"SEND_AUTH","_VAR_TRIPCNT","0xfffff","1","",""},
+    {10,"WAIT","<Timeout>","","","",""},
+    {11,"CALL","Sid19","0x02","0x02","",""},
+    {12,"CALL","ChkReadDTC","0xE40100","0x02","0x02",""},
+    {13,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M53_3B(void)
+{
+  struct stTestScenarioBlock scenario[10] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"PRINT","???????????????????????0xffe0????????","","","",""},
+    {4,"WAIT","1000","","","",""},
+    {5,"JUMPLESS","4","_VAR_RESETCNT","0xfffff","",""},
+    {6,"WAIT","","","","",""},
+    {7,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {8,"SEND_AUTH","_VAR_TRIPCNT","0xfffff","1","",""},
+    {9,"WAIT","1000","","","",""},
+    {10,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M53_4A(void)
+{
+  struct stTestScenarioBlock scenario[13] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"PRINT","???????????????????????0xffe0????????","","","",""},
+    {4,"WAIT","1000","","","",""},
+    {5,"JUMPLESS","4","_VAR_RESETCNT","0xfffff","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"CALL","Sid14","","","",""},
+    {8,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {9,"SEND_AUTH","_VAR_TRIPCNT","0xfffff","0x80","",""},
+    {10,"WAIT","<Timeout>","","","",""},
+    {11,"CALL","Sid19","0x02","0x02","",""},
+    {12,"CALL","ChkReadDTC","0xE40100","0x02","0x02",""},
+    {13,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M53_4B(void)
+{
+  struct stTestScenarioBlock scenario[10] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"PRINT","???????????????????????0xffe0????????","","","",""},
+    {4,"WAIT","1000","","","",""},
+    {5,"JUMPLESS","4","_VAR_RESETCNT","0xfffff","",""},
+    {6,"WAIT","100","","","",""},
+    {7,"SET_SENDDATA","1","4","0xffffffff","",""},
+    {8,"SEND_AUTH","_VAR_TRIPCNT","0xfffff","0x80","",""},
+    {9,"WAIT","1000","","","",""},
+    {10,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M54_1(void)
+{
+  struct stTestScenarioBlock scenario[32] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","1000","","","",""},
+    {4,"SET_MACTX","0","0x0000000","","",""},
+    {5,"SEND_AUTH","_VAR_TRIPCNT","_VAR_RESETCNT","1","",""},
+    {6,"WAIT","<Timeout>","","","",""},
+    {7,"CALL","ReadVerifyNG","1","1","",""},
+    {8,"WAIT","1000","","","",""},
+    {9,"SET","_VAR_DWORD1","_VAR_RESETCNT","","",""},
+    {10,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","1","",""},
+    {11,"SET","_VAR_DWORD2","0","","",""},
+    {12,"SET_MACTX","0","0x0000000","","",""},
+    {13,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","2","",""},
+    {14,"ADD","_VAR_DWORD2","1","","",""},
+    {15,"WAIT","20","","","",""},
+    {16,"JUMPLESS","12","_VAR_DWORD2","2","",""},
+    {17,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWROD1","2","",""},
+    {18,"WAIT","20","","","",""},
+    {19,"SET","_VAR_DWORD2","0","","",""},
+    {20,"SET_MACTX","0","0x0000000","","",""},
+    {21,"SEND_AUTH","_VAR_TRIPCNT","_VAR_DWORD1","3","",""},
+    {22,"WAIT","20","","","",""},
+    {23,"ADD","_VAR_DWORD2","1","","",""},
+    {24,"JUMPLESS","20","_VAR_DWORD1","3","",""},
+    {25,"WAIT","<Timeout>","","","",""},
+    {26,"CALL","ReadVerifyNG","1","3","",""},
+    {27,"WAIT","1000","","","",""},
+    {28,"SET_MACTX","0","0x0000000","","",""},
+    {29,"SEND_AUTH","_VAR_TRIPCNT","_VAR_RESETCNT","1","",""},
+    {30,"WAIT","<Timeout>","","","",""},
+    {31,"CALL","ReadVerifyNG","1","1","",""},
+    {32,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M54_2(void)
+{
+  struct stTestScenarioBlock scenario[30] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAIT","1000","","","",""},
+    {4,"CALL","Sid14","","","",""},
+    {5,"SET_MACTX","0","0x0000000","","",""},
+    {6,"SEND_AUTH","_VAR_TRIPCNT","_VAR_RESETCNT","1","",""},
+    {7,"WAIT","<Timeout>","","","",""},
+    {8,"CALL","Sid19","0x02","0x02","",""},
+    {9,"CALL","ChkReadDTC","0xE40100","0x02","0x02",""},
+    {10,"CALL","Sid14","","","",""},
+    {11,"SET_MACTX","0","0x0000000","","",""},
+    {12,"SEND_AUTH","_VAR_TRIPCNT","_VAR_RESETCNT","1","",""},
+    {13,"WAIT","<Timeout>","","","",""},
+    {14,"CALL","Sid19","0x02","0x02","",""},
+    {15,"CALL","ChkReadDTC","0xE40100","0x02","0x02",""},
+    {16,"CALL","Sid14","","","",""},
+    {17,"WAIT","<Timeout>","","","",""},
+    {18,"CALL","Sid19","0x02","0x02","",""},
+    {19,"CALL","ChkReadDTC","0xE40100","0x02","0x02","1"},
+    {20,"WAIT","1000","","","",""},
+    {21,"CALL","Sid14","","","",""},
+    {22,"SET_MACTX","0","0x0000000","","",""},
+    {23,"SEND_AUTH","_VAR_TRIPCNT","_VAR_RESETCNT","1","",""},
+    {24,"WAIT","<Timeout>","","","",""},
+    {25,"WAITKEY","??OperationCycle??????????","","","",""},
+    {26,"SEND_AUTH","_VAR_TRIPCNT","_VAR_RESETCNT","1","",""},
+    {27,"WAIT","1000","","","",""},
+    {28,"CALL","Sid19","0x02","0x08","",""},
+    {29,"CALL","ChkReadDTC","0xE40100","0x08","0x08",""},
+    {30,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+
+testcase M55_1(void)
+{
+  struct stTestScenarioBlock scenario[7] = {
+    {1,"RCVNODE_START","","","","",""},
+    {2,"WAITKEY","?????????????????ON???????","","","",""},
+    {3,"LOGSTART","","","","",""},
+    {4,"WAITKEY","KeyValueVerifyTime???????????","","","",""},
+    {5,"CALL","Sid19","0x02","0x08","",""},
+    {6,"CALL","ChkReadDTC","0xE40000","0x08","0x08","1"},
+    {7,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEA);
+}
+
+testcase M55_2(void)
+{
+  struct stTestScenarioBlock scenario[6] = {
+    {1,"WAITKEY","?????????????????ON???????","","","",""},
+    {2,"LOGSTART","","","","",""},
+    {3,"WAITKEY","KeyValueVerifyTime???????????","","","",""},
+    {4,"CALL","Sid19","0x02","0x08","",""},
+    {5,"CALL","ChkReadDTC","0xE40000","0x08","0x08","1"},
+    {6,"LOGSTOP","","","","",""}
+  };
+
+  ScenarioTest(scenario, TESTENV_TYPEE);
+}
+

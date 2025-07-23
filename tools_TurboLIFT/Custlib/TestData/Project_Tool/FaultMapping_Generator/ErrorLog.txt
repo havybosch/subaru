@@ -1,0 +1,42 @@
+!!!!!!!!!!!!!!!!!!!!!!!!ERRORS!!!!!!!!!!!!!!!!!!!!!!!!
+
+1. DeviceType (DeviceType) column is missing. Please add this to the excel sheet
+2. Fault type property: not set is expected for rb_swm_OpenLineConnectorLockC_flt?
+3. Fault type property: not set is expected for rb_swm_OpenLineConnectorLockB_flt?
+4. Fault type property: not set is expected for rb_swm_OpenLineConnectorLockA_flt?
+5. Fault type property: not set is expected for rb_swm_UndefinedConnectorLockC_flt?
+6. Fault type property: not set is expected for rb_swm_UndefinedConnectorLockB_flt?
+7. Fault type property: not set is expected for rb_swm_UndefinedConnectorLockA_flt?
+8. Fault type property: not set is expected for rb_swm_ShortLineConnectorLockC_flt?
+9. Fault type property: not set is expected for rb_swm_ShortLineConnectorLockB_flt?
+10. Fault type property: not set is expected for rb_swm_ShortLineConnectorLockA_flt?
+11. Fault type property: not set is expected for rb_swm_Short2BatConnectorLockC_flt?
+12. Fault type property: not set is expected for rb_swm_Short2BatConnectorLockB_flt?
+13. Fault type property: not set is expected for rb_swm_Short2BatConnectorLockA_flt?
+14. Fault type property: not set is expected for rb_swm_CrossCouplingConnectorLockC_flt?
+15. Fault type property: not set is expected for rb_swm_CrossCouplingConnectorLockB_flt?
+16. Fault type property: not set is expected for rb_swm_CrossCouplingConnectorLockA_flt?
+17. Fault type property: not set is expected for rb_swm_UnexpectedConnectorLockC_flt?
+18. Fault type property: not set is expected for rb_swm_UnexpectedConnectorLockB_flt?
+19. Fault type property: not set is expected for rb_swm_UnexpectedConnectorLockA_flt?
+20. Fault type property: not set is expected for rb_lfm_LifeTimeIdle_flt?
+21. Fault type property: not set is expected for rb_lfm_LifeTimeLamp_flt?
+22. Fault type property: not set is expected for CANIF_E_NOT_SLEEP?
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!WARNINGS!!!!!!!!!!!!!!!!!!!!!!
+
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!NOTES!!!!!!!!!!!!!!!!!!!!!!!!!
+
+1. Allowed values (mandatory) for 'WarningLamp' property are 'Filtered/Latched/Stored', 'Filtered/Latched', 'Filtered' or 'off'
+2. Allowed values (currently) for 'DeviceType' are 'Squib', 'Switch', 'PAS' or 'Lamp'
+3. Allowed values (currently) for 'FaultType' are 'cyclic', 'init', 'initcyclic'
+
+
+!!!!!!!!!!!!!!!!!!!!!!!INFO!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Perform the below steps:
+1. Make sure this new mapping file is declared in the CFG file for your project. Insert the below statement
+require "$LIFT_PRJCFG_path/Mapping_FAULT.pm";

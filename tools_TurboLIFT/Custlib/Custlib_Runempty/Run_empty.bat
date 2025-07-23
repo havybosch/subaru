@@ -1,0 +1,5 @@
+REM Set project according to "SupportedEdrVariants" field in Mapping EDR
+cd /d %~dp0
+SET PROJECT=Subaru_TG8
+call .\..\..\Engine\LIFT_exec_engine.pl -testlist .\empty.txt -conf .\..\config\Common_Cfg\Subaru_AB12_CFG.pm -minimalsnapshot -offline
+pause

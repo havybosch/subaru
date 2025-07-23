@@ -1,0 +1,26 @@
+/*@!Encoding:1252*/
+includes
+{
+  
+}
+
+variables
+{
+  
+}
+
+on busOff {
+  int errRxCnt;
+  int errTxCnt;
+  int channel;
+  double timestamp; // [seconds]
+
+  timestamp = (double)timeNow() / (double)100000;
+  channel = this.can;
+  errRxCnt = this.errorCountRX;
+  errTxCnt = this.errorCountTX;
+  Write("Bus Off: time=%f channel=%d, errRxCnt=%d, errTxCnt=%d",
+  timestamp, channel, errRxCnt, errTxCnt);
+
+  resetCanEx(channel);
+}

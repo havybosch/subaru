@@ -1,0 +1,109 @@
+!!!!!!!!!!!!!!!!!!!!!!!!ERRORS!!!!!!!!!!!!!!!!!!!!!!!!
+
+1. DeviceType (DeviceType) column is missing. Please add this to the excel sheet
+2. Fault type property: Initial
+On Event is expected for rb_acc_AlgoVerifySensorId_flt?
+3. Fault type property: Initial
+On Event is expected for rb_acc_AlgoVerifySensorId_flt?
+4. Fault type property: On Event is expected for rb_evm_CrashDetected_flt?
+5. Fault type property: On Event is expected for rb_evm_FrontCrashDetected_flt?
+6. Fault type property: On Event is expected for rb_evm_RearCrashDetected_flt?
+7. Fault type property: On Event is expected for rb_evm_SideLeftCrashDetected_flt?
+8. Fault type property: On Event is expected for rb_evm_SideRightCrashDetected_flt?
+9. Fault type property: On Event is expected for rb_evm_RolloverCrashDetected_flt?
+10. Fault type property: On Event is expected for rb_evm_PepCrashDetected_flt?
+11. Fault type property: On Event is expected for rb_evm_PitchoverCrashDetected_flt?
+12. Fault type property: On Event is expected for rb_co_FuelCutoff_flt?
+13. DTC is not defined for fault rb_syc_ConfigurationDataInconsistent_flt		(owned by SFT_SYC_SystemConfigurationFaults). Please add this
+14. Fault type property: not set is expected for rb_csem_MonPermInitInertialSensor2_flt?
+15. Fault type property: not set is expected for rb_csem_MonPermInitInertialSensor1_flt?
+16. DTC is not defined for fault rb_csem_MonPermAccXLgChl_flt, rb_csem_MonPermAccYLgPlausiChl_flt, rb_csem_MonPermYawRateLfChl_flt, rb_csem_MonPermYawRateLfPlausiChl_flt, rb_csem_MonPermPitchRateLfChl_flt. Please add this
+17. DTC is not defined for fault rb_csem_MonPermAccXHgMonChl_flt, rb_csem_MonPermAccYHgMonChl_flt, rb_csem_MonPermAccYLgChl_flt, rb_csem_MonPermAccZLgChl_flt, rb_csem_MonPermRollRateLfChl_flt. Please add this
+18. Fault type property: Initial
+On Event is expected for rb_csem_FieldCalibMissing_flt?
+19. Fault type property: On Event is expected for rb_dmim_DeploymentIsInProgress_flt ?
+20. Fault type property: On Event is expected for rb_dmim_DeploymentComplete_flt?
+21. Fault type property: On Event is expected for rb_mcb_MCBDeployed_flt?
+22. DTC is not defined for fault rb_syc_ConfigurationData   Inconsistent_flt. Please add this
+23. Fault type property: On Event is expected for rb_psem_InitUFSD_flt?
+24. Fault type property: On Event is expected for rb_psem_InitUFSP_flt?
+25. Fault type property: On Event is expected for rb_psem_InitPASFD_flt?
+26. Fault type property: On Event is expected for rb_psem_InitPASFP_flt?
+27. Fault type property: On Event is expected for rb_psem_InitPASMD_flt?
+28. Fault type property: On Event is expected for rb_psem_InitPASMP_flt?
+29. Fault type property: On Event is expected for rb_psem_InitPPSFD_flt?
+30. Fault type property: On Event is expected for rb_psem_InitPPSFP_flt?
+31. Fault type property: On Event is expected for rb_psem_InitPCSC_flt?
+32. Fault type property: On Event is expected for rb_psem_InitPTSD_flt?
+33. Fault type property: On Event is expected for rb_psem_InitPTSP_flt?
+34. Fault type property: On Event is expected for rb_psem_InitPASRC_flt?
+35. Fault type property: not set is expected for rb_scm_DisableLinesConnection_flt?
+36. Fault type property: On Event is expected for rb_sqm_SconLocked_flt?
+37. DTC is not defined for fault rb_sqm_LEAPolarityRolloverbarDriver_flt. Please add this
+38. DTC is not defined for fault rb_sqm_LEAPolarityRolloverbarPassenger_flt. Please add this
+39. Fault type property: On Event is expected for rb_cos_CANIfEInvalidDLC_flt?
+40. Fault type property: not set is expected for rb_cos_CANIfENotSleep_flt ?
+41. Fault type property: not set is expected for rb_cos_CANIfEStopped_flt?
+42. Fault type property: On Event is expected for rb_cos_FrIfEACSCHA_flt?
+43. Fault type property: On Event is expected for rb_cos_FrIfEACSCHB_flt?
+44. Fault type property: On Event is expected for rb_cos_FrIfENITCHA_flt?
+45. Fault type property: On Event is expected for rb_cos_FrIfENITCHB_flt?
+46. Fault type property: On Event is expected for rb_cos_FrIfESWCHA_flt?
+47. Fault type property: On Event is expected for rb_cos_FrIfESWCHB_flt?
+48. Fault type property: On Event
+Cyclic: Configurable is expected for rb_cos_FrSMEClusterSYNLoss_flt?
+49. Fault type property: On Event
+Cyclic: Configurable is expected for rb_cos_LINIfEResponse_flt?
+50. Fault type property: Initial
+On Event is expected for rb_sdm_SectionInvalid_flt?
+51. Fault type property: Initial
+On Event is expected for rb_sdm_NVBlock_flt?
+52. Fault type property: Initial
+On Event is expected for rb_sdm_CRCExternal_flt?
+53. Fault type property: Cyclic: 10 ms
+Cyclic: Configurable is expected for rb_coa_BMIEMNRxMsgTimeout_flt?
+54. Fault type property: Cyclic: 10 ms
+Cyclic: Configurable is expected for rb_coa_VDC01RxMsgTimeout_flt?
+55. Fault type property: Cyclic: 10 ms
+Cyclic: Configurable is expected for rb_coa_DRV01RxMsgTimeout_flt?
+56. Fault type property: Cyclic: 10 ms
+Cyclic: Configurable is expected for rb_coa_EXTPCPRxMsgTimeout_flt?
+57. Fault type property: Cyclic: 10 ms
+Cyclic: Configurable is expected for rb_coa_MSBFDRxMsgTimeout_flt?
+58. Fault type property: Cyclic: 10 ms
+Cyclic: Configurable is expected for rb_coa_MSBFPRxMsgTimeout_flt?
+59. Fault type property: Cyclic: 10 ms
+Cyclic: Configurable is expected for rb_coa_MSBRDRxMsgTimeout_flt?
+60. Fault type property: Cyclic: 10 ms
+Cyclic: Configurable is expected for rb_coa_MSBRCRxMsgTimeout_flt?
+61. Fault type property: Cyclic: 10 ms
+Cyclic: Configurable is expected for rb_coa_MSBRPRxMsgTimeout_flt?
+62. Fault type property: not set is expected for ECUM_E_CONFIGURATION_DATA_INCONSISTENT?
+63. Fault type property: not set is expected for ECUM_E_START_CORE_FAILED?
+64. Fault type property: not set is expected for SPI_CSIH_DEM_TMOE?
+65. Fault type property: not set is expected for SPI_CSIH_DEM_OFE?
+66. Fault type property: not set is expected for SPI_CSIH_DEM_FLF?
+67. Fault type property: not set is expected for SPI_CSIH_DEM_EMF?
+68. Fault type property: not set is expected for SPI_CSIH_DEM_DCE?
+69. Fault type property: not set is expected for SPI_CSIH_DEM_PE?
+70. Fault type property: not set is expected for SPI_CSIH_DEM_OVE?
+71. Fault type property: not set is expected for BSWM_E_INTRPTQUEUE_FULL?
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!WARNINGS!!!!!!!!!!!!!!!!!!!!!!
+
+1.  (Tolerance) column is missing in excel sheet. Please add if required
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!NOTES!!!!!!!!!!!!!!!!!!!!!!!!!
+
+1. Allowed values (mandatory) for 'WarningLamp' property are 'Filtered/Latched/Stored', 'Filtered/Latched', 'Filtered' or 'off'
+2. Allowed values (currently) for 'DeviceType' are 'Squib', 'Switch', 'PAS' or 'Lamp'
+3. Allowed values (currently) for 'FaultType' are 'cyclic', 'init', 'initcyclic'
+
+
+!!!!!!!!!!!!!!!!!!!!!!!INFO!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Perform the below steps:
+1. Make sure this new mapping file is declared in the CFG file for your project. Insert the below statement
+require "$LIFT_PRJCFG_path/Mapping_FAULT.pm";

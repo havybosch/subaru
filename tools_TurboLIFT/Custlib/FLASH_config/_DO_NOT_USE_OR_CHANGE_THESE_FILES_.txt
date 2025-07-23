@@ -1,0 +1,2 @@
+THIS config folder is only used for FLASHING.
+Do not use or change this these files ! 
